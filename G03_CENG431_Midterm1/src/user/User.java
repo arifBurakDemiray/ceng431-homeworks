@@ -1,45 +1,45 @@
 package user;
 
 import java.nio.charset.Charset;
-import java.util.List;
 import java.util.Random;
 
-import team.Team;
+import storage.TeamContainer;
 
 public abstract class User {
 
-	private List<Team> teamList;
+	private TeamContainer teams;
 	private String id, firstName, lastName, password, department, email;
 
 	/**
-	 * If password and id are not given, create User with given parameters
-	 * and create a random id and a random password.
-	 * @param firstName
-	 * @param lastName
-	 * @param department
+	 * If password and id are not given, create User with given parameters and
+	 * create a random id and a random password.
+	 * @param firstName  = user's first name
+	 * @param lastName   = user's last name
+	 * @param department = user's department
 	 */
 	public User(String firstName, String lastName, String department) {
 		setFirstName(firstName);
 		setLastName(lastName);
 		setDepartment(department);
-		createId(); // It creates an unique ID.
-		createPassword(); // It creates a password.
+		setRandom(); // It sets random password and random id. 
+		teams = new TeamContainer();
 	}
-	
+
 	/**
 	 * If password and id are given, create User with given parameters
-	 * @param firstName
-	 * @param lastName
-	 * @param department
-	 * @param id
-	 * @param password
+	 * 
+	 * @param firstName  = user's first name
+	 * @param lastName   = user's last name
+	 * @param department = user's department
+	 * @param id         = user's unique id
+	 * @param password   = user's 4-length password
 	 */
 	public User(String firstName, String lastName, String department, String id, String password) {
 		setFirstName(firstName);
 		setLastName(lastName);
 		setDepartment(department);
-		setId(id); 
-		setPassword(password); 
+		setId(id);
+		setPassword(password);
 	}
 
 	public String getId() {
@@ -90,30 +90,41 @@ public abstract class User {
 		this.email = email;
 	}
 
-	public List<Team> getTeamList() {
-		return teamList;
+	public TeamContainer getTeamList() {
+		return teams;
 	}
-	
-	
-	/*
-	 * It creates a random id string 
-	 *  BURADA UNIQUE OLMA OLAYINA BAKMAK LAZIM. TÜM ID'leri bir yerde tutmak lazım ki kontrol etmek lazım.
+
+	/**
+	 * It creates a random unique id string.
+	 * 
+	 * @return generatedId which is created random id.
 	 */
-	public void createId() {
-		String id = "aaa";
-		setId(id);
+	public String createId() {
+		String generatedId = "aaa";
+		return (generatedId);
 	}
-	
-	
-	/*
-	 * It creates a random password string whose length is 4, and sets the password with that string.
+
+	/**
+	 * It creates a random password string whose length is 4.
+	 * 
+	 * @return generatedPassword which is created random password.
 	 */
-	public void createPassword() {
+	public String createPassword() {
 
 		byte[] array = new byte[4]; // length is bounded by 7
 		new Random().nextBytes(array);
-		String generatedString = new String(array, Charset.forName("UTF-8"));
-		setPassword(generatedString);
+		String generatedPassword = new String(array, Charset.forName("UTF-8"));
+		return generatedPassword;
+	}
+
+	/**
+	 * Function assigns the random generated id and password to the class' attributes.
+	 */
+	public void setRandom() {
+		String randomId = createId(); // It creates and returns an unique ID.
+		setId(randomId);
+		String randomPassword = createPassword(); // It creates and returns a password.
+		setPassword(randomPassword); // It creates a password.
 	}
 
 	public String toString() {
