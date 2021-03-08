@@ -4,9 +4,11 @@ import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Random;
 
-public abstract class User<T> {
+import team.Team;
 
-	private List<T> teamList;
+public abstract class User {
+
+	private List<Team> teamList;
 	private String id, firstName, lastName, password, department, email;
 
 	/**
@@ -88,7 +90,7 @@ public abstract class User<T> {
 		this.email = email;
 	}
 
-	public List<T> getTeamList() {
+	public List<Team> getTeamList() {
 		return teamList;
 	}
 	

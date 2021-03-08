@@ -1,6 +1,6 @@
 package user;
 
-public class Student extends User<Object>{
+public class Student extends User{
 
 	
 	public Student(String firstName, String lastName, String department) {

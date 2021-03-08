@@ -1,6 +1,6 @@
 package user;
 
-public abstract class Academician extends User<Object>{
+public abstract class Academician extends User{
 
 	
 	
