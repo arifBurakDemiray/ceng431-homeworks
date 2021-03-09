@@ -5,18 +5,26 @@ public abstract class Academician extends User{
 	
 	
 
-	public Academician(String firstName, String lastName, String department) {
-		super(firstName, lastName, department);
+	
+
+
+	public Academician(String name, String id, String password) {
+		super(name, id, password);
+		setAcademicianEmail();
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	/*
 	 * It sets the email which is created with academician domain
 	 */
 
 	public void setAcademicianEmail()
 	{	
-		String email = getFirstName()+getLastName()+"@iyte.edu.tr";
+		String name = getName();
+		String[] splittedName = name.split(" ");
+		String firstName = splittedName[0];
+		String lastName = splittedName[splittedName.length-1];
+		String email = firstName+lastName+"@iyte.edu.tr";
 		setEmail(email);
 	}
 

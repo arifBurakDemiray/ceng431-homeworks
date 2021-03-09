@@ -3,6 +3,7 @@
  */
 package storage;
 
+import exception.ItemExistException;
 import exception.ItemNotFoundException;
 import exception.UserExistException;
 
@@ -15,7 +16,7 @@ public interface IContainer<T> {
 	 * This function adds an elements to the container
 	 * @param item which is going to be added to the container
 	 */
-	public boolean add(T item) throws UserExistException;
+	public boolean add(T item) throws ItemExistException;
 	/**
 	 * 	
 	 * This function returns an element by its id
@@ -23,7 +24,7 @@ public interface IContainer<T> {
 	 * @return s searched item if not found throws 
 	 * @throws ItemNotFoundException if not found by id it throws that exception
 	 */
-	public T getById(int id) throws ItemNotFoundException;
+	public T getById(String id) throws ItemNotFoundException;
 	
 	/**
 	 * This function removes given element
@@ -46,6 +47,8 @@ public interface IContainer<T> {
 	 * @return s the length of the collection
 	 */
 	public int getLength();
+	
+	
 	
 	
 }

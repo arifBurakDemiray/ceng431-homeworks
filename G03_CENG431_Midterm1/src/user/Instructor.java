@@ -2,10 +2,13 @@ package user;
 
 public class Instructor extends Academician{
 
-	public Instructor(String firstName, String lastName, String department) {
-		super(firstName, lastName, department);
+	public Instructor(String name, String id, String password) {
+		super(name, id, password);
 		// TODO Auto-generated constructor stub
 	}
+
+	
+
 
 	
 

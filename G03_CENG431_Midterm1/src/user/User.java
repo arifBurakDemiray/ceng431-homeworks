@@ -8,38 +8,52 @@ import storage.TeamContainer;
 public abstract class User {
 
 	private TeamContainer teams;
-	private String id, firstName, lastName, password, department, email;
+	private String id, name, password, email;
 
 	/**
 	 * If password and id are not given, create User with given parameters and
 	 * create a random id and a random password.
-	 * @param firstName  = user's first name
-	 * @param lastName   = user's last name
-	 * @param department = user's department
+	 * @param name  = user's name
 	 */
-	public User(String firstName, String lastName, String department) {
-		setFirstName(firstName);
-		setLastName(lastName);
-		setDepartment(department);
-		setRandom(); // It sets random password and random id. 
+	public User(String name) {
+		setName(name);
+		setRandomId(); // It sets random id. 
+		setRandomPassword();// It sets random password. 
 		teams = new TeamContainer();
 	}
 
 	/**
 	 * If password and id are given, create User with given parameters
 	 * 
-	 * @param firstName  = user's first name
-	 * @param lastName   = user's last name
-	 * @param department = user's department
+	 * @param name  = user's name
 	 * @param id         = user's unique id
 	 * @param password   = user's 4-length password
 	 */
-	public User(String firstName, String lastName, String department, String id, String password) {
-		setFirstName(firstName);
-		setLastName(lastName);
-		setDepartment(department);
-		setId(id);
-		setPassword(password);
+	public User(String name,String id, String password) {
+		setName(name);
+		control(id, password);
+	}
+	
+	private void control(String id, String password)
+	{
+		if(id == null)
+		{
+			setRandomId();
+		}
+		else
+		{
+			setId(id);
+		}
+		
+		if(password==null)
+		{
+			setRandomPassword();
+		}
+		else
+		{
+			setPassword(password);
+		}
+		
 	}
 
 	public String getId() {
@@ -50,22 +64,15 @@ public abstract class User {
 		this.id = id;
 	}
 
-	public String getFirstName() {
-		return firstName;
+	public String getName() {
+		return name;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
+	
 	public String getPassword() {
 		return password;
 	}
@@ -74,14 +81,7 @@ public abstract class User {
 		this.password = password;
 	}
 
-	public String getDepartment() {
-		return department;
-	}
-
-	public void setDepartment(String department) {
-		this.department = department;
-	}
-
+	
 	public String getEmail() {
 		return email;
 	}
@@ -120,23 +120,29 @@ public abstract class User {
 	/**
 	 * Function assigns the random generated id and password to the class' attributes.
 	 */
-	public void setRandom() {
-		String randomId = createId(); // It creates and returns an unique ID.
-		setId(randomId);
+	public void setRandomPassword() {
 		String randomPassword = createPassword(); // It creates and returns a password.
 		setPassword(randomPassword); // It creates a password.
 	}
+	
+	/**
+	 * Function assigns the random generated id and password to the class' attributes.
+	 */
+	public void setRandomId() {
+		String randomId = createId(); // It creates and returns an unique ID.
+		setId(randomId);
+	}
+
 
 	public String toString() {
-		String info = ("First Name: " + this.firstName + "\n" + "Last Name: " + this.lastName + "\n" + "Id: " + this.id
+		String info = ("Name: " + this.name + "\n" + "\n" + "Id: " + this.id
 				+ "\n" + "Email: " + this.email + "\n");
 
 		return (info);
 	}
 	
 	public boolean equals(User usr) {
-		if(usr.getFirstName().equals(this.getFirstName()) && 
-		   usr.getLastName().equals(this.getLastName()) &&
+		if(usr.getName().equals(this.getName()) && 
 		   usr.getId().equals(this.getId()))
 			return true;
 		return false;

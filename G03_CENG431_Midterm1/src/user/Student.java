@@ -3,18 +3,25 @@ package user;
 public class Student extends User{
 
 	
-	public Student(String firstName, String lastName, String department) {
-		super(firstName, lastName, department);
+
+
+	public Student(String name, String id, String password) {
+		super(name, id, password);
+		setStudentEmail();
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	/*
 	 * It sets the email which is created with student domain
 	 */
 
 	public void setStudentEmail()
 	{	
-		String email = getFirstName()+getLastName()+"@std.iyte.edu.tr";
+		String name = getName();
+		String[] splittedName = name.split(" ");
+		String firstName = splittedName[0];
+		String lastName = splittedName[splittedName.length-1];
+		String email = firstName+lastName+"@std.iyte.edu.tr";
 		setEmail(email);
 	}
 

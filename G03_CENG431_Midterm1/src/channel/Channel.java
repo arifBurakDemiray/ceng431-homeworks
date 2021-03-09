@@ -3,11 +3,9 @@ package channel;
 import team.Team;
 
 public abstract class Channel {
-	private Team team;
 	private Meeting meeting;
-	public Channel(Team team, Meeting meeting) {
+	public Channel(Meeting meeting) {
 		this.meeting = meeting;
-		this.team = team;
 	}
 	
 	
