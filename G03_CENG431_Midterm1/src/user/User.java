@@ -133,5 +133,12 @@ public abstract class User {
 
 		return (info);
 	}
-
+	
+	public boolean equals(User usr) {
+		if(usr.getFirstName().equals(this.getFirstName()) && 
+		   usr.getLastName().equals(this.getLastName()) &&
+		   usr.getId().equals(this.getId()))
+			return true;
+		return false;
+	}
 }

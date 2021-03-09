@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import exception.ItemNotFoundException;
+import exception.UserExistException;
+import user.User;
 
 /**
  * @author burak
@@ -20,8 +22,10 @@ public abstract class Container<T> implements IContainer<T> {
 		container = new ArrayList<T>();
 	}
 	
-	public void add(T item) {
-		container.add(item);
+	public boolean add(T item) throws UserExistException{
+		if(this.isExist(item))
+			throw new UserExistException();
+		return container.add(item);
 	}
 	
 	public T removeById(int id) throws ItemNotFoundException {
@@ -45,5 +49,16 @@ public abstract class Container<T> implements IContainer<T> {
 	
 	public int getLength() {
 		return container.size();
+	}
+	
+	private boolean isExist(T item) {
+		boolean boolValue = true;
+		for(T itm : container) {
+			if(itm.equals(item)){
+				boolValue = false;
+				break;
+			}
+		}
+		return boolValue;
 	}
 }

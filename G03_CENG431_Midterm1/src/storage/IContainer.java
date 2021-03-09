@@ -4,6 +4,7 @@
 package storage;
 
 import exception.ItemNotFoundException;
+import exception.UserExistException;
 
 /**
  * @author burak
@@ -14,7 +15,7 @@ public interface IContainer<T> {
 	 * This function adds an elements to the container
 	 * @param item which is going to be added to the container
 	 */
-	public void add(T item);
+	public boolean add(T item) throws UserExistException;
 	/**
 	 * 	
 	 * This function returns an element by its id
