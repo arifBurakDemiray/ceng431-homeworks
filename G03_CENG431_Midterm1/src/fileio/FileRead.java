@@ -34,12 +34,7 @@ public class FileRead {
 			while ((line = br.readLine()) != null) {
 				
 				String[] values = line.split(",",-1);
-				
-				for(int i=0;i<values.length;i++)
-				{
-					System.out.println(values[i]);
-				}
-				System.out.println("length " +values.length+"\n\n");
+
 				records.add(Arrays.asList(values));
 			}
 		}
@@ -62,7 +57,7 @@ public class FileRead {
 			participantId = line.get(6); // "X,Y"
 			String[] participantList = participantId.intern().split(",");
 			
-			Team team = new Team(teamName, teamId, null);
+			Team team = new Team(teamName, teamId);
 			Meeting meeting = null;
 			if(defaultChannel != null)
 			{
@@ -79,7 +74,7 @@ public class FileRead {
 		return teams;
 	}
 
-	public IContainer<User> createUsers(List<List<String>> records, TeamContainer teams) throws ItemExistException {
+	public IContainer<User> createUsers(List<List<String>> records, IContainer<Team> teams) throws ItemExistException {
 		IContainer<User> users = new UserContainer();
 		
 		for (List<String> line : records) {
@@ -100,40 +95,44 @@ public class FileRead {
 
 				user = new Instructor(userName, userId, password);
 				int n = 5;
-				while (line.get(n) != null) {
+				while (line.get(n) != null && (n+1)<line.size()) {
 					teamId = line.get(n);
 					try {
-						Team team = teams.geyById(teamId);
+						Team team = teams.getById(teamId);
 				
 						team.addTeamOwner((Academician) user);
 						
 					} catch (Exception e) {
 						System.out.println(e);
 					}
-					
+					n++;
 				}
+				break;
 			}
 			case "Teaching Assistant": {
 
 				user = new TeachingAssistant(userName, userId, password);
+				break;
 			}
 			default:
 				throw new IllegalArgumentException("Unexpected user type value: " + userType);
 			}
 			
 			int n = 5;
-			while (line.get(n) != null) {
+			while (line.get(n) != null && (n+1)<line.size()) {
 				teamId = line.get(n);
 				try {
-					Team team = teams.geyById(teamId);
+					Team team = teams.getById(teamId);
 					
 					user.getTeamList().add(team);
+					
 					
 					team.addMember(user);
 					
 				} catch (Exception e) {
-					System.out.println(e);
+					System.out.println("FileRead - CreateUser - try add(team)"+ e);
 				}
+				n++;
 				
 			}
 			users.add(user);

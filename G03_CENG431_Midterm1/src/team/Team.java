@@ -19,11 +19,10 @@ public class Team {
 	private IContainer<User> memberUsers;
 	private List<Academician> owners;
 	
-	public Team(String name, String id, Academician owner) {
+	public Team(String name, String id) {
 		this.name = name;
 		this.id=id;
 		this.owners = new ArrayList<Academician>();
-		this.owners.add(owner);
 		this.meeting_ch_list = new ChannelContainer();
 		this.memberUsers = new UserContainer();
 	}

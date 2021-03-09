@@ -3,11 +3,13 @@ package user;
 import java.nio.charset.Charset;
 import java.util.Random;
 
+import storage.IContainer;
 import storage.TeamContainer;
+import team.Team;
 
 public abstract class User {
 
-	private TeamContainer teams;
+	private IContainer<Team> teams;
 	private String id, name, password, email;
 
 	/**
@@ -32,6 +34,7 @@ public abstract class User {
 	public User(String name,String id, String password) {
 		setName(name);
 		control(id, password);
+		teams = new TeamContainer();
 	}
 	
 	private void control(String id, String password)
@@ -90,7 +93,7 @@ public abstract class User {
 		this.email = email;
 	}
 
-	public TeamContainer getTeamList() {
+	public IContainer<Team> getTeamList() {
 		return teams;
 	}
 
