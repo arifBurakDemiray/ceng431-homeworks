@@ -8,7 +8,6 @@ import java.util.List;
 
 import exception.ItemExistException;
 import exception.ItemNotFoundException;
-import exception.UserExistException;
 import user.User;
 
 /**

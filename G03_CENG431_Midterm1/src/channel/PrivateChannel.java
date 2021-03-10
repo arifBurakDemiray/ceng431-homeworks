@@ -1,7 +1,6 @@
 package channel;
 
 import exception.ItemExistException;
-import exception.UserExistException;
 import storage.IContainer;
 import storage.UserContainer;
 import team.Team;

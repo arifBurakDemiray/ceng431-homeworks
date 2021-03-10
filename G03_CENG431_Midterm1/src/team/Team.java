@@ -5,7 +5,6 @@ import java.util.List;
 
 import channel.Channel;
 import exception.ItemExistException;
-import exception.UserExistException;
 import storage.ChannelContainer;
 import storage.IContainer;
 import storage.UserContainer;
