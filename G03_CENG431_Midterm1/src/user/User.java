@@ -17,6 +17,14 @@ public abstract class User {
 	 * create a random id and a random password.
 	 * @param name  = user's name
 	 */
+	
+	public User(String id, String name, String password, String email) {
+		this.email = email;
+		this.id=id;
+		this.name=name;
+		this.password=password;
+		
+	}
 	public User(String name) {
 		setName(name);
 		setRandomId(); // It sets random id. 

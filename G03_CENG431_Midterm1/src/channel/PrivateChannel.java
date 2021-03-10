@@ -1,23 +1,22 @@
 package channel;
 
+
 import exception.ItemExistException;
 import storage.IContainer;
-import storage.UserContainer;
-import team.Team;
-import user.User;
+import storage.IdContainer;
+
 
 public class PrivateChannel extends Channel{
 	
-	private IContainer<User> participants;
+	private IContainer<String> participants;
 	public PrivateChannel(Meeting meeting) {
 		super(meeting);
-		this.participants = new UserContainer();
-		// TODO Auto-generated constructor stub
+		this.participants = new IdContainer();
 	}
 	
-	public boolean addParticipant(User user) throws ItemExistException {
+	public boolean addParticipant(String participantId) throws ItemExistException {
 		try {
-			return participants.add(user);
+			return participants.add(participantId);
 		}
 		catch(ItemExistException e)
 		{

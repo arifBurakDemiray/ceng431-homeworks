@@ -4,13 +4,14 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
+import channel.Channel;
 import channel.Meeting;
+import channel.MeetingChannel;
+import channel.PrivateChannel;
 import exception.ItemExistException;
 import storage.IContainer;
 import storage.TeamContainer;
@@ -42,7 +43,6 @@ public class FileRead {
 
 	}
 
-	@SuppressWarnings("deprecation")
 	public IContainer<Team> createTeams(List<List<String>> records) throws ItemExistException, ParseException {
 		IContainer<Team> teams = new TeamContainer();
 		for (List<String> line : records) {
@@ -59,6 +59,7 @@ public class FileRead {
 			
 			Team team = new Team(teamName, teamId);
 			Meeting meeting = null;
+			Channel tempChannel = null;
 			if(defaultChannel != null)
 			{
 				if(defaultMeetingDate != null)
@@ -66,6 +67,20 @@ public class FileRead {
 				else
 					meeting = new Meeting();
 			}
+			tempChannel = new MeetingChannel(meeting);
+			team.addChannel(tempChannel);
+			if(meetingChannel!=null) {
+				if(meetingDate!=null) {
+					meeting = new Meeting(meetingDate);
+				}
+				else
+					meeting = new Meeting();
+			}
+			tempChannel = new PrivateChannel(meeting);
+			for(String id : participantList) {
+				((PrivateChannel) tempChannel).addParticipant(id);
+			}
+			team.addChannel(tempChannel);
 			teams.add(team);
 			System.out.println(team);
 			// create Team
@@ -78,6 +93,7 @@ public class FileRead {
 		IContainer<User> users = new UserContainer();
 		
 		for (List<String> line : records) {
+			@SuppressWarnings("unused")//we should look that situation
 			String userType, userName, userId, email, password, teamId;
 			userType = line.get(0);
 			userName = line.get(1);

@@ -8,12 +8,9 @@ import java.util.List;
 
 import exception.ItemExistException;
 import exception.ItemNotFoundException;
-import user.User;
 
-/**
- * @author burak
- *
- */
+
+
 public abstract class Container<T> implements IContainer<T> {
 	
 	private List<T> container;

@@ -1,11 +1,12 @@
 package storage;
 
+import channel.Channel;
 import exception.ItemNotFoundException;
 
-public class ChannelContainer extends Container {
+public class ChannelContainer extends Container<Channel> {
 
 	@Override
-	public Object getById(String id) throws ItemNotFoundException {
+	public Channel getById(String id) throws ItemNotFoundException {
 		// TODO Auto-generated method stub
 		return null;
 	}
