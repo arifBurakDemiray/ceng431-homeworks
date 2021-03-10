@@ -4,9 +4,8 @@ public class ItemExistException extends Exception {
 
 	
 	private static final long serialVersionUID = 8062612492147243742L;
-
 	public ItemExistException(){
-		super("ItemExistException, ''that type of item is not exists'' ");
+		super("ItemExistException, ''that type of item exists'' ");
 	}
 	
 	public ItemExistException(String message) {

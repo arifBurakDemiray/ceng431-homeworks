@@ -1,8 +1,5 @@
 package team;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import channel.Channel;
 import exception.ItemExistException;
 import storage.ChannelContainer;
@@ -16,12 +13,12 @@ public class Team {
 	private String name,id;
 	private IContainer<Channel> meeting_ch_list;
 	private IContainer<User> memberUsers;
-	private List<Academician> owners;
+	private IContainer<User> owners;
 	
 	public Team(String name, String id) {
 		this.name = name;
 		this.id=id;
-		this.owners = new ArrayList<Academician>();
+		this.owners = new UserContainer();
 		this.meeting_ch_list = new ChannelContainer();
 		this.memberUsers = new UserContainer();
 	}
@@ -30,20 +27,36 @@ public class Team {
 	public void addChannel(Channel ch) throws ItemExistException
 	{
 		boolean isAdded = meeting_ch_list.add(ch);
-		if(isAdded)
+		if(!isAdded)
 		{
-			System.out.println("Channel is added");
+			System.out.println("Channel was added before.");
 		}
 	}
 	
 	public void addMember(User user) throws ItemExistException
 	{
-		this.memberUsers.add(user);
+		boolean isAdded = memberUsers.add(user);
+		if(!isAdded)
+		{
+			System.out.println("User was added before.");
+		}
 	}
 	
 	public void addTeamOwner(Academician user)
 	{
-		this.owners.add(user);
+		if(user instanceof Academician)
+		{
+			boolean isAdded = owners.add(user);
+			if(!isAdded)
+			{
+				System.out.println("User "+user.getName()+ " was added before.");
+			}
+		}
+		else
+		{
+			System.out.println("Only academicians can be owner.");
+		}
+		
 	}
 	
 	public String getId()

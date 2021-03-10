@@ -3,19 +3,19 @@
  */
 package storage;
 
+import java.util.Iterator;
+import java.util.List;
+
 import exception.ItemExistException;
 import exception.ItemNotFoundException;
 
-/**
- * @author burak
- *
- */
-public interface IContainer<T> {
+
+public interface IContainer<T>{
 	/**
 	 * This function adds an elements to the container
 	 * @param item which is going to be added to the container
 	 */
-	public boolean add(T item) throws ItemExistException;
+	public boolean add(T item);
 	/**
 	 * 	
 	 * This function returns an element by its id
@@ -24,6 +24,9 @@ public interface IContainer<T> {
 	 * @throws ItemNotFoundException if not found by id it throws that exception
 	 */
 	public T getById(String id) throws ItemNotFoundException;
+	
+	
+	public List<T> getList();
 	
 	/**
 	 * This function removes given element
@@ -47,7 +50,6 @@ public interface IContainer<T> {
 	 */
 	public int getLength();
 	
-	
-	
+	public Iterator<T> getIterator();
 	
 }

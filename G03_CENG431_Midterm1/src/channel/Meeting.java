@@ -11,6 +11,7 @@ public class Meeting {
 
 	
 	public Meeting() {
+		this.date = null;
 	}
 	
 	public Meeting(String date) {

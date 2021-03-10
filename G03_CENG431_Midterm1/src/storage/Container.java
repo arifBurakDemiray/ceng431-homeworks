@@ -4,6 +4,7 @@
 package storage;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import exception.ItemExistException;
@@ -24,9 +25,9 @@ public abstract class Container<T> implements IContainer<T> {
 		return container;
 	}
 	
-	public boolean add(T item) throws ItemExistException{
+	public boolean add(T item){
 		if(this.isExist(item))
-			throw new ItemExistException();
+			return false;
 		
 		return container.add(item);
 	}
@@ -46,9 +47,12 @@ public abstract class Container<T> implements IContainer<T> {
 		
 	}
 	
-	public T geyById(String id) throws ItemNotFoundException {
-		return null;
+	public List<T> getList() {
+		return container;
+		
 	}
+	
+	public abstract T getById(String id) throws ItemNotFoundException;
 		
 	public int getLength() {
 		return container.size();
@@ -65,4 +69,24 @@ public abstract class Container<T> implements IContainer<T> {
 		}
 		return boolValue;
 	}
+	
+	
+	/**
+	@author AMCIKLAR BURAYA BAKIN BURDA LİSTE DÖNDĞREK"
+	*/
+	public String toString()
+	{
+		for(T item: this.container)
+		{
+			System.out.println(item.toString());
+		}
+		return "adas";
+	}
+	
+	@Override
+	public Iterator<T> getIterator() {
+		// TODO Auto-generated method stub
+		return container.iterator();
+	} 
+	
 }

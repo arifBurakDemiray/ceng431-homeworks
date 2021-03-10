@@ -2,10 +2,6 @@ package user;
 
 public abstract class Academician extends User{
 
-	
-	
-
-	
 
 
 	public Academician(String name, String id, String password) {
@@ -24,7 +20,7 @@ public abstract class Academician extends User{
 		String[] splittedName = name.split(" ");
 		String firstName = splittedName[0];
 		String lastName = splittedName[splittedName.length-1];
-		String email = firstName+lastName+"@iyte.edu.tr";
+		String email = firstName.toLowerCase()+lastName.toLowerCase()+"@iyte.edu.tr";
 		setEmail(email);
 	}
 

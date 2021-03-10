@@ -7,6 +7,16 @@ public class Instructor extends Academician{
 		// TODO Auto-generated constructor stub
 	}
 
+	@Override
+	public String getSimpleName() {
+		// TODO Auto-generated method stub
+		return "Instructor";
+	}
+
+
+	
+	
+
 	
 
 

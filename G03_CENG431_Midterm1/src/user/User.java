@@ -1,8 +1,7 @@
 package user;
 
-import java.nio.charset.Charset;
-import java.util.Random;
 
+import java.util.Random;
 import storage.IContainer;
 import storage.TeamContainer;
 import team.Team;
@@ -19,18 +18,15 @@ public abstract class User {
 	 */
 	
 	public User(String id, String name, String password, String email) {
-		this.email = email;
-		this.id=id;
-		this.name=name;
-		this.password=password;
-		
-	}
-	public User(String name) {
+		setEmail(email);
+		setId(id);
 		setName(name);
-		setRandomId(); // It sets random id. 
-		setRandomPassword();// It sets random password. 
+		setPassword(password);
+		this.control(id, password);
 		teams = new TeamContainer();
 	}
+		 
+		
 
 	/**
 	 * If password and id are given, create User with given parameters
@@ -47,16 +43,12 @@ public abstract class User {
 	
 	private void control(String id, String password)
 	{
-		if(id == null)
-		{
-			setRandomId();
-		}
-		else
+		if(!id.equals(""))
 		{
 			setId(id);
 		}
 		
-		if(password==null)
+		if(password.equals(""))
 		{
 			setRandomPassword();
 		}
@@ -100,10 +92,18 @@ public abstract class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-	public IContainer<Team> getTeamList() {
+	
+	
+	public IContainer<Team> getTeams() {
 		return teams;
 	}
+
+
+
+	public void setTeams(IContainer<Team> teams) {
+		this.teams = teams;
+	}
+
 
 	/**
 	 * It creates a random unique id string.
@@ -111,8 +111,9 @@ public abstract class User {
 	 * @return generatedId which is created random id.
 	 */
 	public String createId() {
-		String generatedId = "aaa";
-		return (generatedId);
+		Random rand = new Random();
+		Integer id = rand.nextInt(999)+1;
+		return (String.valueOf(id));
 	}
 
 	/**
@@ -122,10 +123,27 @@ public abstract class User {
 	 */
 	public String createPassword() {
 
-		byte[] array = new byte[4]; // length is bounded by 7
-		new Random().nextBytes(array);
-		String generatedPassword = new String(array, Charset.forName("UTF-8"));
-		return generatedPassword;
+		int length = 4;
+        String symbol = "-/.^&*_!@%=+>)"; 
+        String cap_letter = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; 
+        String small_letter = "abcdefghijklmnopqrstuvwxyz"; 
+        String numbers = "0123456789"; 
+
+
+        String finalString = cap_letter + small_letter + 
+                numbers + symbol; 
+
+        Random random = new Random(); 
+
+        char[] password = new char[length]; 
+
+        for (int i = 0; i < length; i++) 
+        { 
+            password[i] = 
+                    finalString.charAt(random.nextInt(finalString.length())); 
+
+        } 
+		return String.valueOf(password);
 	}
 
 	/**
@@ -143,14 +161,25 @@ public abstract class User {
 		String randomId = createId(); // It creates and returns an unique ID.
 		setId(randomId);
 	}
+	
+	public abstract String getSimpleName();
+	
+	public String toString()
+	{
+		String teams = "";	
+		for (Team item : this.teams.getList()) {
+			teams = teams+item.getId()+",";
+		}
+		if(teams.endsWith(","))
+		{
+			teams = teams.substring(0,teams.length() - 1);
+		}
 
-
-	public String toString() {
-		String info = ("Name: " + this.name + "\n" + "\n" + "Id: " + this.id
-				+ "\n" + "Email: " + this.email + "\n");
-
-		return (info);
-	}
+		//String className = tempClassName.split(".")[1];
+		String info = (this.getSimpleName()
+		 +","+ getName() +","+ getId() +","+ getEmail() +","+ getPassword() +","+ teams);
+		return info;
+	};
 	
 	public boolean equals(User usr) {
 		if(usr.getName().equals(this.getName()) && 

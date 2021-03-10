@@ -7,6 +7,7 @@ import java.util.List;
 import exception.ItemExistException;
 import exception.ItemNotFoundException;
 import fileio.FileRead;
+import fileio.FileWrite;
 import storage.IContainer;
 import team.Team;
 import user.User;
@@ -18,13 +19,14 @@ public class Program {
 		FileRead fr = new FileRead();
 		List<List<String>> lines = null;
 		lines = fr.read("data\\teamList.csv");
-		IContainer<Team> teams = fr.createTeams(lines);
-		
+		IContainer<Team> teams = fr.readTeams(lines);
 		System.out.println("\nMAIN "+teams.getById("CENG611").toString()+"\n\n");
 		
 		lines = fr.read("data\\userList.csv");
-		IContainer<User> users = fr.createUsers(lines,teams);
+		IContainer<User> users = fr.readUsers(lines,teams);
 		
-		System.out.println("MAIN "+users.getLength());
+		FileWrite<User> file = new FileWrite();
+		file.writeUsers(users, "data\\userList.csv");
+
 	}
 }

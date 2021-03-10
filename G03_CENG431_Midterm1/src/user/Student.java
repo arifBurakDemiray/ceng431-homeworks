@@ -1,5 +1,6 @@
 package user;
 
+
 public class Student extends User{
 
 	
@@ -10,6 +11,8 @@ public class Student extends User{
 		setStudentEmail();
 		// TODO Auto-generated constructor stub
 	}
+	
+	
 
 	/*
 	 * It sets the email which is created with student domain
@@ -21,13 +24,14 @@ public class Student extends User{
 		String[] splittedName = name.split(" ");
 		String firstName = splittedName[0];
 		String lastName = splittedName[splittedName.length-1];
-		String email = firstName+lastName+"@std.iyte.edu.tr";
+		String email = firstName.toLowerCase()+lastName.toLowerCase()+"@std.iyte.edu.tr";
 		setEmail(email);
 	}
-
-
 	
 	
-	
-
+	@Override
+	public String getSimpleName() {
+		// TODO Auto-generated method stub
+		return "Student";	
+	}
 }

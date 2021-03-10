@@ -14,14 +14,10 @@ public class PrivateChannel extends Channel{
 		this.participants = new IdContainer();
 	}
 	
-	public boolean addParticipant(String participantId) throws ItemExistException {
-		try {
-			return participants.add(participantId);
-		}
-		catch(ItemExistException e)
-		{
-			return false;
-		}
+	public boolean addParticipant(String participantId) {
+
+		return participants.add(participantId);
+
 	}
 
 }

@@ -7,21 +7,11 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import channel.Channel;
-import channel.Meeting;
-import channel.MeetingChannel;
-import channel.PrivateChannel;
+import channel.*;
 import exception.ItemExistException;
-import storage.IContainer;
-import storage.TeamContainer;
-import storage.UserContainer;
+import storage.*;
 import team.Team;
-import user.Academician;
-import user.Instructor;
-import user.Student;
-import user.TeachingAssistant;
-import user.User;
+import user.*;
 
 public class FileRead {
 
@@ -33,54 +23,56 @@ public class FileRead {
 			String line;
 			br.readLine();
 			while ((line = br.readLine()) != null) {
-				
-				String[] values = line.split(",",-1);
+
+				String[] values = line.split(",", -1);
 
 				records.add(Arrays.asList(values));
 			}
+			br.close();
 		}
+
 		return records;
 
 	}
 
-	public IContainer<Team> createTeams(List<List<String>> records) throws ItemExistException, ParseException {
+	public IContainer<Team> readTeams(List<List<String>> records) throws ItemExistException, ParseException {
 		IContainer<Team> teams = new TeamContainer();
 		for (List<String> line : records) {
-			String teamName, teamId, defaultChannel, defaultMeetingDate, meetingChannel, meetingDate, participantId = null;
-			
-			teamName = line.get(0);
-			teamId = line.get(1);
-			defaultChannel = line.get(2);
-			defaultMeetingDate = line.get(3);
-			meetingChannel = line.get(4);
-			meetingDate = line.get(5);
-			participantId = line.get(6); // "X,Y"
+			String teamName, teamId, defaultChannel, defaultMeetingDate, meetingChannel, meetingDate,
+					participantId = null;
+
+			teamName = line.get(0).strip();
+			teamId = line.get(1).strip();
+			defaultChannel = line.get(2).strip();
+			defaultMeetingDate = line.get(3).strip();
+			meetingChannel = line.get(4).strip();
+			meetingDate = line.get(5).strip();
+			participantId = line.get(6).strip(); // "X,Y"
 			String[] participantList = participantId.intern().split(",");
-			
+
 			Team team = new Team(teamName, teamId);
 			Meeting meeting = null;
 			Channel tempChannel = null;
-			if(defaultChannel != null)
-			{
-				if(defaultMeetingDate != null)
+			if (!defaultChannel.equals("")) {
+				if (!defaultMeetingDate.equals(""))
 					meeting = new Meeting(defaultMeetingDate);
 				else
 					meeting = new Meeting();
 			}
 			tempChannel = new MeetingChannel(meeting);
 			team.addChannel(tempChannel);
-			if(meetingChannel!=null) {
-				if(meetingDate!=null) {
+			if (!meetingChannel.equals("")) {
+				if (!meetingDate.equals("")) {
 					meeting = new Meeting(meetingDate);
-				}
-				else
+				} else {
 					meeting = new Meeting();
+				}
+				tempChannel = new PrivateChannel(meeting);
+				for (String id : participantList) {
+					((PrivateChannel) tempChannel).addParticipant(id);
+				}
+				team.addChannel(tempChannel);
 			}
-			tempChannel = new PrivateChannel(meeting);
-			for(String id : participantList) {
-				((PrivateChannel) tempChannel).addParticipant(id);
-			}
-			team.addChannel(tempChannel);
 			teams.add(team);
 			System.out.println(team);
 			// create Team
@@ -89,21 +81,21 @@ public class FileRead {
 		return teams;
 	}
 
-	public IContainer<User> createUsers(List<List<String>> records, IContainer<Team> teams) throws ItemExistException {
+	public IContainer<User> readUsers(List<List<String>> records, IContainer<Team> teams) throws ItemExistException {
 		IContainer<User> users = new UserContainer();
-		
+		IContainer<String> ids = new IdContainer();
 		for (List<String> line : records) {
-			@SuppressWarnings("unused")//we should look that situation
+			@SuppressWarnings("unused") // we should look that situation
 			String userType, userName, userId, email, password, teamId;
-			userType = line.get(0);
-			userName = line.get(1);
-			userId = line.get(2);
-			email = line.get(3);
-			password = line.get(4);
+			userType = line.get(0).strip();
+			userName = line.get(1).strip();
+			userId = line.get(2).strip();
+			email = line.get(3).strip();
+			password = line.get(4).strip();
 			User user;
 			switch (userType) {
 			case "Student": {
-				
+
 				user = new Student(userName, userId, password);
 				break;
 			}
@@ -111,17 +103,17 @@ public class FileRead {
 
 				user = new Instructor(userName, userId, password);
 				int n = 5;
-				while (line.get(n) != null && (n+1)<line.size()) {
+				while (((n) < line.size() && !line.get(n).equals(""))) {
 					teamId = line.get(n);
 					try {
 						Team team = teams.getById(teamId);
-				
+
 						team.addTeamOwner((Academician) user);
-						
+
 					} catch (Exception e) {
 						System.out.println(e);
 					}
-					n++;
+					n = n + 1;
 				}
 				break;
 			}
@@ -133,28 +125,39 @@ public class FileRead {
 			default:
 				throw new IllegalArgumentException("Unexpected user type value: " + userType);
 			}
-			
+
+			if (userId.equals("")) {
+				checkId(ids, user);
+			}
+
 			int n = 5;
-			while (line.get(n) != null && (n+1)<line.size()) {
+			while (((n) < line.size()) && (!line.get(n).equals(""))) {
 				teamId = line.get(n);
 				try {
 					Team team = teams.getById(teamId);
-					
-					user.getTeamList().add(team);
-					
-					
+
+					user.getTeams().add(team);
+
 					team.addMember(user);
-					
+
 				} catch (Exception e) {
-					System.out.println("FileRead - CreateUser - try add(team)"+ e);
+					System.out.println("FileRead - CreateUser - try add(team)" + e);
 				}
 				n++;
-				
+
 			}
 			users.add(user);
 
 		}
 		return users;
+	}
+
+	private void checkId(IContainer<String> ids, User user) {
+		String id = user.createId();
+		while (!ids.add(id)) {
+			id = user.createId();
+		}
+		user.setId(id);
 	}
 
 }
