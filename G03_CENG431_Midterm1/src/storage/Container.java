@@ -6,8 +6,6 @@ package storage;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import exception.ItemExistException;
 import exception.ItemNotFoundException;
 
 
@@ -71,6 +69,17 @@ public abstract class Container<T> implements IContainer<T> {
 	}
 	
 	
+	protected T search(T item) {
+		T obj = null;
+		for(T itm : container) {
+			if(itm.equals(item)){
+				obj = itm;
+				break;
+			}
+		}
+		return obj;
+	}
+	
 	/**
 	@author AMCIKLAR BURAYA BAKIN BURDA LİSTE DÖNDĞREK"
 	*/
@@ -84,9 +93,13 @@ public abstract class Container<T> implements IContainer<T> {
 	}
 	
 	@Override
-	public Iterator<T> getIterator() {
+	public Iterator<T> iterator() {
 		// TODO Auto-generated method stub
 		return container.iterator();
 	} 
+	
+	public T getItem(T item) {
+		return search(item);
+	}
 	
 }

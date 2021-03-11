@@ -6,7 +6,7 @@ package storage;
 import java.util.Iterator;
 import java.util.List;
 
-import exception.ItemExistException;
+
 import exception.ItemNotFoundException;
 
 
@@ -50,6 +50,8 @@ public interface IContainer<T>{
 	 */
 	public int getLength();
 	
-	public Iterator<T> getIterator();
+	public T getItem(T item);
+	
+	public Iterator<T> iterator();
 	
 }

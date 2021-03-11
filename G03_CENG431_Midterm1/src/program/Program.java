@@ -24,9 +24,9 @@ public class Program {
 		
 		lines = fr.read("data\\userList.csv");
 		IContainer<User> users = fr.readUsers(lines,teams);
-		
-		FileWrite<User> file = new FileWrite();
-		file.writeUsers(users, "data\\userList.csv");
+		String header = "User Type,User Name,User ID,Email,Password,Team ID,";
+		FileWrite file = new FileWrite();
+		file.writeItems(users, "data\\userLeest.csv",header);
 
 	}
 }
