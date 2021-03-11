@@ -21,6 +21,6 @@ public abstract class Channel {
 	
 	public String toString() {
 		
-		return this.getName()+this.getMeeting().toString();
+		return this.getName()+","+this.getMeeting().toString();
 	}
 }

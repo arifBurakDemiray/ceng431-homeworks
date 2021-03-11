@@ -88,7 +88,11 @@ public abstract class Container<T> implements IContainer<T> {
 		String string = "";
 		for(T item: this.container)
 		{
-			string+=item.toString();
+			string+=item.toString()+",";
+		}
+		if(string.endsWith(","))
+		{
+			string = string.substring(0,string.length() - 1);
 		}
 		return string;
 	}

@@ -70,7 +70,7 @@ public class Team {
 	
 	public String toString()
 	{
-		return this.getName() + this.getId()+ this.meeting_ch_list.toString();
+		return this.getName()+","+this.getId()+","+this.meeting_ch_list.toString();
 	}
 	
 }

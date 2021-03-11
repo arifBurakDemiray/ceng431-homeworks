@@ -23,7 +23,10 @@ public class FileRead {
 			String line;
 			br.readLine();
 			while ((line = br.readLine()) != null) {
-
+				if(line.contains("\"")) {
+					line = line.replace("\"", "");
+					System.out.println(line);
+				}
 				String[] values = line.split(",", -1);
 
 				records.add(Arrays.asList(values));
@@ -47,8 +50,12 @@ public class FileRead {
 			defaultMeetingDate = line.get(3).strip();
 			meetingChannel = line.get(4).strip();
 			meetingDate = line.get(5).strip();
-			participantId = line.get(6).strip(); // "X,Y"
-			String[] participantList = participantId.intern().split(",");
+			String[] participantList;
+			int ptSize = line.size()-5;
+			if(ptSize>0) {
+				
+			}
+				
 
 			Team team = new Team(teamName, teamId);
 			Meeting meeting = null;
@@ -74,9 +81,9 @@ public class FileRead {
 				team.addChannel(tempChannel);
 			}
 			teams.add(team);
-			System.out.println(team);
 			// create Team
 			// add team
+			System.out.println(participantId);
 		}
 		return teams;
 	}

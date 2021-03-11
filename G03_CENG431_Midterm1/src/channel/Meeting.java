@@ -84,6 +84,9 @@ public class Meeting {
 	}
 	
 	public String toString() {
-		return this.getDate();
+		String string=this.getDate();
+		if(string==null)
+			string = "";
+		return string;
 	}
 }
