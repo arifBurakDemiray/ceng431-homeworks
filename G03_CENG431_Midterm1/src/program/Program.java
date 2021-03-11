@@ -6,6 +6,7 @@ import java.util.List;
 
 import exception.ItemExistException;
 import exception.ItemNotFoundException;
+import exception.NotSupportedException;
 import fileio.FileRead;
 import fileio.FileWrite;
 import storage.IContainer;
@@ -14,7 +15,7 @@ import user.User;
 
 public class Program {
 
-	public static void main(String[] args) throws IOException, ItemExistException, ItemNotFoundException, ParseException
+	public static void main(String[] args) throws IOException, ItemExistException, ItemNotFoundException, ParseException, NotSupportedException
 	{
 		FileRead fr = new FileRead();
 		List<List<String>> lines = null;
@@ -24,9 +25,10 @@ public class Program {
 		
 		lines = fr.read("data\\userList.csv");
 		IContainer<User> users = fr.readUsers(lines,teams);
-		String header = "User Type,User Name,User ID,Email,Password,Team ID,";
+		String header1 = "User Type,User Name,User ID,Email,Password,Team ID,";
+		String header2 = "Team Name,Team ID,Default Channel,Default Meeting Day and Time,Meeting Channel,Meeting Day and Time,Participant ID";
 		FileWrite file = new FileWrite();
-		//file.writeItems(users, "data\\userLeest.csv",header);
-		file.writeItems(teams, "data\\userLeaest.csv",header);
+		file.writeItems(users, "data\\userLeest.csv",header1);
+		file.writeItems(teams, "data\\teamLeaest.csv",header2);
 	}
 }

@@ -10,7 +10,9 @@ import java.util.List;
 import channel.*;
 import exception.ItemExistException;
 import storage.*;
+import team.ITeamManagement;
 import team.Team;
+import team.TeamManagement;
 import user.*;
 
 public class FileRead {
@@ -39,6 +41,8 @@ public class FileRead {
 	}
 
 	public IContainer<Team> readTeams(List<List<String>> records) throws ItemExistException, ParseException {
+		
+		
 		IContainer<Team> teams = new TeamContainer();
 		for (List<String> line : records) {
 			String teamName, teamId, defaultChannel, defaultMeetingDate, meetingChannel, meetingDate,
@@ -50,14 +54,19 @@ public class FileRead {
 			defaultMeetingDate = line.get(3).strip();
 			meetingChannel = line.get(4).strip();
 			meetingDate = line.get(5).strip();
-			String[] participantList;
-			int ptSize = line.size()-5;
-			if(ptSize>0) {
-				
+		
+			List<String> participantList = new ArrayList<String>();
+			int n = 6;
+			while (((n) < line.size() && !line.get(n).equals(""))) {
+				participantId = line.get(n).strip();
+				participantList.add(participantId);
+				n = n + 1;
 			}
 				
 
 			Team team = new Team(teamName, teamId);
+			ITeamManagement teamManagement = new TeamManagement(team);
+			
 			Meeting meeting = null;
 			Channel tempChannel = null;
 			if (!defaultChannel.equals("")) {
@@ -67,7 +76,7 @@ public class FileRead {
 					meeting = new Meeting();
 			}
 			tempChannel = new MeetingChannel(meeting,defaultChannel);
-			team.addChannel(tempChannel);
+			teamManagement.addChannel(tempChannel);
 			if (!meetingChannel.equals("")) {
 				if (!meetingDate.equals("")) {
 					meeting = new Meeting(meetingDate);
@@ -78,12 +87,11 @@ public class FileRead {
 				for (String id : participantList) {
 					((PrivateChannel) tempChannel).addParticipant(id);
 				}
-				team.addChannel(tempChannel);
+				teamManagement.addChannel(tempChannel);
 			}
 			teams.add(team);
 			// create Team
 			// add team
-			System.out.println(participantId);
 		}
 		return teams;
 	}
@@ -114,8 +122,8 @@ public class FileRead {
 					teamId = line.get(n);
 					try {
 						Team team = teams.getById(teamId);
-
-						team.addTeamOwner((Academician) user);
+						TeamManagement teamManagement = new TeamManagement(team);
+						teamManagement.addTeamOwner((Academician) user);
 
 					} catch (Exception e) {
 						System.out.println(e);
@@ -144,8 +152,8 @@ public class FileRead {
 					Team team = teams.getById(teamId);
 
 					user.getTeams().add(team);
-
-					team.addMember(user);
+					TeamManagement teamManagement = new TeamManagement(team);
+					teamManagement.addMember(user);
 
 				} catch (Exception e) {
 					System.out.println("FileRead - CreateUser - try add(team)" + e);

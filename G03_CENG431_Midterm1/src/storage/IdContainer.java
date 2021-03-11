@@ -1,15 +1,12 @@
 package storage;
 
-
-
-import exception.ItemNotFoundException;
+import exception.NotSupportedException;
 
 public class IdContainer extends Container<String>{
 
 	@Override
-	public String getById(String id) throws ItemNotFoundException {
-		// TODO Auto-generated method stub
-		return null;
+	public String getById(String id) throws NotSupportedException {
+		throw new NotSupportedException("src.storage.IdContainer.getById() function is not supported for IdContainer.");
 	}
 
 	

@@ -6,11 +6,11 @@ package storage;
 import java.util.Iterator;
 import java.util.List;
 
-
+import exception.NotSupportedException;
 import exception.ItemNotFoundException;
 
 
-public interface IContainer<T>{
+public interface IContainer<T> extends Iterable<T>{
 	/**
 	 * This function adds an elements to the container
 	 * @param item which is going to be added to the container
@@ -23,10 +23,22 @@ public interface IContainer<T>{
 	 * @return s searched item if not found throws 
 	 * @throws ItemNotFoundException if not found by id it throws that exception
 	 */
-	public T getById(String id) throws ItemNotFoundException;
+	public T getById(String id) throws ItemNotFoundException,NotSupportedException;
 	
+	
+	public T getItem(T item);
+	
+	/**
+	 * This function returns the length of the collection
+	 * @return s the length of the collection
+	 */
+	public int getLength();
 	
 	public List<T> getList();
+	
+	public boolean isEmpty();
+	
+	public Iterator<T> iterator();
 	
 	/**
 	 * This function removes given element
@@ -43,15 +55,5 @@ public interface IContainer<T>{
 	 * @throws ItemNotFoundException if not found
 	 */
 	public T removeById(int id) throws ItemNotFoundException;
-	
-	/**
-	 * This function returns the length of the collection
-	 * @return s the length of the collection
-	 */
-	public int getLength();
-	
-	public T getItem(T item);
-	
-	public Iterator<T> iterator();
 	
 }

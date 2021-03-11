@@ -1,11 +1,9 @@
 package team;
 
 import channel.Channel;
-import exception.ItemExistException;
 import storage.ChannelContainer;
 import storage.IContainer;
 import storage.UserContainer;
-import user.Academician;
 import user.User;
 
 public class Team {
@@ -16,47 +14,21 @@ public class Team {
 	private IContainer<User> owners;
 	
 	public Team(String name, String id) {
-		this.name = name;
-		this.id=id;
+		setName(name);
+		setId(id);
 		this.owners = new UserContainer();
 		this.meeting_ch_list = new ChannelContainer();
 		this.memberUsers = new UserContainer();
 	}
 	
-	
-	public void addChannel(Channel ch) throws ItemExistException
+	public String getName()
 	{
-		boolean isAdded = meeting_ch_list.add(ch);
-		if(!isAdded)
-		{
-			System.out.println("Channel was added before.");
-		}
+		return this.name;
 	}
 	
-	public void addMember(User user) throws ItemExistException
+	public void setName(String name)
 	{
-		boolean isAdded = memberUsers.add(user);
-		if(!isAdded)
-		{
-			System.out.println("User was added before.");
-		}
-	}
-	
-	public void addTeamOwner(Academician user)
-	{
-		if(user instanceof Academician)
-		{
-			boolean isAdded = owners.add(user);
-			if(!isAdded)
-			{
-				System.out.println("User "+user.getName()+ " was added before.");
-			}
-		}
-		else
-		{
-			System.out.println("Only academicians can be owner.");
-		}
-		
+		this.name = name;
 	}
 	
 	public String getId()
@@ -64,10 +36,26 @@ public class Team {
 		return this.id;
 	}
 	
-	public String getName() {
-		return this.name;
+	public void setId(String id)
+	{
+		this.id = id;
 	}
 	
+	public IContainer<Channel> getMeetingChannelList()
+	{
+		return this.meeting_ch_list;
+	}
+	
+	public IContainer<User> getMemberUsers()
+	{
+		return this.memberUsers;
+	}
+	
+	public IContainer<User> getOwners()
+	{
+		return this.owners;
+	}
+		
 	public String toString()
 	{
 		return this.getName()+","+this.getId()+","+this.meeting_ch_list.toString();
