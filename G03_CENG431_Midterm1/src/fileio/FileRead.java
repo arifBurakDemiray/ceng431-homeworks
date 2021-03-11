@@ -59,7 +59,7 @@ public class FileRead {
 				else
 					meeting = new Meeting();
 			}
-			tempChannel = new MeetingChannel(meeting);
+			tempChannel = new MeetingChannel(meeting,defaultChannel);
 			team.addChannel(tempChannel);
 			if (!meetingChannel.equals("")) {
 				if (!meetingDate.equals("")) {
@@ -67,7 +67,7 @@ public class FileRead {
 				} else {
 					meeting = new Meeting();
 				}
-				tempChannel = new PrivateChannel(meeting);
+				tempChannel = new PrivateChannel(meeting,meetingChannel);
 				for (String id : participantList) {
 					((PrivateChannel) tempChannel).addParticipant(id);
 				}

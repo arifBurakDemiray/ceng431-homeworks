@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
 import storage.IContainer;
-import team.Team;
 import java.io.IOException;
 import java.util.Iterator;
 

@@ -9,8 +9,8 @@ import storage.IdContainer;
 public class PrivateChannel extends Channel{
 	
 	private IContainer<String> participants;
-	public PrivateChannel(Meeting meeting) {
-		super(meeting);
+	public PrivateChannel(Meeting meeting,String name) {
+		super(meeting,name);
 		this.participants = new IdContainer();
 	}
 	
@@ -18,6 +18,11 @@ public class PrivateChannel extends Channel{
 
 		return participants.add(participantId);
 
+	}
+	
+	@Override
+	public String toString() {
+		return super.toString()+this.participants.toString();
 	}
 
 }

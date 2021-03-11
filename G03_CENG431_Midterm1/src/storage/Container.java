@@ -85,11 +85,12 @@ public abstract class Container<T> implements IContainer<T> {
 	*/
 	public String toString()
 	{
+		String string = "";
 		for(T item: this.container)
 		{
-			System.out.println(item.toString());
+			string+=item.toString();
 		}
-		return "adas";
+		return string;
 	}
 	
 	@Override

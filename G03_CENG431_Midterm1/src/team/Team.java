@@ -64,9 +64,13 @@ public class Team {
 		return this.id;
 	}
 	
+	public String getName() {
+		return this.name;
+	}
+	
 	public String toString()
 	{
-		return ( this.name + "-" + this.id + "-" + this.memberUsers.getLength());
+		return this.getName() + this.getId()+ this.meeting_ch_list.toString();
 	}
 	
 }
