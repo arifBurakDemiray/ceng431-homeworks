@@ -27,6 +27,5 @@ public class Program {
 		String header = "User Type,User Name,User ID,Email,Password,Team ID,";
 		FileWrite file = new FileWrite();
 		file.writeItems(users, "data\\userLeest.csv",header);
-
 	}
 }

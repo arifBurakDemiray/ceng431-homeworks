@@ -41,9 +41,6 @@ public class FileWrite {
 		return true;
 	}
 	
-	public boolean writeTeams(IContainer<Team> teams){
-		return false;
-	}
 		
 		
 }
