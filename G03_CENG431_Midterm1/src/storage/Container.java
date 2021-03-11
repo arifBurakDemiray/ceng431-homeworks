@@ -4,17 +4,28 @@
 package storage;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
-import java.util.List;
 import exception.ItemNotFoundException;
 import exception.NotSupportedException;
 
 public abstract class Container<T> implements IContainer<T> {
 
-	private List<T> container;
+	private Collection<T> container; // it holds objects of given type.
 
+	/**
+	 * The constructor to create a container which holds the objects of given type.
+	 */
 	public Container() {
 		container = new ArrayList<T>();
+	}
+
+	public int getLength() {
+		return container.size();
+	}
+
+	public Collection<T> getContainer() {
+		return this.container;
 	}
 
 	public boolean add(T item) {
@@ -26,27 +37,21 @@ public abstract class Container<T> implements IContainer<T> {
 
 	public abstract T getById(String id) throws ItemNotFoundException, NotSupportedException;
 
-	public List<T> getContainer() {
-		return container;
-	}
-
 	public T getItem(T item) {
 		return search(item);
-	}
-
-	public int getLength() {
-		return container.size();
-	}
-
-	public List<T> getList() {
-		return container;
-
 	}
 
 	public boolean isEmpty() {
 		return this.container.isEmpty();
 	}
 
+	/**
+	 * The function returns the result of that the given item is in the container or
+	 * not.
+	 *
+	 * @param item given item.
+	 * @return true/false
+	 */
 	private boolean isExist(T item) {
 		boolean boolValue = false;
 
@@ -69,18 +74,15 @@ public abstract class Container<T> implements IContainer<T> {
 		} else {
 			return item;
 		}
-
 	}
 
-	public T removeById(int id) throws ItemNotFoundException {
-		if (!container.remove(null)) {
-			throw new ItemNotFoundException();
-		} else {
-			return null;
-		}
-
-	}
-
+	/**
+	 * The function searches the given item in the container to find equilavent
+	 * object which is in the container.
+	 *
+	 * @param item given item.
+	 * @return T item is in the container which is equal to the given item.
+	 */
 	protected T search(T item) {
 		T obj = null;
 		for (T itm : container) {
@@ -92,6 +94,11 @@ public abstract class Container<T> implements IContainer<T> {
 		return obj;
 	}
 
+	/**
+	 * The function prints the all container items.
+	 *
+	 * @return string to print.
+	 */
 	public String toString() {
 		String string = "";
 		for (T item : this.container) {

@@ -13,7 +13,6 @@ public abstract class Academician extends User{
 	/*
 	 * It sets the email which is created with academician domain
 	 */
-
 	public void setAcademicianEmail()
 	{	
 		String name = getName();

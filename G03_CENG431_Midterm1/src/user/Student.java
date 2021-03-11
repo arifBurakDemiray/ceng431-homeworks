@@ -17,7 +17,6 @@ public class Student extends User{
 	/*
 	 * It sets the email which is created with student domain
 	 */
-
 	public void setStudentEmail()
 	{	
 		String name = getName();

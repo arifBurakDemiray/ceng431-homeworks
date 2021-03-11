@@ -3,7 +3,6 @@ package fileio;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -17,7 +16,15 @@ import user.*;
 
 public class FileRead {
 
-	public List<List<String>> read(String filePath) throws IOException {
+	private void checkId(IContainer<String> ids, User user) {
+		String id = user.createId();
+		while (!ids.add(id)) {
+			id = user.createId();
+		}
+		user.setId(id);
+	}
+
+	protected List<List<String>> read(String filePath) {
 
 		List<List<String>> records = new ArrayList<>();
 
@@ -25,7 +32,7 @@ public class FileRead {
 			String line;
 			br.readLine();
 			while ((line = br.readLine()) != null) {
-				if(line.contains("\"")) {
+				if (line.contains("\"")) {
 					line = line.replace("\"", "");
 					System.out.println(line);
 				}
@@ -36,13 +43,16 @@ public class FileRead {
 			br.close();
 		}
 
+		catch (IOException e) {
+			System.out.println("File can not be read at the moment");
+		}
+
 		return records;
 
 	}
 
-	public IContainer<Team> readTeams(List<List<String>> records) throws ItemExistException, ParseException {
-		
-		
+	protected IContainer<Team> readTeams(List<List<String>> records) {
+
 		IContainer<Team> teams = new TeamContainer();
 		for (List<String> line : records) {
 			String teamName, teamId, defaultChannel, defaultMeetingDate, meetingChannel, meetingDate,
@@ -54,7 +64,7 @@ public class FileRead {
 			defaultMeetingDate = line.get(3).strip();
 			meetingChannel = line.get(4).strip();
 			meetingDate = line.get(5).strip();
-		
+
 			List<String> participantList = new ArrayList<String>();
 			int n = 6;
 			while (((n) < line.size() && !line.get(n).equals(""))) {
@@ -62,11 +72,10 @@ public class FileRead {
 				participantList.add(participantId);
 				n = n + 1;
 			}
-				
 
 			Team team = new Team(teamName, teamId);
 			ITeamManagement teamManagement = new TeamManagement(team);
-			
+
 			Meeting meeting = null;
 			Channel tempChannel = null;
 			if (!defaultChannel.equals("")) {
@@ -75,19 +84,27 @@ public class FileRead {
 				else
 					meeting = new Meeting();
 			}
-			tempChannel = new MeetingChannel(meeting,defaultChannel);
-			teamManagement.addChannel(tempChannel);
+			tempChannel = new MeetingChannel(meeting, defaultChannel);
+			try {
+				teamManagement.addChannel(tempChannel);
+			} catch (ItemExistException e) {
+				System.out.println("This channel already exists");
+			}
 			if (!meetingChannel.equals("")) {
 				if (!meetingDate.equals("")) {
 					meeting = new Meeting(meetingDate);
 				} else {
 					meeting = new Meeting();
 				}
-				tempChannel = new PrivateChannel(meeting,meetingChannel);
+				tempChannel = new PrivateChannel(meeting, meetingChannel);
 				for (String id : participantList) {
 					((PrivateChannel) tempChannel).addParticipant(id);
 				}
-				teamManagement.addChannel(tempChannel);
+				try {
+					teamManagement.addChannel(tempChannel);
+				} catch (ItemExistException e) {
+					System.out.println("This channel already exists");
+				}
 			}
 			teams.add(team);
 			// create Team
@@ -96,7 +113,7 @@ public class FileRead {
 		return teams;
 	}
 
-	public IContainer<User> readUsers(List<List<String>> records, IContainer<Team> teams) throws ItemExistException {
+	protected IContainer<User> readUsers(List<List<String>> records, IContainer<Team> teams) {
 		IContainer<User> users = new UserContainer();
 		IContainer<String> ids = new IdContainer();
 		for (List<String> line : records) {
@@ -165,14 +182,6 @@ public class FileRead {
 
 		}
 		return users;
-	}
-
-	private void checkId(IContainer<String> ids, User user) {
-		String id = user.createId();
-		while (!ids.add(id)) {
-			id = user.createId();
-		}
-		user.setId(id);
 	}
 
 }

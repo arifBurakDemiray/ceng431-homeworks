@@ -13,12 +13,18 @@ public class Team {
 	private IContainer<User> memberUsers;
 	private IContainer<User> owners;
 	
+	
+	/**
+	 * Constructor creates a Team with given name and id.
+	 * @param name team's given name
+	 * @param id team's given id
+	 */
 	public Team(String name, String id) {
 		setName(name);
 		setId(id);
-		this.owners = new UserContainer();
-		this.meeting_ch_list = new ChannelContainer();
-		this.memberUsers = new UserContainer();
+		this.owners = new UserContainer(); // it holds owners of the this team
+		this.meeting_ch_list = new ChannelContainer(); // it holds channels of the this team
+		this.memberUsers = new UserContainer(); // it holds members of the this team
 	}
 	
 	public String getName()
@@ -55,6 +61,7 @@ public class Team {
 	{
 		return this.owners;
 	}
+		
 		
 	public String toString()
 	{

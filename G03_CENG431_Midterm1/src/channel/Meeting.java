@@ -2,6 +2,9 @@ package channel;
 
 import enums.TimePeriod;
 
+/**
+ * meeting class holds date and time values for an object
+ */
 public class Meeting {
 	private String date;
 	private String day;
@@ -9,24 +12,41 @@ public class Meeting {
 	private String minute;
 	private TimePeriod period;
 
-	
+	/**
+	 * Default constructor
+	 */
 	public Meeting() {
 		this.date = null;
 	}
 	
+	/**
+	 * @param date which is given in format that "DAY HH:SS PERIOD" periods are AM and PM
+	 * From input it parses this to day hour second and period values
+	 */
 	public Meeting(String date) {
 		this.date = date;
 		parseDate();
 	}
 
+	/**
+	 * Getter for date value
+	 * @returns date of the meeting
+	 */
 	public String getDate() {
 		return date;
 	}
 
+	/**
+	 * setter for date
+	 * @param date is format "DAY HH:SS PERIOD" periods are AM and PM
+	 */
 	public void setDate(String date) {
 		this.date = date;
 	}
-
+	
+	/**
+	 * @returns the day of the meeting
+	 */
 	public String getDay() {
 		return day;
 	}
@@ -59,6 +79,9 @@ public class Meeting {
 		this.period = period;
 	}
 
+	/**
+	 * Parses given date 
+	 */
 	private void parseDate()
 	{
 		String[] splittedDate = this.date.split(" ");
@@ -81,6 +104,12 @@ public class Meeting {
 			throw new IllegalArgumentException("Unexpected value: " + splittedDate[2]);
 		}
 		
+	}
+	
+	public void updateDate(String date)
+	{
+		this.date = date;
+		parseDate();
 	}
 	
 	public String toString() {
