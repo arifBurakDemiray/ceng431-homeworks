@@ -61,16 +61,6 @@ public class FileRead {
 			teamId = line.get(1).strip();
 			defaultChannel = line.get(2).strip();
 			defaultMeetingDate = line.get(3).strip();
-			meetingChannel = line.get(4).strip();
-			meetingDate = line.get(5).strip();
-
-			List<String> participantList = new ArrayList<String>();
-			int n = 6;
-			while (((n) < line.size() && !line.get(n).equals(""))) {
-				participantId = line.get(n).strip();
-				participantList.add(participantId);
-				n = n + 1;
-			}
 
 			Team team = new Team(teamName, teamId);
 			ITeamManagement teamManagement = new TeamManagement(team);
@@ -89,21 +79,37 @@ public class FileRead {
 			} catch (ItemExistException e) {
 				System.out.println("This channel already exists");
 			}
-			System.out.println(line.size());
-			if (!meetingChannel.equals("")) {
-				if (!meetingDate.equals("")) {
-					meeting = new Meeting(meetingDate);
-				} else {
-					meeting = new Meeting();
+			
+			
+			
+			List<String> participantList = new ArrayList<String>();
+			int n = 4;
+			while(line.size()-n > 1) {
+				meetingChannel = line.get(n).strip();
+				n++;
+				meetingDate = line.get(n).strip();
+				n++;
+				while (((n) < line.size() && !line.get(n).equals("")) && checkType(line.get(n))) {
+					participantId = line.get(n).strip();
+					participantList.add(participantId);
+					n++;
 				}
-				tempChannel = new PrivateChannel(meeting, meetingChannel);
-				for (String id : participantList) {
-					((PrivateChannel) tempChannel).addParticipant(id);
-				}
-				try {
-					teamManagement.addChannel(tempChannel);
-				} catch (ItemExistException e) {
-					System.out.println("This channel already exists");
+				
+				if (!meetingChannel.equals("")) {
+					if (!meetingDate.equals("")) {
+						meeting = new Meeting(meetingDate);
+					} else {
+						meeting = new Meeting();
+					}
+					tempChannel = new PrivateChannel(meeting, meetingChannel);
+					for (String id : participantList) {
+						((PrivateChannel) tempChannel).addParticipant(id);
+					}
+					try {
+						teamManagement.addChannel(tempChannel);
+					} catch (ItemExistException e) {
+						System.out.println("This channel already exists");
+					}
 				}
 			}
 			teams.add(team);
@@ -182,6 +188,19 @@ public class FileRead {
 
 		}
 		return users;
+	}
+	
+	
+	private boolean checkType(String value) {
+		
+		String temp = value.strip();
+		try {
+			boolean result = Integer.valueOf(temp) instanceof Integer;
+			return result;
+		}
+		catch(NumberFormatException e) {
+			return false;
+		}
 	}
 
 }
