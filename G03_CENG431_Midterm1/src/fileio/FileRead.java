@@ -34,7 +34,6 @@ public class FileRead {
 			while ((line = br.readLine()) != null) {
 				if (line.contains("\"")) {
 					line = line.replace("\"", "");
-					System.out.println(line);
 				}
 				String[] values = line.split(",", -1);
 
@@ -90,6 +89,7 @@ public class FileRead {
 			} catch (ItemExistException e) {
 				System.out.println("This channel already exists");
 			}
+			System.out.println(line.size());
 			if (!meetingChannel.equals("")) {
 				if (!meetingDate.equals("")) {
 					meeting = new Meeting(meetingDate);
@@ -117,7 +117,6 @@ public class FileRead {
 		IContainer<User> users = new UserContainer();
 		IContainer<String> ids = new IdContainer();
 		for (List<String> line : records) {
-			//burada team management ý bikere oluþturmak lazým sanýrsam
 			String userType, userName, userId, email, password, teamId;
 			userType = line.get(0).strip();
 			userName = line.get(1).strip();
@@ -139,11 +138,12 @@ public class FileRead {
 					teamId = line.get(n);
 					try {
 						Team team = teams.getById(teamId);
-						TeamManagement teamManagement = new TeamManagement(team);
+						
+						ITeamManagement teamManagement = new TeamManagement(team);
 						teamManagement.addTeamOwner((Academician) user);
 
 					} catch (Exception e) {
-						System.out.println(e);
+						System.out.println(e.getMessage());
 					}
 					n = n + 1;
 				}
@@ -169,7 +169,7 @@ public class FileRead {
 					Team team = teams.getById(teamId);
 
 					user.getTeams().add(team);
-					TeamManagement teamManagement = new TeamManagement(team);
+					ITeamManagement teamManagement = new TeamManagement(team);
 					teamManagement.addMember(user);
 
 				} catch (Exception e) {

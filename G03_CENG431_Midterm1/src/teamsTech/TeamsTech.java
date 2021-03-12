@@ -5,6 +5,8 @@ package teamsTech;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.Iterator;
+
 import exception.ItemExistException;
 import exception.ItemNotFoundException;
 import exception.NotSupportedException;
@@ -29,10 +31,7 @@ public class TeamsTech {
 		
 		IFileIO fr = new FileIO();
 		IContainer<Team> teams = fr.readTeams("data\\teamList.csv");
-		System.out.println("\nMAIN "+teams.getById("CENG611").toString()+"\n\n");
-		IContainer<User> users = fr.readUsers(teams,"data\\userList.csv");
-		fr.writeUsers(users, "data\\userLeest.csv");
-		fr.writeTeams(teams, "data\\teamLeaest.csv");
+		IContainer<User> users = fr.readUsers(teams,"data\\userLeest.csv");
 		Program teamsTeach = new Program();
 		teamsTeach.start();
 
