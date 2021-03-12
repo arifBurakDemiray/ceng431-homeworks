@@ -1,5 +1,7 @@
 package user;
 
+import java.util.Locale;
+
 public abstract class Academician extends User{
 
 
@@ -22,7 +24,7 @@ public abstract class Academician extends User{
 		String[] splittedName = name.split(" ");
 		String firstName = splittedName[0];
 		String lastName = splittedName[splittedName.length-1];
-		String email = firstName.toLowerCase()+lastName.toLowerCase()+"@iyte.edu.tr";
+		String email = (firstName+lastName).toLowerCase(Locale.US)+"@iyte.edu.tr";
 		setEmail(email);
 	}
 

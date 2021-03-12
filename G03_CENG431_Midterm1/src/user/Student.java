@@ -1,5 +1,6 @@
 package user;
 
+import java.util.Locale;
 
 public class Student extends User{
 
@@ -27,7 +28,7 @@ public class Student extends User{
 		String[] splittedName = name.split(" ");
 		String firstName = splittedName[0];
 		String lastName = splittedName[splittedName.length-1];
-		String email = firstName.toLowerCase()+lastName.toLowerCase()+"@std.iyte.edu.tr";
+		String email = (firstName+lastName).toLowerCase(Locale.US)+"@std.iyte.edu.tr";
 		setEmail(email);
 	}
 	
