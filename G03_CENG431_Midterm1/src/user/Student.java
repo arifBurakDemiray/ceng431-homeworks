@@ -5,11 +5,15 @@ public class Student extends User{
 
 	
 
+	
+	public Student(String name, String id, String password, String email) {
+		super(name, id, password,email);
+		if(email.equals(""))
+			this.setStudentEmail();
+	}
 
 	public Student(String name, String id, String password) {
-		super(name, id, password);
-		setStudentEmail();
-		// TODO Auto-generated constructor stub
+		this(name,id,password,"");
 	}
 	
 	

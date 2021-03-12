@@ -117,7 +117,7 @@ public class FileRead {
 		IContainer<User> users = new UserContainer();
 		IContainer<String> ids = new IdContainer();
 		for (List<String> line : records) {
-			@SuppressWarnings("unused") // we should look that situation
+			//burada team management ý bikere oluþturmak lazým sanýrsam
 			String userType, userName, userId, email, password, teamId;
 			userType = line.get(0).strip();
 			userName = line.get(1).strip();
@@ -128,12 +128,12 @@ public class FileRead {
 			switch (userType) {
 			case "Student": {
 
-				user = new Student(userName, userId, password);
+				user = new Student(userName, userId, password,email);
 				break;
 			}
 			case "Instructor": {
 
-				user = new Instructor(userName, userId, password);
+				user = new Instructor(userName, userId, password,email);
 				int n = 5;
 				while (((n) < line.size() && !line.get(n).equals(""))) {
 					teamId = line.get(n);
@@ -151,7 +151,7 @@ public class FileRead {
 			}
 			case "Teaching Assistant": {
 
-				user = new TeachingAssistant(userName, userId, password);
+				user = new TeachingAssistant(userName, userId, password,email);
 				break;
 			}
 			default:

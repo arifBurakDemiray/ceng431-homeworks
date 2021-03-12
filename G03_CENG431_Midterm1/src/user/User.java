@@ -21,12 +21,11 @@ public abstract class User {
 	 * @param email    = user's email
 	 */
 
-	public User(String id, String name, String password, String email) {
-		setEmail(email);
-		setId(id);
+	public User( String name, String id, String password, String email) {
 		setName(name);
-		setPassword(password);
 		this.control(id, password);
+		setEmail(email);
+		//setPassword(password);
 		teams = new TeamContainer(); // create a TeamContainer to hold the teams which user is in.
 	}
 
@@ -40,9 +39,10 @@ public abstract class User {
 	 * @param password = user's password
 	 */
 	public User(String name, String id, String password) {
-		setName(name);
-		control(id, password);
-		teams = new TeamContainer(); // create a TeamContainer to hold the teams which user is in.
+		this(name,id,password,"");
+//		setName(name);
+//		control(id, password);
+//		teams = new TeamContainer(); // create a TeamContainer to hold the teams which user is in.
 	}
 
 	/**

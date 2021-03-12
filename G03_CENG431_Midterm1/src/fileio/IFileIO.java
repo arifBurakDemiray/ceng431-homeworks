@@ -31,7 +31,7 @@ public interface IFileIO {
 	 * This function writes teams in a pattern like mentioned in readTeams method
 	 * @param teams that is going to be wrote
 	 * @param filePath is the fileName of the teams data file
-	 * @returns true if successfully wrote the team ,false if there is a problem with the fileName
+	 * @returns true if successfully wrote the team ,false if there is a problem with the file and container is empty
 	 */
 	public boolean writeTeams(IContainer<Team> teams, String filePath);
 	
@@ -39,7 +39,7 @@ public interface IFileIO {
 	 * This function writes users in a pattern like mentioned in readUsers method
 	 * @param users that is going to be wrote
 	 * @param filePath is the fileName of the users data file
-	 * @returns true if successfully wrote the team ,false if there is a problem with the fileName
+	 * @returns true if successfully wrote the team ,false if there is a problem with the file and container is empty
 	 */
 	public boolean writeUsers(IContainer<User> users, String filePath);
 }

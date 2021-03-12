@@ -3,11 +3,14 @@ package user;
 public abstract class Academician extends User{
 
 
+	public Academician(String name, String id, String password, String email) {
+		super(name, id, password,email);
+		if(email.equals(""))
+			this.setAcademicianEmail();
+	}
 
 	public Academician(String name, String id, String password) {
-		super(name, id, password);
-		setAcademicianEmail();
-		// TODO Auto-generated constructor stub
+		this(name,id,password,"");
 	}
 
 	/*
