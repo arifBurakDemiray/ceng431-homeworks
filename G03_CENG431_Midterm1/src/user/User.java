@@ -21,28 +21,10 @@ public abstract class User {
 	 * @param email    = user's email
 	 */
 
-	public User( String name, String id, String password, String email) {
+	public User(String name, String id, String password, String email) {
 		setName(name);
-		this.control(id, password);
-		setEmail(email);
-		//setPassword(password);
+		this.control(id, password, email);
 		teams = new TeamContainer(); // create a TeamContainer to hold the teams which user is in.
-	}
-
-	/**
-	 * The constructor creates User with given parameters and invoke control() to do
-	 * that if the given id or password is null it creates a random id or a random
-	 * password.
-	 * 
-	 * @param name     = user's name
-	 * @param id       = user's id
-	 * @param password = user's password
-	 */
-	public User(String name, String id, String password) {
-		this(name,id,password,"");
-//		setName(name);
-//		control(id, password);
-//		teams = new TeamContainer(); // create a TeamContainer to hold the teams which user is in.
 	}
 
 	/**
@@ -54,7 +36,7 @@ public abstract class User {
 	 * @param password user's given password
 	 */
 
-	private void control(String id, String password) {
+	private void control(String id, String password, String email) {
 		if (!id.equals("")) {
 			setId(id);
 		}
@@ -63,6 +45,12 @@ public abstract class User {
 			setRandomPassword(); // invoke it to create random password and set password.
 		} else {
 			setPassword(password);
+		}
+
+		if (email.equals("")) {
+			createEmail(); // invoke it to create user email.
+		} else {
+			setEmail(email);
 		}
 
 	}
@@ -108,6 +96,12 @@ public abstract class User {
 	}
 
 	/**
+	 * It creates a email in the subclasses.
+	 */
+	public abstract void createEmail();
+	
+	
+	/**
 	 * It creates a random unique id string.
 	 * 
 	 * @return generatedId which is created random id.
@@ -126,7 +120,7 @@ public abstract class User {
 	public String createPassword() {
 
 		int length = 4;
-		String symbol = "-/.^&*_!@%=+>)";
+		String symbol = "-./*_=+)";
 		String cap_letter = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		String small_letter = "abcdefghijklmnopqrstuvwxyz";
 		String numbers = "0123456789";

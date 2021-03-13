@@ -8,6 +8,7 @@ import java.text.ParseException;
 import exception.ItemExistException;
 import exception.ItemNotFoundException;
 import exception.NotSupportedException;
+import exception.UnauthorizedUserOperationException;
 import fileio.FileIO;
 import fileio.IFileIO;
 import program.Program;
@@ -24,9 +25,10 @@ public class TeamsTech {
 	 * @throws ItemExistException
 	 * @throws NotSupportedException
 	 * @throws ItemNotFoundException
+	 * @throws UnauthorizedUserOperationException 
 	 */
 	public static void main(String[] args)
-			throws IOException, ItemExistException, ParseException, ItemNotFoundException, NotSupportedException {
+			throws IOException, ItemExistException, ParseException, ItemNotFoundException, NotSupportedException, UnauthorizedUserOperationException {
 
 		IFileIO fr = new FileIO();
 		IContainer<Team> teams = fr.readTeams("data\\teamLOST.csv");

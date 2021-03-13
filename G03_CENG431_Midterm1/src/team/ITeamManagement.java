@@ -15,10 +15,10 @@ public interface ITeamManagement {
 	 */
 	public void addChannel(Channel ch);
 
-	/**
-	 * The function tries to add given user to the team users if it is possible
-	 *
-	 * @param user given user to add to the team's users
+	/*
+	 * The function tries to add the given user to the team's user.
+	 * @param user given user to add.
+	 * @throws UnauthorizedUserOperationException
 	 */
 	public void addMember(User user) throws UnauthorizedUserOperationException;
 
@@ -38,16 +38,19 @@ public interface ITeamManagement {
 	 * possible
 	 *
 	 * @param user given user to add to the team's owners
+	 * @throws UnauthorizedUserOperationException
 	 */
 	public void addTeamOwner(Academician user) throws UnauthorizedUserOperationException;
 
-	/**
-	 * The function tries to remove given channel from the team channels if it is
-	 * possible, invoking removeItem method.
-	 * 
-	 * @param ch given channel to remove from the team's channels
+	/*
+	 * The function tries to remove the defined user from the defined channel.
+	 * If channel is not private, return an error because normal channels don't support removing a member from a channel
+	 * @param userId given userId to add.
+	 * @param channelName to identify which channel to remove
+	 * @throws UnauthorizedUserOperationException
 	 */
 	public void removeChannel(Channel ch);
+	
 
 	/**
 	 * By this function Private Channel members can remove members from channel.

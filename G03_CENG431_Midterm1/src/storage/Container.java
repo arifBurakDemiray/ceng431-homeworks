@@ -26,10 +26,6 @@ public abstract class Container<T> implements IContainer<T> {
 
 		return container.add(item);
 	}
-
-	public abstract T getById(String id) throws ItemNotFoundException, NotSupportedException;
-
-	public abstract T getByName(String name) throws ItemNotFoundException, NotSupportedException;
 	
 	public Collection<T> getContainer() {
 		return this.container;
@@ -46,9 +42,17 @@ public abstract class Container<T> implements IContainer<T> {
 	public boolean isEmpty() {
 		return this.container.isEmpty();
 	}
+	
+	public Iterator<T> iterator() {
+		return container.iterator();
+	}
+	
+	public abstract T getById(String id) throws ItemNotFoundException, NotSupportedException;
+
+	public abstract T getByName(String name) throws ItemNotFoundException, NotSupportedException;
 
 	/**
-	 * The function returns the result of that the given item is in the container or
+	 * The function returns the result of that : the given item is in the container or
 	 * not.
 	 *
 	 * @param item given item.
@@ -66,10 +70,13 @@ public abstract class Container<T> implements IContainer<T> {
 		return boolValue;
 	}
 
-	public Iterator<T> iterator() {
-		return container.iterator();
-	}
-
+	/**
+	 * The function tries to remove the given item from container. If process is successfull, it returns the removed item.
+	 * not.
+	 *
+	 * @param item given item.
+	 * @return item
+	 */
 	public T remove(T item) throws ItemNotFoundException {
 		if (!container.remove(item)) {
 			throw new ItemNotFoundException();

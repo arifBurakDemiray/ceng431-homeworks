@@ -14,14 +14,22 @@ public class TeamManagement implements ITeamManagement {
 
 	private Team team;
 
+	
+	/**
+	 * The Constructor creates a team management object 
+	 */
+	public TeamManagement() {
+	}
+	
+	
 	/**
 	 * The Constructor creates a team management object with given team object.
-	 *
 	 * @param team given team to manage it
 	 */
 	public TeamManagement(Team team) {
 		setTeam(team);
 	}
+	
 
 	public void addChannel(Channel ch) {
 		// it tries to add the channel to the team's channels.
@@ -31,16 +39,17 @@ public class TeamManagement implements ITeamManagement {
 			System.out.println("Channel was added before.");
 		}
 	}
-
+	
 	public void addMember(User user) throws UnauthorizedUserOperationException {
-		// it tries to add the user to the team's users.
+		// it tries to add the user to the team's members.
 		// if user was added before, return a message.
 		boolean isAdded = this.team.getMemberUsers().add(user);
 		if (!isAdded) {
 			System.out.println("User was added before.");
 		}
 	}
-
+	
+	
 	public void addMemberToChannel(String userId, String channelName) throws UnauthorizedUserOperationException {
 
 		try {
@@ -56,6 +65,7 @@ public class TeamManagement implements ITeamManagement {
 			System.out.println("There is no channel named " + channelName);
 		}
 	}
+	
 
 	public void addTeamOwner(Academician user) throws UnauthorizedUserOperationException {
 
@@ -73,11 +83,8 @@ public class TeamManagement implements ITeamManagement {
 		}
 
 	}
-
-	public void removeChannel(Channel ch) {
-		removeItem("Channel has not removed.", this.team.getMeetingChannelList(), ch);
-	}
-
+	
+	
 	@Override
 	public void removeChannelMember(String userId, String channelName) throws UnauthorizedUserOperationException {
 
@@ -117,6 +124,11 @@ public class TeamManagement implements ITeamManagement {
 			System.out.println("This item is not found in the container.");
 		}
 	}
+	
+	public void removeChannel(Channel ch) {
+		removeItem("Channel has not removed.", this.team.getMeetingChannelList(), ch);
+	}
+	
 
 	public void removeMember(User user) throws UnauthorizedUserOperationException {
 		removeItem("User has not removed.", this.team.getMemberUsers(), user);

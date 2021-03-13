@@ -3,7 +3,12 @@ package storage;
 import exception.ItemNotFoundException;
 import team.Team;
 public class TeamContainer extends Container<Team> {
-
+	
+	/*
+	 * The function search the given id belongs to the any team or not. If given id belongs to a team, it returns the team
+	 * @param id given team id 
+	 * @return Team whose id is the same with given id. 
+	 */
 	@Override
 	public Team getById(String id) throws ItemNotFoundException {
 		Team returnedTeam = null;
@@ -22,7 +27,13 @@ public class TeamContainer extends Container<Team> {
 			return returnedTeam;
 		}
 	}
-
+	
+	
+	/*
+	 * The function search the given name belongs to the any team or not. If given name belongs to a team, it returns the team
+	 * @param name given team name 
+	 * @return Team whose name is the same with given name. 
+	 */
 	@Override
 	public Team getByName(String name) throws ItemNotFoundException {
 		Team found = null;

@@ -4,7 +4,12 @@ package storage;
 import exception.ItemNotFoundException;
 import user.User;
 public class UserContainer extends Container<User> {
-
+	
+	/*
+	 * The function search the given id belongs to the any user or not. If given id belongs to a user, it returns the user
+	 * @param id given user id 
+	 * @return User whose id is the same with given id. 
+	 */
 	@Override
 	public User getById(String id) throws ItemNotFoundException {
 		User returnedUser = null;
@@ -23,7 +28,13 @@ public class UserContainer extends Container<User> {
 			return returnedUser;
 		}
 	}
-
+	
+	
+	/*
+	 * The function search the given name belongs to the any user or not. If given name belongs to a user, it returns the user
+	 * @param name given user name 
+	 * @return User whose name is the same with given name. 
+	 */
 	@Override
 	public User getByName(String name) throws ItemNotFoundException {
 		User found = null;
