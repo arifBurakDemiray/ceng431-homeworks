@@ -3,6 +3,7 @@ package team;
 import channel.Channel;
 import exception.ItemExistException;
 import exception.ItemNotFoundException;
+import exception.UnauthorizedUserOperationException;
 import storage.IContainer;
 import user.Academician;
 import user.User;
@@ -43,7 +44,7 @@ public class TeamManagement implements ITeamManagement {
 	 *
      * @param user given user to add to the team's users
 	 */
-	public void addMember(User user) throws ItemExistException {
+	public void addMember(User user) throws ItemExistException,UnauthorizedUserOperationException {
 		// it tries to add the user to the team's users.
 		// if user was added before, return a message.
 		boolean isAdded = this.team.getMemberUsers().add(user);
@@ -59,7 +60,7 @@ public class TeamManagement implements ITeamManagement {
 	 *
      * @param user given user to add to the team's owners
 	 */
-	public void addTeamOwner(Academician user) {
+	public void addTeamOwner(Academician user) throws UnauthorizedUserOperationException {
 		
 		//control that given user is an academician or not
 		if (user instanceof Academician) {
@@ -88,7 +89,7 @@ public class TeamManagement implements ITeamManagement {
 	 * The function tries to remove given user from the team users if it is possible, invoking removeItem method. 
      * @param user given user to remove from the team's user	 
 	 */
-	public void removeMember(User user) {
+	public void removeMember(User user) throws UnauthorizedUserOperationException {
 		removeItem("User has not removed.", this.team.getMemberUsers(), user);
 	}
 	
@@ -96,7 +97,7 @@ public class TeamManagement implements ITeamManagement {
 	 * The function tries to remove given user from the team owners if it is possible, invoking removeItem method. 
      * @param user given user to remove from the team's owners	 
 	 */
-	public void removeTeamOwner(User user) {
+	public void removeTeamOwner(User user) throws UnauthorizedUserOperationException {
 		removeItem("Team Owner has not removed.", this.team.getOwners(), user);
 	}
 	
