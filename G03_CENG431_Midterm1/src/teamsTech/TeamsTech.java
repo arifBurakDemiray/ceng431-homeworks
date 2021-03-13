@@ -21,17 +21,18 @@ public class TeamsTech {
 
 	/**
 	 * @param args
-	 * @throws IOException 
-	 * @throws ParseException 
-	 * @throws ItemExistException 
-	 * @throws NotSupportedException 
-	 * @throws ItemNotFoundException 
+	 * @throws IOException
+	 * @throws ParseException
+	 * @throws ItemExistException
+	 * @throws NotSupportedException
+	 * @throws ItemNotFoundException
 	 */
-	public static void main(String[] args) throws IOException, ItemExistException, ParseException, ItemNotFoundException, NotSupportedException {
-		
+	public static void main(String[] args)
+			throws IOException, ItemExistException, ParseException, ItemNotFoundException, NotSupportedException {
+
 		IFileIO fr = new FileIO();
 		IContainer<Team> teams = fr.readTeams("data\\teamLOST.csv");
-		IContainer<User> users = fr.readUsers(teams,"data\\userLeest.csv");
+		IContainer<User> users = fr.readUsers(teams, "data\\userLeest.csv");
 		fr.writeTeams(teams, "data\\teamLEST.csv");
 		Program teamsTeach = new Program();
 		teamsTeach.start();
@@ -39,5 +40,3 @@ public class TeamsTech {
 	}
 
 }
-
-
