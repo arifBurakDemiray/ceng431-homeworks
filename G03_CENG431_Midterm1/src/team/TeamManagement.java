@@ -21,12 +21,6 @@ public class TeamManagement implements ITeamManagement {
 		setTeam(team);
 	}
 
-	/**
-	 * The function tries to add given channel to the team channels if it is
-	 * possible
-	 *
-	 * @param ch given channel to add to the team's channels
-	 */
 	public void addChannel(Channel ch) throws ItemExistException {
 		// it tries to add the channel to the team's channels.
 		// if channel was added before, return a message.
@@ -36,11 +30,6 @@ public class TeamManagement implements ITeamManagement {
 		}
 	}
 
-	/**
-	 * The function tries to add given user to the team users if it is possible
-	 *
-	 * @param user given user to add to the team's users
-	 */
 	public void addMember(User user) throws ItemExistException, UnauthorizedUserOperationException {
 		// it tries to add the user to the team's users.
 		// if user was added before, return a message.
@@ -50,12 +39,6 @@ public class TeamManagement implements ITeamManagement {
 		}
 	}
 
-	/**
-	 * The function tries to add given academician to the team owners if it is
-	 * possible
-	 *
-	 * @param user given user to add to the team's owners
-	 */
 	public void addTeamOwner(Academician user) throws UnauthorizedUserOperationException {
 
 		// control that given user is an academician or not
@@ -73,12 +56,6 @@ public class TeamManagement implements ITeamManagement {
 
 	}
 
-	/**
-	 * The function tries to remove given channel from the team channels if it is
-	 * possible, invoking removeItem method.
-	 * 
-	 * @param ch given channel to remove from the team's channels
-	 */
 	public void removeChannel(Channel ch) {
 		removeItem("Channel has not removed.", this.team.getMeetingChannelList(), ch);
 	}
@@ -106,22 +83,10 @@ public class TeamManagement implements ITeamManagement {
 		}
 	}
 
-	/**
-	 * The function tries to remove given user from the team users if it is
-	 * possible, invoking removeItem method.
-	 * 
-	 * @param user given user to remove from the team's user
-	 */
 	public void removeMember(User user) throws UnauthorizedUserOperationException {
 		removeItem("User has not removed.", this.team.getMemberUsers(), user);
 	}
 
-	/**
-	 * The function tries to remove given user from the team owners if it is
-	 * possible, invoking removeItem method.
-	 * 
-	 * @param user given user to remove from the team's owners
-	 */
 	public void removeTeamOwner(User user) throws UnauthorizedUserOperationException {
 		removeItem("Team Owner has not removed.", this.team.getOwners(), user);
 	}
