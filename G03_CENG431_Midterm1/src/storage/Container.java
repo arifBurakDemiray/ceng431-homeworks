@@ -20,14 +20,6 @@ public abstract class Container<T> implements IContainer<T> {
 		container = new ArrayList<T>();
 	}
 
-	public int getLength() {
-		return container.size();
-	}
-
-	public Collection<T> getContainer() {
-		return this.container;
-	}
-
 	public boolean add(T item) {
 		if (this.isExist(item))
 			return false;
@@ -37,8 +29,18 @@ public abstract class Container<T> implements IContainer<T> {
 
 	public abstract T getById(String id) throws ItemNotFoundException, NotSupportedException;
 
+	public abstract T getByName(String name) throws ItemNotFoundException, NotSupportedException;
+	
+	public Collection<T> getContainer() {
+		return this.container;
+	}
+
 	public T getItem(T item) {
 		return search(item);
+	}
+
+	public int getLength() {
+		return container.size();
 	}
 
 	public boolean isEmpty() {

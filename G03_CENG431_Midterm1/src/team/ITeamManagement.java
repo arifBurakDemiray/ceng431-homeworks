@@ -1,7 +1,6 @@
 package team;
 
 import channel.Channel;
-import exception.ItemExistException;
 import exception.UnauthorizedUserOperationException;
 import user.Academician;
 import user.User;
@@ -14,14 +13,25 @@ public interface ITeamManagement {
 	 *
 	 * @param ch given channel to add to the team's channels
 	 */
-	public void addChannel(Channel ch) throws ItemExistException;
+	public void addChannel(Channel ch);
 
 	/**
 	 * The function tries to add given user to the team users if it is possible
 	 *
 	 * @param user given user to add to the team's users
 	 */
-	public void addMember(User user) throws ItemExistException, UnauthorizedUserOperationException;
+	public void addMember(User user) throws UnauthorizedUserOperationException;
+
+	/**
+	 * By this function Private channel members can add participant to their
+	 * channel.
+	 * 
+	 * @param userId      which will be added to to channel by its id
+	 * @param channelName name of the channel user will be added
+	 * @throws UnauthorizedUserOperationException if non member of the channel tries
+	 *                                            to do that function
+	 */
+	public void addMemberToChannel(String userId, String channelName) throws UnauthorizedUserOperationException;
 
 	/**
 	 * The function tries to add given academician to the team owners if it is
@@ -29,7 +39,7 @@ public interface ITeamManagement {
 	 *
 	 * @param user given user to add to the team's owners
 	 */
-	public void addTeamOwner(Academician user) throws ItemExistException, UnauthorizedUserOperationException;
+	public void addTeamOwner(Academician user) throws UnauthorizedUserOperationException;
 
 	/**
 	 * The function tries to remove given channel from the team channels if it is
@@ -38,6 +48,16 @@ public interface ITeamManagement {
 	 * @param ch given channel to remove from the team's channels
 	 */
 	public void removeChannel(Channel ch);
+
+	/**
+	 * By this function Private Channel members can remove members from channel.
+	 * 
+	 * @param userId      who is going to be removed to the channel
+	 * @param channelName user is going to be removes from that channel by its name
+	 * @throws UnauthorizedUserOperationException if non member of the channel tries
+	 *                                            to do that function
+	 */
+	public void removeChannelMember(String userId, String channelName) throws UnauthorizedUserOperationException;
 
 	/**
 	 * The function tries to remove given user from the team users if it is
@@ -56,8 +76,9 @@ public interface ITeamManagement {
 	public void removeTeamOwner(User user) throws UnauthorizedUserOperationException;
 
 	/**
-	 * Setter function for Team Management's Team
-	 * This function can provide doing operations in other teams
+	 * Setter function for Team Management's Team This function can provide doing
+	 * operations in other teams
+	 * 
 	 * @param team which will be the new team of the Team Management
 	 */
 	public void setTeam(Team team);

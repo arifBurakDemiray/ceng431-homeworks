@@ -21,24 +21,26 @@ public interface IContainer<T> extends Iterable<T> {
 	public boolean add(T item);
 
 	/**
-	 * 
-	 * This function returns an element by its id
-	 * 
-	 * @param id searched item's id
-	 * @return s searched item if not found throws
-	 * @throws ItemNotFoundException if not found by id it throws that exception
-	 */
-
-	/**
 	 * The abstract function tries to return the item of given id if it is in the
 	 * container.
 	 *
 	 * @param id id of given item.
 	 * @return T object
 	 * @throws ItemNotFoundException,NotSupportedException
+	 * @throws NotSupportedException if item does not have a getId function
 	 */
 	public T getById(String id) throws ItemNotFoundException, NotSupportedException;
-
+	
+	/**
+	 * This is an abstract function and it tries to get an item by its name.
+	 * 
+	 * @param name of the item
+	 * @returns item if found
+	 * @throws ItemNotFoundException if not found throws not found exception
+	 * @throws NotSupportedException if item does not have a getName function
+	 */
+	public T getByName(String name) throws ItemNotFoundException, NotSupportedException;
+	
 	/**
 	 * The function returns the object of the given item if given item is in the
 	 * container, invoking search() function in the body

@@ -1,8 +1,10 @@
 package team;
 
 import channel.Channel;
-import exception.ItemExistException;
+import channel.MeetingChannel;
+import channel.PrivateChannel;
 import exception.ItemNotFoundException;
+import exception.NotSupportedException;
 import exception.UnauthorizedUserOperationException;
 import storage.IContainer;
 import user.Academician;
@@ -21,7 +23,7 @@ public class TeamManagement implements ITeamManagement {
 		setTeam(team);
 	}
 
-	public void addChannel(Channel ch) throws ItemExistException {
+	public void addChannel(Channel ch) {
 		// it tries to add the channel to the team's channels.
 		// if channel was added before, return a message.
 		boolean isAdded = this.team.getMeetingChannelList().add(ch);
@@ -30,12 +32,28 @@ public class TeamManagement implements ITeamManagement {
 		}
 	}
 
-	public void addMember(User user) throws ItemExistException, UnauthorizedUserOperationException {
+	public void addMember(User user) throws UnauthorizedUserOperationException {
 		// it tries to add the user to the team's users.
 		// if user was added before, return a message.
 		boolean isAdded = this.team.getMemberUsers().add(user);
 		if (!isAdded) {
 			System.out.println("User was added before.");
+		}
+	}
+
+	public void addMemberToChannel(String userId, String channelName) throws UnauthorizedUserOperationException {
+
+		try {
+			Channel temp = this.team.getMeetingChannelList().getByName(channelName);
+			if (temp instanceof MeetingChannel) {
+				System.out.println(
+						"Channel " + channelName + " is public and has all members on team " + this.team.getId());
+			} else {
+				if (!((PrivateChannel) temp).addParticipant(userId))
+					System.out.println("This user is already in channel");
+			}
+		} catch (ItemNotFoundException | NotSupportedException e) {
+			System.out.println("There is no channel named " + channelName);
 		}
 	}
 
@@ -58,6 +76,23 @@ public class TeamManagement implements ITeamManagement {
 
 	public void removeChannel(Channel ch) {
 		removeItem("Channel has not removed.", this.team.getMeetingChannelList(), ch);
+	}
+
+	@Override
+	public void removeChannelMember(String userId, String channelName) throws UnauthorizedUserOperationException {
+
+		try {
+			Channel temp = this.team.getMeetingChannelList().getByName(channelName);
+			if (temp instanceof MeetingChannel) {
+				System.out.println("Remove operation is not aplicable for channel " + channelName + " on team "
+						+ this.team.getId());
+			} else {
+				((PrivateChannel) temp).removeParticipant(userId);
+			}
+		} catch (ItemNotFoundException | NotSupportedException e) {
+			System.out.println("There is no channel named " + channelName);
+		}
+
 	}
 
 	/**

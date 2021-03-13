@@ -35,7 +35,7 @@ public class PrivateChannel extends Channel{
      *
      * @param item given item to remove from the participants
 	 */
-	public boolean removeParticipant(String id) throws ItemNotFoundException {
+	public boolean removeParticipant(String id){
 		String removedParticipant = null;
 		try {
 			removedParticipant = participants.remove(id); //try to remove invoking container.remove method
@@ -44,7 +44,7 @@ public class PrivateChannel extends Channel{
 				return false;
 			}
 		} catch (ItemNotFoundException e) {
-			System.out.println("This item is not found in the participant.");
+			System.out.println("This user is not found in the participants.");
 			return false;
 		}
 		return true;

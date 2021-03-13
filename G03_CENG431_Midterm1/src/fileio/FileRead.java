@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import channel.*;
-import exception.ItemExistException;
 import storage.*;
 import team.ITeamManagement;
 import team.Team;
@@ -74,11 +73,7 @@ public class FileRead {
 					meeting = new Meeting();
 			}
 			tempChannel = new MeetingChannel(meeting, defaultChannel);
-			try {
-				teamManagement.addChannel(tempChannel);
-			} catch (ItemExistException e) {
-				System.out.println("This channel already exists");
-			}
+			teamManagement.addChannel(tempChannel);
 			
 			
 			
@@ -105,11 +100,8 @@ public class FileRead {
 					for (String id : participantList) {
 						((PrivateChannel) tempChannel).addParticipant(id);
 					}
-					try {
-						teamManagement.addChannel(tempChannel);
-					} catch (ItemExistException e) {
-						System.out.println("This channel already exists");
-					}
+					teamManagement.addChannel(tempChannel); 
+
 				}
 			}
 			teams.add(team);

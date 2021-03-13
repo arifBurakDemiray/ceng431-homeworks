@@ -9,6 +9,11 @@ public class IdContainer extends Container<String>{
 		throw new NotSupportedException("src.storage.IdContainer.getById() function is not supported for IdContainer.");
 	}
 
+	@Override
+	public String getByName(String name) throws NotSupportedException {
+		throw new NotSupportedException("src.storage.IdContainer.getByName() function is not supported for IdContainer.");
+	}
+
 	
 
 	

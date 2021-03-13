@@ -1,6 +1,5 @@
 package storage;
 
-
 import exception.ItemNotFoundException;
 import team.Team;
 public class TeamContainer extends Container<Team> {
@@ -21,6 +20,25 @@ public class TeamContainer extends Container<Team> {
 		else
 		{
 			return returnedTeam;
+		}
+	}
+
+	@Override
+	public Team getByName(String name) throws ItemNotFoundException {
+		Team found = null;
+		for(Team team : this.getContainer()) {
+			if(team.getName().equals(name)){
+				found = team;
+				break;
+			}
+		}
+		if(found == null)
+		{
+			throw new ItemNotFoundException();
+		}
+		else
+		{
+			return found;
 		}
 	}
 

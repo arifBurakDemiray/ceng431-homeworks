@@ -2,7 +2,6 @@ package storage;
 
 
 import exception.ItemNotFoundException;
-
 import user.User;
 public class UserContainer extends Container<User> {
 
@@ -25,9 +24,29 @@ public class UserContainer extends Container<User> {
 		}
 	}
 
+	@Override
+	public User getByName(String name) throws ItemNotFoundException {
+		User found = null;
+		for(User user : this.getContainer()) {
+			if(user.getName().equals(name)){
+				found = user;
+				break;
+			}
+		}
+		if(found == null)
+		{
+			throw new ItemNotFoundException();
+		}
+		else
+		{
+			return found;
+		}
+	}
+}
+
 	
 	
 	
 
 	
-}
+
