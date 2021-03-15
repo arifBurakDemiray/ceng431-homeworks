@@ -3,7 +3,6 @@ package program;
 import java.util.Scanner;
 
 import exception.ItemNotFoundException;
-import exception.NotSupportedException;
 import fileio.FileIO;
 import fileio.IFileIO;
 import storage.IContainer;
@@ -83,6 +82,7 @@ public class Program {
 				System.out.println(user.toString());
 			}
 		}
+		input.close();
 
 	}
 

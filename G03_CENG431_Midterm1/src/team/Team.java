@@ -3,7 +3,6 @@ package team;
 import channel.Channel;
 import storage.ChannelContainer;
 import storage.IContainer;
-import storage.IdContainer;
 import storage.UserContainer;
 import user.User;
 
