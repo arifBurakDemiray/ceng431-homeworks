@@ -25,6 +25,10 @@ public class FileIO implements IFileIO {
 	public IContainer<User> readUsers(IContainer<Team> teams, String filePath) {
 		List<List<String>> records = fRead.read(filePath); //read file and send it to the readUsers function
 		IContainer<User> users = fRead.readUsers(records, teams);
+		if(fRead.isFirstRead==true){
+			writeTeams(teams,"data\\teamList.csv");
+			writeUsers(users,filePath);
+		}
 		return users;
 	}
 
@@ -39,5 +43,7 @@ public class FileIO implements IFileIO {
 		boolean result = fWrite.writeItems(users, filePath, header);
 		return result;
 	}
+	
+	
 
 }

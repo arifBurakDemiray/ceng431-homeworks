@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
+
 import channel.*;
 import storage.*;
 import team.ITeamManagement;
@@ -15,7 +17,9 @@ import user.*;
 
 public class FileRead {
 	
-	/*
+	protected boolean isFirstRead = true;
+	
+	/**
 	 * This is a helper function. If an user has not an id, it creates an unique id and sets the id to the user.
 	 * @param ids which holds all the ids. In this way, prevent to assign an existing id to the new user.
 	 * @param user whose id is empty. 
@@ -31,7 +35,7 @@ public class FileRead {
 		user.setId(id);
 	}
 
-	/*
+	/**
 	 * The function tries to read the given file which is in the given path. After
 	 * reading, it returns a list of string list which holds all the lines as a list
 	 * of splitted string attributes list.
@@ -56,8 +60,8 @@ public class FileRead {
 				if (line.contains("\"")) {
 					line = line.replace("\"", "");
 				}
+				
 				String[] values = line.split(",", -1);
-
 				records.add(Arrays.asList(values));
 			}
 			br.close();
@@ -71,7 +75,7 @@ public class FileRead {
 
 	}
 
-	/*
+	/**
 	 * The function read the given records and creates the teams. After process, it
 	 * returns a container which holds team objects.
 	 * 
@@ -82,14 +86,17 @@ public class FileRead {
 	protected IContainer<Team> readTeams(List<List<String>> records) {
 
 		IContainer<Team> teams = new TeamContainer(); // holds created teams
-
+				
 		// get the each string list in the records
 		for (List<String> line : records) {
-
+			
+			if(line.size() < 2 && line.get(0).strip().toUpperCase(Locale.US).equals("TEAMSTECH")){
+				isFirstRead = false;
+				break;}
+			
 			// define strings to assign the strings in the line.
 			String teamName, teamId, defaultChannel, defaultMeetingDate, meetingChannel, meetingDate,
 					participantId = null;
-
 			// assign the strings to the variables.
 			teamName = line.get(0).strip();
 			teamId = line.get(1).strip();
@@ -153,7 +160,7 @@ public class FileRead {
 					participantList.add(participantId);
 					n++;
 				}
-
+				
 				// if meetingChannel exists create a new private meeting channel object
 				// Control the meetingDate. If meetingDate exists, create a new meeting and
 				// assign it to the channel.
@@ -170,15 +177,16 @@ public class FileRead {
 						((PrivateChannel) tempChannel).addParticipant(id);
 					}
 					teamManagement.addChannel(tempChannel); // add the channel to the team.
-
+					
 				}
 			}
 			teams.add(team); // add the team to the team container which holds teams.
+			
 		}
 		return teams; // return team container which holds teams.
 	}
 
-	/*
+	/**
 	 * The function read the given records and creates the users. After process, it
 	 * returns a container which holds user objects.
 	 * 
@@ -199,6 +207,10 @@ public class FileRead {
 
 		// get the each string list in the records
 		for (List<String> line : records) {
+			
+			if(line.size() < 2 && line.get(0).strip().toUpperCase(Locale.US).equals("TEAMSTECH")){
+				isFirstRead = false;
+				break;}
 
 			// define strings to assign the strings in the line.
 			String userType, userName, userId, email, password, teamId;
@@ -262,7 +274,7 @@ public class FileRead {
 		return users; // return the user container
 	}
 	
-	/*
+	/**
 	 * It is a helper function to differenciate that the gotten string in the line is a participant Id or the new meeting channel
 	 * @param value : string gotten from the line
 	 * @return true if the value is a participant id.

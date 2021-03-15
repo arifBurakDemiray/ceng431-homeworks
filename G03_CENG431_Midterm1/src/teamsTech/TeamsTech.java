@@ -30,10 +30,6 @@ public class TeamsTech {
 	public static void main(String[] args)
 			throws IOException, ItemExistException, ParseException, ItemNotFoundException, NotSupportedException, UnauthorizedUserOperationException {
 
-		IFileIO fr = new FileIO();
-		IContainer<Team> teams = fr.readTeams("data\\teamLOST.csv");
-		IContainer<User> users = fr.readUsers(teams, "data\\userLeest.csv");
-		fr.writeTeams(teams, "data\\teamLEST.csv");
 		Program teamsTeach = new Program();
 		teamsTeach.start();
 

@@ -53,6 +53,29 @@ public class UserContainer extends Container<User> {
 			return found;
 		}
 	}
+	
+	/*
+	 * The function search the given name belongs to the any user or not. If given name belongs to a user, it returns the user
+	 * @param name given user name 
+	 * @return User whose name is the same with given name. 
+	 */
+	public User getByEmail(String email) throws ItemNotFoundException {
+		User found = null;
+		for(User user : this.getContainer()) {
+			if(user.getEmail().equals(email)){
+				found = user;
+				break;
+			}
+		}
+		if(found == null)
+		{
+			throw new ItemNotFoundException();
+		}
+		else
+		{
+			return found;
+		}
+	}
 }
 
 	
