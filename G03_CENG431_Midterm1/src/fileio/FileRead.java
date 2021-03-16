@@ -251,28 +251,40 @@ public class FileRead {
 			int n = 5;
 			while (((n) < line.size()) && (!line.get(n).equals(""))) {
 				teamId = line.get(n);
+				String[] splitOwner = teamId.split("-");
+				boolean isOwner = false;
+				if(splitOwner.length > 1)
+				{
+					isOwner = true;
+					teamId = splitOwner[1];
+				}
 				try {
 					Team team = teams.getById(teamId);
 
 					user.getTeams().add(team);
 					ITeamManagement teamManagement = new TeamManagement(team);
 					teamManagement.addMember(user);
-
-					if (userType.equals("Instructor")) {
+					
+					if ( ( userType.equals("Instructor") && isFirstRead ) 
+							|| ( (userType.equals("Instructor") || userType.equals("Teaching Assistant")) && isOwner ) ) {
+						
 						teamManagement.addTeamOwner((Academician) user);
+						
 					}
 
 				} catch (Exception e) {
 					System.out.println("FileRead - CreateUser - try add(team)" + e);
 				}
 				n++;
-
+				
 			}
 			users.add(user); // add the user to the user container.
 
 		}
 		return users; // return the user container
 	}
+	
+	
 	
 	/**
 	 * It is a helper function to differenciate that the gotten string in the line is a participant Id or the new meeting channel
