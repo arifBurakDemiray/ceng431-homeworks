@@ -20,7 +20,7 @@ public interface ITeamManagement {
 	 * @param user given user to add.
 	 * @throws UnauthorizedUserOperationException
 	 */
-	public void addMember(User user) throws UnauthorizedUserOperationException;
+	public void addMember(User user);
 
 	/**
 	 * By this function Private channel members can add participant to their
@@ -31,7 +31,7 @@ public interface ITeamManagement {
 	 * @throws UnauthorizedUserOperationException if non member of the channel tries
 	 *                                            to do that function
 	 */
-	public void addMemberToChannel(String userId, String channelName) throws UnauthorizedUserOperationException;
+	public void addMemberToChannel(String userId, String channelName);
 
 	/**
 	 * The function tries to add given academician to the team owners if it is
@@ -40,7 +40,7 @@ public interface ITeamManagement {
 	 * @param user given user to add to the team's owners
 	 * @throws UnauthorizedUserOperationException
 	 */
-	public void addTeamOwner(Academician user) throws UnauthorizedUserOperationException;
+	public void addTeamOwner(Academician user);
 
 	/*
 	 * The function tries to remove the defined user from the defined channel.
@@ -60,7 +60,7 @@ public interface ITeamManagement {
 	 * @throws UnauthorizedUserOperationException if non member of the channel tries
 	 *                                            to do that function
 	 */
-	public void removeChannelMember(String userId, String channelName) throws UnauthorizedUserOperationException;
+	public void removeChannelMember(String userId, String channelName);
 
 	/**
 	 * The function tries to remove given user from the team users if it is
@@ -68,7 +68,7 @@ public interface ITeamManagement {
 	 * 
 	 * @param user given user to remove from the team's user
 	 */
-	public void removeMember(User user) throws UnauthorizedUserOperationException;
+	public void removeMember(User user);
 
 	/**
 	 * The function tries to remove given user from the team owners if it is
@@ -76,7 +76,7 @@ public interface ITeamManagement {
 	 * 
 	 * @param user given user to remove from the team's owners
 	 */
-	public void removeTeamOwner(User user) throws UnauthorizedUserOperationException;
+	public void removeTeamOwner(User user);
 
 	/**
 	 * Setter function for Team Management's Team This function can provide doing

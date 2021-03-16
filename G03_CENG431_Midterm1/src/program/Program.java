@@ -3,6 +3,7 @@ package program;
 import java.util.Scanner;
 
 import exception.ItemNotFoundException;
+import exception.UnauthorizedUserOperationException;
 import fileio.FileIO;
 import fileio.IFileIO;
 import storage.IContainer;
@@ -15,8 +16,10 @@ public class Program {
 	private User loggedInUser = null;
 	private IContainer<User> users = null;
 	private IContainer<Team> teams = null;
+	private Operations operations;
 
 	public Program() {
+		operations = new Operations();
 	}
 
 	public User getLoggedInUser() {
@@ -45,10 +48,33 @@ public class Program {
 
 	public void start() {
 		readAll();
-		writeAll();
 		login();
-
+		createTeam();
+		removeTeam();
+		writeAll();
 	}
+	
+	public void createTeam()
+	{
+		try {
+			this.operations.createTeam(loggedInUser, teams);
+		} catch (UnauthorizedUserOperationException e) {
+			System.out.println(e.getMessage());
+		}
+		
+	}
+	
+	public void removeTeam()
+	{
+		try {
+			this.operations.findTeam(teams);
+			this.operations.removeTeam(loggedInUser, teams);
+		} catch (UnauthorizedUserOperationException e) {
+			System.out.println(e.getMessage());
+		}
+		
+	}
+	;
 
 	private User authenticate(String email, String password) {
 
@@ -72,9 +98,9 @@ public class Program {
 		User user = null;
 		while (user == null) {
 			System.out.print("Email : ");
-			String email = input.next();
+			String email = input.nextLine();
 			System.out.print("Password : ");
-			String password = input.next();
+			String password = input.nextLine();
 
 			user = authenticate(email, password);
 			if (user != null) {
@@ -82,7 +108,6 @@ public class Program {
 				System.out.println(user.toString());
 			}
 		}
-		input.close();
 
 	}
 

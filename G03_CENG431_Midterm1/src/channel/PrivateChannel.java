@@ -6,6 +6,7 @@ import storage.IContainer;
 import storage.IdContainer;
 
 import exception.ItemNotFoundException;
+import exception.NotSupportedException;
 
 
 public class PrivateChannel extends Channel{
@@ -59,6 +60,19 @@ public class PrivateChannel extends Channel{
 	public String toString() {
 		return super.toString()+","+"\""+this.participants.toString()+"\"";
 	}
+	
+	public boolean isMember(String id) {
+		boolean isFound = false;
+		try {
+			this.participants.getById(id);
+			isFound = true;
+		} catch (ItemNotFoundException | NotSupportedException e) {
+			
+		}
+		return isFound;
+	}
 
+	
+	
 	
 }

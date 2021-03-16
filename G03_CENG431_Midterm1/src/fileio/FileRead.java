@@ -119,6 +119,10 @@ public class FileRead {
 				else
 					meeting = new Meeting();
 			}
+			else
+			{
+				defaultChannel="General";
+			}
 			tempChannel = new MeetingChannel(meeting, defaultChannel);
 			teamManagement.addChannel(tempChannel); // add the channel to the team's channels.
 

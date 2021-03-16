@@ -1,6 +1,8 @@
 package team;
 
 import channel.Channel;
+import exception.ItemNotFoundException;
+import exception.NotSupportedException;
 import storage.ChannelContainer;
 import storage.IContainer;
 import storage.UserContainer;
@@ -59,4 +61,27 @@ public class Team {
 		return this.getName() + "," + this.getId() + "," + this.meeting_ch_list.toString();
 	}
 
+	public boolean isTeamOwner(String id) {
+		boolean isFound = false;
+		try {
+			this.getOwners().getById(id);
+			isFound = true;
+		} catch (ItemNotFoundException | NotSupportedException e) {
+			
+		}
+		return isFound;
+	}
+	
+	public boolean isMember(String id) {
+		boolean isFound = false;
+		try {
+			this.getMemberUsers().getById(id);
+			isFound = true;
+		} catch (ItemNotFoundException | NotSupportedException e) {
+			
+		}
+		return isFound;
+	}
+	
+	
 }
