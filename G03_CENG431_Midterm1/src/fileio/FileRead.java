@@ -105,8 +105,7 @@ public class FileRead {
 			// assign the strings to the variables.
 			teamName = line.get(0).strip();
 			teamId = line.get(1).strip();
-			//defaultChannel = line.get(2).strip();
-			//defaultMeetingDate = line.get(3).strip();
+
 
 			Team team = new Team(teamName, teamId); // Create team with the attributes
 			ITeamManagement teamManagement = new TeamManagement(team); // Create team management obect with the given
