@@ -49,8 +49,7 @@ public class Program {
 	public void start() {
 		readAll();
 		login();
-		createTeam();
-		removeTeam();
+		menu();
 		writeAll();
 	}
 	
@@ -89,6 +88,49 @@ public class Program {
 		} catch (ItemNotFoundException e) {
 			System.out.println("User is not found");
 			return null;
+		}
+
+	}
+	
+	private void menu()
+	{
+		String mainOperationIndex=null;
+		try {
+			while(true)
+			{
+				mainOperationIndex = this.operations.mainOperationsMenu();
+				if(mainOperationIndex.equals("4"))
+					break;
+				else
+					mainOperations(mainOperationIndex);
+			}
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
+	}
+	public void mainOperations(String mainOperationIndex) {
+		switch (mainOperationIndex) {
+		case "1": {
+			this.createTeam();
+			break;
+		}
+		case "2": {
+			this.removeTeam();
+			break;
+		}
+		case "3": {
+
+			break;
+		}
+		case "4": {
+
+			break;
+		}
+		
+		default:
+			throw new IllegalArgumentException("Unexpected value: " + mainOperationIndex);
 		}
 
 	}

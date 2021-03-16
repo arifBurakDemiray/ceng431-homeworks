@@ -111,7 +111,8 @@ public abstract class Container<T> implements IContainer<T> {
 	public String toString() {
 		String string = "";
 		for (T item : this.container) {
-			string += item.toString() + ",";
+			if(item!=null)
+				string += item.toString() + ",";
 		}
 		if (string.endsWith(",")) {
 			string = string.substring(0, string.length() - 1);

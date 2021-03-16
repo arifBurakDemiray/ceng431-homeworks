@@ -1,5 +1,6 @@
 package program;
 
+import user.Academician;
 import user.Instructor;
 import user.User;
 
@@ -41,12 +42,14 @@ public class Operations {
 				Meeting defaultMeeting = new Meeting();
 				meetingChannel = new MeetingChannel(defaultMeeting, chName);
 			}
-			//input.close();
+			// input.close();
 			Team newTeam = new Team(teamName, teamId);
 			boolean isAdded = teams.add(newTeam);
 			if (isAdded) {
 				teamManagement.setTeam(newTeam);
 				teamManagement.addChannel(meetingChannel);
+				teamManagement.addTeamOwner((Academician) loggedInUser);
+				loggedInUser.getTeams().add(newTeam);
 				System.out.println("Team is added.");
 			} else {
 				System.out.println("Team exists.");
@@ -56,14 +59,12 @@ public class Operations {
 		}
 	}
 
-	public void removeTeam(User loggedInUser, IContainer<Team> teams)
-			throws UnauthorizedUserOperationException {
+	public void removeTeam(User loggedInUser, IContainer<Team> teams) throws UnauthorizedUserOperationException {
 		Team tempTeam;
 		Scanner input = new Scanner(System.in);
 		System.out.print("Team Id to remove : ");
-		
+
 		String teamId = input.nextLine().strip();
-		input.close();
 		try {
 			tempTeam = teams.getById(teamId);
 
@@ -71,7 +72,7 @@ public class Operations {
 
 				Team removedTeam = teams.remove(tempTeam);
 
-				System.out.println(removedTeam.getName()+" is deleted.");
+				System.out.println(removedTeam.getName() + " is deleted.");
 			} else {
 				throw new UnauthorizedUserOperationException("You are not authorized to remove a team.");
 			}
@@ -79,12 +80,12 @@ public class Operations {
 			System.out.println("Team not found");
 		}
 	}
-	
+
 	public void findTeam(IContainer<Team> teams) {
 		String string = "";
-		
+
 		for (Team item : teams) {
-			string += "1 - "+ item.toString() + "\n";
+			string += "1 - " + item.toString() + "\n";
 		}
 		if (string.endsWith(",")) {
 			string = string.substring(0, string.length() - 1);
@@ -92,8 +93,67 @@ public class Operations {
 		System.out.println(string.toString());
 	}
 	
-	
-	public void updateTeam() {
-		
+	public String mainOperationsMenu() {
+		System.out.println("" + "1- Add a team\r\n" + "2- Remove a team\r\n"
+				+ "3- Update a team\r\n"+ "4- Quit");
+
+		System.out.print("Which operations do you want to do ( please write operation index ) : ");
+		Scanner input = new Scanner(System.in);
+		String mainOperationIndex = input.nextLine().strip();
+		return mainOperationIndex;
 	}
+	
+	
+
+	public String updateTeamOperationsMenu() {
+		System.out.println("" + "1- Add a meeting channel\r\n" + "2- Remove a meeting channel\r\n"
+				+ "3- Update a meeting channel\r\n" + "4- Add a member\r\n" + "5- Remove a member\r\n"
+				+ "6- Add a team owner\r\n" + "7- Monitor team\r\n" + "8- Statictics\r\n");
+
+		System.out.print("Which operations do you want to do ( please write operation index ) : ");
+		Scanner input = new Scanner(System.in);
+		String teamOperationIndex = input.nextLine().strip();
+		return teamOperationIndex;
+	}
+
+	/*public void updateTeamOperations(String teamOperationIndex) {
+		switch (teamOperationIndex) {
+		case "1": {
+
+			break;
+		}
+		case "2": {
+
+			break;
+		}
+		case "3": {
+
+			break;
+		}
+		case "4": {
+
+			break;
+		}
+		case "5": {
+
+			break;
+		}
+		case "6": {
+
+			break;
+		}
+		case "7": {
+
+			break;
+		}
+		case "8": {
+
+			break;
+		}
+
+		default:
+			throw new IllegalArgumentException("Unexpected value: " + teamOperationIndex);
+		}
+
+	}*/
 }
