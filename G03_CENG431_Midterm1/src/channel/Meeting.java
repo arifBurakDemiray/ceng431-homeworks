@@ -1,5 +1,6 @@
 package channel;
 
+import enums.Day;
 import enums.TimePeriod;
 
 /**
@@ -7,7 +8,7 @@ import enums.TimePeriod;
  */
 public class Meeting {
 	private String date;
-	private String day;
+	private Day day;
 	private String hour;
 	private String minute;
 	private TimePeriod period;
@@ -47,11 +48,11 @@ public class Meeting {
 	/**
 	 * @returns the day of the meeting
 	 */
-	public String getDay() {
+	public Day getDay() {
 		return day;
 	}
 
-	public void setDay(String day) {
+	public void setDay(Day day) {
 		this.day = day;
 	}
 
@@ -82,13 +83,25 @@ public class Meeting {
 	/**
 	 * Parses given date 
 	 */
-	private void parseDate()
+	private void parseDate() throws IllegalArgumentException,NumberFormatException,ArrayIndexOutOfBoundsException
 	{
 		String[] splittedDate = this.date.split(" ");
+		System.out.println(date.toString());
 		String[] splittedHour = splittedDate[1].split(":");
-		setDay(splittedDate[0]);
+		System.out.println(splittedHour.toString());
+		setDay(Day.valueOf(splittedDate[0]));
 		setHour(splittedHour[0]);
 		setMinute(splittedHour[1]);
+		boolean hour = (0 <= Integer.valueOf(getHour()) && (Integer.valueOf(getHour()) <= 24)) ;
+		boolean minute = (0 <= Integer.valueOf(getMinute()) 
+				&& Integer.valueOf(getMinute()) <=59 );
+		
+		
+		if(!hour||!minute) 
+		{
+			throw new NumberFormatException("Wrong Format:" + getHour() +":"+ getMinute());
+		}
+		
 		switch (splittedDate[2]) {
 		case "AM": {
 			

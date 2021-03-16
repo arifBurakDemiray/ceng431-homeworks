@@ -58,7 +58,7 @@ public class PrivateChannel extends Channel{
 	
 	@Override
 	public String toString() {
-		return super.toString()+","+"\""+this.participants.toString()+"\"";
+		return super.toString()+",\""+this.participants.toString()+"\"";
 	}
 	
 	public boolean isMember(String id) {

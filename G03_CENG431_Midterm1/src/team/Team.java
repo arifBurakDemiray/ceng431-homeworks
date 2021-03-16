@@ -83,5 +83,11 @@ public class Team {
 		return isFound;
 	}
 	
+	public boolean equals(Team team){
+		if(this.name.equals(team.getName()) && this.id.equals(team.getId()))
+			return true;
+		return false;
+	}
+	
 	
 }

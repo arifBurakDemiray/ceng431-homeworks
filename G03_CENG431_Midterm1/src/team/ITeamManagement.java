@@ -86,4 +86,6 @@ public interface ITeamManagement {
 	 */
 	public void setTeam(Team team);
 
+	public void removeUsers();
+
 }

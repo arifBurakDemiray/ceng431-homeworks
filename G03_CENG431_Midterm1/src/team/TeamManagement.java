@@ -13,22 +13,20 @@ public class TeamManagement implements ITeamManagement {
 
 	private Team team;
 
-	
 	/**
-	 * The Constructor creates a team management object 
+	 * The Constructor creates a team management object
 	 */
 	public TeamManagement() {
 	}
-	
-	
+
 	/**
 	 * The Constructor creates a team management object with given team object.
+	 * 
 	 * @param team given team to manage it
 	 */
 	public TeamManagement(Team team) {
 		setTeam(team);
 	}
-	
 
 	public void addChannel(Channel ch) {
 		// it tries to add the channel to the team's channels.
@@ -38,7 +36,7 @@ public class TeamManagement implements ITeamManagement {
 			System.out.println("Channel was added before.");
 		}
 	}
-	
+
 	public void addMember(User user) {
 		// it tries to add the user to the team's members.
 		// if user was added before, return a message.
@@ -47,8 +45,7 @@ public class TeamManagement implements ITeamManagement {
 			System.out.println("User was added before.");
 		}
 	}
-	
-	
+
 	public void addMemberToChannel(String userId, String channelName) {
 
 		try {
@@ -64,7 +61,6 @@ public class TeamManagement implements ITeamManagement {
 			System.out.println("There is no channel named " + channelName);
 		}
 	}
-	
 
 	public void addTeamOwner(Academician user) {
 
@@ -82,8 +78,7 @@ public class TeamManagement implements ITeamManagement {
 		}
 
 	}
-	
-	
+
 	@Override
 	public void removeChannelMember(String userId, String channelName) {
 
@@ -123,11 +118,10 @@ public class TeamManagement implements ITeamManagement {
 			System.out.println("This item is not found in the container.");
 		}
 	}
-	
+
 	public void removeChannel(Channel ch) {
 		removeItem("Channel has not removed.", this.team.getMeetingChannelList(), ch);
 	}
-	
 
 	public void removeMember(User user) {
 		removeItem("User has not removed.", this.team.getMemberUsers(), user);
@@ -140,5 +134,22 @@ public class TeamManagement implements ITeamManagement {
 	public void setTeam(Team team) {
 		this.team = team;
 	}
+
+	public void removeUsers() {
+		for (User member : team.getMemberUsers()) {
+			try {
+				Team tempTeam = member.getTeams().remove(team);
+				if(!tempTeam.equals(team))
+					System.out.println("Error while removing team from user -> user " + member.toString());
+					
+					
+			} catch (ItemNotFoundException e) {
+				System.out.println(e);
+
+			}
+		}
+	}
+	
+
 
 }
