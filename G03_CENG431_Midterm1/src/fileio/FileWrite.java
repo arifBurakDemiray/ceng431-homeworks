@@ -22,17 +22,15 @@ public class FileWrite {
 	 * @returns true if succeeded, false if there is problem with the file and container is empty
 	 */
 	protected <T> boolean writeItems(IContainer<T> items, String filePath, String header) {
-		File file = new File(filePath); //opening file
+		
+		if(items.isEmpty()) {//if there is no item in the list returns false
+			System.out.println("The container is empty, please do not use empty container");
+			return false;
+		}
 		try {// for catching IOException
+			File file = new File(filePath); //opening file
 			BufferedWriter br = new BufferedWriter(new FileWriter(file)); //setting up buffered writer in write mode to clean given file
 			Iterator<T> iterator = items.iterator(); //taking iterator of the IContainer 
-			
-			if(!iterator.hasNext()) {//if there is no item in the list returns false
-				br.close();
-				System.out.println("The container is empty, please do not use empty container");
-				return false;
-			}
-			
 			T item = iterator.next(); //and taking first item
 
 			br.write(header + "\n"); //write header and clean file
