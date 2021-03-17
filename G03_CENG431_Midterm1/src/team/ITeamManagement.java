@@ -40,7 +40,7 @@ public interface ITeamManagement {
 	 * @param user given user to add to the team's owners
 	 * @throws UnauthorizedUserOperationException
 	 */
-	public void addTeamOwner(Academician user);
+	public void addTeamOwner(User user);
 
 	/*
 	 * The function tries to remove the defined user from the defined channel.

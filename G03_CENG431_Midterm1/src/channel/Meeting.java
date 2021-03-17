@@ -86,9 +86,7 @@ public class Meeting {
 	private void parseDate() throws IllegalArgumentException,NumberFormatException,ArrayIndexOutOfBoundsException
 	{
 		String[] splittedDate = this.date.split(" ");
-		System.out.println(date.toString());
 		String[] splittedHour = splittedDate[1].split(":");
-		System.out.println(splittedHour.toString());
 		setDay(Day.valueOf(splittedDate[0]));
 		setHour(splittedHour[0]);
 		setMinute(splittedHour[1]);

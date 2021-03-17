@@ -5,7 +5,7 @@ import java.util.List;
 import storage.IContainer;
 import team.Team;
 import user.User;
-
+import exception.FileFormatException;
 public class FileIO implements IFileIO {
 	private FileRead fRead;
 	private FileWrite fWrite;
@@ -15,7 +15,7 @@ public class FileIO implements IFileIO {
 		this.fWrite = new FileWrite();
 	}
 
-	public IContainer<Team> readTeams(String filePath) {
+	public IContainer<Team> readTeams(String filePath) throws FileFormatException{
 		List<List<String>> lines = fRead.read(filePath); //read file and send it to the readTeams function
 		IContainer<Team> teams = fRead.readTeams(lines);
 		return teams; //and return it

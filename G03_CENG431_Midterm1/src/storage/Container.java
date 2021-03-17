@@ -26,7 +26,7 @@ public abstract class Container<T> implements IContainer<T> {
 
 		return container.add(item);
 	}
-	
+
 	public Collection<T> getContainer() {
 		return this.container;
 	}
@@ -42,18 +42,18 @@ public abstract class Container<T> implements IContainer<T> {
 	public boolean isEmpty() {
 		return this.container.isEmpty();
 	}
-	
+
 	public Iterator<T> iterator() {
 		return container.iterator();
 	}
-	
+
 	public abstract T getById(String id) throws ItemNotFoundException, NotSupportedException;
 
 	public abstract T getByName(String name) throws ItemNotFoundException, NotSupportedException;
 
 	/**
-	 * The function returns the result of that : the given item is in the container or
-	 * not.
+	 * The function returns the result of that : the given item is in the container
+	 * or not.
 	 *
 	 * @param item given item.
 	 * @return true/false
@@ -71,8 +71,8 @@ public abstract class Container<T> implements IContainer<T> {
 	}
 
 	/**
-	 * The function tries to remove the given item from container. If process is successfull, it returns the removed item.
-	 * not.
+	 * The function tries to remove the given item from container. If process is
+	 * successfull, it returns the removed item. not.
 	 *
 	 * @param item given item.
 	 * @return item
@@ -94,10 +94,12 @@ public abstract class Container<T> implements IContainer<T> {
 	 */
 	protected T search(T item) {
 		T obj = null;
-		for (T itm : container) {
-			if (itm.equals(item)) {
-				obj = itm;
-				break;
+		if (!isEmpty()) {
+			for (T itm : container) {
+				if (itm.equals(item)) {
+					obj = itm;
+					break;
+				}
 			}
 		}
 		return obj;
@@ -111,7 +113,7 @@ public abstract class Container<T> implements IContainer<T> {
 	public String toString() {
 		String string = "";
 		for (T item : this.container) {
-			if(item!=null)
+			if (item != null)
 				string += item.toString() + ",";
 		}
 		if (string.endsWith(",")) {

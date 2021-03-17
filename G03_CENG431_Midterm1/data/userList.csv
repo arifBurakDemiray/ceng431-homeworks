@@ -1,127 +1,127 @@
 User Type,User Name,User ID,Email,Password,Team ID,
-Instructor,TUGKAN TUGLULAR,773,tugkantuglular@iyte.edu.tr,wAeU,O-CENG211,O-CENG431
-Instructor,YALIN BASTANLAR,387,yalinbastanlar@iyte.edu.tr,HVfr,O-CENG611
+Instructor,TUGKAN TUGLULAR,516,tugkantuglular@iyte.edu.tr,M2j.,O-CENG211,O-CENG431
+Instructor,YALIN BASTANLAR,631,yalinbastanlar@iyte.edu.tr,l)kb,O-CENG611
 Teaching Assistant,DILEK OZTURK,98,dilekozturk@iyte.edu.tr,1a2b,CENG211,CENG431
 Teaching Assistant,SERHAT CANER,45,serhatcaner@iyte.edu.tr,c3d4,CENG211,CENG431
-Student,KAZIM BURAK KEVRAN,213,kazimkevran@std.iyte.edu.tr,dC4c,CENG431
-Student,EMRE KARABAG,944,emrekarabag@std.iyte.edu.tr,euF0,CENG431
-Student,ALPEREN EKIN,885,alperenekin@std.iyte.edu.tr,)0*8,CENG431
-Student,ELIF TURHAN,416,elifturhan@std.iyte.edu.tr,n19Y,CENG431
-Student,EKREM OZTURK,445,ekremozturk@std.iyte.edu.tr,aXQ-,CENG431
-Student,FATIH HAMZA,549,fatihhamza@std.iyte.edu.tr,iK1G,CENG431
-Student,DERYA CAKMAK,233,deryacakmak@std.iyte.edu.tr,_pGW,CENG431
-Student,BERKAY AYDIN,831,berkayaydin@std.iyte.edu.tr,HCQ7,CENG431
-Student,EKIN TEPEBAS,122,ekintepebas@std.iyte.edu.tr,I*fT,CENG431
-Student,SALIM CAN YILDIZ,640,salimyildiz@std.iyte.edu.tr,p3gg,CENG431
-Student,HASAN GULERYUZ,692,hasanguleryuz@std.iyte.edu.tr,cgYZ,CENG431
-Student,UMUT CAN TOP,566,umuttop@std.iyte.edu.tr,Nnp/,CENG431
-Student,FURKAN CETIN,819,furkancetin@std.iyte.edu.tr,HUI6,CENG431
-Student,ARDA YIKAMACI,432,ardayikamaci@std.iyte.edu.tr,8JM*,CENG431
-Student,AHMETCAN GUVENDIREN,899,ahmetcanguvendiren@std.iyte.edu.tr,_O_2,CENG431
-Student,FATIH YILMAZ,988,fatihyilmaz@std.iyte.edu.tr,__bO,CENG431
-Student,EFE AKIL,777,efeakil@std.iyte.edu.tr,R=sG,CENG431
-Student,ERKAN SAHIN,600,erkansahin@std.iyte.edu.tr,AoCF,CENG431
-Student,CANER TANGULER,679,canertanguler@std.iyte.edu.tr,+s1p,CENG431
-Student,YUSUF HAYIRLI,51,yusufhayirli@std.iyte.edu.tr,RcQZ,CENG431
-Student,EROL SONMEZ,990,erolsonmez@std.iyte.edu.tr,7=I3,CENG431
-Student,SELIN BAYKAL,730,selinbaykal@std.iyte.edu.tr,+M2c,CENG431,CENG211
-Student,YASAR KAAN HELVA,9,yasarhelva@std.iyte.edu.tr,o*Ib,CENG431
-Student,EGE PERIM,919,egeperim@std.iyte.edu.tr,vGO1,CENG431
-Student,MUHAMMED AYYILDIZ,829,muhammedayyildiz@std.iyte.edu.tr,Vzpm,CENG431
-Student,ARIF BURAK DEMIRAY,353,arifdemiray@std.iyte.edu.tr,S+M4,CENG431
-Student,TAMER UZUNOGLU,826,tameruzunoglu@std.iyte.edu.tr,cLSk,CENG431
-Student,ARMAN OKLUOGLU,220,armanokluoglu@std.iyte.edu.tr,oTb5,CENG431
-Student,IBRAHIM MERT INAN,593,ibrahiminan@std.iyte.edu.tr,/E*D,CENG431
-Student,GOKBERK AKDENIZ,741,gokberkakdeniz@std.iyte.edu.tr,tvfe,CENG431
-Student,FURKAN SAHIN,704,furkansahin@std.iyte.edu.tr,lor1,CENG431
-Student,MERT CAN DONMEZ,57,mertdonmez@std.iyte.edu.tr,vSiY,CENG431
-Student,HAKAN ALP,621,hakanalp@std.iyte.edu.tr,)C=A,CENG431
-Student,KEMAL TURK,676,kemalturk@std.iyte.edu.tr,oe9Y,CENG431
-Student,AYNUR ATIS,23,aynuratis@std.iyte.edu.tr,lp6M,CENG431
-Student,IBRAHIM EKMEN,30,ibrahimekmen@std.iyte.edu.tr,tDtN,CENG431
-Student,YALCIN ERIM GUNENC,22,yalcingunenc@std.iyte.edu.tr,uTQ7,CENG431
-Student,SEYYIT ENES YURTCU,683,seyyityurtcu@std.iyte.edu.tr,vaMJ,CENG431,CENG211
-Student,IHSAN CAN YALABUK,173,ihsanyalabuk@std.iyte.edu.tr,/R+t,CENG431
-Student,GURCAN GUL,552,gurcangul@std.iyte.edu.tr,4ATz,CENG431
-Student,UYGAR UYSAL,907,uygaruysal@std.iyte.edu.tr,/l1W,CENG431
-Student,CANER ALPARSLAN,68,caneralparslan@std.iyte.edu.tr,)u3F,CENG431,CENG211
-Student,MUSTAFA KARACAY,486,mustafakaracay@std.iyte.edu.tr,2GSP,CENG431
-Student,ELIF OZER,310,elifozer@std.iyte.edu.tr,o/a6,CENG611
-Student,NURI GUMUS,426,nurigumus@std.iyte.edu.tr,ajVg,CENG611
-Student,YONCA SEN,653,yoncasen@std.iyte.edu.tr,lU8D,CENG611
-Student,MEDET DONMEZ,564,medetdonmez@std.iyte.edu.tr,Mc+z,CENG611
-Student,AHMET TURK,830,ahmetturk@std.iyte.edu.tr,*ji5,CENG611
-Student,KIVILCIM BERRAK,758,kivilcimberrak@std.iyte.edu.tr,+Jm.,CENG611
-Student,NASIT UYGUN,195,nasituygun@std.iyte.edu.tr,5NnB,CENG611
-Student,BURAK ERSEVER,959,burakersever@std.iyte.edu.tr,qaFW,CENG611
-Student,DENIZ KOCAK,145,denizkocak@std.iyte.edu.tr,.7Ur,CENG611
-Student,UYGAR AKSAZ,316,uygaraksaz@std.iyte.edu.tr,RTeF,CENG611
-Student,BERFIN IREM GERDAN,79,berfingerdan@std.iyte.edu.tr,YBx+,CENG611
-Student,OMER GENISOGLU,531,omergenisoglu@std.iyte.edu.tr,e+g2,CENG611
-Student,EFE AKIL,681,efeakil@std.iyte.edu.tr,oWR_,CENG611
-Student,MEHMET BARAN NAKIPOGLU,684,mehmetnakipoglu@std.iyte.edu.tr,pgxT,CENG611
-Student,BETUL AKSOY,702,betulaksoy@std.iyte.edu.tr,waQq,CENG211
-Student,AHMET OCAL,609,ahmetocal@std.iyte.edu.tr,IYmH,CENG211
-Student,NADIR OZDEMIR,888,nadirozdemir@std.iyte.edu.tr,cI2Z,CENG211
-Student,ENES FURKAN FIDAN,441,enesfidan@std.iyte.edu.tr,s4p4,CENG211
-Student,MUAMMER TARHAN,987,muammertarhan@std.iyte.edu.tr,P*qO,CENG211
-Student,UGUR BARAN OZER,348,ugurozer@std.iyte.edu.tr,aHwf,CENG211
-Student,TUNAHAN ATALAY,207,tunahanatalay@std.iyte.edu.tr,F5tv,CENG211
-Student,ONUR CIHANGIR,577,onurcihangir@std.iyte.edu.tr,lQ2H,CENG211
-Student,NAILE OYKU EMIRLEROGLU,404,naileemirleroglu@std.iyte.edu.tr,SZ4k,CENG211
-Student,ESREF CAGATAY DOGAN,210,esrefdogan@std.iyte.edu.tr,pvx=,CENG211
-Student,DERIN TEKE,299,derinteke@std.iyte.edu.tr,pxUo,CENG211
-Student,OZAN ACIKGOZ,215,ozanacikgoz@std.iyte.edu.tr,uT0s,CENG211
-Student,LATIF EGE CELIK,720,latifcelik@std.iyte.edu.tr,ye.G,CENG211
-Student,BILGEHAN SAVGU,237,bilgehansavgu@std.iyte.edu.tr,0kY0,CENG211
-Student,NECMETTIN COLAKOGLU,425,necmettincolakoglu@std.iyte.edu.tr,Fumq,CENG211
-Student,SINEM ALAGEYIK,472,sinemalageyik@std.iyte.edu.tr,X4S.,CENG211
-Student,EREN BOZTEPE,157,erenboztepe@std.iyte.edu.tr,eR0O,CENG211
-Student,CAGDAS OLAM,328,cagdasolam@std.iyte.edu.tr,ijeO,CENG211
-Student,UMUTCAN CEYHAN,251,umutcanceyhan@std.iyte.edu.tr,JSqP,CENG211
-Student,CAN YAKAR,580,canyakar@std.iyte.edu.tr,T7Tr,CENG211
-Student,BURAK CABADAN,780,burakcabadan@std.iyte.edu.tr,cdkS,CENG211
-Student,BARIS YENIGUN,492,barisyenigun@std.iyte.edu.tr,1S)b,CENG211
-Student,MERT AYAZ OZKAN,103,mertozkan@std.iyte.edu.tr,1O+6,CENG211
-Student,IHSAN SELIM CELIK,31,ihsancelik@std.iyte.edu.tr,2uEi,CENG211
-Student,ISMAIL GUNAY,926,ismailgunay@std.iyte.edu.tr,Be*z,CENG211
-Student,ERBERK ELBIR,451,erberkelbir@std.iyte.edu.tr,..lR,CENG211
-Student,YAGIZCAN PANCAK,218,yagizcanpancak@std.iyte.edu.tr,.E3I,CENG211
-Student,KUTAY BILGIC,66,kutaybilgic@std.iyte.edu.tr,HCc_,CENG211
-Student,TALHA TURKUM OZKURT,785,talhaozkurt@std.iyte.edu.tr,5cQq,CENG211
-Student,UMUT YILDIZ,291,umutyildiz@std.iyte.edu.tr,rJi5,CENG211
-Student,SERDAR SERTGOZ,686,serdarsertgoz@std.iyte.edu.tr,gY73,CENG211
-Student,CAN EKENOGLU,209,canekenoglu@std.iyte.edu.tr,JBvo,CENG211
-Student,BURAK SALER,270,buraksaler@std.iyte.edu.tr,zagq,CENG211
-Student,BILGEHAN AY,610,bilgehanay@std.iyte.edu.tr,.Sn4,CENG211
-Student,MUSTAFA KAAN ISIMBAY,900,mustafaisimbay@std.iyte.edu.tr,_TbF,CENG211
-Student,HAZIM ALPER ATA,65,hazimata@std.iyte.edu.tr,902t,CENG211
-Student,ULAS ASLAN,396,ulasaslan@std.iyte.edu.tr,Vy/W,CENG211
-Student,HARUN GOKALP,699,harungokalp@std.iyte.edu.tr,CA1n,CENG211
-Student,MERT KARACA,989,mertkaraca@std.iyte.edu.tr,eDZb,CENG211
-Student,ERTUGRUL DEMIR,449,ertugruldemir@std.iyte.edu.tr,5KVj,CENG211
-Student,BARIS ERDAL,452,bariserdal@std.iyte.edu.tr,Tbz),CENG211
-Student,FATIH GULENC,786,fatihgulenc@std.iyte.edu.tr,61*y,CENG211
-Student,ESRA AKGUL,710,esraakgul@std.iyte.edu.tr,6DwT,CENG211
-Student,TUNCER ATAC,643,tunceratac@std.iyte.edu.tr,z.Ny,CENG211
-Student,CAGATAY IBA,818,cagatayiba@std.iyte.edu.tr,0Y.7,CENG211
-Student,EMRE USTERE,275,emreustere@std.iyte.edu.tr,0r_v,CENG211
-Student,MERIC OK,407,mericok@std.iyte.edu.tr,k_-g,CENG211
-Student,BUKET ARSLAN,810,buketarslan@std.iyte.edu.tr,k5sa,CENG211
-Student,KUTAY OZBAY,894,kutayozbay@std.iyte.edu.tr,ma-3,CENG211
-Student,OGUZHAN MERTTURK,604,oguzhanmertturk@std.iyte.edu.tr,Z4.T,CENG211
-Student,DERIN DENIZ OZTAPTIK,466,derinoztaptik@std.iyte.edu.tr,r)Qc,CENG211
-Student,NILSU CAN,787,nilsucan@std.iyte.edu.tr,7Yk1,
-Student,ALI DEVRIM ODABASI,931,aliodabasi@std.iyte.edu.tr,W8H/,
-Student,SAFIYE GULCE SARAC,895,safiyesarac@std.iyte.edu.tr,U1Fj,
-Student,SHAHIN DOSTUYEV,144,shahindostuyev@std.iyte.edu.tr,rLWn,
-Student,CAN CIFTCI,403,canciftci@std.iyte.edu.tr,INb9,
-Student,UMUT UNVERMIS,74,umutunvermis@std.iyte.edu.tr,ufy0,
-Student,HARUN EREN MUTLU,117,harunmutlu@std.iyte.edu.tr,pz*s,
-Student,BILGE ABIL,358,bilgeabil@std.iyte.edu.tr,MJq_,
-Student,ALI OZKAYA,274,aliozkaya@std.iyte.edu.tr,JCs_,
-Student,SERHAT KUMAS,205,serhatkumas@std.iyte.edu.tr,9fYY,
-Student,RABIA TORE BABACAN,362,rabiababacan@std.iyte.edu.tr,qBat,
-Student,MERT TURKER,665,mertturker@std.iyte.edu.tr,WLuy,
-Student,YASIR DUMAN,727,yasirduman@std.iyte.edu.tr,JkYi,
+Student,KAZIM BURAK KEVRAN,163,kazimkevran@std.iyte.edu.tr,uj5M,CENG431
+Student,EMRE KARABAG,223,emrekarabag@std.iyte.edu.tr,P664,CENG431
+Student,ALPEREN EKIN,907,alperenekin@std.iyte.edu.tr,-FLk,CENG431
+Student,ELIF TURHAN,949,elifturhan@std.iyte.edu.tr,hXF4,CENG431
+Student,EKREM OZTURK,637,ekremozturk@std.iyte.edu.tr,6M6X,CENG431
+Student,FATIH HAMZA,852,fatihhamza@std.iyte.edu.tr,d4Gn,CENG431
+Student,DERYA CAKMAK,654,deryacakmak@std.iyte.edu.tr,Wq=A,CENG431
+Student,BERKAY AYDIN,934,berkayaydin@std.iyte.edu.tr,/B3k,CENG431
+Student,EKIN TEPEBAS,140,ekintepebas@std.iyte.edu.tr,Xjet,CENG431
+Student,SALIM CAN YILDIZ,386,salimyildiz@std.iyte.edu.tr,-M9i,CENG431
+Student,HASAN GULERYUZ,507,hasanguleryuz@std.iyte.edu.tr,TvdI,CENG431
+Student,UMUT CAN TOP,132,umuttop@std.iyte.edu.tr,KZGa,CENG431
+Student,FURKAN CETIN,334,furkancetin@std.iyte.edu.tr,+Q)x,CENG431
+Student,ARDA YIKAMACI,409,ardayikamaci@std.iyte.edu.tr,Yuj0,CENG431
+Student,AHMETCAN GUVENDIREN,820,ahmetcanguvendiren@std.iyte.edu.tr,8dTg,CENG431
+Student,FATIH YILMAZ,514,fatihyilmaz@std.iyte.edu.tr,r+Xg,CENG431
+Student,EFE AKIL,454,efeakil@std.iyte.edu.tr,VI3D,CENG431
+Student,ERKAN SAHIN,666,erkansahin@std.iyte.edu.tr,zEmB,CENG431
+Student,CANER TANGULER,606,canertanguler@std.iyte.edu.tr,_c1v,CENG431
+Student,YUSUF HAYIRLI,796,yusufhayirli@std.iyte.edu.tr,m+TN,CENG431
+Student,EROL SONMEZ,871,erolsonmez@std.iyte.edu.tr,DjeE,CENG431
+Student,SELIN BAYKAL,345,selinbaykal@std.iyte.edu.tr,Ojqu,CENG431,CENG211
+Student,YASAR KAAN HELVA,779,yasarhelva@std.iyte.edu.tr,p=j5,CENG431
+Student,EGE PERIM,647,egeperim@std.iyte.edu.tr,HTA2,CENG431
+Student,MUHAMMED AYYILDIZ,769,muhammedayyildiz@std.iyte.edu.tr,nPjQ,CENG431
+Student,ARIF BURAK DEMIRAY,910,arifdemiray@std.iyte.edu.tr,lePk,CENG431
+Student,TAMER UZUNOGLU,417,tameruzunoglu@std.iyte.edu.tr,bHRl,CENG431
+Student,ARMAN OKLUOGLU,40,armanokluoglu@std.iyte.edu.tr,q09k,CENG431
+Student,IBRAHIM MERT INAN,101,ibrahiminan@std.iyte.edu.tr,=yHh,CENG431
+Student,GOKBERK AKDENIZ,37,gokberkakdeniz@std.iyte.edu.tr,8/l3,CENG431
+Student,FURKAN SAHIN,47,furkansahin@std.iyte.edu.tr,Rf.u,CENG431
+Student,MERT CAN DONMEZ,588,mertdonmez@std.iyte.edu.tr,RgqR,CENG431
+Student,HAKAN ALP,742,hakanalp@std.iyte.edu.tr,Et2k,CENG431
+Student,KEMAL TURK,304,kemalturk@std.iyte.edu.tr,RwdY,CENG431
+Student,AYNUR ATIS,231,aynuratis@std.iyte.edu.tr,3uZt,CENG431
+Student,IBRAHIM EKMEN,445,ibrahimekmen@std.iyte.edu.tr,uNZV,CENG431
+Student,YALCIN ERIM GUNENC,997,yalcingunenc@std.iyte.edu.tr,Nl6Q,CENG431
+Student,SEYYIT ENES YURTCU,175,seyyityurtcu@std.iyte.edu.tr,2VWE,CENG431,CENG211
+Student,IHSAN CAN YALABUK,108,ihsanyalabuk@std.iyte.edu.tr,.iAY,CENG431
+Student,GURCAN GUL,364,gurcangul@std.iyte.edu.tr,PJfU,CENG431
+Student,UYGAR UYSAL,725,uygaruysal@std.iyte.edu.tr,0-xz,CENG431
+Student,CANER ALPARSLAN,996,caneralparslan@std.iyte.edu.tr,LIJN,CENG431,CENG211
+Student,MUSTAFA KARACAY,141,mustafakaracay@std.iyte.edu.tr,0fkt,CENG431
+Student,ELIF OZER,17,elifozer@std.iyte.edu.tr,))Uk,CENG611
+Student,NURI GUMUS,681,nurigumus@std.iyte.edu.tr,j1J2,CENG611
+Student,YONCA SEN,181,yoncasen@std.iyte.edu.tr,wR*e,CENG611
+Student,MEDET DONMEZ,278,medetdonmez@std.iyte.edu.tr,d4dT,CENG611
+Student,AHMET TURK,143,ahmetturk@std.iyte.edu.tr,bSF3,CENG611
+Student,KIVILCIM BERRAK,430,kivilcimberrak@std.iyte.edu.tr,/nD2,CENG611
+Student,NASIT UYGUN,658,nasituygun@std.iyte.edu.tr,1sUt,CENG611
+Student,BURAK ERSEVER,207,burakersever@std.iyte.edu.tr,xvPV,CENG611
+Student,DENIZ KOCAK,809,denizkocak@std.iyte.edu.tr,zfZp,CENG611
+Student,UYGAR AKSAZ,815,uygaraksaz@std.iyte.edu.tr,Q*+i,CENG611
+Student,BERFIN IREM GERDAN,280,berfingerdan@std.iyte.edu.tr,L1TY,CENG611
+Student,OMER GENISOGLU,822,omergenisoglu@std.iyte.edu.tr,mQC1,CENG611
+Student,EFE AKIL,870,efeakil@std.iyte.edu.tr,VFvK,CENG611
+Student,MEHMET BARAN NAKIPOGLU,976,mehmetnakipoglu@std.iyte.edu.tr,PLmO,CENG611
+Student,BETUL AKSOY,25,betulaksoy@std.iyte.edu.tr,hWrI,CENG211
+Student,AHMET OCAL,473,ahmetocal@std.iyte.edu.tr,ihd-,CENG211
+Student,NADIR OZDEMIR,962,nadirozdemir@std.iyte.edu.tr,VaJ-,CENG211
+Student,ENES FURKAN FIDAN,667,enesfidan@std.iyte.edu.tr,QqW_,CENG211
+Student,MUAMMER TARHAN,971,muammertarhan@std.iyte.edu.tr,0YBy,CENG211
+Student,UGUR BARAN OZER,956,ugurozer@std.iyte.edu.tr,7ide,CENG211
+Student,TUNAHAN ATALAY,923,tunahanatalay@std.iyte.edu.tr,aieU,CENG211
+Student,ONUR CIHANGIR,495,onurcihangir@std.iyte.edu.tr,wo)=,CENG211
+Student,NAILE OYKU EMIRLEROGLU,788,naileemirleroglu@std.iyte.edu.tr,D/xi,CENG211
+Student,ESREF CAGATAY DOGAN,817,esrefdogan@std.iyte.edu.tr,ziKA,CENG211
+Student,DERIN TEKE,724,derinteke@std.iyte.edu.tr,qCQP,CENG211
+Student,OZAN ACIKGOZ,892,ozanacikgoz@std.iyte.edu.tr,Gpiq,CENG211
+Student,LATIF EGE CELIK,213,latifcelik@std.iyte.edu.tr,2mVj,CENG211
+Student,BILGEHAN SAVGU,515,bilgehansavgu@std.iyte.edu.tr,Rbo+,CENG211
+Student,NECMETTIN COLAKOGLU,350,necmettincolakoglu@std.iyte.edu.tr,8R+p,CENG211
+Student,SINEM ALAGEYIK,435,sinemalageyik@std.iyte.edu.tr,1vG9,CENG211
+Student,EREN BOZTEPE,504,erenboztepe@std.iyte.edu.tr,twSX,CENG211
+Student,CAGDAS OLAM,312,cagdasolam@std.iyte.edu.tr,Lc54,CENG211
+Student,UMUTCAN CEYHAN,773,umutcanceyhan@std.iyte.edu.tr,Uk1X,CENG211
+Student,CAN YAKAR,86,canyakar@std.iyte.edu.tr,c)Uu,CENG211
+Student,BURAK CABADAN,480,burakcabadan@std.iyte.edu.tr,.WoQ,CENG211
+Student,BARIS YENIGUN,782,barisyenigun@std.iyte.edu.tr,3dpv,CENG211
+Student,MERT AYAZ OZKAN,485,mertozkan@std.iyte.edu.tr,bCvE,CENG211
+Student,IHSAN SELIM CELIK,664,ihsancelik@std.iyte.edu.tr,Gi77,CENG211
+Student,ISMAIL GUNAY,323,ismailgunay@std.iyte.edu.tr,rr6U,CENG211
+Student,ERBERK ELBIR,932,erberkelbir@std.iyte.edu.tr,4cl=,CENG211
+Student,YAGIZCAN PANCAK,829,yagizcanpancak@std.iyte.edu.tr,up1k,CENG211
+Student,KUTAY BILGIC,918,kutaybilgic@std.iyte.edu.tr,P-D_,CENG211
+Student,TALHA TURKUM OZKURT,244,talhaozkurt@std.iyte.edu.tr,sVyC,CENG211
+Student,UMUT YILDIZ,306,umutyildiz@std.iyte.edu.tr,Tc*2,CENG211
+Student,SERDAR SERTGOZ,180,serdarsertgoz@std.iyte.edu.tr,c.gx,CENG211
+Student,CAN EKENOGLU,467,canekenoglu@std.iyte.edu.tr,aklR,CENG211
+Student,BURAK SALER,107,buraksaler@std.iyte.edu.tr,EGo8,CENG211
+Student,BILGEHAN AY,89,bilgehanay@std.iyte.edu.tr,IDgj,CENG211
+Student,MUSTAFA KAAN ISIMBAY,129,mustafaisimbay@std.iyte.edu.tr,WteH,CENG211
+Student,HAZIM ALPER ATA,7,hazimata@std.iyte.edu.tr,l=XZ,CENG211
+Student,ULAS ASLAN,523,ulasaslan@std.iyte.edu.tr,B5jO,CENG211
+Student,HARUN GOKALP,501,harungokalp@std.iyte.edu.tr,CBiq,CENG211
+Student,MERT KARACA,594,mertkaraca@std.iyte.edu.tr,fO1b,CENG211
+Student,ERTUGRUL DEMIR,832,ertugruldemir@std.iyte.edu.tr,Ehis,CENG211
+Student,BARIS ERDAL,506,bariserdal@std.iyte.edu.tr,G3xy,CENG211
+Student,FATIH GULENC,396,fatihgulenc@std.iyte.edu.tr,bIj_,CENG211
+Student,ESRA AKGUL,576,esraakgul@std.iyte.edu.tr,.-0-,CENG211
+Student,TUNCER ATAC,944,tunceratac@std.iyte.edu.tr,l/)o,CENG211
+Student,CAGATAY IBA,787,cagatayiba@std.iyte.edu.tr,.FnQ,CENG211
+Student,EMRE USTERE,696,emreustere@std.iyte.edu.tr,muNj,CENG211
+Student,MERIC OK,903,mericok@std.iyte.edu.tr,o.h4,CENG211
+Student,BUKET ARSLAN,614,buketarslan@std.iyte.edu.tr,b/C),CENG211
+Student,KUTAY OZBAY,887,kutayozbay@std.iyte.edu.tr,n5ad,CENG211
+Student,OGUZHAN MERTTURK,257,oguzhanmertturk@std.iyte.edu.tr,Euk+,CENG211
+Student,DERIN DENIZ OZTAPTIK,416,derinoztaptik@std.iyte.edu.tr,QNsp,CENG211
+Student,NILSU CAN,57,nilsucan@std.iyte.edu.tr,8oSU,
+Student,ALI DEVRIM ODABASI,552,aliodabasi@std.iyte.edu.tr,-DLc,
+Student,SAFIYE GULCE SARAC,78,safiyesarac@std.iyte.edu.tr,whYp,
+Student,SHAHIN DOSTUYEV,157,shahindostuyev@std.iyte.edu.tr,4QFl,
+Student,CAN CIFTCI,675,canciftci@std.iyte.edu.tr,BGa_,
+Student,UMUT UNVERMIS,728,umutunvermis@std.iyte.edu.tr,9Z40,
+Student,HARUN EREN MUTLU,984,harunmutlu@std.iyte.edu.tr,/6.0,
+Student,BILGE ABIL,390,bilgeabil@std.iyte.edu.tr,7ghi,
+Student,ALI OZKAYA,290,aliozkaya@std.iyte.edu.tr,rOlN,
+Student,SERHAT KUMAS,418,serhatkumas@std.iyte.edu.tr,m60d,
+Student,RABIA TORE BABACAN,407,rabiababacan@std.iyte.edu.tr,NW_n,
+Student,MERT TURKER,808,mertturker@std.iyte.edu.tr,SiSp,
+Student,YASIR DUMAN,508,yasirduman@std.iyte.edu.tr,UiXr,
 TEAMSTECH

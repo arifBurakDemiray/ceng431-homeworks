@@ -7,7 +7,7 @@ public class ItemNotFoundException extends Exception {
 
 	
 	public ItemNotFoundException(){
-		super("ItemNotFoundException, ''that type of item is not found"); 
+		super("ItemNotFoundException, that type of item is not found."); 
 	
 	}
 	
