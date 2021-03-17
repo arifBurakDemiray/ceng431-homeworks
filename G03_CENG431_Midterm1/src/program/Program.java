@@ -2,6 +2,7 @@ package program;
 
 import java.util.Scanner;
 
+import exception.FileFormatException;
 import exception.ItemNotFoundException;
 import exception.NotSupportedException;
 import exception.UnauthorizedUserOperationException;
@@ -49,10 +50,14 @@ public class Program implements IProgram {
 	}
 
 	public void start() {
-		readAll();
-		login();
-		mainMenu();
-		writeAll();
+		try {
+			readAll();
+			login();
+			mainMenu();
+			writeAll();
+		} catch (FileFormatException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
 	public void createTeam() {
@@ -129,7 +134,7 @@ public class Program implements IProgram {
 			if (tempTeam.isMember(loggedInUser.getId())) {
 				while (true) {
 					teamOperationIndex = this.operations.updateTeamOperationsMenu();
-					if (teamOperationIndex.equals("9"))
+					if (teamOperationIndex.equals("0"))
 						break;
 					else {
 						updateTeamOperations(teamOperationIndex, tempTeam);
@@ -154,34 +159,38 @@ public class Program implements IProgram {
 				break;
 			}
 			case "2": {
-
+				operations.removeMeetingChannel(loggedInUser, team);
 				break;
 			}
 			case "3": {
-
+				operations.updateChannelOperation(loggedInUser, team);
 				break;
 			}
 			case "4": {
-
+				operations.addTeamMember(users, loggedInUser, team);
 				break;
 			}
 			case "5": {
-
+				operations.removeTeamMember(loggedInUser, team);
 				break;
 			}
 			case "6": {
-
+				operations.addTeamOwner(loggedInUser, team);
 				break;
 			}
 			case "7": {
-
+				operations.removeTeamOwner(loggedInUser, team);
 				break;
 			}
 			case "8": {
-
+				operations.teamInfo(team);
 				break;
 			}
 			case "9": {
+				operations.statisticOfTeam(team);
+				break;
+			}
+			case "0": {
 				break;
 			}
 
@@ -193,6 +202,7 @@ public class Program implements IProgram {
 		}
 
 	}
+	
 
 	private User authenticate(String email, String password) {
 
@@ -223,13 +233,13 @@ public class Program implements IProgram {
 			user = authenticate(email, password);
 			if (user != null) {
 				this.loggedInUser = user;
-				System.out.println(user.toString());
+				System.out.println(user.getName() + " Welcome to the TeamsTech");
 			}
 		}
 
 	}
 
-	private void readAll() {
+	private void readAll() throws FileFormatException {
 		IFileIO fr = new FileIO();
 		IContainer<Team> teams = fr.readTeams("data\\teamList.csv");
 		IContainer<User> users = fr.readUsers(teams, "data\\userList.csv");

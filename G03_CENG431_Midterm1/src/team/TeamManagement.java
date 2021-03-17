@@ -31,10 +31,12 @@ public class TeamManagement implements ITeamManagement {
 	public void addChannel(Channel ch) {
 		// it tries to add the channel to the team's channels.
 		// if channel was added before, return a message.
+
 		boolean isAdded = this.team.getMeetingChannelList().add(ch);
 		if (!isAdded) {
 			System.out.println("Channel was added before.");
 		}
+
 	}
 
 	public void addMember(User user) {
@@ -54,15 +56,20 @@ public class TeamManagement implements ITeamManagement {
 				System.out.println(
 						"Channel " + channelName + " is public and has all members on team " + this.team.getId());
 			} else {
-				if (!((PrivateChannel) temp).addParticipant(userId))
+				if (!this.team.isMember(userId))
+					System.out.println("This user is not on team " + this.team.getId());
+				else if (!((PrivateChannel) temp).addParticipant(userId))
 					System.out.println("This user is already in channel");
+				else {
+					System.out.println("User added to channel succesfully");
+				}
 			}
 		} catch (ItemNotFoundException | NotSupportedException e) {
 			System.out.println("There is no channel named " + channelName);
 		}
 	}
 
-	public void addTeamOwner(Academician user) {
+	public void addTeamOwner(User user) {
 
 		// control that given user is an academician or not
 		if (user instanceof Academician) {
@@ -89,6 +96,8 @@ public class TeamManagement implements ITeamManagement {
 						+ this.team.getId());
 			} else {
 				((PrivateChannel) temp).removeParticipant(userId);
+				if( ((PrivateChannel)temp).getParticipants().isEmpty())
+					removeChannel(temp);
 			}
 		} catch (ItemNotFoundException | NotSupportedException e) {
 			System.out.println("There is no channel named " + channelName);
@@ -105,30 +114,47 @@ public class TeamManagement implements ITeamManagement {
 	 * @param container given container list
 	 * @param error     error message to print if removing process is not
 	 *                  successfull.
+	 * @return
 	 */
-	private <T> void removeItem(String error, IContainer<T> container, T item) {
+	private <T> T removeItem(IContainer<T> container, T item) {
 		String removedItemToString = item.toString();
-		T removedItem;
+		T removedItem = null;
 		try {
 			removedItem = container.remove(item); // try to remove invoking container.remove method
-			if (!removedItem.toString().equals(removedItemToString)) {
-				System.out.println(error);
-			}
+			return removedItem;
+
 		} catch (ItemNotFoundException e) {
 			System.out.println("This item is not found in the container.");
+			return null;
 		}
+
 	}
 
 	public void removeChannel(Channel ch) {
-		removeItem("Channel has not removed.", this.team.getMeetingChannelList(), ch);
+
+		removeItem(this.team.getMeetingChannelList(), ch);
+
 	}
 
 	public void removeMember(User user) {
-		removeItem("User has not removed.", this.team.getMemberUsers(), user);
+		User removedUser = ((User) removeItem(this.team.getMemberUsers(), user));
+		if (removedUser.equals(user)) {
+			removeMemberFromChannels(user);
+		}
+	}
+
+	private void removeMemberFromChannels(User user) {
+		for (Channel channel : team.getMeetingChannelList()) {
+			boolean participantOfPrivate = (channel instanceof PrivateChannel)
+					&& ((PrivateChannel) channel).isMember(user.getId());
+			if (participantOfPrivate) {
+				removeChannelMember(user.getId(), channel.getName());
+			}
+		}
 	}
 
 	public void removeTeamOwner(User user) {
-		removeItem("Team Owner has not removed.", this.team.getOwners(), user);
+		removeItem(this.team.getOwners(), user);
 	}
 
 	public void setTeam(Team team) {
@@ -139,17 +165,14 @@ public class TeamManagement implements ITeamManagement {
 		for (User member : team.getMemberUsers()) {
 			try {
 				Team tempTeam = member.getTeams().remove(team);
-				if(!tempTeam.equals(team))
+				if (!tempTeam.equals(team))
 					System.out.println("Error while removing team from user -> user " + member.toString());
-					
-					
+
 			} catch (ItemNotFoundException e) {
 				System.out.println(e);
 
 			}
 		}
 	}
-	
-
 
 }

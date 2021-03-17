@@ -3,7 +3,7 @@ package fileio;
 import storage.IContainer;
 import team.Team;
 import user.User;
-
+import exception.FileFormatException;
 public interface IFileIO {
 	
 	/**
@@ -15,7 +15,7 @@ public interface IFileIO {
 	 * @param filePath is the name of the teams file
 	 * @return s the read teams from file
 	 */
-	public IContainer<Team> readTeams(String filePath);
+	public IContainer<Team> readTeams(String filePath) throws FileFormatException;
 
 	/**
 	 * To read users we should provide teams first to add them to their team

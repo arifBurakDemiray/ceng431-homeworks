@@ -39,11 +39,7 @@ public class PrivateChannel extends Channel{
 	public boolean removeParticipant(String id){
 		String removedParticipant = null;
 		try {
-			removedParticipant = participants.remove(id); //try to remove invoking container.remove method
-			if (!id.equals(removedParticipant)) {
-				System.out.println("Participant has not been removed");
-				return false;
-			}
+			participants.remove(id); //try to remove invoking container.remove method
 		} catch (ItemNotFoundException e) {
 			System.out.println("This user is not found in the participants.");
 			return false;
@@ -63,12 +59,9 @@ public class PrivateChannel extends Channel{
 	
 	public boolean isMember(String id) {
 		boolean isFound = false;
-		try {
-			this.participants.getById(id);
+		String returnedId = this.participants.getItem(id);
+		if(returnedId != (null) && returnedId.equals(id))
 			isFound = true;
-		} catch (ItemNotFoundException | NotSupportedException e) {
-			
-		}
 		return isFound;
 	}
 

@@ -10,7 +10,7 @@ public class NotSupportedException extends Exception {
 	
 
 	public NotSupportedException(){
-		super("NotSupportedException, ''this function is not supported by this class."); 
+		super("NotSupportedException, this function is not supported by this class."); 
 	
 	}
 	

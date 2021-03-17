@@ -1,14 +1,17 @@
 package fileio;
 
 import java.io.BufferedReader;
+
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InterruptedIOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
 import channel.*;
+import exception.FileFormatException;
 import storage.*;
 import team.ITeamManagement;
 import team.Team;
@@ -86,8 +89,9 @@ public class FileRead {
 	 * @param records list of splitted string attributes list for teams.
 	 * 
 	 * @return IContainer<Team> which holds team objects.
+	 * @throws FileFormatException 
 	 */
-	protected IContainer<Team> readTeams(List<List<String>> records) {
+	protected IContainer<Team> readTeams(List<List<String>> records) throws FileFormatException {
 
 		IContainer<Team> teams = new TeamContainer(); // holds created teams
 
@@ -149,15 +153,19 @@ public class FileRead {
 				while (((n) < line.size() && !line.get(n).equals("")) && checkType(line.get(n))) {
 					participantId = line.get(n).strip();
 					participantList.add(participantId);
+					
 					n++;
 				}
-
 				// if meetingChannel exists create a new private meeting channel object
 				// Control the meetingDate. If meetingDate exists, create a new meeting and
 				// assign it to the channel.
 				if (!meetingChannel.equals("")) {
 					if (!meetingDate.equals("")) {
-						meeting = new Meeting(meetingDate);
+						try{
+							meeting = new Meeting(meetingDate);}
+						catch(ArrayIndexOutOfBoundsException e){
+							throw new FileFormatException("Date format is in wrong type. Please fix the file");
+						}
 					} else {
 						meeting = new Meeting();
 					}
@@ -168,6 +176,7 @@ public class FileRead {
 							((PrivateChannel) tempChannel).addParticipant(id);
 						}
 					} else {
+						
 						tempChannel = new MeetingChannel(meeting, meetingChannel);
 					}
 					teamManagement.addChannel(tempChannel); // add the channel to the team.
