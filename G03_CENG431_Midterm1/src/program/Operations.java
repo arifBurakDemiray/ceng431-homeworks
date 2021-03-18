@@ -273,7 +273,7 @@ public class Operations implements IOperations {
 			}
 
 		} catch (IllegalArgumentException | ArrayIndexOutOfBoundsException e) {
-			System.out.println(e.getMessage()); // if given date is in the wrong format holds the ecception there.
+			System.out.println("Date is in wrong type"); // if given date is in the wrong format holds the ecception there.
 		}
 
 	}

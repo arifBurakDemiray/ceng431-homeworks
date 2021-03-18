@@ -112,7 +112,7 @@ public class Meeting {
 			break;
 		}
 		default:
-			throw new IllegalArgumentException("Unexpected value: " + splittedDate[2]);
+			throw new IllegalArgumentException("Wrong type, please write AM or PM: " + splittedDate[2]);
 		}
 		
 	}
