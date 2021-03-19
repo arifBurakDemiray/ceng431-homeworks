@@ -34,11 +34,14 @@ public class Team {
 	 * @param team be looked for equality
 	 * @returns if equal true
 	 */
-	public boolean equals(Team team) {
+	@Override
+	public boolean equals(Object obj) {
+		Team team = ((Team) obj);
 		if (this.name.equals(team.getName()) && this.id.equals(team.getId()))
 			return true;
 		return false;
 	}
+	
 
 	//getters for team class
 	public String getId() {

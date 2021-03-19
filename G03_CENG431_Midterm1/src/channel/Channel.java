@@ -1,5 +1,7 @@
 package channel;
 
+import user.User;
+
 /**
  * This class is to hold the channel information which is given by a csv file.
  * It is a abstract class and it has two child class named Private and Meeting
@@ -37,6 +39,20 @@ public abstract class Channel {
 	public String getName() {
 		return this.name;
 	}
+	
+	/**
+	 * The function controls that given user is equal to this user 
+	 * and returns a boolean
+	 *
+	 * @return name of the channel
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		Channel ch = ((Channel) obj);
+		if (ch.getName().equals(this.getName()))
+			return true;
+		return false;
+	}
 
 	/**
 	 * The function updates the date of the meeting of the channel with the given
@@ -52,5 +68,7 @@ public abstract class Channel {
 	public String toString() {
 		return this.getName() + "," + this.getMeeting().toString();
 	}
+	
+	
 
 }

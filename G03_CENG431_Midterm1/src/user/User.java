@@ -96,19 +96,23 @@ public abstract class User {
 		}
 		return String.valueOf(password);
 	}
-
+	
+	
+	
 	/**
 	 * The function controls that given user is equal to this user and returns a
 	 * boolean
 	 *
 	 * @return true/false
 	 */
-	public boolean equals(User usr) {
+	@Override
+	public boolean equals(Object obj) {
+		User usr = ((User) obj);
 		if (usr.getName().equals(this.getName()) && usr.getId().equals(this.getId()))
 			return true;
 		return false;
 	}
-
+	
 	public String getEmail() {
 		return email;
 	}
