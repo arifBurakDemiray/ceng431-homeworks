@@ -52,10 +52,6 @@ public interface IOperations {
 	public void removeMeetingChannel(User user, Team team) throws UnauthorizedUserOperationException;
 
 	
-	//bunu niye yoruma almışız bilmiyorum
-	//public void updateMeetingChannelDate(User user, Team team, Channel channel) throws UnauthorizedUserOperationException;
-
-	
 	/*
 	 * The function returns a string to print main menu operation gets an input from user
 	 * @return string of operations

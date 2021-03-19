@@ -71,9 +71,9 @@ public class Operations implements IOperations {
 				teamManagement.addChannel(meetingChannel); // add created channel to team
 				teamManagement.addTeamOwner((Academician) loggedInUser); // assign loggedInUser as teamOwner
 				loggedInUser.getTeams().add(newTeam); // Update user's teams
-				System.out.println("Team is added.");
+				System.out.println("Team " + newTeam.getId() + " is added.");
 			} else {
-				System.out.println("Team exists.");
+				System.out.println(newTeam.getId() + " already exists.");
 			}
 		} else {
 			throw new UnauthorizedUserOperationException("You are not authorized to create a team.");
@@ -108,7 +108,7 @@ public class Operations implements IOperations {
 							"You are not authorized to remove team " + tempTeam.getId() + ".");
 				}
 			} catch (ItemNotFoundException | NotSupportedException e) {
-				System.out.println("Team not found"); // If team of givenId is not found, print message.
+				System.out.println(teamId + " is not found"); // If team of givenId is not found, print message.
 			}
 		} else {
 			throw new UnauthorizedUserOperationException("You are not authorized to remove a team.");
@@ -168,7 +168,8 @@ public class Operations implements IOperations {
 				System.out.println("Date is in wrong format.");
 			}
 		} else {
-			System.out.println("Wrong input"); // If input is not Public or Private, print a message
+			System.out.println("Wrong input. Please text 'Public' or 'Private' !"); // If input is not Public or
+																					// Private, print a message
 		}
 
 	}
@@ -220,10 +221,12 @@ public class Operations implements IOperations {
 		try {
 			tempChannel = team.getMeetingChannelList().getByName(channelName);
 
-			// Control that loggedInUser is the team owner if the selected channel is a meeting channel
+			// Control that loggedInUser is the team owner if the selected channel is a
+			// meeting channel
 			boolean ownerOfMeeting = (tempChannel instanceof MeetingChannel && team.isTeamOwner(loggedInUser.getId()));
 
-			// Control loggedInUser is a team member if the selected channel is a private channel
+			// Control loggedInUser is a team member if the selected channel is a private
+			// channel
 			boolean participantOfPrivate = tempChannel instanceof PrivateChannel
 					&& ((PrivateChannel) tempChannel).isMember(loggedInUser.getId());
 
@@ -239,7 +242,7 @@ public class Operations implements IOperations {
 			}
 
 		} catch (ItemNotFoundException | NotSupportedException e) {
-			System.out.println(e.getMessage());
+			System.out.println("Channel " + channelName + " is not found.");
 		}
 
 	}
@@ -248,20 +251,23 @@ public class Operations implements IOperations {
 			throws UnauthorizedUserOperationException {
 
 		try {
-			// Control that loggedInUser is the team owner if the selected channel is a meeting channel
+			// Control that loggedInUser is the team owner if the selected channel is a
+			// meeting channel
 			boolean ownerOfMeeting = (tempChannel instanceof MeetingChannel && team.isTeamOwner(loggedInUser.getId()));
-			
-			// Control that loggedInUser is a team member if the selected channel is a private channel
+
+			// Control that loggedInUser is a team member if the selected channel is a
+			// private channel
 			boolean participantOfPrivate = tempChannel instanceof PrivateChannel
 					&& ((PrivateChannel) tempChannel).isMember(loggedInUser.getId());
 
 			if (ownerOfMeeting || participantOfPrivate) {
-				//Get date from loggedInUser
+				// Get date from loggedInUser
 				Scanner input = new Scanner(System.in);
 				System.out.print("Meeting Channel Date 'Day HH:MM' AM/PM : ");
 				String date = input.nextLine().strip();
-				
-				//try to update date. If date is in wrong type, holds the exceptions gotten from Meeting object in the catch
+
+				// try to update date. If date is in wrong type, holds the exceptions gotten
+				// from Meeting object in the catch
 				tempChannel.getMeeting().updateDate(date); // handle IllegalArgumentException
 															// |ArrayIndexOutOfBoundsException
 				System.out.println(
@@ -269,15 +275,19 @@ public class Operations implements IOperations {
 
 			} else {
 				throw new UnauthorizedUserOperationException(
-						"You are not authorized to remove channel " + tempChannel.getName() + "."); // if booleans are false, throw unauthorized exception
+						"You are not authorized to remove channel " + tempChannel.getName() + "."); // if booleans are
+																									// false, throw
+																									// unauthorized
+																									// exception
 			}
 
 		} catch (IllegalArgumentException | ArrayIndexOutOfBoundsException e) {
-			System.out.println("Date is in wrong type"); // if given date is in the wrong format holds the ecception there.
+			System.out.println("Date is in wrong type"); // if given date is in the wrong format holds the ecception
+															// there.
 		}
 
 	}
-	
+
 	public String mainOperationsMenu() {
 		System.out.println("\n" + "1- Add a team\r\n" + "2- Remove a team\r\n" + "3- Update a team\r\n" + "4- Quit\n");
 
@@ -298,7 +308,7 @@ public class Operations implements IOperations {
 		String teamOperationIndex = input.nextLine().strip();
 		return teamOperationIndex;
 	}
-	
+
 	public String updateMeetingChannelMenu() {
 		System.out.println("\n" + "1- Add a participant\n" + "2- Remove a participant\n"
 				+ "3- Update a meeting channel date and time\n" + "4- Go Back\n");
@@ -308,30 +318,30 @@ public class Operations implements IOperations {
 		String teamOperationIndex = input.nextLine().strip();
 		return teamOperationIndex;
 	}
-	
 
 	public void updateChannelOperation(User loggedInUser, Team team) throws UnauthorizedUserOperationException {
 		String operationChoice = updateMeetingChannelMenu(); // get the selected operation for channel
 		findChannel(team); // print all channels of the team
-		
-		//Get a channel name from loggedInUser.
+
+		// Get a channel name from loggedInUser.
 		Scanner input = new Scanner(System.in);
 		System.out.print("\nMeeting Channel Name to update date :");
 		String channelName = input.nextLine().strip();
 		Channel tempChannel = null;
-		
-		//try to find the channel of given name, if not found, holds the exception of ItemNotFound
+
+		// try to find the channel of given name, if not found, holds the exception of
+		// ItemNotFound
 		try {
 			tempChannel = team.getMeetingChannelList().getByName(channelName);
 		} catch (ItemNotFoundException | NotSupportedException e) {
-			System.out.println(e.getMessage());
+			System.out.println("Channel " + channelName + " is not found.");
 			operationChoice = "4"; // exit from channel operation
 		}
-		
-		//If channel is found, adjust the selected operation 
+
+		// If channel is found, adjust the selected operation
 		switch (operationChoice) {
 		case "1": {
-			//Control that if selected channel is private
+			// Control that if selected channel is private
 			if (tempChannel instanceof PrivateChannel)
 				addParticipantToChannel(loggedInUser, team, tempChannel);
 			else
@@ -339,7 +349,7 @@ public class Operations implements IOperations {
 			break;
 		}
 		case "2": {
-			//Control that if selected channel is private
+			// Control that if selected channel is private
 			if (tempChannel instanceof PrivateChannel) {
 				removeParticipantFromChannel(loggedInUser, team, tempChannel);
 
@@ -364,21 +374,22 @@ public class Operations implements IOperations {
 
 	public void addParticipantToChannel(User loggedInUser, Team team, Channel channel)
 			throws UnauthorizedUserOperationException {
-		
-		// Control loggedInUser is a team member if the selected channel is a private channel
+
+		// Control loggedInUser is a team member if the selected channel is a private
+		// channel
 		boolean participantOfPrivate = ((PrivateChannel) channel).isMember(loggedInUser.getId());
-		
-		//If not authorized for process, throw unauthorized exception.
+
+		// If not authorized for process, throw unauthorized exception.
 		if (participantOfPrivate) {
-			findUsers(team.getMemberUsers()); //print users of the team.
+			findUsers(team.getMemberUsers()); // print users of the team.
 			teamManagement.setTeam(team); // set teamManagement for team operation
-			
-			//Get user id from loggedInUser
+
+			// Get user id from loggedInUser
 			Scanner input = new Scanner(System.in);
 			System.out.print("User Id : ");
 			String userId = input.nextLine().strip();
-			
-			//try to add the user of given id to the private channel.
+
+			// try to add the user of given id to the private channel.
 			teamManagement.addMemberToChannel(userId, channel.getName());
 		} else {
 			throw new UnauthorizedUserOperationException(
@@ -398,31 +409,32 @@ public class Operations implements IOperations {
 
 	public void removeParticipantFromChannel(User loggedInUser, Team team, Channel tempChannel)
 			throws UnauthorizedUserOperationException {
-		
-		// Control loggedInUser is a team member if the selected channel is a private channel
+
+		// Control loggedInUser is a team member if the selected channel is a private
+		// channel
 		boolean participantOfPrivate = ((PrivateChannel) tempChannel).isMember(loggedInUser.getId());
-		
-		
+
 		// If given id is not found, holds the ItemNotFound exception in catch
 		try {
-			
-			//If user is not authorized for process, throw an unauthorized exception.
+
+			// If user is not authorized for process, throw an unauthorized exception.
 			if (participantOfPrivate) {
 				findParticipant(tempChannel); // print all participants of the channel
-				
-				//Get a participant id to remove
+
+				// Get a participant id to remove
 				Scanner input = new Scanner(System.in);
 				System.out.print("Participant ID to remove : ");
 				String participantId = input.nextLine().strip();
-				
-				// try to remove participant from channel, if participant doesn't exist, throw ItemNotFound exception.
-				((PrivateChannel) tempChannel).getParticipants().remove(participantId); 
+
+				// try to remove participant from channel, if participant doesn't exist, throw
+				// ItemNotFound exception.
+				((PrivateChannel) tempChannel).getParticipants().remove(participantId);
 			} else {
 				throw new UnauthorizedUserOperationException(
 						"You are not authorized to remove channel " + tempChannel.getName() + ".");
 			}
 		} catch (ItemNotFoundException e) {
-			System.out.println(e.getMessage());
+			System.out.println("Participant is not found.");
 			// TODO: handle exception
 		}
 
@@ -430,26 +442,28 @@ public class Operations implements IOperations {
 
 	public void addTeamMember(IContainer<User> users, User loggedInUser, Team team)
 			throws UnauthorizedUserOperationException {
-		
+
 		// Control loggedInUser is an instructor or assistant of the team.
 		boolean isAcademician = (loggedInUser instanceof Academician) && team.isMember(loggedInUser.getId());
-		
-		//If not authorized for process, throw unauthorized exception
+
+		// If not authorized for process, throw unauthorized exception
 		if (isAcademician) {
-			findUsers(users); // print all users in the system 
-			
-			//Get an user id to add to team.
+			findUsers(users); // print all users in the system
+
+			// Get an user id to add to team.
 			Scanner input = new Scanner(System.in);
 			System.out.print("User ID to add : ");
 			String memberId = input.nextLine().strip();
-			
-			//Try to find the user of given id, if not exists holds the ItemNotFound exception in catch
+
+			// Try to find the user of given id, if not exists holds the ItemNotFound
+			// exception in catch
 			try {
-				User user = users.getById(memberId); // find the user in the user container which holds all users of the system
+				User user = users.getById(memberId); // find the user in the user container which holds all users of the
+														// system
 				teamManagement.setTeam(team); // set teamManagement for team operation
 				teamManagement.addMember(user); // add user to the team.
 			} catch (ItemNotFoundException | NotSupportedException e) {
-				System.out.println(e.getMessage());
+				System.out.println("User " + memberId + " is not found.");
 			}
 		} else {
 			throw new UnauthorizedUserOperationException(
@@ -459,27 +473,29 @@ public class Operations implements IOperations {
 	}
 
 	public void removeTeamMember(User loggedInUser, Team team) throws UnauthorizedUserOperationException {
-		
+
 		// Control loggedInUser is an instructor or assistant of the team.
 		boolean academicianInTeam = (loggedInUser instanceof Academician) && team.isMember(loggedInUser.getId());
-		
-		//If not authorized for process, throw unauthorized exception
+
+		// If not authorized for process, throw unauthorized exception
 		if (academicianInTeam) {
 			findUsers(team.getMemberUsers()); // print users of the team
-			
-			//Get an user id to remove from team.
+
+			// Get an user id to remove from team.
 			Scanner input = new Scanner(System.in);
 			System.out.print("Member ID to remove : ");
 			String memberId = input.nextLine().strip();
-			
-			//Try to find the user of given id, if not exists holds the ItemNotFound exception in catch
+
+			// Try to find the user of given id, if not exists holds the ItemNotFound
+			// exception in catch
 			try {
-				User user = team.getMemberUsers().getById(memberId); // find the user in the member container of the team 
+				User user = team.getMemberUsers().getById(memberId); // find the user in the member container of the
+																		// team
 				teamManagement.setTeam(team); // set teamManagement for team operation
 				teamManagement.removeMember(user); // remove user from the team.
 
 			} catch (ItemNotFoundException | NotSupportedException e) {
-				System.out.println(e.getMessage());
+				System.out.println("User " + memberId + " is not found in the team " + team.getId());
 			}
 
 		} else {
@@ -489,29 +505,29 @@ public class Operations implements IOperations {
 	}
 
 	public void addTeamOwner(User loggedInUser, Team team) throws UnauthorizedUserOperationException {
-		
+
 		// Control loggedInUser is not student and is a teamOwner of the team.
 		boolean isTeamOwner = (loggedInUser instanceof Academician) && team.isTeamOwner(loggedInUser.getId());
-		
-		//If not authorized for process, throw unauthorized exception
+
+		// If not authorized for process, throw unauthorized exception
 		if (isTeamOwner) {
 			IContainer<User> members = team.getMemberUsers();
 			findUsers(members); // print members of the team
-			
-			//Get an user id to assing as team owner for team.
+
+			// Get an user id to assing as team owner for team.
 			Scanner input = new Scanner(System.in);
 			System.out.print("User ID to add to Owners: ");
 			String memberId = input.nextLine().strip();
-			
-			//Try to find the user of given id, if not exists holds the ItemNotFound exception in catch
+
+			// Try to find the user of given id, if not exists holds the ItemNotFound
+			// exception in catch
 			try {
-				User user = members.getById(memberId); // find the user in the member container of the team 
+				User user = members.getById(memberId); // find the user in the member container of the team
 				teamManagement.setTeam(team); // set teamManagement for team operation
 				teamManagement.addTeamOwner(user); // assign user as team owner.
 			} catch (ItemNotFoundException | NotSupportedException e) {
-				System.out.println(e.getMessage());
+				System.out.println("The user not found in team " + team.getId());
 			}
-
 		} else {
 			throw new UnauthorizedUserOperationException(
 					"You are not authorized to add team owner to team " + team.getId());
@@ -519,28 +535,29 @@ public class Operations implements IOperations {
 	}
 
 	public void removeTeamOwner(User loggedInUser, Team team) throws UnauthorizedUserOperationException {
-		
+
 		// Control loggedInUser is not student and is a teamOwner of the team.
 		boolean teamOwnerInTeam = team.isTeamOwner(loggedInUser.getId());
-		
-		//If not authorized for process, throw unauthorized exception
+
+		// If not authorized for process, throw unauthorized exception
 		if (teamOwnerInTeam) {
 			IContainer<User> owners = team.getOwners();
 			findUsers(owners); // print owners of the team
-			
-			//Get an user id to assing as team owner for team.
+
+			// Get an user id to assing as team owner for team.
 			Scanner input = new Scanner(System.in);
 			System.out.print("Owner ID to remove : ");
 			String ownerId = input.nextLine().strip();
-			
-			//Try to find the user of given id, if not exists holds the ItemNotFound exception in catch
+
+			// Try to find the user of given id, if not exists holds the ItemNotFound
+			// exception in catch
 			try {
-				User user = owners.getById(ownerId); // find the user  in the owner container of the team 
+				User user = owners.getById(ownerId); // find the user in the owner container of the team
 				teamManagement.setTeam(team); // set teamManagement for team operation
 				teamManagement.removeTeamOwner(user); // remove user from team owner.
 
 			} catch (ItemNotFoundException | NotSupportedException e) {
-				System.out.println(e.getMessage());
+				System.out.println("Owner is not found in team "+team.getId());
 			}
 
 		} else {
