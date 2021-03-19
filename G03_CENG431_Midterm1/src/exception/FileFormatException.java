@@ -1,10 +1,7 @@
 package exception;
 
-public class FileFormatException extends Exception{
-	
-	/**
-	 * 
-	 */
+public class FileFormatException extends Exception {
+
 	private static final long serialVersionUID = 2540916260158001137L;
 
 	public FileFormatException() {
@@ -20,8 +17,7 @@ public class FileFormatException extends Exception{
 		super(message, cause);
 	}
 
-	public FileFormatException(String message, Throwable cause, boolean enableSuppression,
-			boolean writableStackTrace) {
+	public FileFormatException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
 		super(message, cause, enableSuppression, writableStackTrace);
 	}
 
@@ -33,5 +29,3 @@ public class FileFormatException extends Exception{
 		return super.getMessage();
 	}
 }
-
-

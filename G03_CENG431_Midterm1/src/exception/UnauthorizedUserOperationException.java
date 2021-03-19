@@ -5,9 +5,6 @@ package exception;
 
 public class UnauthorizedUserOperationException extends Exception {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -6005204757945142905L;
 
 	public UnauthorizedUserOperationException() {

@@ -1,6 +1,5 @@
 package channel;
 
-
 /**
  * This class is to hold the channel information which is given by a csv file.
  * It is a abstract class and it has two child class named Private and Meeting
@@ -53,5 +52,5 @@ public abstract class Channel {
 	public String toString() {
 		return this.getName() + "," + this.getMeeting().toString();
 	}
-	
+
 }

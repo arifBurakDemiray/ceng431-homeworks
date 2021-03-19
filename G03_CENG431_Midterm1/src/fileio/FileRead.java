@@ -19,7 +19,7 @@ import user.*;
 
 public class FileRead {
 
-	protected boolean isFirstRead = true;
+	protected boolean isFirstRead = true; // boolean holds the info that is the first read or not
 
 	/**
 	 * This is a helper function. If an user has not an id, it creates an unique id
@@ -61,8 +61,8 @@ public class FileRead {
 			String line;
 			br.readLine();
 			while ((line = br.readLine()) != null) {
-				// Get the line's participantID which is in the form of "1,2,3.." as a splitted
-				// strings 1,2,3
+				// Get the line's participantID which is in the form of "1,2,3.." as
+				// a splittedstrings 1,2,3
 				if (line.contains("\"")) {
 					line = line.replace("\"", "");
 				}
@@ -88,7 +88,7 @@ public class FileRead {
 	 * @param records list of splitted string attributes list for teams.
 	 * 
 	 * @return IContainer<Team> which holds team objects.
-	 * @throws FileFormatException 
+	 * @throws FileFormatException
 	 */
 	protected IContainer<Team> readTeams(List<List<String>> records) throws FileFormatException {
 
@@ -97,18 +97,18 @@ public class FileRead {
 		// get the each string list in the records
 		for (List<String> line : records) {
 
+			// If there exists "TEAMSTECH" line at the end of the file, we understand that
+			// this is not the first reading.
 			if (line.size() < 2 && line.get(0).strip().toUpperCase(Locale.US).equals("TEAMSTECH")) {
 				isFirstRead = false;
 				break;
 			}
 
 			// define strings to assign the strings in the line.
-			String teamName, teamId, meetingChannel, meetingDate,
-					participantId = null;
+			String teamName, teamId, meetingChannel, meetingDate, participantId = null;
 			// assign the strings to the variables.
 			teamName = line.get(0).strip();
 			teamId = line.get(1).strip();
-
 
 			Team team = new Team(teamName, teamId); // Create team with the attributes
 			ITeamManagement teamManagement = new TeamManagement(team); // Create team management obect with the given
@@ -117,13 +117,12 @@ public class FileRead {
 			Meeting meeting = null; // create a meeting object as null;
 			Channel tempChannel = null; // create a channel object as null;
 
-
 			// When reading the teams' file, line is created in the form of :
 			// Team Name,Team ID,Default Channel,Default Meeting Day and Time,
-			// Meeting Channel 1 (MC1), Meeting Day and Time of MC1, MC1 PTR ID 1, MC1 PTR
-			// ID 2, MC1 PTR ID 3,
-			// Meeting Channel 2 (MC2), Meeting Day and Time of MC2, MC2 PTR ID 1, MC2 PTR
-			// ID 2, MC2 PTR ID 3,
+			// Meeting Channel 1 (MC1), Meeting Day and Time of MC1, MC1 PRT ID 1,
+			// MC1 PRTID 2, MC1 PRT ID 3,
+			// Meeting Channel 2 (MC2), Meeting Day and Time of MC2, MC2 PRT ID 1,
+			// MC2 PRT ID 2, MC2 PRT ID 3,
 			// The loop gets these meeting channels and their attributes.
 			int n = 2;
 			while (line.size() - n > 1) {
@@ -134,17 +133,17 @@ public class FileRead {
 
 				// When reading the teams' file, line is created in the form of :
 				// Team Name,Team ID,Default Channel,Default Meeting Day and Time,
-				// Meeting Channel 1 (MC1), Meeting Day and Time of MC1, MC1 PTR ID 1, MC1 PTR
-				// ID 2, MC1 PTR ID 3,
-				// Meeting Channel 2 (MC2), Meeting Day and Time of MC2, MC2 PTR ID 1, MC2 PTR
-				// ID 2, MC2 PTR ID 3,
+				// Meeting Channel 1 (MC1), Meeting Day and Time of MC1, MC1 PRT ID 1,
+				// MC1 PRT ID 2, MC1 PRT ID 3,
+				// Meeting Channel 2 (MC2), Meeting Day and Time of MC2, MC2 PTR ID 1,
+				// MC2 PRT ID 2, MC2 PRT ID 3,
 
 				// After getting meeting channel and its date, while loop gets the each
 				// participant's id until the gotten item is not the type of participant id
 				// checkType controls that it is the id or the new meeting channel
 				// For example Meeting Channel 1 (MC1), Meeting Day and Time of MC1 are taken
 				// above,
-				// Take the participants id MC1 PTR ID 1, MC1 PTR ID 2... until the taken item
+				// Take the participants id MC1 PRT ID 1, MC1 PRT ID 2... until the taken item
 				// is not in the type of participant id
 				// if not in the type of id -> checkType(line.get(n) returns false and loop is
 				// broken.
@@ -152,17 +151,17 @@ public class FileRead {
 				while (((n) < line.size() && !line.get(n).equals("")) && checkType(line.get(n))) {
 					participantId = line.get(n).strip();
 					participantList.add(participantId);
-					
+
 					n++;
 				}
-				// if meetingChannel exists create a new private meeting channel object
+				// if meetingChannel exists, create a new private meeting channel object
 				// Control the meetingDate. If meetingDate exists, create a new meeting and
 				// assign it to the channel.
 				if (!meetingChannel.equals("")) {
 					if (!meetingDate.equals("")) {
-						try{
-							meeting = new Meeting(meetingDate);}
-						catch(ArrayIndexOutOfBoundsException e){
+						try {
+							meeting = new Meeting(meetingDate);
+						} catch (ArrayIndexOutOfBoundsException e) {
 							throw new FileFormatException("Date format is in wrong type. Please fix the file");
 						}
 					} else {
@@ -175,7 +174,7 @@ public class FileRead {
 							((PrivateChannel) tempChannel).addParticipant(id);
 						}
 					} else {
-						
+
 						tempChannel = new MeetingChannel(meeting, meetingChannel);
 					}
 					teamManagement.addChannel(tempChannel); // add the channel to the team.
@@ -203,13 +202,15 @@ public class FileRead {
 
 		// create an IDContainer to holds ids.
 		// after each creating of user if user has not an id, create a random id
-		// and save the id in the id container to prevent to assign existing id to the
-		// new user.
+		// and save the id in the id container to prevent to assign existing id
+		// to the new user.
 		IContainer<String> ids = new IdContainer();
 
 		// get the each string list in the records
 		for (List<String> line : records) {
 
+			// If there exists "TEAMSTECH" line at the end of the file, we understand that
+			// this is not the first reading.
 			if (line.size() < 2 && line.get(0).strip().toUpperCase(Locale.US).equals("TEAMSTECH")) {
 				isFirstRead = false;
 				break;
@@ -244,40 +245,50 @@ public class FileRead {
 				throw new IllegalArgumentException("Unexpected user type value: " + userType);
 			}
 
-			// If user id is empty create an unique id and set the id to the user invoking
-			// checkId()
+			// If user id is empty create an unique id
+			// and set the id to the user invoking checkId()
 			if (userId.equals("")) {
 				checkId(ids, user);
 			}
 
-			// In this loop, get the each team, get the team object, add the user to the
-			// team
-			// If user is an instructor, add instructor to the owners of the team.
+			// In this loop, get the user's each team id
+			// and get the team object from team container.
+			// After that add the user to the team.
+			// If the gotten line is in type O-TeamId ( ex : O-CENG431 )
+			// we understand user is the owner of the team.
+			// After that add the user to the owner of the team.
 			int n = 5;
 			while (((n) < line.size()) && (!line.get(n).equals(""))) {
-				teamId = line.get(n);
+				teamId = line.get(n); // get the team id
+
+				// control that gotten Id indicates that user is the owner or not
 				String[] splitOwner = teamId.split("-");
+
+				// If there exists O at the start, make isOwner true
 				boolean isOwner = false;
 				if (splitOwner.length > 1) {
 					isOwner = true;
 					teamId = splitOwner[1];
 				}
+
 				try {
-					Team team = teams.getById(teamId);
+					Team team = teams.getById(teamId); // try to get team object
 
-					user.getTeams().add(team);
-					ITeamManagement teamManagement = new TeamManagement(team);
-					teamManagement.addMember(user);
-
+					user.getTeams().add(team); // add team to the user's team.
+					ITeamManagement teamManagement = new TeamManagement(team); // set teamManagement for team operation
+					teamManagement.addMember(user); // add user to the team
+					
+					// If isOwner is true and user is an instructor or assistant,
+					// add the user to the owners of the team
 					if ((userType.equals("Instructor") && isFirstRead)
 							|| ((userType.equals("Instructor") || userType.equals("Teaching Assistant")) && isOwner)) {
 
-						teamManagement.addTeamOwner((Academician) user);
+						teamManagement.addTeamOwner((Academician) user); 
 
 					}
 
 				} catch (Exception e) {
-					System.out.println("FileRead - CreateUser - try add(team)" + e);
+					System.out.println("Team " + teamId + " is not found while reading file." + e);
 				}
 				n++;
 

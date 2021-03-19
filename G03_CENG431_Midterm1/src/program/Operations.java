@@ -23,7 +23,7 @@ public class Operations implements IOperations {
 	private ITeamManagement teamManagement;
 
 	public Operations() {
-		teamManagement = new TeamManagement();
+		teamManagement = new TeamManagement(); // create teamManagement for team operations
 	}
 
 	public void addMeetingChannel(User loggedInUser, Team team) throws UnauthorizedUserOperationException {
@@ -34,7 +34,7 @@ public class Operations implements IOperations {
 		System.out.print("Select Meeting Channel Type : \n1-Public\n2-Private\n");
 		String type = input.nextLine().strip();
 
-		Channel tempChannel = null;
+		Channel tempChannel = null; // create tempChannel as null first.
 
 		// Control the input
 		if (type.equals("Public") || type.equals("Private")) {
@@ -45,7 +45,7 @@ public class Operations implements IOperations {
 				throw new UnauthorizedUserOperationException("You are not authorized to create a public channel.");
 			}
 
-			// Get channel name and chanel date from user
+			// Get channel name and channel date from user
 			System.out.print("Meeting Channel Name: ");
 			String name = input.nextLine().strip();
 			System.out.print("Meeting Channel Date 'Day HH:MM AM/PM' : ");
@@ -59,8 +59,9 @@ public class Operations implements IOperations {
 
 				if (type.equals("Private")) {
 					tempChannel = new PrivateChannel(meeting, name);
-					((PrivateChannel) tempChannel).addParticipant(loggedInUser.getId()); // add user as participant if
-																							// channel is private.
+
+					// add user as participant if channel is private.
+					((PrivateChannel) tempChannel).addParticipant(loggedInUser.getId());
 				}
 				teamManagement.setTeam(team); // set teamManagement to make team operation
 				teamManagement.addChannel(tempChannel); // add channel to the team's channels
@@ -71,8 +72,8 @@ public class Operations implements IOperations {
 				System.out.println("Date is in wrong format.");
 			}
 		} else {
-			System.out.println("Wrong input. Please text 'Public' or 'Private' !"); // If input is not Public or
-																					// Private, print a message
+			// If input is not Public or Private, print a message
+			System.out.println("Wrong channel type. Please text 'Public' or 'Private' !");
 		}
 
 	}
@@ -80,8 +81,8 @@ public class Operations implements IOperations {
 	public void addParticipantToChannel(User loggedInUser, Team team, Channel channel)
 			throws UnauthorizedUserOperationException {
 
-		// Control loggedInUser is a team member if the selected channel is a private
-		// channel
+		// Control loggedInUser is a team member if the selected channel
+		// is a private channel
 		boolean participantOfPrivate = ((PrivateChannel) channel).isMember(loggedInUser.getId());
 
 		// If not authorized for process, throw unauthorized exception.
@@ -119,11 +120,11 @@ public class Operations implements IOperations {
 			System.out.print("User ID to add : ");
 			String memberId = input.nextLine().strip();
 
-			// Try to find the user of given id, if not exists holds the ItemNotFound
-			// exception in catch
+			// Try to find the user of given id, if not exists
+			// holds the ItemNotFound exception in catch
 			try {
-				User user = users.getById(memberId); // find the user in the user container which holds all users of the
-														// system
+				// find the user in the user container which holds all users of the system
+				User user = users.getById(memberId);
 				teamManagement.setTeam(team); // set teamManagement for team operation
 				teamManagement.addMember(user); // add user to the team.
 			} catch (ItemNotFoundException | NotSupportedException e) {
@@ -152,8 +153,8 @@ public class Operations implements IOperations {
 			System.out.print("User ID to add to Owners: ");
 			String memberId = input.nextLine().strip();
 
-			// Try to find the user of given id, if not exists holds the ItemNotFound
-			// exception in catch
+			// Try to find the user of given id, if not exists
+			// holds the ItemNotFound exception in catch
 			try {
 				User user = members.getById(memberId); // find the user in the member container of the team
 				teamManagement.setTeam(team); // set teamManagement for team operation
@@ -211,6 +212,7 @@ public class Operations implements IOperations {
 			if (isAdded) {
 				teamManagement.setTeam(newTeam); // set teamManagement to make team operation
 				teamManagement.addChannel(meetingChannel); // add created channel to team
+				teamManagement.addMember(loggedInUser); // add user to the team
 				teamManagement.addTeamOwner((Academician) loggedInUser); // assign loggedInUser as teamOwner
 				loggedInUser.getTeams().add(newTeam); // Update user's teams
 				System.out.println("Team " + newTeam.getId() + " is added.");
@@ -240,6 +242,7 @@ public class Operations implements IOperations {
 
 	/**
 	 * This function prints all participants of a private channel
+	 * 
 	 * @param tempChannel channel
 	 */
 	private void findParticipant(Channel tempChannel) {
@@ -254,6 +257,7 @@ public class Operations implements IOperations {
 
 	/**
 	 * This function prints all teams in a system
+	 * 
 	 * @param teams teams container
 	 */
 	public void findTeam(IContainer<Team> teams) {
@@ -283,19 +287,19 @@ public class Operations implements IOperations {
 	public String mainOperationsMenu() {
 		System.out.println("\n" + "1- Add a team\r\n" + "2- Remove a team\r\n" + "3- Update a team\r\n" + "4- Quit\n");
 
-		System.out.print("Which operations do you want to do ( please write operation index ) : "); //print choices
+		System.out.print("Which operations do you want to do ( please write operation index ) : "); // print choices
 		Scanner input = new Scanner(System.in);
 		String mainOperationIndex = input.nextLine().strip();
-		if(mainOperationIndex.equals("4")) //close scanner just a one time
+		if (mainOperationIndex.equals("4")) // close scanner just a one time
 			input.close();
-		return mainOperationIndex; //return input
+		return mainOperationIndex; // return input
 	}
 
 	public void removeMeetingChannel(User loggedInUser, Team team) throws UnauthorizedUserOperationException {
 		// print all channels of the selected team to help user select a channel easily
 		findChannel(team);
 
-		// Get channel naöe from user to remove.
+		// Get channel name from user to remove.
 		@SuppressWarnings("resource")
 		Scanner input = new Scanner(System.in);
 		System.out.print("\nMeeting Channel Name to remove : ");
@@ -303,17 +307,17 @@ public class Operations implements IOperations {
 		Channel tempChannel = null;
 		teamManagement.setTeam(team); // set teamManagement to make team operation
 
-		// try to find the channel of given name using ontainer.getByNamefunction, if
-		// not exists holds item not found exception in the catch
+		// Try to find the channel of given name using ontainer.getByNamefunction,
+		// if not exists holds ItemNotFound Exception in the catch
 		try {
 			tempChannel = team.getMeetingChannelList().getByName(channelName);
 
-			// Control that loggedInUser is the team owner if the selected channel is a
-			// meeting channel
+			// Control that loggedInUser is the team owner if the selected channel
+			// is a meeting channel
 			boolean ownerOfMeeting = (tempChannel instanceof MeetingChannel && team.isTeamOwner(loggedInUser.getId()));
 
-			// Control loggedInUser is a team member if the selected channel is a private
-			// channel
+			// Control loggedInUser is a team member if the selected channel
+			// is a private channel
 			boolean participantOfPrivate = tempChannel instanceof PrivateChannel
 					&& ((PrivateChannel) tempChannel).isMember(loggedInUser.getId());
 
@@ -323,9 +327,8 @@ public class Operations implements IOperations {
 
 			} else {
 				throw new UnauthorizedUserOperationException(
-						"You are not authorized to remove channel " + channelName + "."); // if booleans are false,
-																							// throw unauthorized
-																							// exception.
+						// If booleans are false, throw unauthorized exception.
+						"You are not authorized to remove channel " + channelName + ".");
 			}
 
 		} catch (ItemNotFoundException | NotSupportedException e) {
@@ -354,8 +357,8 @@ public class Operations implements IOperations {
 				System.out.print("Participant ID to remove : ");
 				String participantId = input.nextLine().strip();
 
-				// try to remove participant from channel, if participant doesn't exist, throw
-				// ItemNotFound exception.
+				// try to remove participant from channel, if participant doesn't exist,
+				// throw ItemNotFound exception.
 				((PrivateChannel) tempChannel).getParticipants().remove(participantId);
 			} else {
 				throw new UnauthorizedUserOperationException(
@@ -386,10 +389,15 @@ public class Operations implements IOperations {
 				// if team is found, control that loggedInUser is the team owner of that team
 				if (tempTeam.isTeamOwner(loggedInUser.getId())) {
 					teamManagement.setTeam(tempTeam); // set teamManagement to make team operation
-					teamManagement.removeUsers(); // remove the team from the each user's teams' container which holds
-													// teams that user enrolled.
-					Team removedTeam = teams.remove(tempTeam); // remove team from team container which holds all teams
-																// of system
+
+					// remove the team from the each user's teams' container which
+					// holds teams that user enrolled.
+					teamManagement.removeUsers();
+
+					// remove team from team container which
+					// holds all teams of system
+					Team removedTeam = teams.remove(tempTeam);
+
 					System.out.println(removedTeam.getName() + " is deleted.");
 				} else {
 					throw new UnauthorizedUserOperationException(
@@ -418,11 +426,11 @@ public class Operations implements IOperations {
 			System.out.print("Member ID to remove : ");
 			String memberId = input.nextLine().strip();
 
-			// Try to find the user of given id, if not exists holds the ItemNotFound
-			// exception in catch
+			// Try to find the user of given id, if not exists
+			// holds the ItemNotFound exception in catch
 			try {
-				User user = team.getMemberUsers().getById(memberId); // find the user in the member container of the
-																		// team
+				// find the user in the member container of the team
+				User user = team.getMemberUsers().getById(memberId);
 				teamManagement.setTeam(team); // set teamManagement for team operation
 				teamManagement.removeMember(user); // remove user from the team.
 
@@ -432,7 +440,7 @@ public class Operations implements IOperations {
 
 		} else {
 			throw new UnauthorizedUserOperationException(
-					"You are not authorized to remove a member form " + team.getName() + ".");
+					"You are not authorized to remove a member from " + team.getName() + ".");
 		}
 	}
 
@@ -446,14 +454,14 @@ public class Operations implements IOperations {
 			IContainer<User> owners = team.getOwners();
 			findUsers(owners); // print owners of the team
 
-			// Get an user id to assing as team owner for team.
+			// Get an user id to assign as team owner for team.
 			@SuppressWarnings("resource")
 			Scanner input = new Scanner(System.in);
 			System.out.print("Owner ID to remove : ");
 			String ownerId = input.nextLine().strip();
 
-			// Try to find the user of given id, if not exists holds the ItemNotFound
-			// exception in catch
+			// Try to find the user of given id, if not exists
+			// holds the ItemNotFound exception in catch
 			try {
 				User user = owners.getById(ownerId); // find the user in the owner container of the team
 				teamManagement.setTeam(team); // set teamManagement for team operation
@@ -473,17 +481,17 @@ public class Operations implements IOperations {
 		int students = 0;
 		int instructors = 0;
 		int tas = 0;
-		IContainer<User> members = team.getMemberUsers(); //get members of a team
-		if (!members.isEmpty()) { //if not empty
+		IContainer<User> members = team.getMemberUsers(); // get members of a team
+		if (!members.isEmpty()) { // if not empty
 			for (User user : members) {
-				if (user instanceof Student) //increase student
+				if (user instanceof Student) // increase student
 					students++;
-				else if (user instanceof Instructor) //increase instructor
+				else if (user instanceof Instructor) // increase instructor
 					instructors++;
-				else if (user instanceof TeachingAssistant) //increse tas
+				else if (user instanceof TeachingAssistant) // increase tas
 					tas++;
 			}
-			//print infos
+			// print infos
 			System.out.println("Number of Students in team " + team.getId() + ": " + students);
 			System.out.println("Number of Instructors in team " + team.getId() + ": " + instructors);
 			System.out.println("Number of Teaching Assistants in team " + team.getId() + ": " + tas);
@@ -492,29 +500,32 @@ public class Operations implements IOperations {
 	}
 
 	public void teamInfo(Team team) {
-		IContainer<Channel> channels = team.getMeetingChannelList(); //get channels
 
-		for (Channel channel : channels) { //iterate through channels
+		IContainer<Channel> channels = team.getMeetingChannelList(); // get channels
+
+		System.out.println(team.getName() + "\n");
+
+		for (Channel channel : channels) { // iterate through channels
 			String channelInfo = null;
 			channelInfo = "Channel Name : " + channel.getName() + "\nChannel Meeting Date : "
-					+ channel.getMeeting().getDate(); //channel info
+					+ channel.getMeeting().getDate(); // channel info
 
 			if (channel instanceof PrivateChannel) {
 				String participants = "";
 				IContainer<String> participantList = ((PrivateChannel) channel).getParticipants();
 				for (String participant : participantList) {
-					participants += (participant + ","); //if private participants info
+					participants += (participant + ","); // if private participants info
 				}
 
-				if (participants.endsWith(",")) { //remove last comma
+				if (participants.endsWith(",")) { // remove last comma
 					participants = participants.substring(0, participants.length() - 1);
 				}
 
-				channelInfo += ("\nParticipants : " + participants); //add participant info
+				channelInfo += ("\nParticipants : " + participants); // add participant info
 
 			}
 
-			System.out.println("---------------\n" + channelInfo); //print team info
+			System.out.println("---------------\n" + channelInfo); // print team info
 		}
 	}
 
@@ -525,12 +536,12 @@ public class Operations implements IOperations {
 		// Get a channel name from loggedInUser.
 		@SuppressWarnings("resource")
 		Scanner input = new Scanner(System.in);
-		System.out.print("\nMeeting Channel Name to update date :");
+		System.out.print("\nMeeting Channel Name :");
 		String channelName = input.nextLine().strip();
 		Channel tempChannel = null;
 
-		// try to find the channel of given name, if not found, holds the exception of
-		// ItemNotFound
+		// try to find the channel of given name, if not found
+		// holds the exception of ItemNotFound
 		try {
 			tempChannel = team.getMeetingChannelList().getByName(channelName);
 		} catch (ItemNotFoundException | NotSupportedException e) {
@@ -576,18 +587,18 @@ public class Operations implements IOperations {
 			throws UnauthorizedUserOperationException {
 
 		try {
-			// Control that loggedInUser is the team owner if the selected channel is a
-			// meeting channel
+			// Control that loggedInUser is the team owner if the selected channel
+			// is a meeting channel
 			boolean ownerOfMeeting = (tempChannel instanceof MeetingChannel && team.isTeamOwner(loggedInUser.getId()));
 
-			// Control that loggedInUser is a team member if the selected channel is a
-			// private channel
+			// Control that loggedInUser is a team member if the selected channel
+			// is a private channel
 			boolean participantOfPrivate = tempChannel instanceof PrivateChannel
 					&& ((PrivateChannel) tempChannel).isMember(loggedInUser.getId());
 
 			if (ownerOfMeeting || participantOfPrivate) {
 				// Get date from loggedInUser
-				@SuppressWarnings("resource") //scanner must close one time
+				@SuppressWarnings("resource") // scanner must close one time
 				Scanner input = new Scanner(System.in);
 				System.out.print("Meeting Channel Date 'Day HH:MM' AM/PM : ");
 				String date = input.nextLine().strip();
@@ -600,16 +611,14 @@ public class Operations implements IOperations {
 						"In " + tempChannel.getName() + " date is updated as " + tempChannel.getMeeting().getDate());
 
 			} else {
+				// If booleans are false, throw unauthorized exception.
 				throw new UnauthorizedUserOperationException(
-						"You are not authorized to remove channel " + tempChannel.getName() + "."); // if booleans are
-																									// false, throw
-																									// unauthorized
-																									// exception
+						"You are not authorized to update channel " + tempChannel.getName() + ".");
 			}
 
 		} catch (IllegalArgumentException | ArrayIndexOutOfBoundsException e) {
-			System.out.println("Date is in wrong type"); // if given date is in the wrong format holds the ecception
-															// there.
+			// If the given date is in the wrong format holds the exception there.
+			System.out.println("Date is in wrong type");
 		}
 
 	}
@@ -618,13 +627,12 @@ public class Operations implements IOperations {
 		System.out.println("\n" + "1- Add a participant\n" + "2- Remove a participant\n"
 				+ "3- Update a meeting channel date and time\n" + "4- Go Back\n");
 
-		System.out.print("Which operations do you want to do ( please write operation index ) : "); //print menu
+		System.out.print("Which operations do you want to do ( please write operation index ) : "); // print menu
 		@SuppressWarnings("resource")
 		Scanner input = new Scanner(System.in);
 		String teamOperationIndex = input.nextLine().strip();
 		return teamOperationIndex;
 	}
-
 
 	public String updateTeamOperationsMenu() {
 		System.out.println(
@@ -632,11 +640,10 @@ public class Operations implements IOperations {
 						+ "4- Add a member\n" + "5- Remove a member\n" + "6- Add a team owner\n"
 						+ "7- Remove a team owner\n" + "8- Monitor team\n" + "9- Statictics\n" + "0- Go Back\n");
 
-		System.out.print("Which operations do you want to do ( please write operation index ) : "); //print menu
+		System.out.print("Which operations do you want to do ( please write operation index ) : "); // print menu
 		@SuppressWarnings("resource")
-		Scanner input = new Scanner(System.in);	//take input
+		Scanner input = new Scanner(System.in); // take input
 		String teamOperationIndex = input.nextLine().strip();
-		return teamOperationIndex;	//and return it
+		return teamOperationIndex; // and return it
 	}
 }
-

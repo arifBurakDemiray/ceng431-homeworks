@@ -80,6 +80,7 @@ public class TeamManagement implements ITeamManagement {
 			if (!isAdded) {
 				System.out.println("User " + user.getName() + " was added before.");
 			}
+			
 		} else {
 			System.out.println("Only academicians can be owner.");
 		}

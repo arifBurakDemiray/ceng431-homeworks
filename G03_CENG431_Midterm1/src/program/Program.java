@@ -35,14 +35,16 @@ public class Program implements IProgram {
 
 		try {
 			User user = ((UserContainer) users).getByEmail(email);
-			if (user.getPassword().equals(password)) { // if user found by email and has same password
-				return user; // Authenticate
+
+			// if user found by email and has same password return it.
+			if (user.getPassword().equals(password)) {
+				return user;
 			} else { // wrong password
 				System.out.println("Password is wrong");
 				return null; // return null
 			}
 		} catch (ItemNotFoundException e) { // otherwise user not found
-			System.out.println("User is not found");
+			System.out.println("User " + email + " is not found");
 			return null; // return null
 		}
 
@@ -50,21 +52,30 @@ public class Program implements IProgram {
 
 	public void createTeam() {
 		try {
-			this.operations.createTeam(loggedInUser, teams); // go operations to create a team
+			this.operations.createTeam(loggedInUser, teams); // invoke createTeam operation of the operations.
 		} catch (UnauthorizedUserOperationException e) {
 			System.out.println(e.getMessage());
 		}
 
 	}
-
+	
+	/*
+	 * @return loggedInUser
+	 */
 	public User getLoggedInUser() {
 		return loggedInUser;
 	}
-
+	
+	/*
+	 * @return team container which holds all teams in the system
+	 */
 	public IContainer<Team> getTeams() {
 		return teams;
 	}
 
+	/*
+	 * @return user container which holds all users in the system
+	 */
 	public IContainer<User> getUsers() {
 		return users;
 	}
@@ -72,14 +83,16 @@ public class Program implements IProgram {
 	private void login() {
 		@SuppressWarnings("resource")
 		Scanner input = new Scanner(System.in);
-		User user = null; // Initialize
-		while (user == null) { // while user has a valid user in system
+		User user = null; // Initialise user as null
+		
+		// Until gotten user mail and password are belong to a valid user in system, loop
+		while (user == null) { 
 			System.out.print("Email : ");
 			String email = input.nextLine();
 			System.out.print("Password : ");
 			String password = input.nextLine();
 
-			user = authenticate(email, password); // Authenticate user, look for we have or not
+			user = authenticate(email, password); // Authenticate user, look for valid or not
 			if (user != null) { // if authenticated
 				this.loggedInUser = user;
 				System.out.println(user.getName() + " Welcome to the TeamsTech");
@@ -87,16 +100,24 @@ public class Program implements IProgram {
 		}
 	}
 
-
 	private void mainMenu() {
 		String mainOperationIndex = null;
 		try {
 			while (true) {
-				mainOperationIndex = this.operations.mainOperationsMenu(); // take input
-				if (mainOperationIndex.equals("4")) // if 4 exit
+				// Print main menu and take input 
+				// invoking mainOperationsMenu function 
+				mainOperationIndex = this.operations.mainOperationsMenu(); 
+				if (mainOperationIndex.equals("4"))
+				{
+					System.out.println("Bye bye.");
 					break;
+				}
+					
 				else
+				{
 					mainMenuOperations(mainOperationIndex);
+				}
+					
 			}
 
 		} catch (Exception e) {
@@ -121,12 +142,14 @@ public class Program implements IProgram {
 			break;
 		}
 		case "3": {
-			operations.findTeam(teams); // print teams
+			// print teams to help user select team easily
+			operations.findTeam(teams);
 			this.updateTeamMenu();
 			break;
 		}
 		case "4": {
 			// exit
+			System.out.println("Bye bye.");
 			break;
 		}
 
@@ -137,7 +160,7 @@ public class Program implements IProgram {
 	}
 
 	/**
-	 * This function reads all datas from csv files
+	 * This function reads all data from csv files
 	 */
 	private void readAll() throws FileFormatException {
 		IFileIO fr = new FileIO();
@@ -150,32 +173,42 @@ public class Program implements IProgram {
 
 	public void removeTeam() {
 		try {
-			this.operations.findTeam(teams); // print teams
-			this.operations.removeTeam(loggedInUser, teams); // and go remove
+			// print teams to help user select team easily
+			this.operations.findTeam(teams); 
+			this.operations.removeTeam(loggedInUser, teams); // and invoke remove
 		} catch (UnauthorizedUserOperationException e) {
 			System.out.println(e.getMessage());
 		}
 
 	}
-
+	
+	/*
+	 * @param loggedInUser which logged in to the system
+	 */
 	public void setLoggedInUser(User loggedInUser) {
 		this.loggedInUser = loggedInUser;
 	}
-
+	
+	/*
+	 * @param team container which holds all teams in the system
+	 */
 	public void setTeams(IContainer<Team> teams) {
 		this.teams = teams;
 	}
-
+	
+	/*
+	 * @param user container which holds all users in the system
+	 */
 	public void setUsers(IContainer<User> users) {
 		this.users = users;
 	}
 
 	public void start() {
 		try {
-			readAll(); // read all datas
+			readAll(); // read all data
 			login(); // login
-			mainMenu(); // print main menü
-			writeAll(); // than write all datas
+			mainMenu(); // print main menu
+			writeAll(); // than write all data
 		} catch (FileFormatException e) { // if there is an error reading file
 			System.out.println(e.getMessage());
 		}
@@ -193,8 +226,9 @@ public class Program implements IProgram {
 			Team tempTeam = teams.getById(teamId); // get team
 			if (tempTeam.isMember(loggedInUser.getId())) { // if user is member of this team
 				while (true) {
-					teamOperationIndex = this.operations.updateTeamOperationsMenu(); // take input from user to which
-																						// operation be done
+					// take input from user to which operation be done
+					teamOperationIndex = this.operations.updateTeamOperationsMenu(); 
+																						
 					if (teamOperationIndex.equals("0")) // if zero go upper menu
 						break;
 					else { // else do operation
@@ -215,7 +249,7 @@ public class Program implements IProgram {
 	/**
 	 * This function is update team menu
 	 * 
-	 * @param teamOperationIndex for which operaiton is going to be done
+	 * @param teamOperationIndex for which operation is going to be done
 	 * @param team               that is going to be updated
 	 * @throws UnauthorizedUserOperationException if user not authorized for some
 	 *                                            operations
@@ -251,7 +285,7 @@ public class Program implements IProgram {
 				operations.removeTeamOwner(loggedInUser, team);
 				break;
 			}
-			case "8": {// team info
+			case "8": {// channels of the team info
 				operations.teamInfo(team);
 				break;
 			}
@@ -271,7 +305,7 @@ public class Program implements IProgram {
 	}
 
 	/**
-	 * This function writes all datas to csv files
+	 * This function writes all data to csv files
 	 */
 	private void writeAll() {
 		IFileIO fr = new FileIO();
