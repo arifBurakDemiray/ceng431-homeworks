@@ -70,23 +70,23 @@ public class Program implements IProgram {
 	}
 
 	private void login() {
-		try (Scanner input = new Scanner(System.in)) { // scanner must closed just one time
-			User user = null; // Initialize
-			while (user == null) { // while user has a valid user in system
-				System.out.print("Email : ");
-				String email = input.nextLine();
-				System.out.print("Password : ");
-				String password = input.nextLine();
+		@SuppressWarnings("resource")
+		Scanner input = new Scanner(System.in);
+		User user = null; // Initialize
+		while (user == null) { // while user has a valid user in system
+			System.out.print("Email : ");
+			String email = input.nextLine();
+			System.out.print("Password : ");
+			String password = input.nextLine();
 
-				user = authenticate(email, password); // Authenticate user, look for we have or not
-				if (user != null) { // if authenticated
-					this.loggedInUser = user;
-					System.out.println(user.getName() + " Welcome to the TeamsTech");
-				}
+			user = authenticate(email, password); // Authenticate user, look for we have or not
+			if (user != null) { // if authenticated
+				this.loggedInUser = user;
+				System.out.println(user.getName() + " Welcome to the TeamsTech");
 			}
 		}
-
 	}
+
 
 	private void mainMenu() {
 		String mainOperationIndex = null;

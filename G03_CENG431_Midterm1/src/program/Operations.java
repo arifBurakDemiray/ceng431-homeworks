@@ -522,53 +522,53 @@ public class Operations implements IOperations {
 		String operationChoice = updateMeetingChannelMenu(); // get the selected operation for channel
 		findChannel(team); // print all channels of the team
 
-		try (// Get a channel name from loggedInUser.
-		Scanner input = new Scanner(System.in)) {
-			System.out.print("\nMeeting Channel Name to update date :");
-			String channelName = input.nextLine().strip();
-			Channel tempChannel = null;
+		// Get a channel name from loggedInUser.
+		@SuppressWarnings("resource")
+		Scanner input = new Scanner(System.in);
+		System.out.print("\nMeeting Channel Name to update date :");
+		String channelName = input.nextLine().strip();
+		Channel tempChannel = null;
 
-			// try to find the channel of given name, if not found, holds the exception of
-			// ItemNotFound
-			try {
-				tempChannel = team.getMeetingChannelList().getByName(channelName);
-			} catch (ItemNotFoundException | NotSupportedException e) {
-				System.out.println("Channel " + channelName + " is not found.");
-				operationChoice = "4"; // exit from channel operation
+		// try to find the channel of given name, if not found, holds the exception of
+		// ItemNotFound
+		try {
+			tempChannel = team.getMeetingChannelList().getByName(channelName);
+		} catch (ItemNotFoundException | NotSupportedException e) {
+			System.out.println("Channel " + channelName + " is not found.");
+			operationChoice = "4"; // exit from channel operation
+		}
+
+		// If channel is found, adjust the selected operation
+		switch (operationChoice) {
+		case "1": {
+			// Control that if selected channel is private
+			if (tempChannel instanceof PrivateChannel)
+				addParticipantToChannel(loggedInUser, team, tempChannel);
+			else
+				System.out.println("You can not add participants to Public Channels");
+			break;
+		}
+		case "2": {
+			// Control that if selected channel is private
+			if (tempChannel instanceof PrivateChannel) {
+				removeParticipantFromChannel(loggedInUser, team, tempChannel);
+
+			} else {
+				System.out.println("You cannot remove a participant from public channel");
 			}
 
-			// If channel is found, adjust the selected operation
-			switch (operationChoice) {
-			case "1": {
-				// Control that if selected channel is private
-				if (tempChannel instanceof PrivateChannel)
-					addParticipantToChannel(loggedInUser, team, tempChannel);
-				else
-					System.out.println("You can not add participants to Public Channels");
-				break;
-			}
-			case "2": {
-				// Control that if selected channel is private
-				if (tempChannel instanceof PrivateChannel) {
-					removeParticipantFromChannel(loggedInUser, team, tempChannel);
+			break;
+		}
+		case "3": {
+			updateMeetingChannelDate(loggedInUser, team, tempChannel);
+			break;
+		}
+		case "4": {
 
-				} else {
-					System.out.println("You cannot remove a participant from public channel");
-				}
-
-				break;
-			}
-			case "3": {
-				updateMeetingChannelDate(loggedInUser, team, tempChannel);
-				break;
-			}
-			case "4": {
-
-				break;
-			}
-			default:
-				throw new IllegalArgumentException("Unexpected value: " + operationChoice);
-			}
+			break;
+		}
+		default:
+			throw new IllegalArgumentException("Unexpected value: " + operationChoice);
 		}
 	}
 
@@ -619,11 +619,12 @@ public class Operations implements IOperations {
 				+ "3- Update a meeting channel date and time\n" + "4- Go Back\n");
 
 		System.out.print("Which operations do you want to do ( please write operation index ) : "); //print menu
-		try (Scanner input = new Scanner(System.in)) {
-			String teamOperationIndex = input.nextLine().strip();
-			return teamOperationIndex;
-		}
+		@SuppressWarnings("resource")
+		Scanner input = new Scanner(System.in);
+		String teamOperationIndex = input.nextLine().strip();
+		return teamOperationIndex;
 	}
+
 
 	public String updateTeamOperationsMenu() {
 		System.out.println(
@@ -632,10 +633,10 @@ public class Operations implements IOperations {
 						+ "7- Remove a team owner\n" + "8- Monitor team\n" + "9- Statictics\n" + "0- Go Back\n");
 
 		System.out.print("Which operations do you want to do ( please write operation index ) : "); //print menu
-		try (Scanner input = new Scanner(System.in)) {	//take input
-			String teamOperationIndex = input.nextLine().strip();
-			return teamOperationIndex;	//and return it
-		}
+		@SuppressWarnings("resource")
+		Scanner input = new Scanner(System.in);	//take input
+		String teamOperationIndex = input.nextLine().strip();
+		return teamOperationIndex;	//and return it
 	}
-
 }
+
