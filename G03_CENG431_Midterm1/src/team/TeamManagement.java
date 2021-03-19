@@ -86,18 +86,23 @@ public class TeamManagement implements ITeamManagement {
 
 	}
 
-	@Override
+	public void removeChannel(Channel ch) {
+		//remove given channel from team
+		removeItem(this.team.getMeetingChannelList(), ch);
+
+	}
+
 	public void removeChannelMember(String userId, String channelName) {
 
-		try {
+		try {//get channel
 			Channel temp = this.team.getMeetingChannelList().getByName(channelName);
-			if (temp instanceof MeetingChannel) {
+			if (temp instanceof MeetingChannel) { //if it is a meeting channel means public channel
 				System.out.println("Remove operation is not aplicable for channel " + channelName + " on team "
 						+ this.team.getId());
 			} else {
-				((PrivateChannel) temp).removeParticipant(userId);
-				if( ((PrivateChannel)temp).getParticipants().isEmpty())
-					removeChannel(temp);
+				((PrivateChannel) temp).removeParticipant(userId);//remove member from channel
+				if (((PrivateChannel) temp).getParticipants().isEmpty())//if channel become empty
+					removeChannel(temp);							// delete channel from team
 			}
 		} catch (ItemNotFoundException | NotSupportedException e) {
 			System.out.println("There is no channel named " + channelName);
@@ -107,72 +112,64 @@ public class TeamManagement implements ITeamManagement {
 
 	/**
 	 * The function tries to remove given item from the given list if it is possible
-	 * If item is in the list remove it. Else return ItemNotFoundException. If
-	 * removing process is not successfull, return the given error message.
+	 * If item is in the list remove it. If removing process is not successful, 
+	 * returns null.
 	 *
 	 * @param item      given item to remove from the given container
 	 * @param container given container list
-	 * @param error     error message to print if removing process is not
-	 *                  successfull.
-	 * @return
+	 * @returns removed item if not found return null
 	 */
 	private <T> T removeItem(IContainer<T> container, T item) {
-		String removedItemToString = item.toString();
-		T removedItem = null;
+		T removedItem = null; //Initially null
 		try {
 			removedItem = container.remove(item); // try to remove invoking container.remove method
 			return removedItem;
-
 		} catch (ItemNotFoundException e) {
-			System.out.println("This item is not found in the container.");
 			return null;
 		}
 
 	}
 
-	public void removeChannel(Channel ch) {
-
-		removeItem(this.team.getMeetingChannelList(), ch);
-
-	}
-
 	public void removeMember(User user) {
-		User removedUser = ((User) removeItem(this.team.getMemberUsers(), user));
-		if (removedUser.equals(user)) {
-			removeMemberFromChannels(user);
+		User removedUser = ((User) removeItem(this.team.getMemberUsers(), user)); //remove user from team
+		if (removedUser.equals(user)) { //if removed successfully a team
+			removeMemberFromChannels(user); //remove also from his channels
 		}
 	}
 
+	/**
+	 * This function removes a user from channels that he joined
+	 * @param user
+	 */
 	private void removeMemberFromChannels(User user) {
-		for (Channel channel : team.getMeetingChannelList()) {
-			boolean participantOfPrivate = (channel instanceof PrivateChannel)
+		for (Channel channel : team.getMeetingChannelList()) { //iterate through channels list
+			boolean participantOfPrivate = (channel instanceof PrivateChannel) //if user participant of a private class
 					&& ((PrivateChannel) channel).isMember(user.getId());
 			if (participantOfPrivate) {
-				removeChannelMember(user.getId(), channel.getName());
+				removeChannelMember(user.getId(), channel.getName());	//remove user from private channel
 			}
 		}
 	}
 
 	public void removeTeamOwner(User user) {
-		removeItem(this.team.getOwners(), user);
+		removeItem(this.team.getOwners(), user);//remove team owner by generic removeItem function
+	}
+
+	public void removeUsers() {
+		for (User member : team.getMemberUsers()) { //iterate through members
+			try {
+				Team tempTeam = member.getTeams().remove(team); //remove team from user
+				if (!tempTeam.equals(team))	//if not equals
+					System.out.println("Error while removing team from user -> user " + member.toString());
+
+			} catch (ItemNotFoundException e) {
+				System.out.println(e.getMessage());
+			}
+		}
 	}
 
 	public void setTeam(Team team) {
 		this.team = team;
-	}
-
-	public void removeUsers() {
-		for (User member : team.getMemberUsers()) {
-			try {
-				Team tempTeam = member.getTeams().remove(team);
-				if (!tempTeam.equals(team))
-					System.out.println("Error while removing team from user -> user " + member.toString());
-
-			} catch (ItemNotFoundException e) {
-				System.out.println(e);
-
-			}
-		}
 	}
 
 }

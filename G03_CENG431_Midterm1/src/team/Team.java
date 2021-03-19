@@ -11,10 +11,10 @@ import user.User;
 public class Team {
 
 	private String name, id;
-	private IContainer<Channel> meeting_ch_list;
-	private IContainer<User> memberUsers;
-	private IContainer<User> owners;
-
+	private IContainer<Channel> meeting_ch_list; //channel list
+	private IContainer<User> memberUsers;	//members list
+	private IContainer<User> owners;	//owners list
+	
 	/**
 	 * Constructor creates a Team with given name and id.
 	 * 
@@ -28,21 +28,21 @@ public class Team {
 		this.meeting_ch_list = new ChannelContainer(); // it holds channels of the this team
 		this.memberUsers = new UserContainer(); // it holds members of the this team
 	}
-
-	public String getName() {
-		return this.name;
+	
+	/**
+	 * This function takes a team looks for equality with @this
+	 * @param team be looked for equality
+	 * @returns if equal true
+	 */
+	public boolean equals(Team team) {
+		if (this.name.equals(team.getName()) && this.id.equals(team.getId()))
+			return true;
+		return false;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
+	//getters for team class
 	public String getId() {
 		return this.id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
 	}
 
 	public IContainer<Channel> getMeetingChannelList() {
@@ -53,41 +53,53 @@ public class Team {
 		return this.memberUsers;
 	}
 
+	public String getName() {
+		return this.name;
+	}
+
 	public IContainer<User> getOwners() {
 		return this.owners;
 	}
 
+	/**
+	 * Looks for given user id is a member of @this team
+	 * @param id of a user
+	 * @return true if user is member
+	 */
+	public boolean isMember(String id) {
+		boolean isFound = false;
+		try {
+			this.getMemberUsers().getById(id); //try to get by id
+			isFound = true; //if not throw any exception means we found
+		} catch (ItemNotFoundException | NotSupportedException e) {}
+		return isFound;
+	}
+
+	/**
+	 * This function looks for given user id is owner of @this team
+	 * @param id of a user
+	 * @return true if user is owner
+	 */
+	public boolean isTeamOwner(String id) {
+		boolean isFound = false;
+		try {
+			this.getOwners().getById(id); //try to get by id
+			isFound = true; //if not throw any exception means we found
+		} catch (ItemNotFoundException | NotSupportedException e) {}
+		return isFound;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	//to string method for team class
 	public String toString() {
 		return this.getName() + "," + this.getId() + "," + this.meeting_ch_list.toString();
 	}
 
-	public boolean isTeamOwner(String id) {
-		boolean isFound = false;
-		try {
-			this.getOwners().getById(id);
-			isFound = true;
-		} catch (ItemNotFoundException | NotSupportedException e) {
-			
-		}
-		return isFound;
-	}
-	
-	public boolean isMember(String id) {
-		boolean isFound = false;
-		try {
-			this.getMemberUsers().getById(id);
-			isFound = true;
-		} catch (ItemNotFoundException | NotSupportedException e) {
-			
-		}
-		return isFound;
-	}
-	
-	public boolean equals(Team team){
-		if(this.name.equals(team.getName()) && this.id.equals(team.getId()))
-			return true;
-		return false;
-	}
-	
-	
 }

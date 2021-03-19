@@ -12,7 +12,6 @@ import storage.IContainer;
 import storage.UserContainer;
 import team.Team;
 import user.User;
-import exception.NotSupportedException;
 
 public class Program implements IProgram {
 
@@ -25,56 +24,66 @@ public class Program implements IProgram {
 		operations = new Operations();
 	}
 
+	/**
+	 * This function authenticates a user, looks from system user repo
+	 * 
+	 * @param email    of the user
+	 * @param password of the user
+	 * @returns user if found else null
+	 */
+	private User authenticate(String email, String password) {
+
+		try {
+			User user = ((UserContainer) users).getByEmail(email);
+			if (user.getPassword().equals(password)) { // if user found by email and has same password
+				return user; // Authenticate
+			} else { // wrong password
+				System.out.println("Password is wrong");
+				return null; // return null
+			}
+		} catch (ItemNotFoundException e) { // otherwise user not found
+			System.out.println("User is not found");
+			return null; // return null
+		}
+
+	}
+
+	public void createTeam() {
+		try {
+			this.operations.createTeam(loggedInUser, teams); // go operations to create a team
+		} catch (UnauthorizedUserOperationException e) {
+			System.out.println(e.getMessage());
+		}
+
+	}
+
 	public User getLoggedInUser() {
 		return loggedInUser;
-	}
-
-	public void setLoggedInUser(User loggedInUser) {
-		this.loggedInUser = loggedInUser;
-	}
-
-	public IContainer<User> getUsers() {
-		return users;
-	}
-
-	public void setUsers(IContainer<User> users) {
-		this.users = users;
 	}
 
 	public IContainer<Team> getTeams() {
 		return teams;
 	}
 
-	public void setTeams(IContainer<Team> teams) {
-		this.teams = teams;
+	public IContainer<User> getUsers() {
+		return users;
 	}
 
-	public void start() {
-		try {
-			readAll();
-			login();
-			mainMenu();
-			writeAll();
-		} catch (FileFormatException e) {
-			System.out.println(e.getMessage());
-		}
-	}
+	private void login() {
+		try (Scanner input = new Scanner(System.in)) { // scanner must closed just one time
+			User user = null; // Initialize
+			while (user == null) { // while user has a valid user in system
+				System.out.print("Email : ");
+				String email = input.nextLine();
+				System.out.print("Password : ");
+				String password = input.nextLine();
 
-	public void createTeam() {
-		try {
-			this.operations.createTeam(loggedInUser, teams);
-		} catch (UnauthorizedUserOperationException e) {
-			System.out.println(e.getMessage());
-		}
-
-	}
-
-	public void removeTeam() {
-		try {
-			this.operations.findTeam(teams);
-			this.operations.removeTeam(loggedInUser, teams);
-		} catch (UnauthorizedUserOperationException e) {
-			System.out.println(e.getMessage());
+				user = authenticate(email, password); // Authenticate user, look for we have or not
+				if (user != null) { // if authenticated
+					this.loggedInUser = user;
+					System.out.println(user.getName() + " Welcome to the TeamsTech");
+				}
+			}
 		}
 
 	}
@@ -83,8 +92,8 @@ public class Program implements IProgram {
 		String mainOperationIndex = null;
 		try {
 			while (true) {
-				mainOperationIndex = this.operations.mainOperationsMenu();
-				if (mainOperationIndex.equals("4"))
+				mainOperationIndex = this.operations.mainOperationsMenu(); // take input
+				if (mainOperationIndex.equals("4")) // if 4 exit
 					break;
 				else
 					mainMenuOperations(mainOperationIndex);
@@ -96,6 +105,11 @@ public class Program implements IProgram {
 
 	}
 
+	/**
+	 * Main menu operations
+	 * 
+	 * @param mainOperationIndex that operation number
+	 */
 	public void mainMenuOperations(String mainOperationIndex) {
 		switch (mainOperationIndex) {
 		case "1": {
@@ -107,12 +121,12 @@ public class Program implements IProgram {
 			break;
 		}
 		case "3": {
-			operations.findTeam(teams);
-			updateTeamMenu();
+			operations.findTeam(teams); // print teams
+			this.updateTeamMenu();
 			break;
 		}
 		case "4": {
-
+			// exit
 			break;
 		}
 
@@ -122,27 +136,74 @@ public class Program implements IProgram {
 
 	}
 
+	/**
+	 * This function reads all datas from csv files
+	 */
+	private void readAll() throws FileFormatException {
+		IFileIO fr = new FileIO();
+		IContainer<Team> teams = fr.readTeams("data\\teamList.csv");
+		IContainer<User> users = fr.readUsers(teams, "data\\userList.csv");
+		this.setUsers(users);
+		this.setTeams(teams);
+
+	}
+
+	public void removeTeam() {
+		try {
+			this.operations.findTeam(teams); // print teams
+			this.operations.removeTeam(loggedInUser, teams); // and go remove
+		} catch (UnauthorizedUserOperationException e) {
+			System.out.println(e.getMessage());
+		}
+
+	}
+
+	public void setLoggedInUser(User loggedInUser) {
+		this.loggedInUser = loggedInUser;
+	}
+
+	public void setTeams(IContainer<Team> teams) {
+		this.teams = teams;
+	}
+
+	public void setUsers(IContainer<User> users) {
+		this.users = users;
+	}
+
+	public void start() {
+		try {
+			readAll(); // read all datas
+			login(); // login
+			mainMenu(); // print main menü
+			writeAll(); // than write all datas
+		} catch (FileFormatException e) { // if there is an error reading file
+			System.out.println(e.getMessage());
+		}
+	}
+
 	private void updateTeamMenu() {
 
 		try {
 			String teamOperationIndex = null;
+			@SuppressWarnings("resource") // scanner must close one time in main menu
 			Scanner input = new Scanner(System.in);
 			System.out.print("Team Id to update: ");
 
-			String teamId = input.nextLine().strip();
-			Team tempTeam = teams.getById(teamId);
-			if (tempTeam.isMember(loggedInUser.getId())) {
+			String teamId = input.nextLine().strip(); // strip for blank
+			Team tempTeam = teams.getById(teamId); // get team
+			if (tempTeam.isMember(loggedInUser.getId())) { // if user is member of this team
 				while (true) {
-					teamOperationIndex = this.operations.updateTeamOperationsMenu();
-					if (teamOperationIndex.equals("0"))
+					teamOperationIndex = this.operations.updateTeamOperationsMenu(); // take input from user to which
+																						// operation be done
+					if (teamOperationIndex.equals("0")) // if zero go upper menu
 						break;
-					else {
+					else { // else do operation
 						updateTeamOperations(teamOperationIndex, tempTeam);
 					}
 
 				}
 
-			} else {
+			} else { // throw not authorized for not member of a team
 				throw new UnauthorizedUserOperationException("You are not authorized to update this team ");
 			}
 		} catch (ItemNotFoundException | NotSupportedException | UnauthorizedUserOperationException e) {
@@ -151,6 +212,14 @@ public class Program implements IProgram {
 
 	}
 
+	/**
+	 * This function is update team menu
+	 * 
+	 * @param teamOperationIndex for which operaiton is going to be done
+	 * @param team               that is going to be updated
+	 * @throws UnauthorizedUserOperationException if user not authorized for some
+	 *                                            operations
+	 */
 	public void updateTeamOperations(String teamOperationIndex, Team team) throws UnauthorizedUserOperationException {
 		try {
 			switch (teamOperationIndex) {
@@ -182,72 +251,28 @@ public class Program implements IProgram {
 				operations.removeTeamOwner(loggedInUser, team);
 				break;
 			}
-			case "8": {
+			case "8": {// team info
 				operations.teamInfo(team);
 				break;
 			}
-			case "9": {
+			case "9": { // team statistics
 				operations.statisticOfTeam(team);
 				break;
 			}
-			case "0": {
+			case "0": { // exit from menu
 				break;
 			}
-
 			default:
 				throw new IllegalArgumentException("Unexpected value: " + teamOperationIndex);
 			}
-		} catch (UnauthorizedUserOperationException e) {
+		} catch (UnauthorizedUserOperationException e) { // catches for lower level functions
 			System.out.println(e.getMessage());
 		}
-
-	}
-	
-
-	private User authenticate(String email, String password) {
-
-		try {
-			User user = ((UserContainer) users).getByEmail(email);
-			if (user.getPassword().equals(password)) {
-				return user;
-			} else {
-				System.out.println("Password is wrong");
-				return null;
-			}
-		} catch (ItemNotFoundException e) {
-			System.out.println("User is not found");
-			return null;
-		}
-
 	}
 
-	private void login() {
-		Scanner input = new Scanner(System.in);
-		User user = null;
-		while (user == null) {
-			System.out.print("Email : ");
-			String email = input.nextLine();
-			System.out.print("Password : ");
-			String password = input.nextLine();
-
-			user = authenticate(email, password);
-			if (user != null) {
-				this.loggedInUser = user;
-				System.out.println(user.getName() + " Welcome to the TeamsTech");
-			}
-		}
-
-	}
-
-	private void readAll() throws FileFormatException {
-		IFileIO fr = new FileIO();
-		IContainer<Team> teams = fr.readTeams("data\\teamList.csv");
-		IContainer<User> users = fr.readUsers(teams, "data\\userList.csv");
-		this.setUsers(users);
-		this.setTeams(teams);
-
-	}
-
+	/**
+	 * This function writes all datas to csv files
+	 */
 	private void writeAll() {
 		IFileIO fr = new FileIO();
 		fr.writeTeams(this.teams, "data\\teamList.csv");

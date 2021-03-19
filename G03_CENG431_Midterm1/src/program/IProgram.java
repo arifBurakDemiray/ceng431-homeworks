@@ -3,7 +3,9 @@ package program;
 public interface IProgram {
 	
 	/**
-	*	This function starts the TeamsTeach program
-	*/
+	 * @author Furkan Þahin -
+	 * @author Arif Burak Demiray - 250201022 
+	 * This function starts the TeamsTeach program
+	 */
 	void start();
 }

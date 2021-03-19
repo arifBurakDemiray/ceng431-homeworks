@@ -7,7 +7,7 @@ import team.Team;
 
 public abstract class User {
 
-	private IContainer<Team> teams;
+	private IContainer<Team> teams; //This container holds user's teams
 	private String id, name, password, email;
 
 	/**
@@ -37,7 +37,7 @@ public abstract class User {
 	 */
 
 	private void control(String id, String password, String email) {
-		if (!id.equals("")) {
+		if (!id.equals("")) { //if id not equal null, set id
 			setId(id);
 		}
 
@@ -55,52 +55,11 @@ public abstract class User {
 
 	}
 
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public IContainer<Team> getTeams() {
-		return teams;
-	}
-
-	public void setTeams(IContainer<Team> teams) {
-		this.teams = teams;
-	}
-
 	/**
 	 * It creates a email in the subclasses.
 	 */
 	public abstract void createEmail();
-	
-	
+
 	/**
 	 * It creates a random unique id string.
 	 * 
@@ -125,13 +84,13 @@ public abstract class User {
 		String small_letter = "abcdefghijklmnopqrstuvwxyz";
 		String numbers = "0123456789";
 
-		String finalString = cap_letter + small_letter + numbers + symbol;
+		String finalString = cap_letter + small_letter + numbers + symbol; //add all possibilities
 
 		Random random = new Random();
 
-		char[] password = new char[length];
+		char[] password = new char[length]; //create id array
 
-		for (int i = 0; i < length; i++) {
+		for (int i = 0; i < length; i++) { //and randomly select from finalString
 			password[i] = finalString.charAt(random.nextInt(finalString.length()));
 
 		}
@@ -139,12 +98,57 @@ public abstract class User {
 	}
 
 	/**
-	 * Function assigns the random generated id and password to the class'
-	 * attributes.
+	 * The function controls that given user is equal to this user and returns a
+	 * boolean
+	 *
+	 * @return true/false
 	 */
-	public void setRandomPassword() {
-		String randomPassword = createPassword(); // It creates and returns a password.
-		setPassword(randomPassword); // It creates a password.
+	public boolean equals(User usr) {
+		if (usr.getName().equals(this.getName()) && usr.getId().equals(this.getId()))
+			return true;
+		return false;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	/**
+	 * this function creates simple name of child classes
+	 * @returns simple name of the child classes
+	 */
+	public abstract String getSimpleName();
+
+	public IContainer<Team> getTeams() {
+		return teams;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	/**
@@ -156,7 +160,18 @@ public abstract class User {
 		setId(randomId);
 	}
 
-	public abstract String getSimpleName();
+	/**
+	 * Function assigns the random generated id and password to the class'
+	 * attributes.
+	 */
+	public void setRandomPassword() {
+		String randomPassword = createPassword(); // It creates and returns a password.
+		setPassword(randomPassword); // It creates a password.
+	}
+
+	public void setTeams(IContainer<Team> teams) {
+		this.teams = teams;
+	};
 
 	/**
 	 * The function returns a string which includes all info of user.
@@ -176,17 +191,5 @@ public abstract class User {
 		String info = (this.getSimpleName() + "," + getName() + "," + getId() + "," + getEmail() + "," + getPassword()
 				+ "," + teams);
 		return info;
-	};
-
-	/**
-	 * The function controls that given user is equal to this user and returns a
-	 * boolean
-	 *
-	 * @return true/false
-	 */
-	public boolean equals(User usr) {
-		if (usr.getName().equals(this.getName()) && usr.getId().equals(this.getId()))
-			return true;
-		return false;
 	}
 }

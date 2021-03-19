@@ -1,6 +1,3 @@
-/**
- * 
- */
 package storage;
 
 import java.util.Collection;
@@ -26,11 +23,12 @@ public interface IContainer<T> extends Iterable<T> {
 	 *
 	 * @param id id of given item.
 	 * @return T object
-	 * @throws ItemNotFoundException,NotSupportedException
-	 * @throws NotSupportedException if item does not have a getId function
+	 * @throws ItemNotFoundException
+	 * @throws NotSupportedException   if item does not have a getId function
+	 *
 	 */
 	public T getById(String id) throws ItemNotFoundException, NotSupportedException;
-	
+
 	/**
 	 * This is an abstract function and it tries to get an item by its name.
 	 * 
@@ -40,7 +38,14 @@ public interface IContainer<T> extends Iterable<T> {
 	 * @throws NotSupportedException if item does not have a getName function
 	 */
 	public T getByName(String name) throws ItemNotFoundException, NotSupportedException;
-	
+
+	/**
+	 * The function returns the container
+	 *
+	 * @return Container
+	 */
+	public Collection<T> getContainer();
+
 	/**
 	 * The function returns the object of the given item if given item is in the
 	 * container, invoking search() function in the body
@@ -49,12 +54,6 @@ public interface IContainer<T> extends Iterable<T> {
 	 * @return T item
 	 */
 	public T getItem(T item);
-
-	/**
-	 * This function returns the length of the collection
-	 * 
-	 * @return s the length of the collection
-	 */
 
 	/**
 	 * The function returns the length of the container
@@ -69,13 +68,6 @@ public interface IContainer<T> extends Iterable<T> {
 	 * @return true/false
 	 */
 	public boolean isEmpty();
-
-	/**
-	 * The function returns the container
-	 *
-	 * @return Container
-	 */
-	public Collection<T> getContainer();
 
 	/**
 	 * The function returns the iterator of the container

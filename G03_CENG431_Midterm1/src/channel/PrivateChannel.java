@@ -6,7 +6,6 @@ import storage.IContainer;
 import storage.IdContainer;
 
 import exception.ItemNotFoundException;
-import exception.NotSupportedException;
 
 
 public class PrivateChannel extends Channel{
@@ -37,7 +36,7 @@ public class PrivateChannel extends Channel{
      * @param item given item to remove from the participants
 	 */
 	public boolean removeParticipant(String id){
-		String removedParticipant = null;
+		//String removedParticipant = null; Buraya bakarsýn furkan kalmýs galiba bu
 		try {
 			participants.remove(id); //try to remove invoking container.remove method
 		} catch (ItemNotFoundException e) {
