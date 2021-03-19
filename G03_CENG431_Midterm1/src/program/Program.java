@@ -131,7 +131,7 @@ public class Program implements IProgram {
 		}
 
 		default:
-			throw new IllegalArgumentException("Unexpected value: " + mainOperationIndex);
+			System.out.println("Unexpected value: " + mainOperationIndex);
 		}
 
 	}
@@ -263,7 +263,7 @@ public class Program implements IProgram {
 				break;
 			}
 			default:
-				throw new IllegalArgumentException("Unexpected value: " + teamOperationIndex);
+				System.out.println("Unexpected value: " + teamOperationIndex);
 			}
 		} catch (UnauthorizedUserOperationException e) { // catches for lower level functions
 			System.out.println(e.getMessage());
