@@ -134,7 +134,13 @@ public class TeamManagement implements ITeamManagement {
 	public void removeMember(User user) {
 		User removedUser = ((User) removeItem(this.team.getMemberUsers(), user)); //remove user from team
 		if (removedUser.equals(user)) { //if removed successfully a team
-			removeMemberFromChannels(user); //remove also from his channels
+			try {
+				user.getTeams().remove(this.team);
+				removeMemberFromChannels(user); //remove also from his channels
+			} catch (ItemNotFoundException e) {
+				System.out.println("User's team is not removed");
+			}
+			
 		}
 	}
 
