@@ -65,7 +65,7 @@ public abstract class User {
 	 * 
 	 * @return generatedId which is created random id.
 	 */
-	public String createId() {
+	private String createId() {
 		Random rand = new Random();
 		Integer id = rand.nextInt(999) + 1;
 		return (String.valueOf(id));
@@ -76,7 +76,7 @@ public abstract class User {
 	 * 
 	 * @return generatedPassword which is created random password.
 	 */
-	public String createPassword() {
+	private String createPassword() {
 
 		int length = 4;
 		String symbol = "-./*_=+)";
@@ -168,14 +168,14 @@ public abstract class User {
 	 * Function assigns the random generated id and password to the class'
 	 * attributes.
 	 */
-	public void setRandomPassword() {
+	private void setRandomPassword() {
 		String randomPassword = createPassword(); // It creates and returns a password.
 		setPassword(randomPassword); // It creates a password.
 	}
 
 	public void setTeams(IContainer<Team> teams) {
 		this.teams = teams;
-	};
+	}
 
 	/**
 	 * The function returns a string which includes all info of user.

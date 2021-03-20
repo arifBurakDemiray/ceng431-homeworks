@@ -28,24 +28,20 @@ public class TeamManagement implements ITeamManagement {
 		setTeam(team);
 	}
 
-	public void addChannel(Channel ch) {
+	public boolean addChannel(Channel ch) {
 		// it tries to add the channel to the team's channels.
 		// if channel was added before, return a message.
 
 		boolean isAdded = this.team.getMeetingChannelList().add(ch);
-		if (!isAdded) {
-			System.out.println("Channel was added before.");
-		}
+		return isAdded;
 
 	}
 
-	public void addMember(User user) {
+	public boolean addMember(User user) {
 		// it tries to add the user to the team's members.
 		// if user was added before, return a message.
 		boolean isAdded = this.team.getMemberUsers().add(user);
-		if (!isAdded) {
-			System.out.println("User was added before.");
-		}
+		return isAdded;
 	}
 
 	public void addMemberToChannel(String userId, String channelName) {
@@ -69,7 +65,7 @@ public class TeamManagement implements ITeamManagement {
 		}
 	}
 
-	public void addTeamOwner(User user) {
+	public boolean addTeamOwner(User user) {
 
 		// control that given user is an academician or not
 		if (user instanceof Academician) {
@@ -77,14 +73,12 @@ public class TeamManagement implements ITeamManagement {
 			// it tries to add the user to the team's owners.
 			// if user was added before, return a message.
 			boolean isAdded = this.team.getOwners().add(user);
-			if (!isAdded) {
-				System.out.println("User " + user.getName() + " was added before.");
-			}
+			return isAdded;
 			
 		} else {
 			System.out.println("Only academicians can be owner.");
+			return false;
 		}
-
 	}
 
 	public void removeChannel(Channel ch) {
@@ -133,9 +127,10 @@ public class TeamManagement implements ITeamManagement {
 
 	public void removeMember(User user) {
 		User removedUser = ((User) removeItem(this.team.getMemberUsers(), user)); //remove user from team
-		if (removedUser.equals(user)) { //if removed successfully a team
+		if (removedUser.equals(user)) { //if removed successfully from a team
 			try {
 				user.getTeams().remove(this.team);
+				removeTeamOwner(removedUser);
 				removeMemberFromChannels(user); //remove also from his channels
 			} catch (ItemNotFoundException e) {
 				System.out.println("User's team is not removed");

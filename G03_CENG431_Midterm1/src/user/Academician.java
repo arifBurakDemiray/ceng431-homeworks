@@ -32,7 +32,6 @@ public abstract class Academician extends User {
 			teams = teams.substring(0, teams.length() - 1);
 		}
 
-		// String className = tempClassName.split(".")[1];
 		String info = (this.getSimpleName() + "," + getName() + "," + getId() + "," + getEmail() + "," + getPassword()
 				+ "," + teams);
 		return info;

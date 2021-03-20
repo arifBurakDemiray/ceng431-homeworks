@@ -30,15 +30,15 @@ public class FileRead {
 	 * @param user whose id is empty.
 	 */
 	private void checkId(IContainer<String> ids, User user) {
-		String id = user.createId(); // create an id invoking createId() function of the user.
-
+		user.setRandomId(); // create an id invoking createId() function of the user.
+		String id = user.getId();
+				
 		// Control that id is in the id container or not. If id is already in the
 		// container, until unique id is created repeat the creating process
 		while (!ids.add(id)) {
-			id = user.createId();
+			user.setRandomId(); // After creating an unique id, set the user id.
+			id = user.getId();
 		}
-		// After creating an unique id, set the user id.
-		user.setId(id);
 	}
 
 	/**
@@ -316,9 +316,4 @@ public class FileRead {
 			return false;
 		}
 	}
-
-	public void readOwners(IContainer<User> users, IContainer<Team> teams) {
-
-	}
-
 }

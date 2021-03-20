@@ -64,8 +64,14 @@ public class Operations implements IOperations {
 					((PrivateChannel) tempChannel).addParticipant(loggedInUser.getId());
 				}
 				teamManagement.setTeam(team); // set teamManagement to make team operation
-				teamManagement.addChannel(tempChannel); // add channel to the team's channels
-				System.out.println(tempChannel.getName() + " is added successfully to " + team.getId());
+
+				// add channel to the team's channels
+				if (teamManagement.addChannel(tempChannel)) {
+					System.out.println(tempChannel.getName() + " is added successfully to " + team.getId());
+				} else {
+					System.out.println(tempChannel.getName() + " was added before ! ");
+				}
+
 			}
 			// If date is in the wrong type, hold exception gotten from Meeting.parseDate()
 			catch (IllegalArgumentException | ArrayIndexOutOfBoundsException e) {
@@ -126,7 +132,14 @@ public class Operations implements IOperations {
 				// find the user in the user container which holds all users of the system
 				User user = users.getById(memberId);
 				teamManagement.setTeam(team); // set teamManagement for team operation
-				teamManagement.addMember(user); // add user to the team.
+				if (teamManagement.addMember(user)) // try to add user to the team.
+				{
+					user.getTeams().add(team);
+					System.out.println(memberId + " added successfully.");
+
+				} else {
+					System.out.println("User " + memberId + " was added before.");
+				}
 			} catch (ItemNotFoundException | NotSupportedException e) {
 				System.out.println("User " + memberId + " is not found.");
 			}
@@ -158,7 +171,11 @@ public class Operations implements IOperations {
 			try {
 				User user = members.getById(memberId); // find the user in the member container of the team
 				teamManagement.setTeam(team); // set teamManagement for team operation
-				teamManagement.addTeamOwner(user); // assign user as team owner.
+
+				// try to assign user as team owner.
+				if (teamManagement.addTeamOwner(user)) {
+					System.out.println("User " + memberId + " is assigned as owner.");
+				}
 			} catch (ItemNotFoundException | NotSupportedException e) {
 				System.out.println("The user not found in team " + team.getId());
 			}
@@ -432,8 +449,19 @@ public class Operations implements IOperations {
 				// find the user in the member container of the team
 				User user = team.getMemberUsers().getById(memberId);
 				teamManagement.setTeam(team); // set teamManagement for team operation
-				teamManagement.removeMember(user); // remove user from the team.
-
+				User owner = null;
+				boolean flag = true;
+				try {
+					owner = team.getOwners().getById(memberId);
+				} catch (ItemNotFoundException e) {
+					flag = false;
+				}
+				if (team.getOwners().getLength() == 1 && flag && user.equals(owner)) {
+					System.out.println("You cannot remove the last owner.");
+				} else {
+					teamManagement.removeMember(user); // remove user from the team.
+					System.out.println("User " + user.getId() + " is removed succesfully.");
+				}
 			} catch (ItemNotFoundException | NotSupportedException e) {
 				System.out.println("User " + memberId + " is not found in the team " + team.getId());
 			}
@@ -465,7 +493,13 @@ public class Operations implements IOperations {
 			try {
 				User user = owners.getById(ownerId); // find the user in the owner container of the team
 				teamManagement.setTeam(team); // set teamManagement for team operation
-				teamManagement.removeTeamOwner(user); // remove user from team owner.
+				if (team.getOwners().getLength() == 1) {
+					System.out.println("You cannot remove yourself from team owner if you are the only owner.\n "
+							+ "If you want to delete team, please select 'Remove a team' from menu.");
+				} else {
+					teamManagement.removeTeamOwner(user); // remove user from team owner.
+					System.out.println("User " + user.getId() + " is removed from owners successfuly.");
+				}
 
 			} catch (ItemNotFoundException | NotSupportedException e) {
 				System.out.println("Owner is not found in team " + team.getId());
@@ -507,8 +541,11 @@ public class Operations implements IOperations {
 
 		for (Channel channel : channels) { // iterate through channels
 			String channelInfo = null;
-			channelInfo = "Channel Name : " + channel.getName() + "\nChannel Meeting Date : "
-					+ channel.getMeeting().getDate(); // channel info
+			String date = channel.getMeeting().getDate();
+			if (date == null) {
+				date = "Meeting date is not set.";
+			}
+			channelInfo = "Channel Name : " + channel.getName() + "\nChannel Meeting Date : " + date;// channel info
 
 			if (channel instanceof PrivateChannel) {
 				String participants = "";

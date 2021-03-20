@@ -10,15 +10,17 @@ public interface ITeamManagement {
 	 * possible
 	 *
 	 * @param ch given channel to add to the team's channels
+	 * @return true if channel added successfully
 	 */
-	public void addChannel(Channel ch);
+	public boolean addChannel(Channel ch);
 
 	/**
 	 * The function tries to add the given user to the team's user.
 	 * 
 	 * @param user given user for adding to the team
+	 * @return true if member added successfully
 	 */
-	public void addMember(User user);
+	public boolean addMember(User user);
 
 	/**
 	 * By this function Private channel members can add participant to their
@@ -34,8 +36,9 @@ public interface ITeamManagement {
 	 * possible
 	 *
 	 * @param user given user to add to the team's owners
+	 * @return true if owner added successfully
 	 */
-	public void addTeamOwner(User user);
+	public boolean addTeamOwner(User user);
 
 	/**
 	 * The function tries to remove a channel from a team

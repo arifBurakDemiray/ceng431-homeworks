@@ -149,7 +149,7 @@ public class Program implements IProgram {
 		}
 		case "4": {
 			// exit
-			System.out.println("Bye bye.");
+			System.out.println("See you again "+loggedInUser.getId());
 			break;
 		}
 
