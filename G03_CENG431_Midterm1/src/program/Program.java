@@ -58,14 +58,14 @@ public class Program implements IProgram {
 		}
 
 	}
-	
+
 	/*
 	 * @return loggedInUser
 	 */
 	public User getLoggedInUser() {
 		return loggedInUser;
 	}
-	
+
 	/*
 	 * @return team container which holds all teams in the system
 	 */
@@ -84,9 +84,10 @@ public class Program implements IProgram {
 		@SuppressWarnings("resource")
 		Scanner input = new Scanner(System.in);
 		User user = null; // Initialise user as null
-		
-		// Until gotten user mail and password are belong to a valid user in system, loop
-		while (user == null) { 
+
+		// Until gotten user mail and password are belong to a valid user in system,
+		// loop
+		while (user == null) {
 			System.out.print("Email : ");
 			String email = input.nextLine();
 			System.out.print("Password : ");
@@ -104,22 +105,22 @@ public class Program implements IProgram {
 		String mainOperationIndex = null;
 		try {
 			while (true) {
-				// Print main menu and take input 
-				// invoking mainOperationsMenu function 
-				mainOperationIndex = this.operations.mainOperationsMenu(); 
-				if (mainOperationIndex.equals("4"))
-				{
+				// Print main menu and take input
+				// invoking mainOperationsMenu function
+				mainOperationIndex = this.operations.mainOperationsMenu();
+				if (mainOperationIndex.equals("4")) {
 					System.out.println("Bye bye.");
 					break;
 				}
-					
-				else
-				{
+
+				else {
 					mainMenuOperations(mainOperationIndex);
 				}
-					
+
 			}
 
+		} catch (RuntimeException e) {
+			System.out.println("There has been an error in the system\nAll changes saved.");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -149,7 +150,7 @@ public class Program implements IProgram {
 		}
 		case "4": {
 			// exit
-			System.out.println("See you again "+loggedInUser.getId());
+			System.out.println("See you again " + loggedInUser.getId());
 			break;
 		}
 
@@ -174,28 +175,28 @@ public class Program implements IProgram {
 	public void removeTeam() {
 		try {
 			// print teams to help user select team easily
-			this.operations.findTeam(teams); 
+			this.operations.findTeam(teams);
 			this.operations.removeTeam(loggedInUser, teams); // and invoke remove
 		} catch (UnauthorizedUserOperationException e) {
 			System.out.println(e.getMessage());
 		}
 
 	}
-	
+
 	/*
 	 * @param loggedInUser which logged in to the system
 	 */
 	public void setLoggedInUser(User loggedInUser) {
 		this.loggedInUser = loggedInUser;
 	}
-	
+
 	/*
 	 * @param team container which holds all teams in the system
 	 */
 	public void setTeams(IContainer<Team> teams) {
 		this.teams = teams;
 	}
-	
+
 	/*
 	 * @param user container which holds all users in the system
 	 */
@@ -209,6 +210,8 @@ public class Program implements IProgram {
 			login(); // login
 			mainMenu(); // print main menu
 			writeAll(); // than write all data
+		} catch (RuntimeException e) {
+			System.out.println("\nThere has been an error in the system\nShutting down.");
 		} catch (FileFormatException e) { // if there is an error reading file
 			System.out.println(e.getMessage());
 		}
@@ -227,8 +230,8 @@ public class Program implements IProgram {
 			if (tempTeam.isMember(loggedInUser.getId())) { // if user is member of this team
 				while (true) {
 					// take input from user to which operation be done
-					teamOperationIndex = this.operations.updateTeamOperationsMenu(); 
-																						
+					teamOperationIndex = this.operations.updateTeamOperationsMenu();
+
 					if (teamOperationIndex.equals("0")) // if zero go upper menu
 						break;
 					else { // else do operation
