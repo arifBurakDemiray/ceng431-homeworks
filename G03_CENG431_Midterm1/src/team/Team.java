@@ -37,7 +37,7 @@ public class Team {
 	@Override
 	public boolean equals(Object obj) {
 		Team team = ((Team) obj);
-		if (this.name.equals(team.getName()) && this.id.equals(team.getId()))
+		if (this.id.equals(team.getId()))
 			return true;
 		return false;
 	}

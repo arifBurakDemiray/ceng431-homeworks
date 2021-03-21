@@ -175,6 +175,8 @@ public class Operations implements IOperations {
 				// try to assign user as team owner.
 				if (teamManagement.addTeamOwner(user)) {
 					System.out.println("User " + memberId + " is assigned as owner.");
+				} else {
+					System.out.println("Operation is invalid");
 				}
 			} catch (ItemNotFoundException | NotSupportedException e) {
 				System.out.println("The user not found in team " + team.getId());
@@ -314,6 +316,10 @@ public class Operations implements IOperations {
 
 	public void removeMeetingChannel(User loggedInUser, Team team) throws UnauthorizedUserOperationException {
 		// print all channels of the selected team to help user select a channel easily
+		if(team.getMeetingChannelList().isEmpty()) {
+			System.out.println("There is no channel in team "+team.getId());
+			return;
+		}
 		findChannel(team);
 
 		// Get channel name from user to remove.
@@ -376,7 +382,12 @@ public class Operations implements IOperations {
 
 				// try to remove participant from channel, if participant doesn't exist,
 				// throw ItemNotFound exception.
-				((PrivateChannel) tempChannel).getParticipants().remove(participantId);
+				if (((PrivateChannel) tempChannel).getParticipants().getLength() >= 2) {
+					((PrivateChannel) tempChannel).getParticipants().remove(participantId);
+				} else {
+					System.out.println("You are the only person in channel " + tempChannel.getName()
+							+ "\nIf you want to remove a channel, use remove a meeting channel option.");
+				}
 			} else {
 				throw new UnauthorizedUserOperationException(
 						"You are not authorized to remove channel " + tempChannel.getName() + ".");
@@ -567,25 +578,30 @@ public class Operations implements IOperations {
 	}
 
 	public void updateChannelOperation(User loggedInUser, Team team) throws UnauthorizedUserOperationException {
-		String operationChoice = updateMeetingChannelMenu(); // get the selected operation for channel
+		if(team.getMeetingChannelList().isEmpty()) {
+			System.out.println("There is no channel in team "+team.getId());
+			return;
+		}
+		
 		findChannel(team); // print all channels of the team
-
+		
 		// Get a channel name from loggedInUser.
 		@SuppressWarnings("resource")
 		Scanner input = new Scanner(System.in);
 		System.out.print("\nMeeting Channel Name :");
 		String channelName = input.nextLine().strip();
 		Channel tempChannel = null;
-
+		
+		String operationChoice = "";
 		// try to find the channel of given name, if not found
 		// holds the exception of ItemNotFound
 		try {
 			tempChannel = team.getMeetingChannelList().getByName(channelName);
+			operationChoice = updateMeetingChannelMenu(); // get the selected operation for channel
 		} catch (ItemNotFoundException | NotSupportedException e) {
 			System.out.println("Channel " + channelName + " is not found.");
 			operationChoice = "4"; // exit from channel operation
 		}
-
 		// If channel is found, adjust the selected operation
 		switch (operationChoice) {
 		case "1": {
@@ -645,7 +661,7 @@ public class Operations implements IOperations {
 				tempChannel.getMeeting().updateDate(date); // handle IllegalArgumentException
 															// |ArrayIndexOutOfBoundsException
 				System.out.println(
-						"In " + tempChannel.getName() + " date is updated as " + tempChannel.getMeeting().getDate());
+						"In " + tempChannel.getName() + ", date is updated as " + tempChannel.getMeeting().getDate());
 
 			} else {
 				// If booleans are false, throw unauthorized exception.
@@ -667,8 +683,8 @@ public class Operations implements IOperations {
 		System.out.print("Which operations do you want to do ( please write operation index ) : "); // print menu
 		@SuppressWarnings("resource")
 		Scanner input = new Scanner(System.in);
-		String teamOperationIndex = input.nextLine().strip();
-		return teamOperationIndex;
+		String channelOperationIndex = input.nextLine().strip();
+		return channelOperationIndex;
 	}
 
 	public String updateTeamOperationsMenu() {

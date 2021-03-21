@@ -302,7 +302,7 @@ public class Program implements IProgram {
 			default:
 				System.out.println("Unexpected value: " + teamOperationIndex);
 			}
-		} catch (UnauthorizedUserOperationException e) { // catches for lower level functions
+		} catch (UnauthorizedUserOperationException | IllegalArgumentException e) { // catches for lower level functions
 			System.out.println(e.getMessage());
 		}
 	}

@@ -245,9 +245,9 @@ public class FileRead {
 				throw new IllegalArgumentException("Unexpected user type value: " + userType);
 			}
 
-			// If user id is empty create an unique id
+			// If user id is empty or exist but we have same id, create an unique id
 			// and set the id to the user invoking checkId()
-			if (userId.equals("")) {
+			if (userId.equals("") || !ids.add(userId)) {
 				checkId(ids, user);
 			}
 
