@@ -384,6 +384,7 @@ public class Operations implements IOperations {
 				// throw ItemNotFound exception.
 				if (((PrivateChannel) tempChannel).getParticipants().getLength() >= 2) {
 					((PrivateChannel) tempChannel).getParticipants().remove(participantId);
+					System.out.println(participantId + " is removed.");
 				} else {
 					System.out.println("You are the only person in channel " + tempChannel.getName()
 							+ "\nIf you want to remove a channel, use remove a meeting channel option.");
