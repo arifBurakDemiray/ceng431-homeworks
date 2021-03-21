@@ -20,7 +20,7 @@ public class Student extends User {
 	 * It sets the email which is created with student domain
 	 */
 	@Override
-	public void createEmail() {
+	protected void createEmail() {
 		String name = getName();
 		String[] splittedName = name.split(" ");
 		String firstName = splittedName[0];

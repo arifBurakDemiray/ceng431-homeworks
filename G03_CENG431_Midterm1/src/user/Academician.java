@@ -1,5 +1,7 @@
 package user;
 
+import java.util.Locale;
+
 import team.Team;
 
 public abstract class Academician extends User {
@@ -36,4 +38,20 @@ public abstract class Academician extends User {
 				+ "," + teams);
 		return info;
 	}
+	
+	/*
+	 * It sets the email which is created with academician domain
+	 */
+	@Override
+	protected void createEmail() {
+		String name = getName();
+		String[] splittedName = name.split(" ");
+		String firstName = splittedName[0];
+		String lastName = splittedName[splittedName.length - 1];
+		String email = (firstName + lastName).toLowerCase(Locale.US) + "@iyte.edu.tr";
+		setEmail(email);
+
+	}
+	
+	
 }

@@ -58,7 +58,7 @@ public abstract class User {
 	/**
 	 * It creates a email in the subclasses.
 	 */
-	public abstract void createEmail();
+	protected abstract void createEmail();
 
 	/**
 	 * It creates a random unique id string.
