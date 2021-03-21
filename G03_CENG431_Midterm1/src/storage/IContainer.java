@@ -86,4 +86,11 @@ public interface IContainer<T> extends Iterable<T> {
 	 */
 	public T remove(T item) throws ItemNotFoundException;
 
+	/**
+	 * The function converts all container items to string.
+	 *
+	 * @return string value of a container.
+	 */
+	public String toString();
+	
 }
