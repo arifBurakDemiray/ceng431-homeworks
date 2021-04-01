@@ -4,7 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import state.ProductState;
-
+import org.json.JSONArray;
 
 public class Main {
 	public static void main(String[] args)
@@ -22,6 +22,7 @@ public class Main {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} // setting up buffered writer in write mode to		
+		JSONArray js = new JSONArray();
 	}
 }
 
