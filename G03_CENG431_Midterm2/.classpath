@@ -6,6 +6,10 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/GithubFiles/ceng431-homeworks/G03_CENG431_Midterm2/externalLibraries/java-json.jar"/>
+	<classpathentry kind="lib" path="externalLibraries/java-json.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
