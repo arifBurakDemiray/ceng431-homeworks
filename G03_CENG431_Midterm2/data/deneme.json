@@ -1,0 +1,63 @@
+
+{
+ 	"ENGINE": {
+		"type": "Assembly",
+        "title": "example glossary",
+		"Tire": {
+			"type": "Assembly",
+            "title": "S",
+			"Jant": {
+				"type": "Assembly",
+                "Çelik": {
+					"type":"Part",
+                    "ID": "SGML",
+					"SortAs": "SGML",
+					"GlossTerm": "Standard Generalized Markup Language",
+					"Acronym": "SGML",
+					"Abbrev": "ISO 8879:1986",
+					"GlossSee": "markup"
+                }
+            }
+        }
+    },
+ 	"Wheel": {
+		"type": "Product",
+        "title": "example glossary",
+		"Tire": {
+			"type": "Assembly",
+            "title": "S",
+			"Jant": {
+				"type": "Assembly",
+                "Çelik": {
+					"type":"Part",
+                    "ID": "SGML",
+					"SortAs": "SGML",
+					"GlossTerm": "Standard Generalized Markup Language",
+					"Acronym": "SGML",
+					"Abbrev": "ISO 8879:1986",
+					"GlossSee": "markup"
+                }
+            }
+        }
+    }, 	"AAAAA": {
+		"type": "Product",
+        "title": "example glossary",
+		"Tire": {
+			"type": "Assembly",
+            "title": "S",
+			"Jant": {
+				"type": "Assembly",
+                "Çelik": {
+					"type":"Part",
+                    "ID": "SGML",
+					"SortAs": "SGML",
+					"GlossTerm": "Standard Generalized Markup Language",
+					"Acronym": "SGML",
+					"Abbrev": "ISO 8879:1986",
+					"GlossSee": "markup"
+                }
+            }
+        }
+    }
+
+}
