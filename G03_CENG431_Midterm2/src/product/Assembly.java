@@ -5,6 +5,11 @@ import java.util.Collection;
 import state.ProductState;
 
 public class Assembly extends Product {
+	public Collection<Product> getProducts() {
+		return products;
+	}
+
+
 	private Collection<Product> products;
 
 	public Assembly(String id, String title) {
@@ -25,6 +30,13 @@ public class Assembly extends Product {
 	public boolean removeProduct(Product product) {
 		boolean result = this.products.remove(product);
 		return result;
+	}
+	
+	public String toString()
+	{
+		
+		return String.valueOf(products.size());
+		
 	}
 
 }

@@ -11,5 +11,10 @@ public class Part extends Product {
 	public Part(String id, String title, ProductState state) {
 		super(id, title, state);
 	}
+	
+	public String toString()
+	{
+		return getTitle();
+	}
 
 }

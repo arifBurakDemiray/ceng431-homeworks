@@ -2,62 +2,34 @@
 {
  	"ENGINE": {
 		"type": "Assembly",
-        "title": "example glossary",
+		"id":"8",
+		"state":"NotStarted",
 		"Tire": {
-			"type": "Assembly",
-            "title": "S",
-			"Jant": {
-				"type": "Assembly",
-                "Çelik": {
-					"type":"Part",
-                    "ID": "SGML",
-					"SortAs": "SGML",
-					"GlossTerm": "Standard Generalized Markup Language",
-					"Acronym": "SGML",
-					"Abbrev": "ISO 8879:1986",
-					"GlossSee": "markup"
-                }
-            }
-        }
-    },
- 	"Wheel": {
-		"type": "Product",
-        "title": "example glossary",
+				"type":"Assembly",
+				"id":"10",
+				"state":"InProgress", 
+				"Jant":{
+						"type":"Part",
+						"id":"63",
+						"state":"NotStarted"}},
+		"Piston":{
+				"type":"Part",
+				"id":"5",
+				"state":"Completed"}},
+	"MOTOR": {
+		"type": "Assembly",
+		"id":"8",
+		"state":"NotStarted",
 		"Tire": {
-			"type": "Assembly",
-            "title": "S",
-			"Jant": {
-				"type": "Assembly",
-                "Çelik": {
-					"type":"Part",
-                    "ID": "SGML",
-					"SortAs": "SGML",
-					"GlossTerm": "Standard Generalized Markup Language",
-					"Acronym": "SGML",
-					"Abbrev": "ISO 8879:1986",
-					"GlossSee": "markup"
-                }
-            }
-        }
-    }, 	"AAAAA": {
-		"type": "Product",
-        "title": "example glossary",
-		"Tire": {
-			"type": "Assembly",
-            "title": "S",
-			"Jant": {
-				"type": "Assembly",
-                "Çelik": {
-					"type":"Part",
-                    "ID": "SGML",
-					"SortAs": "SGML",
-					"GlossTerm": "Standard Generalized Markup Language",
-					"Acronym": "SGML",
-					"Abbrev": "ISO 8879:1986",
-					"GlossSee": "markup"
-                }
-            }
-        }
-    }
-
+				"type":"Assembly",
+				"id":"10",
+				"state":"InProgress", 
+				"Jant":{
+						"type":"Part",
+						"id":"63",
+						"state":"NotStarted"}},
+		"Piston":{
+				"type":"Part",
+				"id":"5",
+				"state":"Completed"}}
 }
