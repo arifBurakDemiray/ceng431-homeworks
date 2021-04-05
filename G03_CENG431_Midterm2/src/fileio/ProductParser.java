@@ -9,10 +9,12 @@ import org.json.JSONObject;
 import product.Assembly;
 import product.Part;
 import product.Product;
-
+import factory.Creator;
 public class ProductParser {
 
+	private Creator creator;
 	public ProductParser() {
+		creator = new Creator();
 	}
 
 	public Collection<Product> parseProducts(String fileAll) throws JSONException {
@@ -32,34 +34,35 @@ public class ProductParser {
 		// TYPE CAST EXCEPTION BAK 
 		Iterator<?> keys = jsonObject.keys();
 		Object val = null;
-		Product newAssembly = null;
+		Product newProduct = null;
 		while (keys.hasNext()) {
 			Object keyTemp = keys.next();
 			if(!(keyTemp instanceof String))
-				throw new JSONException("");
+				//throw new JSONException(""); //Type cast bura galiba //eski olan
+				throw new JSONException("ProductParser.recusiveParser::Key is not a string"); //Yeni olan
 			String key = (String) keyTemp;
 			val = jsonObject.get(key);
-
-			if (val.getClass().getTypeName().equals("org.json.JSONObject")) {
-
-				if (((JSONObject) val).get("type").equals("Assembly")) {
-					newAssembly = new Assembly(((JSONObject) val).get("id").toString(), key);
+			String valType = val.getClass().getTypeName(); 
+			
+			if (valType.equals("org.json.JSONObject")) {
+				JSONObject valObj = (JSONObject) val;
+				String productType = valObj.get("type").toString();
+				String title = key;
+				String state = valObj.get("state").toString();
+				String id = valObj.get("id").toString();
+				newProduct = creator.createProduct(productType,title,id,state);
+				if(newProduct == null)
+					throw new JSONException("Wrong format");
+				if(prd instanceof Assembly)
+					((Assembly) prd).addProduct(newProduct);
+				if(newProduct instanceof Assembly) {
 					if (prd == null) {
-						productList.add(newAssembly);
-					} else if (prd instanceof Assembly) {
-						((Assembly) prd).addProduct(newAssembly);
+						productList.add(newProduct);
 					}
-
-					recursiveParser(((JSONObject) val), newAssembly, productList);
-				} else {
-					newAssembly = new Part(((JSONObject) val).get("id").toString(), key);
-					if (prd instanceof Assembly)
-						((Assembly) prd).addProduct(newAssembly);
+					recursiveParser(valObj, newProduct, productList);
 				}
-
-			}
 
 		}
 
 	}
-}
+}}

@@ -38,9 +38,12 @@ public class Assembly extends Product {
 		String thisId = this.getId();
 		String thisState = this.getProductState().getState();
 		String jsonValue = "\""+thisName+"\": {\"id\":\""+thisId+"\",\"state\":\""+thisState+"\",\"type\":\"Assembly\"";
-		jsonValue+=","+this.getProducts().toString()+"}";
+		StringHelper sh = new StringHelper();
+		String childs = this.getProducts().toString();
+		String[] tokens = {"[","]"};
+		childs = sh.clearOccurences(tokens, childs, "");
+		jsonValue+=","+childs+"}";
 		return jsonValue;
-		
 	}
 
 }
