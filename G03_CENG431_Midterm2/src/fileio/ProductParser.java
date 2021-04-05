@@ -1,35 +1,33 @@
 package fileio;
 
-import java.util.Collection;
 import java.util.Iterator;
-import java.util.ArrayList;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import product.Assembly;
 import product.Product;
+import storage.IContainer;
+import storage.ProductContainer;
 import factory.CreationResult;
 import factory.Creator;
 public class ProductParser {
 
-	private Creator creator;
 	public ProductParser() {
-		creator = new Creator();
 	}
 
-	public Collection<Product> parseProducts(String fileAll) throws JSONException {
+	public IContainer<Product> parseProducts(String fileAll, Creator creator) throws JSONException {
 		JSONObject jsonProducts = (new JSONParser()).parse(fileAll);
-		return collectBaseProducts(jsonProducts);
+		return collectBaseProducts(jsonProducts,creator);
 
 	}
 
-	private Collection<Product> collectBaseProducts(JSONObject jsonObject) throws JSONException {
-		Collection<Product> products = new ArrayList<Product>();
-		recursiveParser(jsonObject, null, products);
+	private IContainer<Product> collectBaseProducts(JSONObject jsonObject,Creator creator) throws JSONException {
+		IContainer<Product> products = new ProductContainer();
+		recursiveParser(jsonObject, null, products,creator);
 		return products;
 	}
 
-	private void recursiveParser(JSONObject jsonObject, Product prd, Collection<Product> productList)
+	private void recursiveParser(JSONObject jsonObject, Product prd, IContainer<Product> productList,Creator creator)
 			throws JSONException {
 		// TYPE CAST EXCEPTION BAK 
 		Iterator<?> keys = jsonObject.keys();
@@ -56,11 +54,9 @@ public class ProductParser {
 					throw new JSONException("Wrong format "+cr.message);
 				if(prd instanceof Assembly)
 					((Assembly) prd).addProduct(newProduct);
+				productList.add(newProduct);
 				if(newProduct instanceof Assembly) {
-					if (prd == null) {
-						productList.add(newProduct);
-					}
-					recursiveParser(valObj, newProduct, productList);
+					recursiveParser(valObj, newProduct, productList,creator);
 				}
 
 		}

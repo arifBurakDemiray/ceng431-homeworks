@@ -38,4 +38,9 @@ public abstract class User {
 		return result;
 	}
 
+	public String toString() {
+		String className = this.getClass().getSimpleName();
+		String jsonValue = "\""+this.getUserName()+"\":{\"type\":\""+className+"\",\"password\":\""+this.password+"\"}";
+		return jsonValue;
+	}
 }

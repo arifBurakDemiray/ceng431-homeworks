@@ -1,23 +1,14 @@
 
-import java.io.IOException;
-import java.util.ArrayList;
-
-import org.json.JSONException;
-
 import fileio.FileIO;
 import product.*;
+import storage.IContainer;
+
 public class Main {
-	public static void main(String[] args) throws Exception  {
+	public static void main(String[] args) throws Exception {
 		FileIO fileIO = new FileIO();
-		try {
-			ArrayList<Product> prds = (ArrayList<Product>) fileIO.readProducts("deneme");
-			System.out.println( ((Assembly)prds.get(0)).toString());
-		} catch (IOException | JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		IContainer<Product> prds = fileIO.readProducts("deneme");
+		System.out.println(prds.toString());
 
 	}
 
-
-}//.getProducts()).get(0).toString() ((ArrayList<Product>) 
+}// .getProducts()).get(0).toString() ((ArrayList<Product>)

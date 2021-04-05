@@ -1,9 +1,12 @@
 package fileio;
 
-import java.util.Collection;
+
 
 import product.Product;
+import storage.IContainer;
+import user.User;
 
 public interface IFileIO {
-	public Collection<Product> readProducts(String filePath) throws Exception;
+	public IContainer<Product> readProducts(String filePath) throws Exception;
+	public IContainer<User> readUser(String filePath) throws Exception;
 }

@@ -1,29 +1,32 @@
 package contract;
 
-import product.Product;
-import user.User;
 
 public class Contract {
 
-	private Product product;
-	private User user;
+	private String productId;
+	private String userName;
 	
-	public Contract(Product prd, User usr) {
-		this.product = prd;this.user=usr;
+	public Contract(String prd, String usr) {
+		this.productId = prd;this.userName=usr;
 	}
 
 	/**
 	 * @return the product
 	 */
-	public Product getProduct() {
-		return product;
+	public String getProduct() {
+		return this.productId;
 	}
 
 	/**
 	 * @return the user
 	 */
-	public User getUser() {
-		return user;
+	public String getUser() {
+		return this.userName;
+	}
+	
+	public String toString() {
+		String jsonValue = "\""+this.userName+"\":\""+this.productId+"\"";
+		return jsonValue;
 	}
 	
 }

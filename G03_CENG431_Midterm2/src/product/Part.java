@@ -12,13 +12,6 @@ public class Part extends Product {
 		super(id, title, state);
 	}
 	
-	public String toString()
-	{
-		String thisName = this.getTitle();
-		String thisId = this.getId();
-		String thisState = this.getProductState().getState();
-		String jsonValue = "\""+thisName+"\": {\"id\":\""+thisId+"\",\"state\":\""+thisState+"\",\"type\":\"Part\"}";
-		return jsonValue;
-	}
+
 
 }
