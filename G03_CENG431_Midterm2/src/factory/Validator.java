@@ -1,38 +1,43 @@
 package factory;
 
-import storage.IContainer;
-import storage.IdContainer;
+import java.util.ArrayList;
+import java.util.Collection;
 
 public class Validator {
 	
-	private IContainer<String> idContainer;
+	private Collection<String> idContainer;
 	
 	public Validator() {
-		idContainer = new IdContainer();
+		idContainer = new ArrayList<String>();
 	}
 	
-	public boolean validateProduct(String id,String type) {
+	public ValidationResult validateProduct(String id,String type) {
 		boolean isNotNull = !id.equals(null) || !type.equals(null);
+		if(!isNotNull)
+			return new ValidationResult(false,"Missing attributes.");
 		boolean uniqueId = idContainer.add(id);
 		boolean isIdInteger = Integer.valueOf(id) instanceof Integer;
-		boolean isValidType = validateType(type);
+		ValidationResult vr = validateType(type);
+		boolean isValidType = vr.isValid();
 		boolean result = isIdInteger && isValidType && uniqueId && isNotNull;
-		return result;
+		String msg = "Product is not valid to create. ";
+		if(!isValidType) msg+=vr.message;
+		return new ValidationResult(result,msg);
 	}
 	
-	private boolean validateType(String type) {
+	private ValidationResult validateType(String type) {
 		boolean isPart = type.equals("Part");
 		boolean isAssembly = type.equals("Assembly");
 		boolean result = isPart || isAssembly;
-		return result;
+		return new ValidationResult(result,"Product type is invalid.");
 	}
 	
-	protected boolean validateState(String state) {
+	protected ValidationResult validateState(String state) {
 		boolean notStarted = state.equals("NotStarted");
 		boolean inProgress = state.equals("InProgress");
 		boolean completed = state.equals("Completed");
 		boolean result = notStarted || inProgress || completed;
-		return result;
+		return new ValidationResult(result,"Product's state is invalid.");
 	}
 	
 }

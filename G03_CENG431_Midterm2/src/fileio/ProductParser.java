@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import product.Assembly;
 import product.Part;
 import product.Product;
+import factory.CreationResult;
 import factory.Creator;
 public class ProductParser {
 
@@ -50,9 +51,10 @@ public class ProductParser {
 				String title = key;
 				String state = valObj.get("state").toString();
 				String id = valObj.get("id").toString();
-				newProduct = creator.createProduct(productType,title,id,state);
+				CreationResult cr = creator.createProduct(productType,title,id,state); 
+				newProduct = (Product) cr.object;
 				if(newProduct == null)
-					throw new JSONException("Wrong format");
+					throw new JSONException("Wrong format "+cr.message);
 				if(prd instanceof Assembly)
 					((Assembly) prd).addProduct(newProduct);
 				if(newProduct instanceof Assembly) {

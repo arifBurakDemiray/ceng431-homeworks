@@ -14,12 +14,14 @@ public class Creator {
 		validator = new Validator();
 	}
 	
-	public Product createProduct(String type,String title,String id,String state) {
-		boolean result = validator.validateProduct(id,type);
+	public CreationResult createProduct(String type,String title,String id,String state) {
+		ValidationResult result = validator.validateProduct(id,type);
+		CreationResult cr = new CreationResult(null,"");
 		Product prd = null;
-		if(result) {
-			ProductState prdSt = createProductState(state);
-			if(!prdSt.equals(null)) {
+		if(result.isValid()) {
+			cr = createProductState(state);
+			ProductState prdSt = (ProductState)cr.object;
+			if(prdSt != null) {
 				switch(type)
 				{
 				case "Assembly":
@@ -31,11 +33,12 @@ public class Creator {
 				}
 			}
 		}
-		return prd;
+		return new CreationResult(prd,result.message+" "+cr.message);
 	}
 	
-	private ProductState createProductState(String state) {
-		boolean result = validator.validateState(state);
+	private CreationResult createProductState(String state) {
+		ValidationResult vr = validator.validateState(state);
+		boolean result = vr.isValid();
 		State st = null;
 		ProductState pst = null;
 		if(result) {
@@ -52,6 +55,6 @@ public class Creator {
 			}
 			pst = new ProductState(st);
 		}
-		return pst;
+		return new CreationResult(pst,vr.message);
 	}
 }
