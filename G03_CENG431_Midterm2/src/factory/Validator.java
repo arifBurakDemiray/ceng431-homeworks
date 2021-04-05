@@ -1,14 +1,14 @@
 package factory;
 
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 
 public class Validator {
 	
 	private Collection<String> idContainer;
 	
 	public Validator() {
-		idContainer = new ArrayList<String>();
+		idContainer = new HashSet<String>();
 	}
 	
 	public ValidationResult validateProduct(String id,String type) {
