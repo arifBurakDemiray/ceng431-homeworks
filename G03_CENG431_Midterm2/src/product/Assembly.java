@@ -37,7 +37,7 @@ public class Assembly extends Product {
 		String thisName = this.getTitle();
 		String thisId = this.getId();
 		String thisState = this.getProductState().getState();
-		String jsonValue = "\""+thisName+"\": {\"id\":\""+thisId+"\",\"state\":\""+thisState+"\",\"type\":\"Part\"";
+		String jsonValue = "\""+thisName+"\": {\"id\":\""+thisId+"\",\"state\":\""+thisState+"\",\"type\":\"Assembly\"";
 		jsonValue+=","+this.getProducts().toString()+"}";
 		return jsonValue;
 		
