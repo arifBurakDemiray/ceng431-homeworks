@@ -8,11 +8,11 @@ import product.Product;
 
 public class FileIO implements IFileIO {
 	private FileRead fRead;
-	private FileWrite fWrite;
+	//private FileWrite fWrite;
 
 	public FileIO() {
 		this.fRead = new FileRead(); // initialise file read
-		this.fWrite = new FileWrite(); // initialise file write
+		//this.fWrite = new FileWrite(); // initialise file write
 	}
 
 	public Collection<Product> readProducts(String filePath) throws Exception {

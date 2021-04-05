@@ -7,7 +7,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import product.Assembly;
-import product.Part;
 import product.Product;
 import factory.CreationResult;
 import factory.Creator;
