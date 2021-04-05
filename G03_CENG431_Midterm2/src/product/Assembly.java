@@ -34,8 +34,12 @@ public class Assembly extends Product {
 	
 	public String toString()
 	{
-		
-		return String.valueOf(products.size());
+		String thisName = this.getTitle();
+		String thisId = this.getId();
+		String thisState = this.getProductState().getState();
+		String jsonValue = "\""+thisName+"\": {\"id\":\""+thisId+"\",\"state\":\""+thisState+"\",\"type\":\"Part\"";
+		jsonValue+=","+this.getProducts().toString()+"}";
+		return jsonValue;
 		
 	}
 

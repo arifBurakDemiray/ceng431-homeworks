@@ -40,6 +40,24 @@ public abstract class Product {
 	}
 	
 	public String toString(){
-		return "jibele";
+		String thisName = this.getTitle();
+		String thisId = this.getId();
+		String thisState = this.getProductState().getState();
+		String jsonValue = "\""+thisName+"\": {\"id\":\""+thisId+"\",\"state\":\""+thisState+"\"}";
+		return jsonValue;
+	}
+	public boolean equals(Product prd) {
+		String thisName = this.getTitle();
+		String thisId = this.getId();
+		String prdName = prd.getTitle();
+		String prdId = prd.getId();
+		boolean resultName = thisName.equals(prdName);
+		boolean resultId = thisId.equals(prdId);
+		return resultName && resultId;
+	}
+	public boolean equals(String name) {
+		String thisName = this.getTitle();
+		boolean result = thisName.equals(name);
+		return result;
 	}
 }

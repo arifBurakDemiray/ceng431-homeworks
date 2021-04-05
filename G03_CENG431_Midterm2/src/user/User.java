@@ -25,4 +25,17 @@ public abstract class User {
 		this.password = password;
 	}
 
+	public boolean equals(String name) {
+		String thisName = this.getUserName();
+		boolean result = thisName.equals(name);
+		return result;
+	}
+
+	public boolean equals(User user) {
+		String thisName = this.getUserName();
+		String userName = user.getUserName();
+		boolean result = thisName.equals(userName);
+		return result;
+	}
+
 }
