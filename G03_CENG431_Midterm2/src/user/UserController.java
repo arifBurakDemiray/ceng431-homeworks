@@ -18,21 +18,21 @@ public class UserController {
 	}
 	
 	public void updateProduct() throws UnauthorizedUserException{		
-		this.authController.authorizeUserForUpdate(this.user);
+		authController.authorizeUserForUpdate(this.user);
 	}
 	
 	public void createUser(User givenUser,IContainer<User> users) throws UnauthorizedUserException{		
-		this.authController.authorizeUserForCreateUser(this.user,givenUser);
+		authController.authorizeUserForCreateUser(this.user,givenUser);
 		users.add(givenUser);
 	}
 	
 	public void createProduct(Product product,IContainer<Product> products) throws UnauthorizedUserException{		
-		this.authController.authorizeUserForCreateProduct(this.user,product);
+		authController.authorizeUserForCreateProduct(this.user,product);
 		products.add(product);
 	}
 	
 	public void assignProduct(User givenUser,Product product,IContainer<Contract> contracts) throws UnauthorizedUserException{		
-		this.authController.authorizeUserForAssign(this.user,givenUser,product);
+		authController.authorizeUserForAssign(this.user,givenUser,product);
 		Contract newAssignment = new Contract(product, givenUser);
 		contracts.add(newAssignment);
 	}

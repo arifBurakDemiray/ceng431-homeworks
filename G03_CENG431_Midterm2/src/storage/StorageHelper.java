@@ -6,10 +6,6 @@ import product.Product;
 
 public class StorageHelper {
 
-	protected StorageHelper() {
-
-	}
-
 	protected static Product recursiveGetBy(IContainer<Product> products, String value, Product returnedProduct, boolean flag) {
 	
 		for (Product product : products) {

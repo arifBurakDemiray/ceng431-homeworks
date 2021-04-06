@@ -18,11 +18,17 @@ public class Validator {
 	}
 
 	public ValidationResult validateProduct(String id, String type) {
-		boolean isNotNull = !id.equals(null) || !type.equals(null);
+		boolean isNotNull = !type.equals(null);
 		if (!isNotNull)
 			return new ValidationResult(false, "Missing attributes.");
-		ValidationResult vrProductType = validateProductType(type);
 		ValidationResult vrId = validateId(id);
+		if(!id.equals(null)) {
+			while(!vrId.isValid()) {
+				id = RandomFactory.randomId();
+				vrId = validateId(id);
+			}
+		}
+		ValidationResult vrProductType = validateProductType(type);
 		boolean isValidType = vrProductType.isValid();
 		boolean isValidId = vrId.isValid();
 		boolean result = isValidId && isValidType && isNotNull;
@@ -94,8 +100,8 @@ public class Validator {
 				
 			ValidationResult  returnedResult = null;
 		try {
-			User user = users.getByName(userName);			
-			Product product = products.getById(productId);							
+			users.getByName(userName);			
+			products.getById(productId);							
 			returnedResult =  new ValidationResult(true, "Contract validation error. ");
 		} catch (Exception e) {
 			returnedResult =  new ValidationResult(false, "Contract validation : getBy error.");
