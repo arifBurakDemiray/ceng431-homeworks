@@ -16,9 +16,9 @@ public class FileIO implements IFileIO {
 	private Creator creator;
 	private FileWrite fWrite;
 
-	public FileIO() {
+	public FileIO(Creator creator) {
 		this.fRead = new FileRead(); // initialise file read
-		this.creator = new Creator();
+		this.creator = creator;
 		this.fWrite = new FileWrite(); // initialise file write
 	}
 
@@ -57,7 +57,4 @@ public class FileIO implements IFileIO {
 		fWrite.writeItems(contracts, filePath);
 		
 	}
-
-	
-
 }

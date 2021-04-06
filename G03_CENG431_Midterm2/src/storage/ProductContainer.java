@@ -6,11 +6,10 @@ import product.Product;
 
 public class ProductContainer extends Container<Product> {
 
-	// BURAYI ELDEN GECIRMEK LAZIM
 	@Override
 	public Product getById(String id) throws ItemNotFoundException, NotSupportedException {
 		Product returnedProduct = null;
-		returnedProduct = StorageHelper.recursiveGetById(this, id, returnedProduct);
+		returnedProduct = StorageHelper.recursiveGetBy(this, id, returnedProduct,true);
 		if(returnedProduct==null)
 			throw new ItemNotFoundException("There is no product has id " + id);
 		return returnedProduct;
@@ -18,18 +17,11 @@ public class ProductContainer extends Container<Product> {
 
 	@Override
 	public Product getByName(String name) throws ItemNotFoundException, NotSupportedException {
-		Product found = null;
-		for (Product product : this.getContainer()) {
-			if (product.equals(name)) {
-				found = product; // BURAYA ID CHECK ATMAMIZ LAZIM GELEN PRODUCT AYNIMI DÝYE ÜSTTETE YAPABÝLÝRZ
-				break; // ÇAGIRDIFIMIZ YERDE
-			}
-		}
-		if (found == null) {
+		Product returnedProduct = null;
+		returnedProduct = StorageHelper.recursiveGetBy(this, name, returnedProduct,false);
+		if(returnedProduct==null)
 			throw new ItemNotFoundException("There is no product has name " + name);
-		} else {
-			return found;
-		}
+		return returnedProduct;
 	}
 
 }

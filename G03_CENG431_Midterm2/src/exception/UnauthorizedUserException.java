@@ -3,29 +3,29 @@
  */
 package exception;
 
-public class UnauthorizedUserOperationException extends Exception {
+public class UnauthorizedUserException extends Exception {
 
 	private static final long serialVersionUID = -6005204757945142905L;
 
-	public UnauthorizedUserOperationException() {
+	public UnauthorizedUserException() {
 		super("UnauthorizedUserOperationException, this user is not authorized to do that operation.");
 
 	}
 
-	public UnauthorizedUserOperationException(String message) {
+	public UnauthorizedUserException(String message) {
 		super(message);
 	}
 
-	public UnauthorizedUserOperationException(String message, Throwable cause) {
+	public UnauthorizedUserException(String message, Throwable cause) {
 		super(message, cause);
 	}
 
-	public UnauthorizedUserOperationException(String message, Throwable cause, boolean enableSuppression,
+	public UnauthorizedUserException(String message, Throwable cause, boolean enableSuppression,
 			boolean writableStackTrace) {
 		super(message, cause, enableSuppression, writableStackTrace);
 	}
 
-	public UnauthorizedUserOperationException(Throwable cause) {
+	public UnauthorizedUserException(Throwable cause) {
 		super(cause);
 	}
 

@@ -9,10 +9,5 @@
     {
         "type":"Manager",
         "password":"111111"
-    },
-    "Burak":
-    {
-        "type":"Manager",
-        "password":"123456"
     }
 }
