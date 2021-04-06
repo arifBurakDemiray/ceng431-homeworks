@@ -1,9 +1,13 @@
 package factory;
 
+import contract.Contract;
+import exception.ItemNotFoundException;
+import exception.NotSupportedException;
 import product.Assembly;
 import product.Part;
 import product.Product;
 import state.ProductState;
+import storage.IContainer;
 import state.*;
 import user.*;
 
@@ -60,7 +64,6 @@ public class Creator {
 
 	public CreationResult createUser(String name, String type, String password) {
 		ValidationResult result = validator.validateUser(name, type, password);
-		CreationResult cr = new CreationResult(null, "");
 		User usr = null;
 		if (result.isValid()) {
 			switch (type) {
@@ -72,8 +75,24 @@ public class Creator {
 				break;
 			}
 		}
-		return new CreationResult(usr, result.message + " " + cr.message);
+		return new CreationResult(usr, result.message);
 	}
 
+	public CreationResult createContract(String userName, String productId, 
+			IContainer<User> users,IContainer<Product> products) {
+		
+		ValidationResult result = validator.validateContract(userName,productId,users,products);
+		Contract contract = null;
+		if(result.isValid()){
+			try {
+				Product prd = products.getById(productId);
+				User usr = users.getByName(userName);
+				contract = new Contract(prd,usr);
+			}  catch (NotSupportedException | ItemNotFoundException e) {
+				
+			}
+		}
+		return new CreationResult(contract,result.message);
+	}
 }
 

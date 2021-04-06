@@ -1,23 +1,24 @@
 package product;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Iterator;
 
+import exception.ItemNotFoundException;
 import state.ProductState;
+import storage.IContainer;
+import storage.ProductContainer;
 
 public class Assembly extends Product {
 
-	private Collection<Product> products;
+	private IContainer<Product> products;
 
 	public Assembly(String id, String title) {
 		super(id, title);
-		this.products = new ArrayList<Product>();
+		this.products = new ProductContainer();
 	}
 
 	public Assembly(String id, String title, ProductState state) {
 		super(id, title, state);
-		this.products = new ArrayList<Product>();
+		this.products = new ProductContainer();
 	}
 
 	public boolean addProduct(Product product) {
@@ -26,29 +27,33 @@ public class Assembly extends Product {
 	}
 
 	public boolean removeProduct(Product product) {
-		boolean result = this.products.remove(product);
-		return result;
+		try {
+			Product tempProduct = this.products.remove(product);
+			if(tempProduct.equals(product))
+				return true;
+			return false;
+		} catch (ItemNotFoundException e) {
+			return false;
+		}
+
 	}
 
-	public Collection<Product> getProducts() {
+	public IContainer<Product> getProducts() {
 		return products;
 	}
 
 	public String toString() {
 		String jsonValue = super.toString();
 		jsonValue = jsonValue.replace("}", "");
-		StringHelper sh = new StringHelper();
 		String childs = this.getProducts().toString();
-		String[] tokens = { "[", "]" };
-		childs = sh.clearOccurences(tokens, childs, "");
-		jsonValue += "," + childs + "}";
+		jsonValue += "," + childs+"}";
 		return jsonValue;
 	}
 
 	@Override
 	public void updateState() {
 
-		Collection<Product> temp = this.getProducts();
+		IContainer<Product> temp = this.getProducts();
 		String state = this.getProductState();
 
 		Iterator<Product> it = temp.iterator();

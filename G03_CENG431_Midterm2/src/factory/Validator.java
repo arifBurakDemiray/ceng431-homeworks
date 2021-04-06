@@ -3,6 +3,10 @@ package factory;
 import java.util.Collection;
 import java.util.HashSet;
 
+import product.Product;
+import storage.IContainer;
+import user.User;
+
 public class Validator {
 
 	private Collection<String> idContainer;
@@ -82,6 +86,22 @@ public class Validator {
 	private ValidationResult validatePassword(String password) {
 		boolean result = password.length() > 6;
 		return new ValidationResult(result, "Password's length must be above 6. ");
+	}
+
+	public ValidationResult validateContract(String userName, String productId, IContainer<User> users,
+			IContainer<Product> products) {
+				
+			ValidationResult  returnedResult = null;
+		try {
+			users.getByName(userName);
+			products.getById(productId);					
+			returnedResult =  new ValidationResult(true, "Contract validation error. ");
+		} catch (Exception e) {
+			returnedResult =  new ValidationResult(false, "Contract validation : getBy error.");
+		}
+		
+		return returnedResult;
+
 	}
 
 }

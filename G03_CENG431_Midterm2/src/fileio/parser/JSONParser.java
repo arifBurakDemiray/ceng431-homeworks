@@ -1,4 +1,4 @@
-package fileio;
+package fileio.parser;
 
 import org.json.JSONException;
 import org.json.JSONObject;

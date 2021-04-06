@@ -1,4 +1,4 @@
-package fileio;
+package fileio.parser;
 
 import java.util.Iterator;
 

@@ -3,6 +3,9 @@ package fileio;
 
 import contract.Contract;
 import factory.Creator;
+import fileio.parser.ContractParser;
+import fileio.parser.ProductParser;
+import fileio.parser.UserParser;
 import product.Product;
 import storage.IContainer;
 import user.User;
@@ -19,6 +22,7 @@ public class FileIO implements IFileIO {
 		this.fWrite = new FileWrite(); // initialise file write
 	}
 
+	@Override
 	public IContainer<Product> readProducts(String filePath) throws Exception {
 		String fileAll = fRead.readFile(filePath);
 		return (new ProductParser()).parseProducts(fileAll,this.creator);
@@ -31,9 +35,9 @@ public class FileIO implements IFileIO {
 	}
 
 	@Override
-	public IContainer<Contract> readContracts(String filePath) throws Exception {
+	public IContainer<Contract> readContracts(String filePath,IContainer<User> users, IContainer<Product> products) throws Exception {
 		String fileAll = fRead.readFile(filePath);
-		return (new ContractParser()).parseContracts(fileAll, this.creator);
+		return (new ContractParser()).parseContracts(fileAll, this.creator, users, products);
 	}
 
 	@Override

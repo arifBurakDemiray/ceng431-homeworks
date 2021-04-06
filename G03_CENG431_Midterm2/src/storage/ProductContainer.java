@@ -2,36 +2,49 @@ package storage;
 
 import exception.ItemNotFoundException;
 import exception.NotSupportedException;
+import product.Assembly;
 import product.Product;
 
 public class ProductContainer extends Container<Product> {
 
-	
-	//BURAYI ELDEN GECIRMEK LAZIM
+	// BURAYI ELDEN GECIRMEK LAZIM
 	@Override
-	public Product getById(String id) throws ItemNotFoundException, NotSupportedException {
-		Product returnedUser = null;
-		for (Product user : getContainer()) {
-			if (user.getId().equals(id)) {
+	public Product getById(String id) throws ItemNotFoundException {
+		Product returnedProduct = null;
+		for (Product prd : getContainer()) {
+			if (prd.getId().equals(id)) {
 
-				returnedUser = user;
+				returnedProduct = prd;
 			}
+			if (prd instanceof Assembly)
+				try {
+					returnedProduct = ((Assembly) prd).getProducts().getById(id);}
+					catch (NotSupportedException e) {
+					e.printStackTrace();
+				}
 		}
-		if (returnedUser == null) {
-			throw new ItemNotFoundException("There is no user has id " + id);
+		if (returnedProduct == null) {
+			throw new ItemNotFoundException("There is no product has id " + id);
 		} else {
-			return returnedUser;
+			return returnedProduct;
 		}
 	}
 
 	@Override
-	public Product getByName(String name) throws ItemNotFoundException, NotSupportedException {
+	public Product getByName(String name) throws ItemNotFoundException {
 		Product found = null;
 		for (Product product : this.getContainer()) {
 			if (product.equals(name)) {
-				found = product;  //BURAYA ID CHECK ATMAMIZ LAZIM GELEN PRODUCT AYNIMI DÝYE ÜSTTETE YAPABÝLÝRZ
-				break;          //ÇAGIRDIFIMIZ YERDE
+				found = product; // BURAYA ID CHECK ATMAMIZ LAZIM GELEN PRODUCT AYNIMI DÝYE ÜSTTETE YAPABÝLÝRZ
+				break; // ÇAGIRDIFIMIZ YERDE
 			}
+
+			if (product instanceof Assembly)
+				try {
+					found = ((Assembly) product).getProducts().getByName(name);
+				} catch (NotSupportedException e) {
+					e.printStackTrace();
+				}
 		}
 		if (found == null) {
 			throw new ItemNotFoundException("There is no product has name " + name);
