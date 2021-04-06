@@ -12,7 +12,6 @@ public class Main {
 		FileIO fileIO = new FileIO();
 		IContainer<Product> prds = fileIO.readProducts("data\\deneme.json");
 		IContainer<User> users = fileIO.readUsers("data\\deneme2.json");
-		System.out.println(prds.getById("9"));
 		IContainer<Contract> ct = fileIO.readContracts("data\\deneme1.json", users, prds);
 		FileWrite fw = new FileWrite();
 		fw.writeItems(prds, "data\\products.json");

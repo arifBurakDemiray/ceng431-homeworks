@@ -1,10 +1,11 @@
 package storage;
 
-import exception.ItemNotFoundException;
-import exception.NotSupportedException;
+import java.util.Collection;
+import java.util.Iterator;
+
 import product.Assembly;
 import product.Product;
-import exception.ItemNotFoundException;
+
 
 public class StorageHelper {
 
@@ -12,22 +13,23 @@ public class StorageHelper {
 		
 		
 	}
-	protected static void recursiveGetById(IContainer<Product> products,String id,Product returnedProduct) {
-		for (Product product : products) {
+	protected static Product recursiveGetById(IContainer<Product> products,String id,Product returnedProduct)  {
+		boolean isContinueTrue = true;
+		Iterator<?> productIterator = products.getContainer().iterator();
+		while(isContinueTrue && productIterator.hasNext() && returnedProduct == null)
+		{
+			Product product = (Product) productIterator.next();
+			System.out.println("Search: " + product.toString());
 			if (product.getId().equals(id)) {
-
 				returnedProduct = product;
+				System.out.println("FOUND : "+returnedProduct.toString());
+				isContinueTrue = false;
 				break;
 			}
-			else if(product instanceof Assembly) {
-				recursiveGetById(products, id,returnedProduct);
-			}
-		}
-		if (returnedProduct == null) {
-			throw new ItemNotFoundException("There is no product has id " + id);
-		} 
-		
-		
-		
+			if(product instanceof Assembly) {				
+				recursiveGetById(((Assembly) product).getProducts(), id,returnedProduct);
+			}			
+		}				
+		return returnedProduct;
 	}
 }
