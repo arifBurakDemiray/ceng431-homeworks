@@ -11,7 +11,7 @@ public class FileRead {
 	
 	public String readFile(String filename) throws IOException{
 		
-		File file = new File("data\\deneme.json"); // opening file
+		File file = new File(filename); // opening file
 		BufferedReader br;
 		String fileAll = "";
 		try {

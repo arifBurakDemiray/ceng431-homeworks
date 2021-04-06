@@ -54,7 +54,8 @@ public class ProductParser {
 					throw new JSONException("Wrong format "+cr.message);
 				if(prd instanceof Assembly)
 					((Assembly) prd).addProduct(newProduct);
-				productList.add(newProduct);
+				if(prd==null)
+					productList.add(newProduct);
 				if(newProduct instanceof Assembly) {
 					recursiveParser(valObj, newProduct, productList,creator);
 				}
