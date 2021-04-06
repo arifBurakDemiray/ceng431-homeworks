@@ -56,10 +56,11 @@ public class Validator {
 		return new ValidationResult(result, "Id is invalid.");
 	}
 
-	public ValidationResult validateUser(String name, String password, String type) {
+	public ValidationResult validateUser(String name, String type, String password) {
 		boolean isNotNull = !name.equals(null) || !password.equals(null) || !type.equals(null);
 		if (!isNotNull)
 			return new ValidationResult(false, "Missing attributes.");
+		
 		boolean uniqueName = nameContainer.add(name); // name container
 		ValidationResult vrUserType = validateUserType(type);
 		ValidationResult vrPassword = validatePassword(password);
@@ -84,7 +85,7 @@ public class Validator {
 	}
 
 	private ValidationResult validatePassword(String password) {
-		boolean result = password.length() > 6;
+		boolean result = password.length() >= 6;
 		return new ValidationResult(result, "Password's length must be above 6. ");
 	}
 
@@ -93,8 +94,8 @@ public class Validator {
 				
 			ValidationResult  returnedResult = null;
 		try {
-			users.getByName(userName);
-			products.getById(productId);					
+			User user = users.getByName(userName);			
+			Product product = products.getById(productId);							
 			returnedResult =  new ValidationResult(true, "Contract validation error. ");
 		} catch (Exception e) {
 			returnedResult =  new ValidationResult(false, "Contract validation : getBy error.");

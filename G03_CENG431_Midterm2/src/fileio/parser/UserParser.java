@@ -43,11 +43,11 @@ public class UserParser {
 				String userType = valObj.get("type").toString();
 				String name = key;
 				String password = valObj.get("password").toString();
-				CreationResult cr = creator.createUser(name, userType, password);
-				newUser = (User) cr.object;
-				if (newUser == null)
+				CreationResult cr = creator.createUser(name,userType,password);
+				if (cr.object == null)
 					throw new JSONException("Wrong format " + cr.message);
-
+				newUser = (User) cr.object;
+				users.add(newUser);
 			}
 		}
 	}
