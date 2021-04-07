@@ -31,6 +31,7 @@ public class AppView extends View {
 			login();
 			UserView userView = new UserView(this.user,fileController,creator);
 			userView.navigate();
+			inputReceiver.close();
 			save();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

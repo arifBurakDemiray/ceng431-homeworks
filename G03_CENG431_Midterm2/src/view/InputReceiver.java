@@ -14,7 +14,7 @@ public class InputReceiver {
 	}
 	
 	public String getString(String printedText) {
-		System.out.println(printedText);
+		System.out.print(printedText);
 		String string = scanner.nextLine();
 		return string;
 	}

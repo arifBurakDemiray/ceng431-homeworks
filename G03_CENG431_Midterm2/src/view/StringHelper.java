@@ -13,10 +13,13 @@ public class StringHelper{
 	}
 	
 	protected static String printProductTree(String products){
-		String[] tokens = {":",
-		        "\"type\" \"Assembly\""
+		String[] tokens = {"\"",": {","{","}",
+		        "type :","Assembly"
 		              ,"Admin","Manager","Part",","};
-		String returnedString = clearOccurences(tokens, products, "\0");
+		String returnedString = clearOccurences(tokens, products, "");
+		String[] tokens1 = {":"};
+		returnedString = clearOccurences(tokens1,returnedString," =");
+		returnedString = returnedString.replace("type =", "-----"); 
 		return returnedString;
 	}
 	
