@@ -3,9 +3,8 @@ package user;
 import auth.AuthController;
 import contract.Contract;
 import exception.UnauthorizedUserException;
+import fileio.FileController;
 import product.Product;
-import storage.IContainer;
-
 public class UserController {
 	
 	
@@ -21,20 +20,20 @@ public class UserController {
 		authController.authorizeUserForUpdate(this.user);
 	}
 	
-	public void createUser(User givenUser,IContainer<User> users) throws UnauthorizedUserException{		
+	public void createUser(User givenUser,FileController fController) throws UnauthorizedUserException{		
 		authController.authorizeUserForCreateUser(this.user,givenUser);
-		users.add(givenUser);
+		fController.users().add(givenUser);
 	}
 	
-	public void createProduct(Product product,IContainer<Product> products) throws UnauthorizedUserException{		
+	public void createProduct(Product product,FileController fController) throws UnauthorizedUserException{		
 		authController.authorizeUserForCreateProduct(this.user,product);
-		products.add(product);
+		fController.products().add(product);
 	}
 	
-	public void assignProduct(User givenUser,Product product,IContainer<Contract> contracts) throws UnauthorizedUserException{		
+	public void assignProduct(User givenUser,Product product,FileController fController) throws UnauthorizedUserException{		
 		authController.authorizeUserForAssign(this.user,givenUser,product);
 		Contract newAssignment = new Contract(product, givenUser);
-		contracts.add(newAssignment);
+		fController.contracts().add(newAssignment);
 	}
 	
 	

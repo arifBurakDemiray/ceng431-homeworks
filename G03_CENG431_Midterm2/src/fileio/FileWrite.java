@@ -24,7 +24,7 @@ public class FileWrite {
 		JSONObject jso = jsp.parse(value);
 		FileWriter fw = new FileWriter(filePath);
 		Writer writer = new BufferedWriter(fw);
-		jso.write(writer);
+		writer.write(jso.toString(4));
 		writer.close();
 	}
 }

@@ -3,6 +3,7 @@ package contract;
 import exception.ItemNotFoundException;
 import product.Product;
 import storage.IContainer;
+import user.User;
 
 public class ContractController {
 
@@ -23,6 +24,22 @@ public class ContractController {
 		}
 		if (found == null) {
 			throw new ItemNotFoundException("The user " + userName+" has no product.");
+		} else {
+			return found;
+		}
+	}
+	
+	public User getProductOfUser(String productId) throws ItemNotFoundException {
+		User found = null;
+		for (Contract contract : this.contracts) {
+			String prdId = contract.getProduct().getId();
+			if (prdId.equals(productId)) {
+				found = contract.getUser();
+				break;
+			}
+		}
+		if (found == null) {
+			throw new ItemNotFoundException("The product " + productId+" has no user.");
 		} else {
 			return found;
 		}

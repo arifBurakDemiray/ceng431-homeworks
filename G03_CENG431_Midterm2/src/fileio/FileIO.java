@@ -8,6 +8,7 @@ import fileio.parser.ProductParser;
 import fileio.parser.UserParser;
 import product.Product;
 import storage.IContainer;
+import user.Admin;
 import user.User;
 
 
@@ -31,7 +32,9 @@ public class FileIO implements IFileIO {
 	@Override
 	public IContainer<User> readUsers(String filePath) throws Exception {
 		String fileAll = fRead.readFile(filePath);
-		return (new UserParser()).parseUsers(fileAll, this.creator);
+		IContainer<User> users =  (new UserParser()).parseUsers(fileAll, this.creator);
+		users.add(new Admin("SYSADMIN","SYSADMIN"));
+		return users;
 	}
 
 	@Override
@@ -42,6 +45,8 @@ public class FileIO implements IFileIO {
 
 	@Override
 	public void writeUsers(IContainer<User> users, String filePath) throws Exception {
+		User admin = users.getByName("SYSADMIN");
+		users.remove(admin);
 		fWrite.writeItems(users, filePath);
 		
 	}

@@ -1,13 +1,18 @@
 {
-
-    "Furkan":
-    {
-        "type":"Employee",
-        "password":"123456"
+    "Arif": {
+        "password": "111111",
+        "type": "Manager"
     },
-    "Arif":
-    {
-        "type":"Manager",
-        "password":"111111"
+    "Burak": {
+        "password": "123456",
+        "type": "Manager"
+    },
+    "Ramazan": {
+        "password": "123456",
+        "type": "Manager"
+    },
+    "Furkan": {
+        "password": "123456",
+        "type": "Employee"
     }
 }

@@ -20,7 +20,20 @@ public class Creator {
 	}
 
 	public CreationResult createProduct(String type, String title, String id, String state) {
-		ValidationResult result = validator.validateProduct(id, type);
+		ValidationResult vrId;
+		if(id == null){
+			id = RandomFactory.randomId();
+		 	vrId = validator.validateId(id);
+			while(!vrId.isValid()) {
+				id = RandomFactory.randomId();
+				vrId = validator.validateId(id);
+			}
+		}
+		else
+		{
+			vrId = validator.validateId(id);
+		}
+		ValidationResult result = validator.validateProduct(id,type);
 		CreationResult cr = new CreationResult(null, "");
 		Product prd = null;
 		if (result.isValid()) {
@@ -41,25 +54,33 @@ public class Creator {
 	}
 
 	private CreationResult createProductState(String state) {
-		ValidationResult vr = validator.validateState(state);
-		boolean result = vr.isValid();
 		State st = null;
 		ProductState pst = null;
-		if (result) {
-			switch (state) {
-			case "NotStarted":
-				st = new NotStarted();
-				break;
-			case "InProgress":
-				st = new InProgress();
-				break;
-			case "Completed":
-				st = new Completed();
-				break;
+		String msg = "";
+		if(state != null){
+			ValidationResult vr = validator.validateState(state);
+			boolean result = vr.isValid();
+			if(result){
+				switch (state) {
+				case "NotStarted":
+					st = new NotStarted();
+					pst = new ProductState(st);
+					break;
+				case "InProgress":
+					st = new InProgress();
+					pst = new ProductState(st);
+					break;
+				case "Completed":
+					st = new Completed();
+					pst = new ProductState(st);
+					break;
+				}
+				msg=vr.message;
 			}
-			pst = new ProductState(st);
 		}
-		return new CreationResult(pst, vr.message);
+		else
+			pst = new ProductState();
+		return new CreationResult(pst,msg);
 	}
 
 	public CreationResult createUser(String name, String type, String password) {

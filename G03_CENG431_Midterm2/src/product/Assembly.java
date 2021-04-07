@@ -46,7 +46,10 @@ public class Assembly extends Product {
 		String jsonValue = super.toString();
 		jsonValue = jsonValue.replace("}", "");
 		String childs = this.getProducts().toString();
-		jsonValue += "," + childs+"}";
+		if(childs.equals(""))
+			jsonValue+="}";
+		else
+			jsonValue += "," + childs+"}";
 		return jsonValue;
 	}
 

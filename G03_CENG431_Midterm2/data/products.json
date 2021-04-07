@@ -1,35 +1,52 @@
-
 {
- 	"ENGINE": {
-		"type": "Assembly",
-		"id":"8",
-		"state":"NotStarted",
-		"Tire": {
-				"type":"Assembly",
-				"id":"10",
-				"state":"InProgress", 
-				"Jant":{
-						"type":"Part",
-						"id":"63",
-						"state":"NotStarted"}},
-		"Piston":{
-				"type":"Part",
-				"id":"5",
-				"state":"Completed"}},
-	"MOTOR": {
-		"type": "Assembly",
-		"id":"9",
-		"state":"NotStarted",
-		"Tire": {
-				"type":"Assembly",
-				"id":"110",
-				"state":"InProgress", 
-				"Jant":{
-						"type":"Part",
-						"id":"613",
-						"state":"NotStarted"}},
-		"Piston":{
-				"type":"Part",
-				"id":"51",
-				"state":"Completed"}}
+    "Akü": {
+        "id": "3389",
+        "state": "NotStarted",
+        "type": "Assembly"
+    },
+    "MOTOR": {
+        "Piston": {
+            "id": "51",
+            "state": "Completed",
+            "type": "Part"
+        },
+        "id": "9",
+        "state": "NotStarted",
+        "type": "Assembly",
+        "Tire": {
+            "id": "110",
+            "state": "InProgress",
+            "type": "Assembly",
+            "Jant": {
+                "id": "613",
+                "state": "NotStarted",
+                "type": "Part"
+            }
+        }
+    },
+    "ENGINE": {
+        "Piston": {
+            "id": "5",
+            "state": "Completed",
+            "type": "Part"
+        },
+        "id": "8",
+        "state": "NotStarted",
+        "type": "Assembly",
+        "Tire": {
+            "id": "10",
+            "state": "InProgress",
+            "type": "Assembly",
+            "Jant": {
+                "id": "63",
+                "state": "NotStarted",
+                "type": "Part"
+            }
+        }
+    },
+    "Krank Mili": {
+        "id": "48572",
+        "state": "NotStarted",
+        "type": "Assembly"
+    }
 }

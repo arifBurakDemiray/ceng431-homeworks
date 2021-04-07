@@ -37,7 +37,17 @@ public class FileController {
 		}
 	}
 	
+
+	public IContainer<Product> products() {
+		return this.products;
+	}
+
+
+	public IContainer<Contract> contracts() {
+		return this.contracts;
+	}
+
 	public IContainer<User> users(){
-		return users;
+		return this.users;
 	}
 }

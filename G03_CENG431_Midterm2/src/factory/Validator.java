@@ -18,25 +18,17 @@ public class Validator {
 	}
 
 	public ValidationResult validateProduct(String id, String type) {
+		
 		boolean isNotNull = !type.equals(null);
 		if (!isNotNull)
 			return new ValidationResult(false, "Missing attributes.");
-		ValidationResult vrId = validateId(id);
-		if(!id.equals(null)) {
-			while(!vrId.isValid()) {
-				id = RandomFactory.randomId();
-				vrId = validateId(id);
-			}
-		}
 		ValidationResult vrProductType = validateProductType(type);
 		boolean isValidType = vrProductType.isValid();
-		boolean isValidId = vrId.isValid();
-		boolean result = isValidId && isValidType && isNotNull;
+		boolean result = isValidType && isNotNull;
 		String msg = "Product is not valid to create. ";
 		if (!isValidType)
+			idContainer.remove(id);
 			msg += vrProductType.message;
-		if (!isValidId)
-			msg += vrId.message;
 		return new ValidationResult(result, msg);
 	}
 
@@ -55,7 +47,7 @@ public class Validator {
 		return new ValidationResult(result, "Product's state is invalid.");
 	}
 
-	private ValidationResult validateId(String id) {
+	protected ValidationResult validateId(String id) {
 		boolean uniqueId = idContainer.add(id);
 		boolean isIdInteger = Integer.valueOf(id) instanceof Integer;
 		boolean result = uniqueId && isIdInteger;
@@ -74,10 +66,12 @@ public class Validator {
 		boolean isValidPassword = vrPassword.isValid();
 		boolean result = isValidType && uniqueName && isNotNull && isValidPassword;
 		String msg = "User is not valid to create. ";
-		if (!isValidType)
-			msg += vrUserType.message;
-		if (!isValidPassword)
-			msg += vrPassword.message;
+		if (!isValidType){
+			nameContainer.remove(name);
+			msg += vrUserType.message;}
+		if (!isValidPassword){
+			nameContainer.remove(name);
+			msg += vrPassword.message;}
 		if (!uniqueName)
 			msg += "User name has already exists";
 		return new ValidationResult(result, msg);
@@ -92,7 +86,7 @@ public class Validator {
 
 	private ValidationResult validatePassword(String password) {
 		boolean result = password.length() >= 6;
-		return new ValidationResult(result, "Password's length must be above 6. ");
+		return new ValidationResult(result, "Password's length must be above 5. ");
 	}
 
 	public ValidationResult validateContract(String userName, String productId, IContainer<User> users,

@@ -13,14 +13,10 @@ public class InputReceiver {
 		scanner.close();
 	}
 	
-	public String getUsername() {
-		System.out.println("Username: ");
-		String userName = scanner.nextLine();
-		return userName;
+	public String getString(String printedText) {
+		System.out.println(printedText);
+		String string = scanner.nextLine();
+		return string;
 	}
-	public String getPassword() {
-		System.out.println("Password: ");
-		String password = scanner.nextLine();
-		return password;
-	}
+
 }
