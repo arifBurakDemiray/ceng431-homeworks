@@ -10,7 +10,8 @@ public class FileController {
 
 	private IContainer<User> users;
 	private IContainer<Product> products;
-	private IContainer<Contract> contracts;
+	private IContainer<Contract> productContracts;
+	private IContainer<Contract> employeeContracts;
 	private IFileIO fileIO;
 	public FileController(Creator creator) {
 		this.fileIO = new FileIO(creator);
@@ -20,7 +21,8 @@ public class FileController {
 		try {
 			users = fileIO.readUsers("data\\users.json");
 			products = fileIO.readProducts("data\\products.json");
-			contracts = fileIO.readContracts("data\\contracts.json", users, products);
+			productContracts = fileIO.readContracts("data\\productcontracts.json", users, products);
+			employeeContracts = fileIO.readContracts("data\\employeecontracts.json", users, products);
 		}
 		catch(Exception e) {
 			throw new FileFormatException(e.getMessage());
@@ -31,23 +33,29 @@ public class FileController {
 		try {
 			fileIO.writeUsers(users, "data\\users.json");
 			fileIO.writeProducts(products, "data\\products.json");
-			fileIO.writeContracts(contracts, "data\\contracts.json");
+			fileIO.writeContracts(productContracts, "data\\productcontracts.json");
+			fileIO.writeContracts(employeeContracts, "data\\employeecontracts.json");
 		} catch (Exception e) {
 			throw new FileFormatException(e.getMessage());
 		}
 	}
 	
+	public IContainer<User> users(){
+		return this.users;
+	}
 
 	public IContainer<Product> products() {
 		return this.products;
 	}
 
 
-	public IContainer<Contract> contracts() {
-		return this.contracts;
+	public IContainer<Contract> productContracts() {
+		return this.productContracts;
+	}
+	
+	public IContainer<Contract> employeeContracts() {
+		return this.employeeContracts;
 	}
 
-	public IContainer<User> users(){
-		return this.users;
-	}
+	
 }

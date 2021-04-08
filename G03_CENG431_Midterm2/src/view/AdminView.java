@@ -4,6 +4,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import contract.ContractController;
+import contract.ContractControllerProduct;
 import exception.ItemNotFoundException;
 import exception.NotSupportedException;
 import exception.UnauthorizedUserException;
@@ -15,8 +16,9 @@ import user.User;
 
 public class AdminView extends UserView {
 
-	public AdminView(User user, FileController fileController, Creator creator, ContractController contractController) {
-		super(user, fileController, creator, contractController);
+	protected AdminView(User user, FileController fileController, Creator creator,
+			ContractController contractControllerProduct) {
+		super(user, fileController, creator, contractControllerProduct);
 	}
 
 	@Override
@@ -64,7 +66,8 @@ public class AdminView extends UserView {
 
 	public void assignProductToManager() {
 		System.out.println("\n\tAssign A Product To Manager");
-		String message = ViewHelper.assingProductList(fileController,contractController);
+		String message = ViewHelper.assingProductList(fileController,
+				((ContractControllerProduct) contractControllerProduct));
 		if (!message.equals("")) {
 			System.out.println(message);
 			return;
@@ -76,28 +79,27 @@ public class AdminView extends UserView {
 		try {
 			product = fileController.products().getById(productID);
 			manager = fileController.users().getByName(managerName);
-			userController.assignProduct(manager, product, fileController);
+			userController.assignProduct(manager, product, fileController,((ContractControllerProduct) contractControllerProduct));
 			System.out.println(product.getTitle() + " is assigned to " + manager.getUserName());
 		} catch (ItemNotFoundException | NotSupportedException | UnauthorizedUserException e) {
 			System.out.println(e.getMessage());
 		}
 	}
-	
-	public void printAll() throws JSONException
-	{
-		
-		String productList = "{"+fileController.products().toString()+"}";		
-		JSONObject jsonProduct = new JSONObject(productList);		
-		String userList = "{"+fileController.users().toString()+"}";
+
+	public void printAll() throws JSONException {
+
+		String productList = "{" + fileController.products().toString() + "}";
+		JSONObject jsonProduct = new JSONObject(productList);
+		String userList = "{" + fileController.users().toString() + "}";
 		JSONObject jsonUser = new JSONObject(userList);
 		String jsonStringProduct = jsonProduct.toString(4);
 		String jsonStringUser = jsonUser.toString(4);
 		String formattedProducts = StringHelper.printProductTree(jsonStringProduct);
 		System.out.println(formattedProducts);
-		
+		System.out.println(jsonStringUser);
+
 	}
 
-	
 	public void menu() {
 		System.out
 				.println("\n\tADMIN MENU\n\n1: Create Manager \n2: Create Product\n3: Assign a Product to a Manager\n4: Print Products and Users\n5: Logout");
@@ -105,27 +107,21 @@ public class AdminView extends UserView {
 		while (!menuChoice.equals("5")) {
 			menuChoice = inputReceiver.getString("\nChoice : ");
 			switch (menuChoice) {
-			case "1": {
+			case "1": 
 				createManager();
 				break;
-			}
-			case "2": {
+			case "2": 
 				createProduct();
 				break;
-			}
-			case "3": {
+			case "3": 
 				assignProductToManager();
 				break;
-			}
-			case "4": {
+			case "4": 
 				try {
 					printAll();
 				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+					System.out.println(e.getMessage());}
 				break;
-			}
 			case "5": {
 				break;
 			}
@@ -134,5 +130,4 @@ public class AdminView extends UserView {
 			}
 		}
 	}
-
 }

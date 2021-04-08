@@ -1,6 +1,8 @@
 package factory;
 
 import contract.Contract;
+import contract.ContractManagerEmployee;
+import contract.ContractUserProduct;
 import exception.ItemNotFoundException;
 import exception.NotSupportedException;
 import product.Assembly;
@@ -8,6 +10,7 @@ import product.Part;
 import product.Product;
 import state.ProductState;
 import storage.IContainer;
+import storage.UserContainer;
 import state.*;
 import user.*;
 
@@ -99,21 +102,42 @@ public class Creator {
 		return new CreationResult(usr, result.message);
 	}
 
-	public CreationResult createContract(String userName, String productId, 
+	public CreationResult createContractUserProduct(String userName, String productId, 
 			IContainer<User> users,IContainer<Product> products) {
 		
-		ValidationResult result = validator.validateContract(userName,productId,users,products);
+		ValidationResult result = validator.validateContractProduct(userName,productId,users,products);
 		Contract contract = null;
 		if(result.isValid()){
 			try {
 				Product prd = products.getById(productId);
 				User usr = users.getByName(userName);
-				contract = new Contract(prd,usr);
+				contract = new ContractUserProduct(usr,prd);
 			}  catch (NotSupportedException | ItemNotFoundException e) {
 				
 			}
 		}
 		return new CreationResult(contract,result.message);
 	}
+	
+	public CreationResult createContractManagerEmplooye(String managerName, String[] userId, IContainer<User> users) {
+		
+		ValidationResult result = validator.validateContractEmployee(managerName,userId,users);
+		Contract contract = null;
+		if(result.isValid()){
+			try {
+				IContainer<User> managerEmployees = new UserContainer();
+				User manager = users.getByName(managerName);
+				for (String user : userId) {
+					User employee = users.getByName(user);
+					managerEmployees.add(employee);					
+				}				
+				contract = new ContractManagerEmployee(manager,managerEmployees);
+			}  catch (NotSupportedException | ItemNotFoundException e) {
+				
+			}
+		}
+		return new CreationResult(contract,result.message);
+	}
+	
 }
 

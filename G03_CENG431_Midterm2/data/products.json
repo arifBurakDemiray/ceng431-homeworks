@@ -1,17 +1,17 @@
 {
-    "Akü": {
-        "id": "3389",
-        "state": "NotStarted",
-        "type": "Assembly"
-    },
     "MOTOR": {
-        "Piston": {
-            "id": "51",
+        "Kablo": {
+            "id": "90016",
             "state": "Completed",
             "type": "Part"
         },
+        "Piston": {
+            "id": "51",
+            "state": "InProgress",
+            "type": "Part"
+        },
         "id": "9",
-        "state": "NotStarted",
+        "state": "InProgress",
         "type": "Assembly",
         "Tire": {
             "id": "110",
@@ -19,7 +19,7 @@
             "type": "Assembly",
             "Jant": {
                 "id": "613",
-                "state": "NotStarted",
+                "state": "Completed",
                 "type": "Part"
             }
         }
@@ -27,11 +27,11 @@
     "ENGINE": {
         "Piston": {
             "id": "5",
-            "state": "Completed",
+            "state": "InProgress",
             "type": "Part"
         },
         "id": "8",
-        "state": "NotStarted",
+        "state": "InProgress",
         "type": "Assembly",
         "Tire": {
             "id": "10",
@@ -44,8 +44,8 @@
             }
         }
     },
-    "Krank Mili": {
-        "id": "48572",
+    "Kaporta": {
+        "id": "28413",
         "state": "NotStarted",
         "type": "Assembly"
     }

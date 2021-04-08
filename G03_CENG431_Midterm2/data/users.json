@@ -1,15 +1,15 @@
 {
     "Arif": {
-        "password": "111111",
-        "type": "Manager"
-    },
-    "Burak": {
         "password": "123456",
         "type": "Manager"
+    },
+    "Selahattin": {
+        "password": "123456",
+        "type": "Employee"
     },
     "Ramazan": {
         "password": "123456",
-        "type": "Manager"
+        "type": "Employee"
     },
     "Furkan": {
         "password": "123456",

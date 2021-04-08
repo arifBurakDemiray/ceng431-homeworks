@@ -11,7 +11,7 @@ public class AuthController {
 	{
 		
 	}
-	
+		
 	public void authorizeUserForUpdate(User user) throws UnauthorizedUserException{
 		String simpleName = user.getClass().getSimpleName();
 		if(!simpleName.equals("Employee"))
@@ -43,9 +43,17 @@ public class AuthController {
 		String simpleNameOfProduct = product.getClass().getSimpleName();
 		if(simpleNameOfUser.equals("Admin") && simpleNameOfGivenUser.equals("Manager") && simpleNameOfProduct.equals("Assembly"))
 			return;
-		if(simpleNameOfUser.equals("Manager") && simpleNameOfGivenUser.equals("Employee") && simpleNameOfProduct.equals("Employee"))
+		if(simpleNameOfUser.equals("Manager") && simpleNameOfGivenUser.equals("Employee") && simpleNameOfProduct.equals("Part"))
 			return;
 		throw new UnauthorizedUserException("You are not authorized to assign the user.");
+	}
+	
+	public void authorizeUserForAssingEmployee(User manager,User employee) throws UnauthorizedUserException{
+		String managerClass = manager.getClass().getSimpleName();
+		String employeeClass = employee.getClass().getSimpleName();
+		if(managerClass.equals("Manager") && employeeClass.equals("Employee"))
+			return;
+		throw new UnauthorizedUserException("You are not authorized to assign the employee.");
 	}
 
 }

@@ -5,6 +5,8 @@ import java.util.HashSet;
 
 import product.Product;
 import storage.IContainer;
+import user.Employee;
+import user.Manager;
 import user.User;
 
 public class Validator {
@@ -18,7 +20,7 @@ public class Validator {
 	}
 
 	public ValidationResult validateProduct(String id, String type) {
-		
+
 		boolean isNotNull = !type.equals(null);
 		if (!isNotNull)
 			return new ValidationResult(false, "Missing attributes.");
@@ -28,7 +30,7 @@ public class Validator {
 		String msg = "Product is not valid to create. ";
 		if (!isValidType)
 			idContainer.remove(id);
-			msg += vrProductType.message;
+		msg += vrProductType.message;
 		return new ValidationResult(result, msg);
 	}
 
@@ -58,7 +60,7 @@ public class Validator {
 		boolean isNotNull = !name.equals(null) || !password.equals(null) || !type.equals(null);
 		if (!isNotNull)
 			return new ValidationResult(false, "Missing attributes.");
-		
+
 		boolean uniqueName = nameContainer.add(name); // name container
 		ValidationResult vrUserType = validateUserType(type);
 		ValidationResult vrPassword = validatePassword(password);
@@ -66,12 +68,14 @@ public class Validator {
 		boolean isValidPassword = vrPassword.isValid();
 		boolean result = isValidType && uniqueName && isNotNull && isValidPassword;
 		String msg = "User is not valid to create. ";
-		if (!isValidType){
+		if (!isValidType) {
 			nameContainer.remove(name);
-			msg += vrUserType.message;}
-		if (!isValidPassword){
+			msg += vrUserType.message;
+		}
+		if (!isValidPassword) {
 			nameContainer.remove(name);
-			msg += vrPassword.message;}
+			msg += vrPassword.message;
+		}
 		if (!uniqueName)
 			msg += "User name has already exists";
 		return new ValidationResult(result, msg);
@@ -89,18 +93,43 @@ public class Validator {
 		return new ValidationResult(result, "Password's length must be above 5. ");
 	}
 
-	public ValidationResult validateContract(String userName, String productId, IContainer<User> users,
+	public ValidationResult validateContractProduct(String userName, String productId, IContainer<User> users,
 			IContainer<Product> products) {
-				
-			ValidationResult  returnedResult = null;
+
+		ValidationResult returnedResult = null;
 		try {
-			users.getByName(userName);			
-			products.getById(productId);							
-			returnedResult =  new ValidationResult(true, "Contract validation error. ");
+			users.getByName(userName);
+			products.getById(productId);
+			returnedResult = new ValidationResult(true, "Contract validation error. ");
 		} catch (Exception e) {
-			returnedResult =  new ValidationResult(false, "Contract validation : getBy error.");
+			returnedResult = new ValidationResult(false, "Contract validation : getBy error.");
 		}
-		
+
+		return returnedResult;
+
+	}
+
+	public ValidationResult validateContractEmployee(String managerName, String[] userId, IContainer<User> users) {
+		ValidationResult returnedResult = null;
+		try {
+			User manager = users.getByName(managerName);
+			if (!(manager instanceof Manager))
+				returnedResult = new ValidationResult(false, "Contract validation: user is no t a manager");
+			else {
+				for (String user : userId) {
+					User employee = users.getByName(user);
+					if (!(employee instanceof Employee)) {
+						returnedResult = new ValidationResult(false, "Contract validation: user is not an employee. ");
+						break;
+					}
+				}
+
+				returnedResult = new ValidationResult(true, "Contract validation error. ");
+			}
+		} catch (Exception e) {
+			returnedResult = new ValidationResult(false, "Contract validation : getBy error.");
+		}
+
 		return returnedResult;
 
 	}

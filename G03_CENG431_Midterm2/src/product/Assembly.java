@@ -62,6 +62,8 @@ public class Assembly extends Product {
 		Iterator<Product> it = temp.iterator();
 		boolean isComplete = true;
 		Product product = null;
+		if(!it.hasNext())
+			return;
 		while (it.hasNext()) {
 			product = it.next();
 			if (product instanceof Assembly)

@@ -53,6 +53,7 @@ public class FileIO implements IFileIO {
 
 	@Override
 	public void writeProducts(IContainer<Product> products, String filePath) throws Exception {
+		FileIOHelper.updateProductsStates(products);
 		fWrite.writeItems(products, filePath);
 		
 	}

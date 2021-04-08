@@ -10,7 +10,11 @@ public class AppView extends View {
 
 	private User user;
 
-	public AppView(FileController fileController,Creator creator) {
+	public AppView(){
+		super();
+	}
+
+	protected AppView(FileController fileController,Creator creator) {
 		super(fileController,creator);
 	}
 
@@ -25,7 +29,7 @@ public class AppView extends View {
 		this.user = login.login(userName, password, fileController.users());
 	}
 
-	public void start() {
+	public void start(){
 		try {
 			init();
 			login();
