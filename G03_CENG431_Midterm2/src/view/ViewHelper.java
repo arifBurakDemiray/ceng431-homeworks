@@ -57,13 +57,13 @@ public class ViewHelper {
 		return products;
 	}
 
-	public static String findManagerEmptyProducts(Product managerProduct, ContractController contractController) {
+	public static String findManagerProductsWithoutEmployee(Product managerProduct, ContractController contractController) {
 		String products = "";
-		products = recursiveEmptyProducts(managerProduct, contractController, products);
+		products = recursiveProductsWithoutEmployee(managerProduct, contractController, products);
 		return products;
 	}
 
-	private static String recursiveEmptyProducts(Product mainProduct, ContractController contractController,
+	private static String recursiveProductsWithoutEmployee(Product mainProduct, ContractController contractController,
 			String products) {
 
 		IContainer<Product> temp = ((Assembly) mainProduct).getProducts();
@@ -73,7 +73,7 @@ public class ViewHelper {
 			product = it.next();
 			if (product instanceof Assembly)
 			{
-				products=recursiveEmptyProducts(product, contractController, products);
+				products=recursiveProductsWithoutEmployee(product, contractController, products);
 			}
 			else {
 				try {
@@ -89,7 +89,7 @@ public class ViewHelper {
 
 	}
 
-	public static String findManagerEmptyEmployees(IContainer<User> employeeContainer,
+	public static String findManagerEmployeesWithoutProduct(IContainer<User> employeeContainer,
 			ContractController contractController) {
 		String employees = "";
 		if(employeeContainer != null)
@@ -104,5 +104,33 @@ public class ViewHelper {
 		}
 		return employees;
 	}
-
+	
+	public static String findManagerEmployees(IContainer<User> employeeContainer) {
+		String employees = "";
+		if(employeeContainer != null)
+		{
+			for (User employee : employeeContainer) {
+				employees += (employee.getUserName() + "\n");
+			}
+		}
+		return employees;
+	}
+	
+	public static String findUsers(IContainer<User> userContainer) {
+		String users = "";
+		if(userContainer != null)
+		{
+			for (User user : userContainer) {
+				users += (user.getUserName() + "\n");
+			}
+		}
+		return users;
+	}
+	
+	
+	
+	
+	
+	
+	
 }

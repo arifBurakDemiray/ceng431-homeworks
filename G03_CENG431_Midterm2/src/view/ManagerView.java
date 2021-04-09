@@ -2,7 +2,6 @@ package view;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import contract.ContractController;
 import contract.ContractControllerEmployee;
 import contract.ContractControllerProduct;
@@ -12,7 +11,6 @@ import exception.UnauthorizedUserException;
 import factory.CreationResult;
 import factory.Creator;
 import fileio.FileController;
-import product.Assembly;
 import product.Product;
 import storage.IContainer;
 import user.User;
@@ -61,16 +59,17 @@ public class ManagerView extends UserView {
 
 	public void createProduct() {
 		System.out.println("\n\tProduct Creation");
+
+		// String st = ViewHelper.findAssembliesOfManager(managerProduct,
+		// contractControllerEmployee);
+		// StringHelper.printProductTree(managerProduct.toString());
+
+		System.out.println(managerProduct.toString());
+		String productId = inputReceiver.getString("Product ID which you wanted to insert new product  : ");
 		String productTitle = inputReceiver.getString("Product Title : ");
 		String productType = inputReceiver.getString("Product Type : \"Assembly\" or \"Part\"");
-		CreationResult cr = creator.createProduct(productType, productTitle, null, null);
-		if (cr.object == null) {
-			System.out.println(cr.message);
-		} else {
-			Product createdProduct = (Product) cr.object;
-			((Assembly) managerProduct).addProduct(createdProduct);
-			System.out.println("Product : " + productTitle + " ( " + productType + " ) is produced.");
-		}
+		userController.createProductForManager(fileController, creator, productId, productType,
+				productTitle);
 
 	}
 
@@ -79,9 +78,9 @@ public class ManagerView extends UserView {
 		try {
 			IContainer<User> employeesOfManager = ((ContractControllerEmployee) contractControllerEmployee)
 					.getContracterOfContractee(this.getUser().getUserName());
-			String emptyProducts = ViewHelper.findManagerEmptyProducts(managerProduct,
+			String emptyProducts = ViewHelper.findManagerProductsWithoutEmployee(managerProduct,
 					(ContractControllerProduct) contractControllerProduct);
-			String emptyEmployees = ViewHelper.findManagerEmptyEmployees(employeesOfManager,
+			String emptyEmployees = ViewHelper.findManagerEmployeesWithoutProduct(employeesOfManager,
 					(ContractControllerProduct) contractControllerProduct);
 			if (emptyProducts.equals("") || emptyEmployees.equals("")) {
 				System.out.println("Employee or Part doesn't exist");
@@ -94,7 +93,6 @@ public class ManagerView extends UserView {
 				part = fileController.products().getById(partId);
 				employee = fileController.users().getByName(employeeName);
 				userController.assignProduct(employee, part, fileController, contractControllerProduct);
-
 			}
 
 		} catch (ItemNotFoundException | NotSupportedException | UnauthorizedUserException e) {
@@ -104,9 +102,20 @@ public class ManagerView extends UserView {
 	}
 
 	public void printAll() throws JSONException {
+		System.out.println("\n\tPRODUCTS\n");
 		String productString = "{" + managerProduct.toString() + "}";
 		JSONObject jsonProduct = new JSONObject(productString);
 		System.out.println(jsonProduct.toString(4));
+
+		try {
+			System.out.println("\n\tEMPLOYEES\n");
+			IContainer<User> employeesOfManager = ((ContractControllerEmployee) contractControllerEmployee)
+					.getContracterOfContractee(this.getUser().getUserName());
+			String employeeString = ViewHelper.findManagerEmployees(employeesOfManager);
+			System.out.println(employeeString);
+		} catch (ItemNotFoundException e) {
+			System.out.println(e.getMessage());
+		}
 
 	}
 

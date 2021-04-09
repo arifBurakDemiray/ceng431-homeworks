@@ -32,7 +32,8 @@ public class EmployeeView extends UserView {
 			{
 				System.out.println("State is updated");
 			}
-			userController.updateProduct(prd);	
+			userController.updateProduct(prd);
+			printPart();
 		} catch (ItemNotFoundException | UnauthorizedUserException e) {
 			System.out.println(e.getMessage());
 		} 				

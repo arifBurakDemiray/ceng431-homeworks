@@ -7,8 +7,13 @@
     "46210": {
         "58534": {
             "name": "Deneme",
+            "12345": {
+                "name": "DenemePart",
+                "state": "NotStarted",
+                "type": "Part"
+            },
             "state": "NotStarted",
-            "type": "Part"
+            "type": "Assembly"
         },
         "name": "Deneme",
         "state": "NotStarted",

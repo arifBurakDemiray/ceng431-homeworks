@@ -54,6 +54,6 @@ public class AuthController {
 		if(managerClass.equals("Manager") && employeeClass.equals("Employee"))
 			return;
 		throw new UnauthorizedUserException("You are not authorized to assign the employee.");
-	}
+	}	
 
 }

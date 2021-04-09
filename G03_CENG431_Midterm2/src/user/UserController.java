@@ -7,7 +7,10 @@ import contract.ContractUserProduct;
 import exception.ItemNotFoundException;
 import exception.NotSupportedException;
 import exception.UnauthorizedUserException;
+import factory.CreationResult;
+import factory.Creator;
 import fileio.FileController;
+import product.Assembly;
 import product.Product;
 import storage.IContainer;
 
@@ -61,6 +64,33 @@ public class UserController {
 			throws UnauthorizedUserException {
 		authController.authorizeUserForAssingEmployee(this.user, employee);
 		employeesOfManager.add(employee);
+	}
+	
+	public void createProductForManager(FileController fileController,Creator creator,  String productId, String productType,String productTitle)
+	{
+		try {
+			Product selectedUpperProduct = (Product) fileController.getByProductId(productId);
+			selectProduct(selectedUpperProduct);
+
+			CreationResult cr = creator.createProduct(productType, productTitle, null, null);
+			if (cr.object == null) {
+				System.out.println(cr.message);
+			} else {
+				Product createdProduct = (Product) cr.object;
+				((Assembly) selectedUpperProduct).addProduct(createdProduct);
+				System.out.println("Product : " + productTitle + " ( " + productType + " ) is produced.");
+			}
+		} catch (ItemNotFoundException | NotSupportedException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	private void selectProduct(Product product) throws NotSupportedException {
+			String managerClass = this.user.getClass().getSimpleName();
+			String productClass = product.getClass().getSimpleName();
+			if(managerClass.equals("Manager") && productClass.equals("Assembly"))
+				return;
+			throw new NotSupportedException("You cannot create a product inside a part.");
 	}
 
 }

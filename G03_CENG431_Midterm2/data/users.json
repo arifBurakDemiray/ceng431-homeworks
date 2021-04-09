@@ -1,10 +1,14 @@
 {
+    "Selahattin": {
+        "password": "123456",
+        "type": "Employee"
+    },
     "Manager": {
         "password": "123456",
         "type": "Manager"
     },
     "Furkan": {
-        "password": "Orusbu07",
+        "password": "123456",
         "type": "Manager"
     },
     "Furkannaa": {

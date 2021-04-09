@@ -11,6 +11,7 @@ import factory.CreationResult;
 import factory.Creator;
 import fileio.FileController;
 import product.Product;
+import storage.IContainer;
 import user.User;
 
 public class AdminView extends UserView {
@@ -83,16 +84,20 @@ public class AdminView extends UserView {
 	}
 
 	private void printAll() throws JSONException {
-
+		
+		System.out.println("\n\tPRODUCTS\n");
 		String productList = "{" + fileController.products().toString() + "}";
 		JSONObject jsonProduct = new JSONObject(productList);
-		String userList = "{" + fileController.users().toString() + "}";
-		JSONObject jsonUser = new JSONObject(userList);
 		String jsonStringProduct = jsonProduct.toString(4);
-		String jsonStringUser = jsonUser.toString(4);
 		String formattedProducts = StringHelper.printProductTree(jsonStringProduct);
 		System.out.println(formattedProducts);
-		System.out.println(jsonStringUser);
+		
+		System.out.println("\n\tUSERS\n");
+		IContainer<User> users =fileController.users();
+		String usersString = ViewHelper.findManagerEmployees(users);
+		System.out.println(usersString);
+	
+			
 
 	}
 	protected void menu() {
