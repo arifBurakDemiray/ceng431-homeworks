@@ -16,6 +16,10 @@ public abstract class ContractController {
 	
 	public abstract Object getContracteeOfContracter(String contracter) throws ItemNotFoundException, NotSupportedException;
 
+	public boolean addContract(Contract contract) {
+		return this.contracts.add(contract);
+	}
+	
 	protected IContainer<Contract> getContracts(){
 		return this.contracts;
 	}

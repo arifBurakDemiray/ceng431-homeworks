@@ -1,17 +1,13 @@
 {
-    "Arif": {
+    "Manager": {
         "password": "123456",
         "type": "Manager"
     },
-    "Selahattin": {
-        "password": "123456",
-        "type": "Employee"
-    },
-    "Ramazan": {
-        "password": "123456",
-        "type": "Employee"
-    },
     "Furkan": {
+        "password": "Orusbu07",
+        "type": "Manager"
+    },
+    "Furkannaa": {
         "password": "123456",
         "type": "Employee"
     }

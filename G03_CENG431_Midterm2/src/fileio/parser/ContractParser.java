@@ -7,8 +7,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import contract.Contract;
-import contract.ContractManagerEmployee;
-import contract.ContractUserProduct;
 import factory.CreationResult;
 import factory.Creator;
 import product.Product;
@@ -41,23 +39,31 @@ public class ContractParser {
 			String valType = val.getClass().getTypeName();
 			if (valType.equals("java.lang.String")) {
 				String contractor = (String) val;
-				String contractee = key;
-				CreationResult cr = creator.createContractUserProduct(contractee, contractor, users, products);
-				Contract newContract = (ContractUserProduct) cr.object;
-				if (newContract == null)
-					throw new JSONException("Wrong format " + cr.message);
+				Contract newContract = createUserProductContract(key,contractor,users,products,creator);
 				contracts.add(newContract);
 
 			} else if (valType.equals("org.json.JSONArray")) {
 				JSONArray contractor = (JSONArray) val;
-				String[] userId = contractor.join(",").replace("\"","").split(",");
-				String contractee = key;
-				CreationResult cr = creator.createContractManagerEmplooye(contractee, userId, users);
-				Contract newContract = (ContractManagerEmployee) cr.object;
-				if (newContract == null)
-					throw new JSONException("Wrong format " + cr.message);
+				Contract newContract = createManagerEmployeeContract(contractor,key,users,creator);
 				contracts.add(newContract);
 			}
 		}
+	}
+	
+	private Contract createManagerEmployeeContract(JSONArray jsonArray, String managerName,IContainer<User> users,Creator creator) throws JSONException{
+		String[] userId = jsonArray.join(",").replace("\"","").split(",");
+		CreationResult cr = creator.createContractManagerEmplooye(managerName, userId, users);
+		Contract newContract = (Contract) cr.object;
+		if (newContract == null)
+			throw new JSONException("Wrong format " + cr.message);
+		return newContract;
+	}
+	
+	private Contract createUserProductContract(String userName,String productName, IContainer<User> users, IContainer<Product> products,Creator creator) throws JSONException{
+		CreationResult cr = creator.createContractUserProduct(userName, productName, users, products);
+		Contract newContract = (Contract) cr.object;
+		if (newContract == null)
+			throw new JSONException("Wrong format " + cr.message);
+		return newContract;
 	}
 }

@@ -6,6 +6,8 @@ import storage.IContainer;
 import user.User;
 import contract.Contract;
 import exception.FileFormatException;
+import exception.ItemNotFoundException;
+import exception.NotSupportedException;
 public class FileController {
 
 	private IContainer<User> users;
@@ -38,6 +40,22 @@ public class FileController {
 		} catch (Exception e) {
 			throw new FileFormatException(e.getMessage());
 		}
+	}
+	
+	public boolean addUser(User user) {
+		return this.users.add(user);
+	}
+	
+	public boolean addProduct(Product product) {
+		return this.products.add(product);
+	}
+	
+	public User getByUserName(String userName) throws ItemNotFoundException, NotSupportedException {
+		return this.users.getByName(userName);
+	}
+	
+	public Product getByProductId(String productId) throws ItemNotFoundException, NotSupportedException {
+		return this.products.getById(productId);
 	}
 	
 	public IContainer<User> users(){

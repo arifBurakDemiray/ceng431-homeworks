@@ -45,9 +45,9 @@ public class ProductParser {
 			if (valType.equals("org.json.JSONObject")) {
 				JSONObject valObj = (JSONObject) val;
 				String productType = valObj.get("type").toString();
-				String title = key;
+				String id = key;
 				String state = valObj.get("state").toString();
-				String id = valObj.get("id").toString();
+				String title = valObj.get("name").toString();
 				CreationResult cr = creator.createProduct(productType,title,id,state); 
 				newProduct = (Product) cr.object;
 				if(newProduct == null)

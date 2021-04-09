@@ -48,7 +48,7 @@ public abstract class Product {
 		String thisId = this.getId();
 		String thisState = this.getProductState();
 		String className = this.getClass().getSimpleName();
-		String jsonValue = "\""+thisName+"\": {\"id\":\""+thisId+"\",\"state\":\""+thisState+"\",\"type\":\""+className+"\"}";
+		String jsonValue = "\""+thisId+"\": {\"name\":\""+thisName+"\",\"state\":\""+thisState+"\",\"type\":\""+className+"\"}";
 		return jsonValue;
 	}
 	public boolean equals(Product prd) {

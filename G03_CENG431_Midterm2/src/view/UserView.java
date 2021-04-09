@@ -40,11 +40,16 @@ public class UserView extends View{
 		this.contractControllerEmployee = contractControllerEmployee;
 	}
 	
-	public User getUser() {
+	protected User getUser() {
 		return user;
 	}
+	
+	protected void logout() {
+		this.user = null;
+		System.out.println("You successfully logged out.");
+	}
 
-	public void navigate() {
+	private void navigate() {
 		if (this.user instanceof Admin) {
 			(new AdminView(user,fileController,creator,contractControllerProduct)).start();
 		} else if (this.user instanceof Manager) {
@@ -56,8 +61,13 @@ public class UserView extends View{
 
 	@Override
 	public void start() {
+		menu();
 		navigate();
-		
+	}
+
+	@Override
+	protected void menu() {
+		System.out.println("Welcome to the system "+user.getUserName());
 	}
 	
 }

@@ -3,10 +3,9 @@ package user;
 import auth.AuthController;
 import contract.Contract;
 import contract.ContractController;
-import contract.ContractControllerProduct;
-import contract.ContractManagerEmployee;
 import contract.ContractUserProduct;
 import exception.ItemNotFoundException;
+import exception.NotSupportedException;
 import exception.UnauthorizedUserException;
 import fileio.FileController;
 import product.Product;
@@ -29,28 +28,30 @@ public class UserController {
 
 	public void createUser(User givenUser, FileController fController) throws UnauthorizedUserException {
 		authController.authorizeUserForCreateUser(this.user, givenUser);
-		fController.users().add(givenUser);
+		fController.addUser(givenUser);
 	}
 
 	public void createProduct(Product product, FileController fController) throws UnauthorizedUserException {
 		authController.authorizeUserForCreateProduct(this.user, product);
-		fController.products().add(product);
+		fController.addProduct(product);
 	}
 
 	public void assignProduct(User givenUser, Product product, FileController fController,
 			ContractController contractControllerProduct) throws UnauthorizedUserException {
 		authController.authorizeUserForAssign(this.user, givenUser, product);
 		try {
-			((ContractControllerProduct) contractControllerProduct).getContracterOfContractee(givenUser.getUserName());
+			contractControllerProduct.getContracterOfContractee(givenUser.getUserName());
 			System.out.println("User has already product.");
 		} catch (ItemNotFoundException e) {
 			try {
-				((ContractControllerProduct) contractControllerProduct).getContracteeOfContracter(product.getId());
+				contractControllerProduct.getContracteeOfContracter(product.getId());
 				System.out.println("Product has already user.");
 			} catch (ItemNotFoundException e1) {
 				Contract newAssignment = new ContractUserProduct(givenUser, product);
-				fController.productContracts().add(newAssignment);
+				contractControllerProduct.addContract(newAssignment);
 				System.out.println(product.getTitle() + " is assigned to " + givenUser.getUserName());
+			} catch (NotSupportedException e2) {
+				System.out.println(e2.getMessage());
 			}
 
 		}

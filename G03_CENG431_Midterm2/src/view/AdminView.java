@@ -4,7 +4,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import contract.ContractController;
-import contract.ContractControllerProduct;
 import exception.ItemNotFoundException;
 import exception.NotSupportedException;
 import exception.UnauthorizedUserException;
@@ -24,10 +23,9 @@ public class AdminView extends UserView {
 	@Override
 	public void start() {
 		menu();
-
 	}
 
-	public void createManager() {
+	private void createManager() {
 		System.out.println("\n\tUser Creation");
 		String userName = inputReceiver.getString("Username : ");
 		String userPassword = inputReceiver.getString("User Password : ");
@@ -46,7 +44,7 @@ public class AdminView extends UserView {
 		}
 	}
 
-	public void createProduct() {
+	private void createProduct() {
 		System.out.println("\n\tProduct Creation");
 		String productTitle = inputReceiver.getString("Product Title : ");
 		CreationResult cr = creator.createProduct("Assembly", productTitle, null, null);
@@ -64,10 +62,9 @@ public class AdminView extends UserView {
 
 	}
 
-	public void assignProductToManager() {
+	private void assignProductToManager() {
 		System.out.println("\n\tAssign A Product To Manager");
-		String message = ViewHelper.assingProductList(fileController,
-				((ContractControllerProduct) contractControllerProduct));
+		String message = ViewHelper.assingProductList(fileController,contractControllerProduct);
 		if (!message.equals("")) {
 			System.out.println(message);
 			return;
@@ -77,16 +74,15 @@ public class AdminView extends UserView {
 		Product product;
 		User manager;
 		try {
-			product = fileController.products().getById(productID);
-			manager = fileController.users().getByName(managerName);
-			userController.assignProduct(manager, product, fileController,((ContractControllerProduct) contractControllerProduct));
-			System.out.println(product.getTitle() + " is assigned to " + manager.getUserName());
+			product = fileController.getByProductId(productID);
+			manager = fileController.getByUserName(managerName);
+			userController.assignProduct(manager, product, fileController, contractControllerProduct);
 		} catch (ItemNotFoundException | NotSupportedException | UnauthorizedUserException e) {
 			System.out.println(e.getMessage());
 		}
 	}
 
-	public void printAll() throws JSONException {
+	private void printAll() throws JSONException {
 
 		String productList = "{" + fileController.products().toString() + "}";
 		JSONObject jsonProduct = new JSONObject(productList);
@@ -99,12 +95,12 @@ public class AdminView extends UserView {
 		System.out.println(jsonStringUser);
 
 	}
-
-	public void menu() {
-		System.out
-				.println("\n\tADMIN MENU\n\n1: Create Manager \n2: Create Product\n3: Assign a Product to a Manager\n4: Print Products and Users\n5: Logout");
+	protected void menu() {
+		String menuString = "1: Create Manager \n2: Create Product\n3: Assign a Product to a Manager\n"
+				+ "4: Print Products and Users\n5: Print Menu\n6: Logout";
+		System.out.println("\n\tADMIN MENU\n\n"+menuString);
 		String menuChoice = "";
-		while (!menuChoice.equals("5")) {
+		while (!menuChoice.equals("6")) {
 			menuChoice = inputReceiver.getString("\nChoice : ");
 			switch (menuChoice) {
 			case "1": 
@@ -123,8 +119,12 @@ public class AdminView extends UserView {
 					System.out.println(e.getMessage());}
 				break;
 			case "5": {
+				System.out.println(menuString);
 				break;
 			}
+			case "6":
+				super.logout();
+				break;
 			default:
 				System.out.println("Write a valid number.");
 			}

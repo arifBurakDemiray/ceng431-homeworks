@@ -21,4 +21,5 @@ public abstract class View {
 	}
 
 	public abstract void start();
+	protected abstract void menu();
 }

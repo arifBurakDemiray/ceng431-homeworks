@@ -1,51 +1,16 @@
 {
-    "MOTOR": {
-        "Kablo": {
-            "id": "90016",
-            "state": "Completed",
-            "type": "Part"
-        },
-        "Piston": {
-            "id": "51",
-            "state": "InProgress",
-            "type": "Part"
-        },
-        "id": "9",
-        "state": "InProgress",
-        "type": "Assembly",
-        "Tire": {
-            "id": "110",
-            "state": "InProgress",
-            "type": "Assembly",
-            "Jant": {
-                "id": "613",
-                "state": "Completed",
-                "type": "Part"
-            }
-        }
+    "84207": {
+        "name": "Deneme",
+        "state": "NotStarted",
+        "type": "Assembly"
     },
-    "ENGINE": {
-        "Piston": {
-            "id": "5",
-            "state": "InProgress",
+    "46210": {
+        "58534": {
+            "name": "Deneme",
+            "state": "NotStarted",
             "type": "Part"
         },
-        "id": "8",
-        "state": "InProgress",
-        "type": "Assembly",
-        "Tire": {
-            "id": "10",
-            "state": "InProgress",
-            "type": "Assembly",
-            "Jant": {
-                "id": "63",
-                "state": "NotStarted",
-                "type": "Part"
-            }
-        }
-    },
-    "Kaporta": {
-        "id": "28413",
+        "name": "Deneme",
         "state": "NotStarted",
         "type": "Assembly"
     }

@@ -3,8 +3,8 @@ package view;
 import java.util.Iterator;
 
 import contract.ContractController;
-import contract.ContractControllerProduct;
 import exception.ItemNotFoundException;
+import exception.NotSupportedException;
 import fileio.FileController;
 import product.Assembly;
 import product.Product;
@@ -34,11 +34,9 @@ public class ViewHelper {
 		for (User user : fileController.users()) {
 			if (user instanceof Manager) {
 				try {
-					((ContractControllerProduct) contractController).getContracterOfContractee(user.getUserName());
-					
+					contractController.getContracterOfContractee(user.getUserName());
 				} catch (ItemNotFoundException e) {
 					managers += (user.getUserName() + "\n");
-
 				}
 			}
 		}
@@ -50,10 +48,11 @@ public class ViewHelper {
 		for (Product product : fileController.products()) {
 
 			try {
-				((ContractControllerProduct) contractController).getContracteeOfContracter(product.getId());
+			  contractController.getContracteeOfContracter(product.getId());
 			} catch (ItemNotFoundException e) {
 				products += (product.getId() + ":" + product.getTitle() + "\n");
 			}
+			catch(NotSupportedException e) {}
 		}
 		return products;
 	}
@@ -78,10 +77,11 @@ public class ViewHelper {
 			}
 			else {
 				try {
-					((ContractControllerProduct) contractController).getContracteeOfContracter(product.getId());
+					 contractController.getContracteeOfContracter(product.getId());
 				} catch (ItemNotFoundException e) {
 					products += (product.getTitle() + " : " + product.getId() + "\n");
 				}
+				catch(NotSupportedException e) {}
 			}
 		}
 		
@@ -96,14 +96,12 @@ public class ViewHelper {
 		{
 			for (User employee : employeeContainer) {
 				try {
-					
-					((ContractControllerProduct) contractController).getContracterOfContractee(employee.getUserName());
+					contractController.getContracterOfContractee(employee.getUserName());
 				} catch (ItemNotFoundException e) {
 					employees += (employee.getUserName() + "\n");
 				}
 			}
 		}
-		
 		return employees;
 	}
 

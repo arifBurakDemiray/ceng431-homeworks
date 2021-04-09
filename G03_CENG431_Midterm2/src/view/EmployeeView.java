@@ -1,7 +1,6 @@
 package view;
 
 import contract.ContractController;
-import contract.ContractControllerProduct;
 import exception.ItemNotFoundException;
 import exception.UnauthorizedUserException;
 import factory.Creator;
@@ -25,10 +24,10 @@ public class EmployeeView extends UserView {
 		
 	}
 	
-	public void changeProductStatus()
+	private void changeProductStatus()
 	{		
 		try {
-			Product prd = ((ContractControllerProduct)contractControllerProduct).getContracterOfContractee(this.getUser().getUserName());
+			Product prd = (Product) contractControllerProduct.getContracterOfContractee(this.getUser().getUserName());
 			if(!prd.getProductState().equals("Completed"))
 			{
 				System.out.println("State is updated");
@@ -39,10 +38,10 @@ public class EmployeeView extends UserView {
 		} 				
 	}
 	
-	public void printPart()
+	private void printPart()
 	{		
 		try {
-			Product prd = ((ContractControllerProduct)contractControllerProduct).getContracterOfContractee(this.getUser().getUserName());
+			Product prd = (Product) contractControllerProduct.getContracterOfContractee(this.getUser().getUserName());
 			System.out.println(prd.toString());		
 		} catch (ItemNotFoundException e) {
 			System.out.println(e.getMessage());
@@ -50,11 +49,12 @@ public class EmployeeView extends UserView {
 	}
 	
 	
-	public void menu() {
+	protected void menu() {
+		String menuString = "1: Change Product Status\n2: Print Part\n3: Print Menu\n4: Logout";
 		System.out
-				.println("\n\tEMPLOYEE MENU\n\n1: Change Product Status\n2: Print Part\n3: Logout");
+				.println("\n\tEMPLOYEE MENU\n\n"+menuString);
 		String menuChoice = "";
-		while (!menuChoice.equals("3")) {
+		while (!menuChoice.equals("4")) {
 			menuChoice = inputReceiver.getString("\nChoice : ");
 			switch (menuChoice) {
 			case "1": {
@@ -66,9 +66,12 @@ public class EmployeeView extends UserView {
 				break;
 			}
 			case "3": {
+				System.out.println(menuString);
 				break;
 			}
-	
+			case "4":
+				super.logout();
+				break;
 			default:
 				System.out.println("Write a valid number.");
 			}

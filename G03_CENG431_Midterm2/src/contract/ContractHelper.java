@@ -9,6 +9,7 @@ public class ContractHelper {
 		String value = "[";
 		if (users instanceof IContainer<?>) {
 			if (users.getClass().getAnnotatedSuperclass().toString().contains("User")) {
+				@SuppressWarnings("unchecked")//It is checked double time but it gives cast error
 				IContainer<User> tempUsers = (IContainer<User>) users;
 				for (User user : tempUsers) {
 					value += "\"" + user.getUserName() + "\",";
