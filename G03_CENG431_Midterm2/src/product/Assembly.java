@@ -55,10 +55,8 @@ public class Assembly extends Product {
 
 	@Override
 	public void updateState() {
-
-		IContainer<Product> temp = this.getProducts();
 		String state = this.getProductState();
-
+		IContainer<Product> temp = this.getProducts();
 		Iterator<Product> it = temp.iterator();
 		boolean isComplete = true;
 		Product product = null;
@@ -73,13 +71,21 @@ public class Assembly extends Product {
 				this.getState().nextState();
 				isComplete = false;
 				break;
-			} else if (productState.equals("Complete")) {
+			} 
+			else if((productState.equals("InProgress") || productState.equals("NotStarted")) && state.equals("Completed") ) {
+				this.getState().backState();
+				isComplete = false;
+				break;
+			}
+			else if (productState.equals("Completed")) {
 
-			} else
+ 			} else
 				isComplete = false;
 		}
-		if (isComplete)
+		if (isComplete) {
 			this.getState().nextState();
+			if(this.getProductState().equals("InProgress"))
+				this.getState().nextState();		
 	}
-
+	}
 }

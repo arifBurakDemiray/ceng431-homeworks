@@ -1,7 +1,5 @@
 package view;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import contract.ContractController;
 import exception.ItemNotFoundException;
@@ -11,7 +9,6 @@ import factory.CreationResult;
 import factory.Creator;
 import fileio.FileController;
 import product.Product;
-import storage.IContainer;
 import user.User;
 
 public class AdminView extends UserView {
@@ -22,11 +19,11 @@ public class AdminView extends UserView {
 	}
 
 	@Override
-	public void start() {
+	public void start() throws UnauthorizedUserException {
 		menu();
 	}
 
-	private void createManager() {
+	private void createManager() throws UnauthorizedUserException {
 		System.out.println("\n\tUser Creation");
 		String userName = inputReceiver.getString("Username : ");
 		String userPassword = inputReceiver.getString("User Password : ");
@@ -36,16 +33,12 @@ public class AdminView extends UserView {
 			System.out.println(cr.message);
 		else {
 			User createdUser = (User) cr.object;
-			try {
-				userController.createUser(createdUser, fileController);
-				System.out.println("User " + userName + " is created succesfully");
-			} catch (UnauthorizedUserException e) {
-				System.out.println(e.getMessage());
-			}
+			userController.createUser(createdUser, fileController);
+			System.out.println("User " + userName + " is created succesfully");
 		}
 	}
 
-	private void createProduct() {
+	private void createProduct() throws UnauthorizedUserException {
 		System.out.println("\n\tProduct Creation");
 		String productTitle = inputReceiver.getString("Product Title : ");
 		CreationResult cr = creator.createProduct("Assembly", productTitle, null, null);
@@ -53,19 +46,15 @@ public class AdminView extends UserView {
 			System.out.println(cr.message);
 		} else {
 			Product createdProduct = (Product) cr.object;
-			try {
-				userController.createProduct(createdProduct, fileController);
-				System.out.println("Product : " + productTitle + " is produced.");
-			} catch (UnauthorizedUserException e) {
-				System.out.println(e.getMessage());
-			}
+			userController.createProduct(createdProduct, fileController);
+			System.out.println("Product : " + productTitle + " is produced.");
 		}
 
 	}
 
-	private void assignProductToManager() {
+	private void assignProductToManager() throws UnauthorizedUserException {
 		System.out.println("\n\tAssign A Product To Manager");
-		String message = ViewHelper.assingProductList(fileController,contractControllerProduct);
+		String message = ViewHelper.assingProductList(fileController, contractControllerProduct);
 		if (!message.equals("")) {
 			System.out.println(message);
 			return;
@@ -78,50 +67,37 @@ public class AdminView extends UserView {
 			product = fileController.getByProductId(productID);
 			manager = fileController.getByUserName(managerName);
 			userController.assignProduct(manager, product, fileController, contractControllerProduct);
-		} catch (ItemNotFoundException | NotSupportedException | UnauthorizedUserException e) {
+		} catch (ItemNotFoundException | NotSupportedException e) {
 			System.out.println(e.getMessage());
 		}
 	}
 
-	private void printAll() throws JSONException {
-		
-		System.out.println("\n\tPRODUCTS\n");
-		String productList = "{" + fileController.products().toString() + "}";
-		JSONObject jsonProduct = new JSONObject(productList);
-		String jsonStringProduct = jsonProduct.toString(4);
-		String formattedProducts = StringHelper.printProductTree(jsonStringProduct);
-		System.out.println(formattedProducts);
-		
-		System.out.println("\n\tUSERS\n");
-		IContainer<User> users =fileController.users();
-		String usersString = ViewHelper.findManagerEmployees(users);
-		System.out.println(usersString);
-	
-			
+	private void printAll(){
+		for(Product product: fileController.products()) {
+			ViewHelper.findProductsAndUsers(product,contractControllerProduct);
+		}
 
 	}
-	protected void menu() {
+
+	protected void menu() throws UnauthorizedUserException {
 		String menuString = "1: Create Manager \n2: Create Product\n3: Assign a Product to a Manager\n"
 				+ "4: Print Products and Users\n5: Print Menu\n6: Logout";
-		System.out.println("\n\tADMIN MENU\n\n"+menuString);
+		System.out.println("\n\tADMIN MENU\n\n" + menuString);
 		String menuChoice = "";
 		while (!menuChoice.equals("6")) {
 			menuChoice = inputReceiver.getString("\nChoice : ");
 			switch (menuChoice) {
-			case "1": 
+			case "1":
 				createManager();
 				break;
-			case "2": 
+			case "2":
 				createProduct();
 				break;
-			case "3": 
+			case "3":
 				assignProductToManager();
 				break;
-			case "4": 
-				try {
-					printAll();
-				} catch (JSONException e) {
-					System.out.println(e.getMessage());}
+			case "4":
+				printAll();
 				break;
 			case "5": {
 				System.out.println(menuString);

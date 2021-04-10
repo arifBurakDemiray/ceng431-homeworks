@@ -1,7 +1,5 @@
 package view;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 import contract.ContractController;
 import contract.ContractControllerEmployee;
 import contract.ContractControllerProduct;
@@ -24,7 +22,7 @@ public class ManagerView extends UserView {
 	}
 
 	@Override
-	public void start() {
+	public void start() throws UnauthorizedUserException {
 		try {
 			managerProduct = (Product) this.contractControllerProduct
 					.getContracterOfContractee(getUser().getUserName());
@@ -36,7 +34,7 @@ public class ManagerView extends UserView {
 
 	}
 
-	public void createEmployee() {
+	public void createEmployee() throws UnauthorizedUserException {
 		System.out.println("\n\tUser Creation");
 		String userName = inputReceiver.getString("Employee username : ");
 		String userPassword = inputReceiver.getString("Employee password : ");
@@ -46,34 +44,25 @@ public class ManagerView extends UserView {
 			System.out.println(cr.message);
 		else {
 			User createdUser = (User) cr.object;
-			try {
-				userController.createUser(createdUser, fileController);
-				((ContractControllerEmployee) contractControllerEmployee).addEmployee(this.getUser(), createdUser);
-
-			} catch (UnauthorizedUserException e) {
-				System.out.println(e.getMessage());
-			}
-
+			userController.createUser(createdUser, fileController);
+			((ContractControllerEmployee) contractControllerEmployee).addEmployee(this.getUser(), createdUser);
 		}
 	}
 
 	public void createProduct() {
 		System.out.println("\n\tProduct Creation");
-
-		// String st = ViewHelper.findAssembliesOfManager(managerProduct,
-		// contractControllerEmployee);
-		// StringHelper.printProductTree(managerProduct.toString());
-
-		System.out.println(managerProduct.toString());
+		String ids = ViewHelper.findManagerAssemblies(managerProduct);
 		String productId = inputReceiver.getString("Product ID which you wanted to insert new product  : ");
-		String productTitle = inputReceiver.getString("Product Title : ");
-		String productType = inputReceiver.getString("Product Type : \"Assembly\" or \"Part\"");
-		userController.createProductForManager(fileController, creator, productId, productType,
-				productTitle);
-
+		boolean isAssemblyPartOfProduct = ids.contains(productId);
+		if (isAssemblyPartOfProduct) {
+			String productTitle = inputReceiver.getString("Product Title : ");
+			String productType = inputReceiver.getString("Product Type : \"Assembly\" or \"Part\"");
+			userController.createProductForManager(fileController, creator, productId, productType, productTitle);
+		} else
+			System.out.println("There is no assembly that has id " + productId);
 	}
 
-	public void assignPartToEmployee() {
+	public void assignPartToEmployee() throws UnauthorizedUserException {
 		System.out.println("\n\tAssign A Part To Employee");
 		try {
 			IContainer<User> employeesOfManager = ((ContractControllerEmployee) contractControllerEmployee)
@@ -88,38 +77,23 @@ public class ManagerView extends UserView {
 				System.out.println(emptyProducts + "\n" + emptyEmployees);
 				String partId = inputReceiver.getString("Part ID : ");
 				String employeeName = inputReceiver.getString("Employee Name : ");
-				Product part;
-				User employee;
-				part = fileController.products().getById(partId);
-				employee = fileController.users().getByName(employeeName);
+				Product part = fileController.products().getById(partId);
+				User employee = fileController.users().getByName(employeeName);
 				userController.assignProduct(employee, part, fileController, contractControllerProduct);
 			}
 
-		} catch (ItemNotFoundException | NotSupportedException | UnauthorizedUserException e) {
+		} catch (ItemNotFoundException | NotSupportedException e) {
 			System.out.println(e.getMessage());
 		}
 
 	}
 
-	public void printAll() throws JSONException {
-		System.out.println("\n\tPRODUCTS\n");
-		String productString = "{" + managerProduct.toString() + "}";
-		JSONObject jsonProduct = new JSONObject(productString);
-		System.out.println(jsonProduct.toString(4));
-
-		try {
-			System.out.println("\n\tEMPLOYEES\n");
-			IContainer<User> employeesOfManager = ((ContractControllerEmployee) contractControllerEmployee)
-					.getContracterOfContractee(this.getUser().getUserName());
-			String employeeString = ViewHelper.findManagerEmployees(employeesOfManager);
-			System.out.println(employeeString);
-		} catch (ItemNotFoundException e) {
-			System.out.println(e.getMessage());
-		}
-
+	public void printAll() {
+		System.out.println("\n\tPRODUCTS and EMPLOYEES\n");
+		ViewHelper.findProductsAndUsers(managerProduct, contractControllerProduct);
 	}
 
-	public void menu() {
+	public void menu() throws UnauthorizedUserException {
 		String menuString = "1: Create Employee\n2: Create Product\n3: Assign a Part to an Employee\n"
 				+ "4: Print Products and Users\n5: Print Menu\n6: Logout";
 		System.out.println("\n\tMANAGER MENU\n\n" + menuString);
@@ -140,11 +114,7 @@ public class ManagerView extends UserView {
 				break;
 			}
 			case "4": {
-				try {
-					printAll();
-				} catch (JSONException e) {
-					System.out.println(e.getMessage());
-				}
+				printAll();
 				break;
 			}
 			case "5": {

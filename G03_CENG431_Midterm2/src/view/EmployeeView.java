@@ -19,22 +19,24 @@ public class EmployeeView extends UserView {
 	}
 
 	@Override
-	public void start() {
+	public void start() throws UnauthorizedUserException {
 		menu();
 		
 	}
 	
-	private void changeProductStatus()
+	private void changeProductStatus() throws UnauthorizedUserException
 	{		
 		try {
 			Product prd = (Product) contractControllerProduct.getContracterOfContractee(this.getUser().getUserName());
 			if(!prd.getProductState().equals("Completed"))
 			{
 				System.out.println("State is updated");
+				userController.updateProduct(prd);
 			}
-			userController.updateProduct(prd);
-			printPart();
-		} catch (ItemNotFoundException | UnauthorizedUserException e) {
+			else {
+				System.out.println("This product is already completed.");
+			}
+		} catch (ItemNotFoundException e) {
 			System.out.println(e.getMessage());
 		} 				
 	}
@@ -43,14 +45,14 @@ public class EmployeeView extends UserView {
 	{		
 		try {
 			Product prd = (Product) contractControllerProduct.getContracterOfContractee(this.getUser().getUserName());
-			System.out.println(prd.toString());		
+			System.out.println("\nTitle: "+prd.getTitle()+"\nId: "+prd.getId()+"\nState: "+prd.getProductState()+"\n");
 		} catch (ItemNotFoundException e) {
 			System.out.println(e.getMessage());
 		} 				
 	}
 	
 	
-	protected void menu() {
+	protected void menu() throws UnauthorizedUserException{
 		String menuString = "1: Change Product Status\n2: Print Part\n3: Print Menu\n4: Logout";
 		System.out
 				.println("\n\tEMPLOYEE MENU\n\n"+menuString);

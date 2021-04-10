@@ -3,6 +3,7 @@ package view;
 import contract.ContractController;
 import contract.ContractControllerEmployee;
 import contract.ContractControllerProduct;
+import exception.UnauthorizedUserException;
 import factory.Creator;
 import fileio.FileController;
 import user.Admin;
@@ -49,7 +50,7 @@ public class UserView extends View{
 		System.out.println("You successfully logged out.");
 	}
 
-	private void navigate() {
+	private void navigate() throws UnauthorizedUserException {
 		if (this.user instanceof Admin) {
 			(new AdminView(user,fileController,creator,contractControllerProduct)).start();
 		} else if (this.user instanceof Manager) {
@@ -60,13 +61,13 @@ public class UserView extends View{
 	}
 
 	@Override
-	public void start() {
+	public void start() throws UnauthorizedUserException {
 		menu();
 		navigate();
 	}
 
 	@Override
-	protected void menu() {
+	protected void menu() throws UnauthorizedUserException{
 		System.out.println("Welcome to the system "+user.getUserName());
 	}
 	

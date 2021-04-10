@@ -19,6 +19,10 @@ public class ProductState {
 		this.state.nextState(this);
 	}
 
+	public void backState() {
+		this.state.backState(this);
+	}
+	
 	protected void setState(State state) {
 		this.state = state;
 	}

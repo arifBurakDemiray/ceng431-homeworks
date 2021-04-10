@@ -1,5 +1,6 @@
 package view;
 
+import exception.UnauthorizedUserException;
 import factory.Creator;
 import fileio.FileController;
 
@@ -20,6 +21,6 @@ public abstract class View {
 		this.inputReceiver = new InputReceiver();
 	}
 
-	public abstract void start();
-	protected abstract void menu();
+	public abstract void start() throws UnauthorizedUserException;
+	protected abstract void menu() throws UnauthorizedUserException;
 }

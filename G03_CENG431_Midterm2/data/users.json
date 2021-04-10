@@ -1,4 +1,16 @@
 {
+    "Burak": {
+        "password": "123456",
+        "type": "Employee"
+    },
+    "Arif": {
+        "password": "123456",
+        "type": "Manager"
+    },
+    "Adem": {
+        "password": "123456",
+        "type": "Employee"
+    },
     "Selahattin": {
         "password": "123456",
         "type": "Employee"
