@@ -3,10 +3,8 @@ package fileio;
 import java.io.IOException;
 
 import contract.Contract;
-import factory.Creator;
-import fileio.parser.ContractParser;
-import fileio.parser.ProductParser;
-import fileio.parser.UserParser;
+import factory.ICreatorService;
+import fileio.parser.Parser;
 import product.Product;
 import storage.ContractContainer;
 import storage.IContainer;
@@ -17,26 +15,28 @@ import user.User;
 
 public class FileIO implements IFileIO {
 	private FileRead fRead;
-	private Creator creator;
+	private ICreatorService creator;
 	private FileWrite fWrite;
+	private Parser parser;
 
-	public FileIO(Creator creator) {
+	public FileIO(ICreatorService creator) {
 		this.fRead = new FileRead(); // initialise file read
 		this.creator = creator;
 		this.fWrite = new FileWrite(); // initialise file write
+		this.parser = new Parser();
 	}
 
 	@Override
 	public IContainer<Product> readProducts(String filePath) throws Exception {
 		IContainer<Product> products = null;
 		try {
-			String fileAll = fRead.readFile(filePath);
-			if (!fileAll.isBlank())
-				products = (new ProductParser()).parseProducts(fileAll, this.creator);
+			String fileAll = fRead.readFile(filePath);// read file
+			if (!fileAll.isBlank())// if not blank
+				products = parser.parseProducts(fileAll, this.creator); // parse products
 			else
-				products = new ProductContainer();
+				products = new ProductContainer(); // init empty repo
 		} catch (IOException e) {
-			products = new ProductContainer();
+			products = new ProductContainer(); // init empty repo
 		}
 
 		return products;
@@ -46,16 +46,16 @@ public class FileIO implements IFileIO {
 	public IContainer<User> readUsers(String filePath) throws Exception {
 		IContainer<User> users = null;
 		try {
-			String fileAll = fRead.readFile(filePath);
-			if (!fileAll.isBlank())
-				users = (new UserParser()).parseUsers(fileAll, this.creator);
+			String fileAll = fRead.readFile(filePath); // read file
+			if (!fileAll.isBlank()) // if not blank
+				users = parser.parseUsers(fileAll, this.creator); // parse users
 			else
-				users = new UserContainer();
+				users = new UserContainer(); // init empty repo
 		} catch (IOException e) {
-			users = new UserContainer();
+			users = new UserContainer();// init empty repo
 		}
 
-		users.add(new Admin("SYSADMIN", "SYSADMIN"));
+		users.add(new Admin("SYSADMIN", "SYSADMIN")); // add admin to the system
 		return users;
 	}
 
@@ -64,13 +64,14 @@ public class FileIO implements IFileIO {
 			throws Exception {
 		IContainer<Contract> contracts = null;
 		try {
-			String fileAll = fRead.readFile(filePath);
-			if (!fileAll.isBlank())
-				contracts = (new ContractParser()).parseContracts(fileAll, this.creator, users, products);
+			String fileAll = fRead.readFile(filePath); // read file
+			if (!fileAll.isBlank()) // if not blank
+				contracts = parser.parseContracts(fileAll, this.creator, users, products); // parse
+																							// contracts
 			else
-				contracts = new ContractContainer();
+				contracts = new ContractContainer();// init empty repo
 		} catch (IOException e) {
-			contracts = new ContractContainer();
+			contracts = new ContractContainer();// init empty repo
 		}
 
 		return contracts;
@@ -79,14 +80,14 @@ public class FileIO implements IFileIO {
 	@Override
 	public void writeUsers(IContainer<User> users, String filePath) throws Exception {
 		User admin = users.getByName("SYSADMIN");
-		users.remove(admin);
+		users.remove(admin);// remove admin while writing
 		fWrite.writeItems(users, filePath);
 		users.add(admin);
 	}
 
 	@Override
 	public void writeProducts(IContainer<Product> products, String filePath) throws Exception {
-		FileIOHelper.updateProductsStates(products);
+		FileIOHelper.updateProductsStates(products);// update main products' states
 		fWrite.writeItems(products, filePath);
 
 	}

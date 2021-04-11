@@ -1,6 +1,5 @@
 package user;
 
-import auth.AuthController;
 import contract.Contract;
 import contract.ContractController;
 import contract.ContractUserProduct;
@@ -8,16 +7,18 @@ import exception.ItemNotFoundException;
 import exception.NotSupportedException;
 import exception.UnauthorizedUserException;
 import factory.CreationResult;
-import factory.Creator;
+import factory.ICreatorService;
 import fileio.FileController;
 import product.Assembly;
 import product.Product;
 import storage.IContainer;
+import user.auth.AuthController;
+import user.auth.IAuthService;
 
 public class UserController {
 
 	private User user;
-	private AuthController authController; // AuthController object to authenticate user for processes
+	private IAuthService authService; // AuthController object to authenticate user for processes
 
 	/**
 	 * The constructor for UserController
@@ -26,7 +27,7 @@ public class UserController {
 	 */
 	public UserController(User user) {
 		this.user = user;
-		this.authController = new AuthController();
+		this.authService = new AuthController();
 	}
 
 	/**
@@ -38,9 +39,11 @@ public class UserController {
 	 *                                   process, throw UnauthorizedUserException
 	 */
 	public void updateProduct(Product product) throws UnauthorizedUserException {
+
 		// try to authorise loggedInUser for process or throw an exception
-		authController.authorizeUserForUpdate(this.user);
+		authService.authorizeUserForUpdate(this.user);
 		// if loggedInUser is authorised, update the state of given product
+
 		product.updateState();
 	}
 
@@ -53,10 +56,12 @@ public class UserController {
 	 *                                   process, throw UnauthorizedUserException
 	 */
 	public void createUser(User givenUser, FileController fController) throws UnauthorizedUserException {
+
 		// try to authorise loggedInUser for process or throw an exception
-		authController.authorizeUserForCreateUser(this.user, givenUser);
+		authService.authorizeUserForCreateUser(this.user, givenUser);
 		// if loggedInUser is authorised, add the created user to the userContainer in
 		// the fController invoking fController.addUser()
+
 		fController.addUser(givenUser);
 	}
 
@@ -69,10 +74,12 @@ public class UserController {
 	 *                                   process, throw UnauthorizedUserException
 	 */
 	public void createProduct(Product product, FileController fController) throws UnauthorizedUserException {
+
 		// try to authorise loggedInUser for process or throw an exception
-		authController.authorizeUserForCreateProduct(this.user, product);
+		authService.authorizeUserForCreateProduct(this.user, product);
 		// if loggedInUser is authorised, add the created product to the
 		// productContainer in the fController invoking fController.addProduct()
+
 		fController.addProduct(product);
 	}
 
@@ -88,8 +95,10 @@ public class UserController {
 	 */
 	public void assignProduct(User givenUser, Product product, FileController fController,
 			ContractController contractControllerProduct) throws UnauthorizedUserException {
+
 		// try to authorise loggedInUser for process or throw an exception
-		authController.authorizeUserForAssign(this.user, givenUser, product);
+		authService.authorizeUserForAssign(this.user, givenUser, product);
+
 		try {
 			// Control that given user has already a product or not. If user has no product
 			// catch the exception and try to assign product
@@ -125,7 +134,7 @@ public class UserController {
 	 */
 	public void assignEmployee(User employee, FileController fController, IContainer<User> employeesOfManager)
 			throws UnauthorizedUserException {
-		authController.authorizeUserForAssingEmployee(this.user, employee);
+		authService.authorizeUserForAssingEmployee(this.user, employee);
 		employeesOfManager.add(employee);
 	}
 
@@ -141,8 +150,9 @@ public class UserController {
 	 *                       part /
 	 * @param productTitle   = gotten product title input from manager
 	 */
-	public void createProductForManager(FileController fileController, Creator creator, String productId,
+	public void createProductForManager(FileController fileController, ICreatorService creator, String productId,
 			String productType, String productTitle) {
+
 		try {
 			// Try to find selected product which the created product is inserted into it
 			Product selectedUpperProduct = (Product) fileController.getByProductId(productId);

@@ -1,11 +1,9 @@
 package exception;
 
-public class NotSupportedException extends Exception{
+public class NotSupportedException extends Exception {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1394184048866781363L;
+
 	public NotSupportedException() {
 		super("ItemNotFoundException, that type of item is not found.");
 
@@ -30,4 +28,5 @@ public class NotSupportedException extends Exception{
 
 	public String getMessage() {
 		return super.getMessage();
-}}
+	}
+}

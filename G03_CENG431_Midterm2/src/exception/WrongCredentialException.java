@@ -2,9 +2,6 @@ package exception;
 
 public class WrongCredentialException extends Exception {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -3860193685789009132L;
 
 	public WrongCredentialException() {

@@ -3,7 +3,7 @@ package view;
 import contract.ContractController;
 import exception.ItemNotFoundException;
 import exception.UnauthorizedUserException;
-import factory.Creator;
+import factory.ICreatorService;
 import fileio.FileController;
 import product.Product;
 import user.User;
@@ -20,7 +20,8 @@ public class EmployeeView extends UserView {
 	 * @param contractControllerProduct = it controls the contract between product
 	 *                                  and user
 	 */
-	protected EmployeeView(User user, FileController fileController, Creator creator,
+
+	protected EmployeeView(User user, FileController fileController, ICreatorService creator,
 			ContractController contractControllerProduct) {
 		super(user, fileController, creator, contractControllerProduct);
 	}

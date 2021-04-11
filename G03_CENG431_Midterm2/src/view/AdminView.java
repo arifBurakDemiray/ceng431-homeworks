@@ -5,7 +5,7 @@ import exception.ItemNotFoundException;
 import exception.NotSupportedException;
 import exception.UnauthorizedUserException;
 import factory.CreationResult;
-import factory.Creator;
+import factory.ICreatorService;
 import fileio.FileController;
 import product.Product;
 import user.User;
@@ -22,7 +22,9 @@ public class AdminView extends UserView {
 	 * @param contractControllerProduct = it controls the contract between product
 	 *                                  and user
 	 */
-	protected AdminView(User user, FileController fileController, Creator creator,
+
+	protected AdminView(User user, FileController fileController, ICreatorService creator,
+
 			ContractController contractControllerProduct) {
 		super(user, fileController, creator, contractControllerProduct);
 	}

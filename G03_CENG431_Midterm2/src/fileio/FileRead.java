@@ -7,10 +7,18 @@ import java.io.IOException;
 
 public class FileRead {
 
-	public FileRead(){}
-	
-	public String readFile(String filename) throws IOException{
-		
+	protected FileRead() {
+	}
+
+	/**
+	 * This function reads a file
+	 * 
+	 * @param filename of the file
+	 * @returns readed file in string format
+	 * @throws IOException
+	 */
+	protected String readFile(String filename) throws IOException {
+
 		File file = new File(filename); // opening file
 		BufferedReader br;
 		String fileAll = "";
@@ -18,13 +26,13 @@ public class FileRead {
 			br = new BufferedReader(new FileReader(file));
 			String line;
 			while ((line = br.readLine()) != null) {
-				fileAll += line;
+				fileAll += line;// add all lines to the string
 			}
-			br.close();
+			br.close();// close file
 		} catch (IOException e) {
-			throw new IOException("Could not be read "+filename);
+			throw new IOException("Could not be read " + filename);
 		}
 		return fileAll;
-		
+
 	}
 }

@@ -14,37 +14,36 @@ import storage.UserContainer;
 import state.*;
 import user.*;
 
-public class Creator {
+public class Creator implements ICreatorService{
 
-	private final Validator validator;
+	private final IValidatorService validator;
 
 	public Creator() {
 		validator = new Validator();
 	}
 
+	// this function creates a product
 	public CreationResult createProduct(String type, String title, String id, String state) {
-		ValidationResult vrId;
-		if(id == null){
+		ValidationResult vrId; // id validation result
+		if (id == null) {
 			id = RandomFactory.randomId();
-		 	vrId = validator.validateId(id);
-			while(!vrId.isValid()) {
+			vrId = validator.validateId(id);
+			while (!vrId.isValid()) {// if id null create a random id until it is valid
 				id = RandomFactory.randomId();
-				vrId = validator.validateId(id);
+				vrId = validator.validateId(id); // and validate it
 			}
-		}
-		else
-		{
+		} else { // if not null
 			vrId = validator.validateId(id);
 		}
-		ValidationResult result = validator.validateProduct(id,type);
-		CreationResult cr = new CreationResult(null, "");
+		ValidationResult result = validator.validateProduct(id, type);// validate product
+		CreationResult cr = new CreationResult(null, "");// creation result for product type
 		Product prd = null;
-		if (result.isValid()) {
+		if (result.isValid() && vrId.isValid()) {
 			cr = createProductState(state);
 			ProductState prdSt = (ProductState) cr.object;
-			if (prdSt != null) {
+			if (prdSt != null) {// if product state is not null
 				switch (type) {
-				case "Assembly":
+				case "Assembly":// create them
 					prd = new Assembly(id, title, prdSt);
 					break;
 				case "Part":
@@ -52,18 +51,18 @@ public class Creator {
 					break;
 				}
 			}
-		}
-		return new CreationResult(prd, result.message + " " + cr.message);
+		} // return newly created product
+		return new CreationResult(prd, result.message + " " + cr.message + " " + vrId.message);
 	}
 
 	private CreationResult createProductState(String state) {
-		State st = null;
+		State st = null;// this function creates a product state
 		ProductState pst = null;
 		String msg = "";
-		if(state != null){
+		if (state != null) {
 			ValidationResult vr = validator.validateState(state);
 			boolean result = vr.isValid();
-			if(result){
+			if (result) { // if state validation is valid
 				switch (state) {
 				case "NotStarted":
 					st = new NotStarted();
@@ -78,18 +77,18 @@ public class Creator {
 					pst = new ProductState(st);
 					break;
 				}
-				msg=vr.message;
+				msg = vr.message;
 			}
-		}
-		else
+		} else
 			pst = new ProductState();
-		return new CreationResult(pst,msg);
+		return new CreationResult(pst, msg);
 	}
 
+	// this function creates an user
 	public CreationResult createUser(String name, String type, String password) {
-		ValidationResult result = validator.validateUser(name, type, password);
+		ValidationResult result = validator.validateUser(name, type, password); // validate inputs
 		User usr = null;
-		if (result.isValid()) {
+		if (result.isValid()) {// if valid create user
 			switch (type) {
 			case "Manager":
 				usr = new Manager(name, password);
@@ -98,46 +97,48 @@ public class Creator {
 				usr = new Employee(name, password);
 				break;
 			}
-		}
+		} // return result
 		return new CreationResult(usr, result.message);
 	}
 
-	public CreationResult createContractUserProduct(String userName, String productId, 
-			IContainer<User> users,IContainer<Product> products) {
-		
-		ValidationResult result = validator.validateContractProduct(userName,productId,users,products);
+	// create user-product contract
+	public CreationResult createContractUserProduct(String userName, String productId, IContainer<User> users,
+			IContainer<Product> products) {
+
+		// validate inputs
+		ValidationResult result = validator.validateContractProduct(userName, productId, users, products);
 		Contract contract = null;
-		if(result.isValid()){
+		if (result.isValid()) {// if is valid
 			try {
-				Product prd = products.getById(productId);
+				Product prd = products.getById(productId);// try to get them
 				User usr = users.getByName(userName);
-				contract = new ContractUserProduct(usr,prd);
-			}  catch (NotSupportedException | ItemNotFoundException e) {
-				
+				contract = new ContractUserProduct(usr, prd);
+			} catch (NotSupportedException | ItemNotFoundException e) {
+
 			}
-		}
-		return new CreationResult(contract,result.message);
+		} // return result
+		return new CreationResult(contract, result.message);
 	}
-	
+
+	// this function creates user-user contract
 	public CreationResult createContractManagerEmplooye(String managerName, String[] userId, IContainer<User> users) {
-		
-		ValidationResult result = validator.validateContractEmployee(managerName,userId,users);
+		// validate inputs
+		ValidationResult result = validator.validateContractEmployee(managerName, userId, users);
 		Contract contract = null;
-		if(result.isValid()){
-			try {
+		if (result.isValid()) {
+			try {// create user container and add users to container
 				IContainer<User> managerEmployees = new UserContainer();
 				User manager = users.getByName(managerName);
 				for (String user : userId) {
 					User employee = users.getByName(user);
-					managerEmployees.add(employee);					
-				}				
-				contract = new ContractManagerEmployee(manager,managerEmployees);
-			}  catch (NotSupportedException | ItemNotFoundException e) {
-				
-			}
-		}
-		return new CreationResult(contract,result.message);
-	}
-	
-}
+					managerEmployees.add(employee);
+				}
+				contract = new ContractManagerEmployee(manager, managerEmployees);
+			} catch (NotSupportedException | ItemNotFoundException e) {
 
+			}
+		} // return result
+		return new CreationResult(contract, result.message);
+	}
+
+}

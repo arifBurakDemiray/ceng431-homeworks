@@ -4,7 +4,7 @@ import contract.ContractController;
 import contract.ContractControllerEmployee;
 import contract.ContractControllerProduct;
 import exception.UnauthorizedUserException;
-import factory.Creator;
+import factory.ICreatorService;
 import fileio.FileController;
 import user.Admin;
 import user.Employee;
@@ -26,7 +26,7 @@ public class UserView extends View {
 	 * @param fileController = holds containers ( file data )
 	 * @param creator        = creator to create any type of instance of class
 	 */
-	public UserView(User user, FileController fileController, Creator creator) {
+	public UserView(User user, FileController fileController, ICreatorService creator) {
 		super(fileController, creator);
 		this.user = user;
 		this.userController = new UserController(user);
@@ -44,9 +44,10 @@ public class UserView extends View {
 	 * @param contractControllerProduct = it controls the contract between product
 	 *                                  and user
 	 */
-	protected UserView(User user, FileController fileController, Creator creator,
+	protected UserView(User user, FileController fileController, ICreatorService creator,
 			ContractController contractControllerProduct) {
 		super(fileController, creator);
+
 		this.user = user;
 		this.userController = new UserController(user);
 		this.contractControllerProduct = contractControllerProduct;
@@ -64,7 +65,7 @@ public class UserView extends View {
 	 * @param contractControllerEmployee = it controls the contract between
 	 *                                   employees and manager
 	 */
-	protected UserView(User user, FileController fileController, Creator creator,
+	protected UserView(User user, FileController fileController, ICreatorService creator,
 			ContractController contractControllerProduct, ContractController contractControllerEmployee) {
 		super(fileController, creator);
 		this.user = user;

@@ -1,14 +1,13 @@
 package view;
 
-import auth.Login;
 import exception.FileFormatException;
-import exception.ItemNotFoundException;
-import exception.NotSupportedException;
 import exception.UnauthorizedUserException;
 import exception.WrongCredentialException;
-import factory.Creator;
+import factory.ICreatorService;
 import fileio.FileController;
+import user.Login;
 import user.User;
+import user.auth.ILoginService;
 
 public class AppView extends View {
 
@@ -24,7 +23,8 @@ public class AppView extends View {
 	 * @param fileController = holds containers ( file data )
 	 * @param creator        = creator to create any type of instance of class
 	 */
-	protected AppView(FileController fileController, Creator creator) {
+
+	protected AppView(FileController fileController, ICreatorService creator) {
 		super(fileController, creator);
 	}
 
@@ -42,13 +42,11 @@ public class AppView extends View {
 	 * invoking login.login() function
 	 * 
 	 * @throws WrongCredentialException
-	 * @throws ItemNotFoundException
-	 * @throws NotSupportedException
 	 */
-	private void login() throws WrongCredentialException, ItemNotFoundException, NotSupportedException {
+	private void login() throws WrongCredentialException {
 		String userName = this.inputReceiver.getString("Username : ");
 		String password = this.inputReceiver.getString("Password : ");
-		Login login = new Login();
+		ILoginService login = new Login();
 		// Try to log in user if user exists in the system, else throw
 		// WrongCredentialException
 		this.user = login.login(userName, password, fileController.users());
@@ -57,7 +55,6 @@ public class AppView extends View {
 	/**
 	 * The function initialise the processes of the app view
 	 * 
-	 * @throws UnauthorizedUserException if user is not authorised for a process
 	 */
 	public void start() {
 		try {
@@ -103,8 +100,7 @@ public class AppView extends View {
 					login();
 					summonUserView();
 					save();
-				} catch (WrongCredentialException | ItemNotFoundException | NotSupportedException
-						| UnauthorizedUserException e) {
+				} catch (WrongCredentialException | UnauthorizedUserException e) {
 					System.out.println(e.getMessage());
 				}
 			} else

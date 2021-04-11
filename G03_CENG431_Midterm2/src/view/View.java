@@ -2,12 +2,13 @@ package view;
 
 import exception.UnauthorizedUserException;
 import factory.Creator;
+import factory.ICreatorService;
 import fileio.FileController;
 
 public abstract class View {
 
 	protected InputReceiver inputReceiver; // it get input from user
-	protected Creator creator; // creator to create any type of instance of class
+	protected ICreatorService creator; // creator to create any type of instance of class
 	protected FileController fileController; // holds containers ( file data )
 
 	/**
@@ -25,7 +26,7 @@ public abstract class View {
 	 * @param fController
 	 * @param crt
 	 */
-	protected View(FileController fController, Creator crt) {
+	protected View(FileController fController, ICreatorService crt) {
 		fileController = fController;
 		creator = crt;
 		this.inputReceiver = new InputReceiver();
