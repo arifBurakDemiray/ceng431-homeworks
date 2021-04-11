@@ -178,9 +178,8 @@ public class ViewHelper {
 	}
 
 	/**
-	 * ?????? BOŞŞŞ
-	 * The function is a helper function which print users and their assigned
-	 * products
+	 * ?????? BOŞŞŞ The function is a helper function which print users and their
+	 * assigned products
 	 * 
 	 * @param userContainer             which is gotten from fileController in
 	 *                                  ManagerView&AdminView, holds users list
