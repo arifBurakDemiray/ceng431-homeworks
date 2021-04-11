@@ -1,3 +1,5 @@
 eclipse.preferences.version=1
 encoding//src/fileio/parser/JSONParser.java=UTF-8
+encoding//src/user/UserController.java=UTF-8
 encoding//src/view/ManagerView.java=UTF-8
+encoding//src/view/ViewHelper.java=UTF-8
