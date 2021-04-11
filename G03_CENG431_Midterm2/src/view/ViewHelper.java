@@ -178,38 +178,6 @@ public class ViewHelper {
 	}
 
 	/**
-	 * ?????? BOŞŞŞ The function is a helper function which print users and their
-	 * assigned products
-	 * 
-	 * @param userContainer             which is gotten from fileController in
-	 *                                  ManagerView&AdminView, holds users list
-	 * @param contractControllerProduct to detect user's product
-	 * @return String of Strings of user and product
-	 */
-	public static String findUsers(IContainer<User> userContainer, ContractController contractControllerProduct) {
-		String users = "";
-		if (userContainer != null) {
-
-			// Travel to userContainer
-			for (User user : userContainer) {
-				// hold user name
-				String userName = user.getUserName();
-				users += (userName + ":");
-				try {
-					// Try to detect user's assigned product if exists
-					Product prd = (Product) contractControllerProduct.getContracterOfContractee(userName);
-					// hold product info
-					users += prd.getTitle();
-				} catch (ItemNotFoundException e) {
-					// hold that message if user has no product
-					users += (" No product found for" + userName + "\n");
-				}
-			}
-		}
-		return users;
-	}
-
-	/**
 	 * Invoked from ManagerView createProduct() The function returns the assembly
 	 * list of main product of manager using recursive
 	 * 
@@ -249,6 +217,42 @@ public class ViewHelper {
 		}
 		return ids;
 	}
+	
+	/**
+	 * ?????? BOŞŞŞ
+	 * The function is a helper function which print users and their assigned
+	 * products
+	 * 
+	 * @param userContainer             which is gotten from fileController in
+	 *                                  ManagerView&AdminView, holds users list
+	 * @param contractControllerProduct to detect user's product
+	 * @return String of Strings of user and product
+	 */
+	public static String findUsers(IContainer<User> userContainer, ContractController contractControllerProduct) {
+		String users = "";
+		if (userContainer != null) {
+
+			// Travel to userContainer
+			for (User user : userContainer) {
+				
+				String userName = user.getUserName();
+				if(!userName.equals("SYSADMIN"))
+				{
+					try {
+						// Try to detect user's assigned product if exists
+						contractControllerProduct.getContracterOfContractee(userName);
+					} catch (ItemNotFoundException e) {				
+						users += (userName + ":");
+						// hold that message if user has no product
+						users += (" No product found for " + userName + "\n");
+					}
+				}
+				
+			}
+		}
+		return users;
+	}
+
 
 	/**
 	 * Invoked from AdminView and ManagerView The function is a helper function
@@ -322,11 +326,21 @@ public class ViewHelper {
 	 * @return
 	 */
 	private static String configureMessage(Product product, User user, int blankInt) {
+		String message = "";
+		String lineVariable = ""; 
 		String blank = ("  ").repeat(blankInt);
-		String message = blank + "Product Title : " + product.getTitle() + "\n" + blank + "Product Id : "
-				+ product.getId() + "\n" + blank + "Product State : " + product.getProductState() + "\n" + blank
-				+ "Product Type : " + product.getClass().getSimpleName() + "\n" + blank;
-		String lineVariable = "Assigned User : " + user.getUserName() + " - " + user.getClass().getSimpleName();
+		if (product != null) {
+
+			message = blank + "Product Title : " + product.getTitle() + "\n" + blank + "Product Id : " + product.getId()
+					+ "\n" + blank + "Product State : " + product.getProductState() + "\n" + blank + "Product Type : "
+					+ product.getClass().getSimpleName() + "\n" + blank;
+
+		}
+		if(user != null)
+		{
+			lineVariable = "Assigned User : " + user.getUserName() + " - " + user.getClass().getSimpleName();
+		}
+	
 		String line = "-";
 		message += lineVariable;
 		message += "\n" + blank + line.repeat(lineVariable.length());

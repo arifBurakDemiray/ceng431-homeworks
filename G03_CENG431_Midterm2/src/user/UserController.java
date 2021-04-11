@@ -11,7 +11,6 @@ import factory.ICreatorService;
 import fileio.FileController;
 import product.Assembly;
 import product.Product;
-import storage.IContainer;
 import user.auth.AuthController;
 import user.auth.IAuthService;
 
@@ -124,20 +123,7 @@ public class UserController {
 		}
 	}
 
-	/**
-	 * ??????? BOŞ
-	 * 
-	 * @param employee
-	 * @param fController
-	 * @param employeesOfManager
-	 * @throws UnauthorizedUserException
-	 */
-	public void assignEmployee(User employee, FileController fController, IContainer<User> employeesOfManager)
-			throws UnauthorizedUserException {
-		authService.authorizeUserForAssingEmployee(this.user, employee);
-		employeesOfManager.add(employee);
-	}
-
+	
 	/**
 	 * The functions is to create a new assembly or part for manager's product and
 	 * insert the created product to given assembly

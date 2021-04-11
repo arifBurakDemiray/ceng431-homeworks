@@ -45,11 +45,4 @@ public interface IAuthService {
 	 */
 	public void authorizeUserForAssign(User user, User givenUser, Product product) throws UnauthorizedUserException;
 
-	/**
-	 * This function authorizes an manager to add employee to his emloyee list
-	 * @param manager  who is going to be assigned an employee
-	 * @param employee who is going to do the job
-	 * @throws UnauthorizedUserException for not authorized users
-	 */
-	public void authorizeUserForAssingEmployee(User manager, User employee) throws UnauthorizedUserException;
 }

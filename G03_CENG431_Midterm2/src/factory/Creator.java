@@ -120,7 +120,7 @@ public class Creator implements ICreatorService{
 		return new CreationResult(contract, result.message);
 	}
 
-	// this function creates user-user contract
+	// this function creates manager-employees contract
 	public CreationResult createContractManagerEmplooye(String managerName, String[] userId, IContainer<User> users) {
 		// validate inputs
 		ValidationResult result = validator.validateContractEmployee(managerName, userId, users);

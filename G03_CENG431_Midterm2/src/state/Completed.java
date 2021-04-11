@@ -4,7 +4,6 @@ public class Completed extends State {
 
 	@Override
 	public void nextState(ProductState state) {
-		// System.out.println("This product is already completed.");
 	}
 
 	/**

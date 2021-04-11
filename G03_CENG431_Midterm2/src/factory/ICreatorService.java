@@ -14,9 +14,9 @@ public interface ICreatorService {
 	 * 
 	 * @param type  of the product
 	 * @param title of the product
-	 * @param id    og the product
+	 * @param id    of the product
 	 * @param state of the product
-	 * @returns creataion result
+	 * @returns creation result
 	 */
 	public CreationResult createProduct(String type, String title, String id, String state);
 
@@ -35,7 +35,7 @@ public interface ICreatorService {
 	 * 
 	 * @param userName  of the user
 	 * @param productId of the product
-	 * @param users     of the systemm
+	 * @param users     of the system
 	 * @param products  of the system
 	 * @returns creation result
 	 */

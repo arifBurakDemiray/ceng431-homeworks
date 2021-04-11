@@ -1,27 +1,12 @@
 {
-    "84207": {
-        "name": "Deneme",
+    "50948": {
+        "name": "Wheel",
         "state": "NotStarted",
         "type": "Assembly"
     },
-    "46210": {
-        "58534": {
-            "35224": {
-                "name": "AdemPart",
-                "state": "Completed",
-                "type": "Part"
-            },
-            "name": "Deneme",
-            "12345": {
-                "name": "DenemePart",
-                "state": "Completed",
-                "type": "Part"
-            },
-            "state": "Completed",
-            "type": "Assembly"
-        },
-        "name": "Deneme",
-        "state": "Completed",
+    "48165": {
+        "name": "Engine",
+        "state": "NotStarted",
         "type": "Assembly"
     }
 }

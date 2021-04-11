@@ -25,7 +25,7 @@ public class ProductParser {
 	private IContainer<Product> collectBaseProducts(JSONObject jsonObject, ICreatorService creator)
 			throws JSONException {
 		IContainer<Product> products = new ProductContainer();// init product repo
-		recursiveParser(jsonObject, null, products, creator);// null is for represent parent product, initally there is
+		recursiveParser(jsonObject, null, products, creator);// null is for represent parent product, initially there is
 																// no parent product
 		return products;
 	}

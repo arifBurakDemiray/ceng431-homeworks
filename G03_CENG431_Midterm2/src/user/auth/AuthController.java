@@ -53,13 +53,5 @@ public class AuthController implements IAuthService {
 		throw new UnauthorizedUserException("You are not authorized to assign the user.");
 	}
 
-	public void authorizeUserForAssingEmployee(User manager, User employee) throws UnauthorizedUserException {
-		String managerClass = manager.getClass().getSimpleName();
-		String employeeClass = employee.getClass().getSimpleName();
-		//Only managers can have employees
-		if (managerClass.equals("Manager") && employeeClass.equals("Employee"))
-			return;
-		throw new UnauthorizedUserException("You are not authorized to assign the employee.");
-	}
 
 }

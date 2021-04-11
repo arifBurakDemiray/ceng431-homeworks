@@ -21,7 +21,7 @@ public abstract class ContractController {
 	 * 
 	 * @param contractee
 	 * @returns contracter if found
-	 * @throws ItemNotFoundException for nout found
+	 * @throws ItemNotFoundException for not found
 	 */
 	public abstract Object getContracterOfContractee(String contractee) throws ItemNotFoundException;
 
@@ -30,7 +30,7 @@ public abstract class ContractController {
 	 * 
 	 * @param contracter
 	 * @returns contractee if found
-	 * @throws ItemNotFoundException for nout found
+	 * @throws ItemNotFoundException for not found
 	 * @throws NotSupportedException for not supported classes
 	 */
 	public abstract Object getContracteeOfContracter(String contracter)
@@ -39,7 +39,7 @@ public abstract class ContractController {
 	/**
 	 * Adds a contract to contract list
 	 * @param contract that is going to be added
-	 * @returns true if succesfully added
+	 * @returns true if successfully added
 	 */
 	public boolean addContract(Contract contract) {
 		return this.contracts.add(contract);

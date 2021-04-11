@@ -23,7 +23,7 @@ public class ContractControllerEmployee extends ContractController {
 			User tempManager = ((User) contract.getContractee()); // get manager
 			String managerName = tempManager.getUserName();
 			if (mngName.equals(managerName)) {// if manager name equals temp name
-				found = castToUserContainer(contract.getContracter());// take it amd break
+				found = castToUserContainer(contract.getContracter());// take it and break
 				break;
 			}
 		}

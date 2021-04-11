@@ -21,7 +21,7 @@ public class FileWrite {
 	 * @param <T>      type of the container
 	 * @param items
 	 * @param filePath
-	 * @throws Exception for wrtte operations
+	 * @throws Exception for write operations
 	 */
 
 	protected <T> void writeItems(IContainer<T> items, String filePath) throws Exception {

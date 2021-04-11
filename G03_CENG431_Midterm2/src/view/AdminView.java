@@ -126,7 +126,9 @@ public class AdminView extends UserView {
 		for (Product product : fileController.products()) {
 			ViewHelper.findProductsAndUsers(product, contractControllerProduct);
 		}
-
+		
+		String userPrint = ViewHelper.findUsers(fileController.users(), contractControllerProduct);
+		System.out.println(userPrint);
 	}
 
 	/**

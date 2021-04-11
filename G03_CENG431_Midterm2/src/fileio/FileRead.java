@@ -14,7 +14,7 @@ public class FileRead {
 	 * This function reads a file
 	 * 
 	 * @param filename of the file
-	 * @returns readed file in string format
+	 * @returns read file in string format
 	 * @throws IOException
 	 */
 	protected String readFile(String filename) throws IOException {

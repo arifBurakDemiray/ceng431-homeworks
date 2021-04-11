@@ -120,7 +120,7 @@ public class ManagerView extends UserView {
 			String emptyEmployees = ViewHelper.findManagerEmployeesWithoutProduct(employeesOfManager,
 					(ContractControllerProduct) contractControllerProduct);
 			if (emptyProducts.equals("") || emptyEmployees.equals("")) {
-				System.out.println("Employee or Part doesn't exist");
+				System.out.println("There is not enough employee or part to assign.");
 			} else {
 				System.out.println(emptyProducts + "\n" + emptyEmployees);
 
@@ -150,6 +150,15 @@ public class ManagerView extends UserView {
 	public void printAll() {
 		System.out.println("\n\tPRODUCTS and EMPLOYEES\n");
 		ViewHelper.findProductsAndUsers(managerProduct, contractControllerProduct);
+		System.out.println("\n");
+		try {
+			IContainer<User> employees =((ContractControllerEmployee)contractControllerEmployee).getContracterOfContractee(this.getUser().getUserName());
+			String userPrint = ViewHelper.findUsers(employees, contractControllerProduct);
+			System.out.println(userPrint);
+		} catch (ItemNotFoundException e) {
+			System.out.println("There is no employee");
+		}
+		
 	}
 
 	/**

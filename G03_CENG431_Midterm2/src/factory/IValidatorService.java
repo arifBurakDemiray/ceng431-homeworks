@@ -35,7 +35,7 @@ public interface IValidatorService {
 	public ValidationResult validateId(String id);
 
 	/**
-	 * This funtion validates an user
+	 * This function validates an user
 	 * 
 	 * @param name     of the user
 	 * @param type     of the user

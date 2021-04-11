@@ -13,7 +13,7 @@ public interface IFileIO {
 	 * This function reads products
 	 * 
 	 * @param filePath of the products file
-	 * @returns readed products
+	 * @returns read products
 	 * @throws Exception for fileio exceptions
 	 */
 	public IContainer<Product> readProducts(String filePath) throws Exception;
@@ -22,7 +22,7 @@ public interface IFileIO {
 	 * This function reads users
 	 * 
 	 * @param filePath of users file
-	 * @returns readed users
+	 * @returns read users
 	 * @throws Exception for fileio exceptions
 	 */
 	public IContainer<User> readUsers(String filePath) throws Exception;
@@ -33,7 +33,7 @@ public interface IFileIO {
 	 * @param filePath of the contracts file
 	 * @param users    of the system
 	 * @param products of the system
-	 * @returns readed contracts
+	 * @returns read contracts
 	 * @throws Exception for fileio exceptions
 	 */
 	public IContainer<Contract> readContracts(String filePath, IContainer<User> users, IContainer<Product> products)

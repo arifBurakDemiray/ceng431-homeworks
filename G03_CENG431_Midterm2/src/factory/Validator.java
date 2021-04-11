@@ -17,7 +17,7 @@ public class Validator implements IValidatorService {
 	private Collection<String> idContainer;
 	private Collection<String> nameContainer;
 
-	// Only can bu used by creator
+	// Only can be used by creator
 	protected Validator() {
 		idContainer = new HashSet<String>();
 		nameContainer = new HashSet<String>();
@@ -41,7 +41,7 @@ public class Validator implements IValidatorService {
 	private ValidationResult validateProductType(String type) {
 		boolean isPart = type.equals("Part");
 		boolean isAssembly = type.equals("Assembly");
-		boolean result = isPart || isAssembly; // types can be only part ot product
+		boolean result = isPart || isAssembly; // types can be only part of product
 		return new ValidationResult(result, "Product type is invalid.");
 	}
 
@@ -102,7 +102,7 @@ public class Validator implements IValidatorService {
 
 		ValidationResult returnedResult = null;
 		try {
-			users.getByName(userName);// if given username and id not exists
+			users.getByName(userName);// if given user name and id not exists
 			products.getById(productId);// if gets gives exception not validate
 			returnedResult = new ValidationResult(true, "Contract validation error. ");
 		} catch (ItemNotFoundException | NotSupportedException e) {
