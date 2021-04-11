@@ -1,10 +1,38 @@
 {
+    "Arif6": {
+        "password": "123456",
+        "type": "Employee"
+    },
+    "DenemeArif1": {
+        "password": "123456",
+        "type": "Manager"
+    },
+    "Arif1": {
+        "password": "123456",
+        "type": "Employee"
+    },
     "Furkan": {
         "password": "123456",
         "type": "Manager"
     },
+    "Arif3": {
+        "password": "123456",
+        "type": "Employee"
+    },
     "Arif Burak": {
         "password": "123456",
         "type": "Manager"
+    },
+    "Arif2": {
+        "password": "123456",
+        "type": "Employee"
+    },
+    "Arif5": {
+        "password": "123456",
+        "type": "Employee"
+    },
+    "Arif4": {
+        "password": "123456",
+        "type": "Employee"
     }
 }

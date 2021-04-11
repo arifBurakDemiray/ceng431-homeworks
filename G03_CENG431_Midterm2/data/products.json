@@ -1,12 +1,62 @@
 {
+    "62691": {
+        "name": "DenemeArif1",
+        "state": "NotStarted",
+        "type": "Assembly"
+    },
     "50948": {
         "name": "Wheel",
         "state": "NotStarted",
         "type": "Assembly"
     },
     "48165": {
+        "83899": {
+            "name": "Aku",
+            "state": "NotStarted",
+            "type": "Part"
+        },
+        "90919": {
+            "name": "Deneme",
+            "state": "NotStarted",
+            "type": "Assembly"
+        },
         "name": "Engine",
+        "27778": {
+            "83249": {
+                "name": "Vida",
+                "state": "NotStarted",
+                "type": "Part"
+            },
+            "name": "Carbirator",
+            "98334": {
+                "name": "Kayýs",
+                "state": "NotStarted",
+                "type": "Part"
+            },
+            "state": "NotStarted",
+            "type": "Assembly"
+        },
         "state": "NotStarted",
+        "21924": {
+            "92425": {
+                "name": "Piston",
+                "state": "NotStarted",
+                "type": "Part"
+            },
+            "name": "EngineBlock",
+            "52423": {
+                "name": "Boru",
+                "state": "NotStarted",
+                "type": "Part"
+            },
+            "state": "NotStarted",
+            "type": "Assembly",
+            "90372": {
+                "name": "Vida",
+                "state": "NotStarted",
+                "type": "Part"
+            }
+        },
         "type": "Assembly"
     }
 }

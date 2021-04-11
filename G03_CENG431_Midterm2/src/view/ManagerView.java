@@ -94,7 +94,7 @@ public class ManagerView extends UserView {
 			// Get new product info and invoke userController.createProductForManager() to
 			// add the created product to selected assembly
 			String productTitle = inputReceiver.getString("Product Title : ");
-			String productType = inputReceiver.getString("Product Type : \"Assembly\" or \"Part\"");
+			String productType = inputReceiver.getString("Product Type : \"Assembly\" or \"Part\": ");
 			userController.createProductForManager(fileController, creator, productId, productType, productTitle);
 		} else
 			System.out.println("There is no assembly that has id " + productId);
