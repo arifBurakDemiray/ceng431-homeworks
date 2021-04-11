@@ -123,6 +123,7 @@ public class AdminView extends UserView {
 	 * Print products' tree and assigned users of products
 	 */
 	private void printAll() {
+		fileController.updateStatesOfProduct();
 		for (Product product : fileController.products()) {
 			ViewHelper.findProductsAndUsers(product, contractControllerProduct);
 		}
