@@ -25,6 +25,7 @@ public class Creator implements ICreatorService{
 	// this function creates a product
 	public CreationResult createProduct(String type, String title, String id, String state) {
 		ValidationResult vrId; // id validation result
+		
 		if (id == null) {
 			id = RandomFactory.randomId();
 			vrId = validator.validateId(id);
@@ -36,6 +37,16 @@ public class Creator implements ICreatorService{
 			vrId = validator.validateId(id);
 		}
 		ValidationResult result = validator.validateProduct(id, type);// validate product
+		String resultMessage="";
+		String vrIdMessage="";
+		if(!vrId.isValid())
+		{
+			vrIdMessage= vrId.message;
+		}
+		if(!result.isValid())
+		{
+			resultMessage = result.message;
+		}
 		CreationResult cr = new CreationResult(null, "");// creation result for product type
 		Product prd = null;
 		if (result.isValid() && vrId.isValid()) {
@@ -52,7 +63,7 @@ public class Creator implements ICreatorService{
 				}
 			}
 		} // return newly created product
-		return new CreationResult(prd, result.message + " " + cr.message + " " + vrId.message);
+		return new CreationResult(prd, resultMessage + " " + cr.message + " " + vrIdMessage);
 	}
 
 	private CreationResult createProductState(String state) {
