@@ -106,7 +106,7 @@ public class Assembly extends Product {
 
 			// When a product inside the assembly is in progress and the assembly is not
 			// started, update assembly's state as inProgress.
-			if (productState.equals("InProgress") && state.equals("NotStarted")) {
+			if (productState.equals("InProgress")  && state.equals("NotStarted")) {
 				this.getState().nextState();
 				isComplete = false;
 				break;
@@ -121,9 +121,18 @@ public class Assembly extends Product {
 				this.getState().backState();
 				isComplete = false;
 				break;
-			} else if (productState.equals("Completed")) {
+			}
 
-			} else
+			// If a product directly set to completed but just only one of them completed
+			// not all
+			// our main product should be InProgress but our main product should has been
+			// NotStarted
+			else if (productState.equals("Completed") && state.equals("NotStarted")) {
+				this.getState().nextState();
+			} else if (productState.equals("Completed")) {
+			}
+
+			else
 				isComplete = false;
 		}
 
