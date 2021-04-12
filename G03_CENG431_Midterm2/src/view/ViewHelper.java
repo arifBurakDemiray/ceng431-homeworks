@@ -219,7 +219,6 @@ public class ViewHelper {
 	}
 	
 	/**
-	 * ?????? BOŞŞŞ
 	 * The function is a helper function which print users and their assigned
 	 * products
 	 * 

@@ -55,6 +55,12 @@ public class FileController {
 			throw new FileFormatException(e.getMessage());
 		}
 	}
+	
+	//Update all products' states
+	public void updateStatesOfProduct()
+	{
+		FileIOHelper.updateProductsStates(products);
+	}
 
 	// Add user to system
 	public boolean addUser(User user) {

@@ -148,6 +148,7 @@ public class ManagerView extends UserView {
 	 * Print product tree and assigned users of parts
 	 */
 	public void printAll() {
+		fileController.updateStatesOfProduct();
 		System.out.println("\n\tPRODUCTS and EMPLOYEES\n");
 		ViewHelper.findProductsAndUsers(managerProduct, contractControllerProduct);
 		System.out.println("\n");
