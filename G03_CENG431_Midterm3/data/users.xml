@@ -1,0 +1,20 @@
+<?xml version = "1.0"?>
+<users>
+	<user userName="furkan">
+		<password>123456</password>
+		<followers>arif,burak</followers>
+		<followings>arif</followings>
+	</user>
+	<user userName="arif">
+		<password>123456</password>
+		<followers>furkan,burak</followers>
+		<followings>furkan</followings>
+	</user>
+	<user userName="burak">
+		<password>111111</password>
+		<followers>arif,furkan</followers>
+		<followings>arif</followings>
+	</user>
+</users>
+
+
