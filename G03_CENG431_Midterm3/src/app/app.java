@@ -5,18 +5,39 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.StringReader;
+import java.nio.Buffer;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.SecureRandom;
+import java.security.spec.KeySpec;
+import java.util.Base64;
 
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.XML;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+
+import fileio.FileIO;
+import fileio.IFileIO;
 
 import javax.xml.parsers.DocumentBuilder;
+import javax.crypto.SecretKey;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
 import javax.swing.*;
-
 
 public class app {
 
@@ -99,36 +120,40 @@ public class app {
 		jframeRef.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
-	public static void main(String[] args) {
-		//app st = new app();
-		// Build &show the window
-		//st.init();
+	public static void main(String[] args) throws Exception {
+		/*Base64.Decoder dec = Base64.getDecoder();
+		
+		Base64.Encoder enc = Base64.getEncoder();
+		String password = "123456";
+		Buffer bf = new ByteBuffer(password);
+		byte[] salt = enc.e
+		KeySpec spec = new PBEKeySpec("ananakayııym".toCharArray(),salt, 65536, 128);
+		SecretKeyFactory f = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+		byte[] hash = f.generateSecret(spec).getEncoded();
+		
+		printf("");
+		
+		
+		
+		//byte[] pa = sk.getFormat();
+		
+		
+		
+		//System.out.println(sk.getFormat());
+		String originalInput = "test input";
+		String encodedString = Base64.getEncoder().encodeToString(originalInput.getBytes());
+		System.out.println(encodedString);
+		byte[] decodedBytes = Base64.getDecoder().decode();
+		String decodedString = new String(decodedBytes);
+		System.out.println(decodedString);
+		*/
+		IFileIO fileIO = new FileIO(null);
+		fileIO.readUsers(null,"data//users.xml");
 
-		try {
-			File inputFile = new File("data//users.xml");
-			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-			Document doc  = dBuilder.parse(inputFile);
-			doc.getDocumentElement().normalize();
-			System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
-			NodeList nList = doc.getElementsByTagName("user");
-			System.out.println("----------------------------");
 
-			for (int temp = 0; temp < nList.getLength(); temp++) {
-				Node nNode = nList.item(temp);
-				System.out.println("\nCurrent Element :" + nNode.getNodeName());
 
-				if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-					Element eElement = (Element) nNode;
-					System.out.println("Username: " + eElement.getAttribute("userName"));
-					System.out.println(
-							"Followers : " + eElement.getElementsByTagName("followers").item(0).getTextContent());
-					
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+
+
 
 	}
 }

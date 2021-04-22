@@ -1,0 +1,22 @@
+{
+	"65":{
+		"brand_name":"Avon",
+		"gender":"male",
+		"noflikes":"15",
+		"nofdislikes":"35",
+		"type":"sport",
+		"size":"XL,L,M,ML",
+		"color":"red",
+		
+	},
+	"38":{
+		"brand_name":"Kardesler Kundura",
+		"gender":"male",
+		"type":"party",
+		"size":"43,42,41,40",
+		"color":"black",
+		"noflikes":"22",
+		"nofdislikes":"10",
+	}
+}
+

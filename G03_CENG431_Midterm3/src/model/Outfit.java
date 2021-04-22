@@ -6,7 +6,6 @@ import storage.IContainer;
 public class Outfit {
 
 	private String id;
-	private String name;
 	private String brandName;
 	private String type;
 	private String gender;
@@ -16,9 +15,8 @@ public class Outfit {
 	private int numberOfDislikes;
 	private IContainer<Comment> comments;
 	 
-	public Outfit(String id,String name, String brandName, String type, String gender, String size, String color){
-		this.id = id;
-		this.name = name;
+	public Outfit(String id,String brandName, String type, String gender, String size, String color){
+		this.id = id;	
 		this.brandName = brandName;
 		this.type = type;
 		this.gender = gender;
@@ -28,8 +26,7 @@ public class Outfit {
 	}
 	
 	public Outfit(String id,String name, String brandName, String type, String gender, String size, String color,int numberOfLikes, int numberOfDislikes, IContainer<Comment> comments){
-		this.id = id;
-		this.name = name;
+		this.id = id;	
 		this.brandName = brandName;
 		this.type = type;
 		this.gender = gender;
@@ -44,9 +41,7 @@ public class Outfit {
 		return id;
 	}
 
-	public String getName() {
-		return name;
-	}
+
 
 	public String getBrandName() {
 		return brandName;
@@ -98,6 +93,10 @@ public class Outfit {
 	
 	public void decreaseDislike(){
 		this.numberOfDislikes--;
+	}
+	
+	public boolean equals(String id){
+		return this.getId().equals(id);
 	}
 
 }

@@ -41,5 +41,15 @@ public class User {
 	public IContainer<User> getFollowings() {
 		return followings;
 	}
+	
+	@Override
+	public String toString(){
+		return "OKundu kardeşşş";
+	}
+
+	public boolean equals(String name){
+		return this.getUserName().equals(name);
+		
+	}
 
 }
