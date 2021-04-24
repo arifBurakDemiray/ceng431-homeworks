@@ -1,32 +1,34 @@
 package model;
 
+import observation.Observable;
 import storage.CommentContainer;
 import storage.IContainer;
 
-public class Outfit {
+
+public class Outfit extends Observable {
 
 	private String id;
 	private String brandName;
 	private String type;
 	private String gender;
-	private String size;
+	private String[] size;
 	private String color;
 	private int numberOfLikes;
 	private int numberOfDislikes;
 	private IContainer<Comment> comments;
-	 
-	public Outfit(String id,String brandName, String type, String gender, String size, String color){
-		this.id = id;	
-		this.brandName = brandName;
-		this.type = type;
-		this.gender = gender;
-		this.size = size;
-		this.color = color;
-		this.comments = new CommentContainer();
+
+	public Outfit(String id, String brandName, String type, String gender, String[] size, String color) {
+		this(id, brandName, type, gender, size, color, 0, 0, new CommentContainer());
 	}
-	
-	public Outfit(String id,String name, String brandName, String type, String gender, String size, String color,int numberOfLikes, int numberOfDislikes, IContainer<Comment> comments){
-		this.id = id;	
+
+	public Outfit(String id, String brandName, String type, String gender, String[] size, String color,
+			int numberOfLikes, int numberOfDislikes) {
+		this(id, brandName, type, gender, size, color, numberOfLikes, numberOfDislikes, new CommentContainer());
+	}
+
+	public Outfit(String id, String brandName, String type, String gender, String[] size, String color,
+			int numberOfLikes, int numberOfDislikes, IContainer<Comment> comments) {
+		this.id = id;
 		this.brandName = brandName;
 		this.type = type;
 		this.gender = gender;
@@ -41,8 +43,6 @@ public class Outfit {
 		return id;
 	}
 
-
-
 	public String getBrandName() {
 		return brandName;
 	}
@@ -55,7 +55,7 @@ public class Outfit {
 		return gender;
 	}
 
-	public String getSize() {
+	public String[] getSize() {
 		return size;
 	}
 
@@ -74,29 +74,35 @@ public class Outfit {
 	public IContainer<Comment> getComments() {
 		return comments;
 	}
-	
-	public boolean addComment(Comment comment){
+
+	public boolean addComment(Comment comment) {
 		return this.comments.add(comment);
 	}
-	
-	public void increaseLike(){
+
+	public void increaseLike() {
 		this.numberOfLikes++;
+		setChanged();
+		notifyObservers();
 	}
-	
-	public void increaseDislike(){
+
+	public void increaseDislike() {
 		this.numberOfDislikes++;
 	}
-	
-	public void decreaseLike(){
+
+	public void decreaseLike() {
 		this.numberOfLikes--;
 	}
-	
-	public void decreaseDislike(){
+
+	public void decreaseDislike() {
 		this.numberOfDislikes--;
 	}
-	
-	public boolean equals(String id){
+
+	public boolean equals(String id) {
 		return this.getId().equals(id);
+	}
+	
+	public String toString(){
+		return this.getId();
 	}
 
 }

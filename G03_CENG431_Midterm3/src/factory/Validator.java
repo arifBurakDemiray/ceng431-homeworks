@@ -3,8 +3,6 @@ package factory;
 import java.util.Collection;
 import java.util.HashSet;
 
-
-
 public class Validator implements IValidatorService {
 
 	// unique collections
@@ -17,13 +15,33 @@ public class Validator implements IValidatorService {
 		nameContainer = new HashSet<String>();
 	}
 
-	public ValidationResult validateOutfit(String id, String type) {
+	public ValidationResult validateOutfit(String brand_name, String gender, String type, String size, String color,
+			String nofLikes, String nofDislikes) {
 
-		boolean isNotNull = !type.equals(null); // not null
+		boolean isNotNull = !brand_name.equals(null) || !gender.equals(null) || !type.equals(null) || !size.equals(null)
+				|| !color.equals(null); // not null
 		if (!isNotNull) // if null
 			return new ValidationResult(false, "Missing attributes.");
-		boolean result = isNotNull; // result
-		String msg = "Product is not valid to create. ";// last message		
+		String msg = "Product is not valid to create. ";// last message
+		boolean isLikesNumber = true;
+		boolean isDislikesNumber = true;
+		if (!nofLikes.isEmpty()) {
+			try {
+				isLikesNumber = Integer.valueOf(nofLikes) >= 0;
+			} catch (NumberFormatException e) {
+				isLikesNumber = false;
+				msg += " Likes are not number";
+			}
+		}
+		if (!nofLikes.isEmpty()) {
+			try {
+				isDislikesNumber = Integer.valueOf(nofDislikes) >= 0;
+			} catch (NumberFormatException e) {
+				isDislikesNumber = false;
+				msg += " Dislikes are not number";
+			}
+		}
+		boolean result = isNotNull && isLikesNumber && isDislikesNumber; // result
 		return new ValidationResult(result, msg); // return result with result message
 	}
 
@@ -34,15 +52,15 @@ public class Validator implements IValidatorService {
 		return new ValidationResult(result, "Id is invalid.");
 	}
 
-	public ValidationResult validateUser(String name, String type, String password) {
-		boolean isNotNull = !name.equals(null) || !password.equals(null) || !type.equals(null);
+	public ValidationResult validateUser(String name, String password) {
+		boolean isNotNull = !name.equals(null) || !password.equals(null);
 		if (!isNotNull)// one of them null
 			return new ValidationResult(false, "Missing attributes.");
 
 		boolean uniqueName = nameContainer.add(name); // name container
-	
+
 		ValidationResult vrPassword = validatePassword(password);
-	
+
 		boolean isValidPassword = vrPassword.isValid();
 		boolean result = uniqueName && isNotNull && isValidPassword; // init result
 		String msg = "User is not valid to create. ";// init message
@@ -60,5 +78,4 @@ public class Validator implements IValidatorService {
 		return new ValidationResult(result, "Password's length must be above 5. ");
 	}
 
-	
 }

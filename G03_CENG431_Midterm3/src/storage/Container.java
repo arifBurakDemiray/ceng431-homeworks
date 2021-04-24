@@ -17,20 +17,20 @@ public abstract class Container<T> implements IContainer<T> {
 		container = new ArrayList<T>();
 	}
 
-	public boolean add(T item) { 
-		if (this.isExist(item)) //if item exit return false
+	public boolean add(T item) {
+		if (this.isExist(item)) // if item exit return false
 			return false;
-		boolean result = container.add(item); //otherwise add it and return
-		return result; 
+		boolean result = container.add(item); // otherwise add it and return
+		return result;
 	}
 
 	public Collection<T> getContainer() {
 		return this.container;
 	}
 
-	//gets an item by searching
+	// gets an item by searching
 	public T getItem(T item) {
-		T result = search(item); 
+		T result = search(item);
 		return result;
 	}
 
@@ -46,10 +46,10 @@ public abstract class Container<T> implements IContainer<T> {
 		return container.iterator();
 	}
 
-	//gets item by its id if has
+	// gets item by its id if has
 	public abstract T getById(String id) throws ItemNotFoundException, NotSupportedException;
 
-	//gets item by its name if has
+	// gets item by its name if has
 	public abstract T getByName(String name) throws ItemNotFoundException, NotSupportedException;
 
 	/**
@@ -63,9 +63,9 @@ public abstract class Container<T> implements IContainer<T> {
 		boolean boolValue = false;
 
 		for (T itm : container) {
-			if (itm.equals(item)) {//if item equals 
-				boolValue = true; //make result true
-				break; //and break the loop
+			if (itm.equals(item)) {// if item equals
+				boolValue = true; // make result true
+				break; // and break the loop
 			}
 		}
 		return boolValue;
@@ -80,9 +80,9 @@ public abstract class Container<T> implements IContainer<T> {
 	 */
 	public T remove(T item) throws ItemNotFoundException {
 		boolean result = container.remove(item);
-		if (!result) { //if not removed
+		if (!result) { // if not removed
 			throw new ItemNotFoundException();
-		} else { //else return it
+		} else { // else return it
 			return item;
 		}
 	}
@@ -92,20 +92,20 @@ public abstract class Container<T> implements IContainer<T> {
 	 * object which is in the container.
 	 *
 	 * @param item given item.
-	 * @return T item is in the container which is equal to the given item.
-	 * 			else null for not found
+	 * @return T item is in the container which is equal to the given item. else
+	 *         null for not found
 	 */
 	protected T search(T item) {
 		T obj = null;
-		if (!isEmpty()) { //if container is not empty
-			for (T itm : container) { //iterate through container
-				if (itm.equals(item)) { //if equals mean found
+		if (!isEmpty()) { // if container is not empty
+			for (T itm : container) { // iterate through container
+				if (itm.equals(item)) { // if equals mean found
 					obj = itm;
-					break; //break loop
+					break; // break loop
 				}
 			}
 		}
-		return obj; //return value
+		return obj; // return value
 	}
 
 	/**
@@ -117,10 +117,7 @@ public abstract class Container<T> implements IContainer<T> {
 		String string = "";
 		for (T item : this.container) {
 			if (item != null)
-				string += item.toString() + ",";
-		}
-		if (string.endsWith(",")) {	//if ends with , ignore it
-			string = string.substring(0, string.length() - 1);
+				string += item.toString();
 		}
 		return string;
 	}

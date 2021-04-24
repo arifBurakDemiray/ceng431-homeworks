@@ -23,5 +23,9 @@ public class Collection {
 		return outfits;
 	}
 	
+	public String toString(){
+		return  "\t<collection name=\""+this.getName()+"\">\n\t"+
+				"<ids>"+this.getOutfits().toString()+"</ids>\n\t</collection>\n";
+	}
 	
 }

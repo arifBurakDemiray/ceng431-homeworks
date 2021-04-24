@@ -13,7 +13,8 @@ public interface IValidatorService {
 	 * @param type of the product
 	 * @returns validation result
 	 */
-	public ValidationResult validateOutfit(String id, String type);
+	public ValidationResult validateOutfit(String brand_name, String gender, String type, String size,
+			String color, String nofLikes, String nofDislikes);
 
 	/**
 	 * This function validates an id by uniquely
@@ -27,11 +28,10 @@ public interface IValidatorService {
 	 * This function validates an user
 	 * 
 	 * @param name     of the user
-	 * @param type     of the user
 	 * @param password of the user
 	 * @returns validation result
 	 */
-	public ValidationResult validateUser(String name, String type, String password);
+	public ValidationResult validateUser(String name, String password);
 
 	
 

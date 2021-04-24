@@ -24,7 +24,7 @@ public interface IFileIO {
 	 * @returns read users
 	 * @throws Exception for fileio exceptions
 	 */
-	public IContainer<User> readUsers(IContainer<Outfit> oufits, String filePath) throws Exception;
+	public IContainer<User> readUsers(IContainer<Outfit> oufits,String filePath) throws Exception;
 
 	/**
 	 * This function writes users

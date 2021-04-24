@@ -20,8 +20,8 @@ public class Parser {
 		this.userParser = new UserParser();
 	}
 
-	public IContainer<User> parseUsers(String fileAll, ICreatorService creator) throws Exception {
-		return userParser.parseUsers(fileAll, creator);
+	public IContainer<User> parseUsers(String fileAll, ICreatorService creator,IContainer<Outfit> outfits ) throws Exception {
+		return userParser.parseUsers(fileAll, creator, outfits);
 	}
 
 	public IContainer<Outfit> parseOutfits(String fileAll, ICreatorService creator) throws JSONException {

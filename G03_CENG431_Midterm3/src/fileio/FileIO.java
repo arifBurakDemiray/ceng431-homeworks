@@ -40,7 +40,7 @@ public class FileIO implements IFileIO {
 
 		String fileAll = fRead.readFile(filePath); // read file
 		if (!fileAll.isBlank()) // if not blank
-			users = parser.parseUsers(fileAll, this.creator); // parse users
+			users = parser.parseUsers( fileAll, this.creator, outfits); // parse users
 		else
 			users = new UserContainer(); // init empty repo
 

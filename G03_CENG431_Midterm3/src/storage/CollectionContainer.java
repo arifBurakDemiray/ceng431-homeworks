@@ -26,5 +26,10 @@ public class CollectionContainer extends Container<Collection> {
 			return found;
 		}
 	}
+	
+	@Override
+	public String toString(){
+		return "<collections>\n"+super.toString()+"\t</collections>";
+	}
 
 }
