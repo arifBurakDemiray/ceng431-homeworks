@@ -14,11 +14,9 @@ public class View extends JFrame implements Observer {
 
 	
 	public View(LoginView loginPage, UserView userPage){
-		Observable model = loginPage.getModel();
-		while(model==null){
-			model=loginPage.getModel();
+		while(loginPage.getModel()==null){
+			System.out.println();
 		}
-		System.out.println("aaa");
 		userPage.setVisible(true);
 	}
 	

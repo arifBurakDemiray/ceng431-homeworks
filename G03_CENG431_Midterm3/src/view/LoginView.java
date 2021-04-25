@@ -2,6 +2,8 @@ package view;
 
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -64,6 +66,11 @@ public class LoginView extends JFrame implements Observer {
 
 	public JPasswordField getPassword() {
 		return password;
+	}
+	
+	public void addTextListener(MouseListener textListener) {
+		userName.addMouseListener(textListener);
+		password.addMouseListener(textListener);
 	}
 
 	public void setPassword(JPasswordField password) {
