@@ -13,7 +13,11 @@ import model.User;
 import observation.Observable;
 import observation.Observer;
 
-public class UserView implements Observer {
+public class UserView extends JFrame implements Observer {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7677309279033720304L;
 	protected User model;
 	protected TextField display;
 	protected JButton followButton;
@@ -25,9 +29,6 @@ public class UserView implements Observer {
 		this.model = model;
 		model.addObserver(this);
 		
-		
-		JFrame mainWindow = new JFrame("Main");
-
 		Box followingsList = Box.createVerticalBox();	
 		followingsList.setOpaque(true);
 		followingsList.setBackground(Color.BLUE);
@@ -53,13 +54,13 @@ public class UserView implements Observer {
 		
 		
 		followingsList.setBounds(0,0, 120,i*50);			
-		mainWindow.add(followingsList);
+		add(followingsList);
 		
 		
-		mainWindow.setSize(1000,1000);  
-		mainWindow.setLayout(null);//using no layout manager  
-		mainWindow.setVisible(true);  
-		mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
+		setSize(1000,1000);  
+		setLayout(null);//using no layout manager  
+		setVisible(false);  
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
 		
 	}
 
