@@ -67,7 +67,7 @@ public class Outfit extends Observable {
 		return numberOfLikes;
 	}
 
-	public int getNumberOfDisliked() {
+	public int getNumberOfDislikes() {
 		return numberOfDislikes;
 	}
 
@@ -87,14 +87,20 @@ public class Outfit extends Observable {
 
 	public void increaseDislike() {
 		this.numberOfDislikes++;
+		setChanged();
+		notifyObservers();
 	}
 
 	public void decreaseLike() {
 		this.numberOfLikes--;
+		setChanged();
+		notifyObservers();
 	}
 
 	public void decreaseDislike() {
 		this.numberOfDislikes--;
+		setChanged();
+		notifyObservers();
 	}
 
 	public boolean equals(String id) {
