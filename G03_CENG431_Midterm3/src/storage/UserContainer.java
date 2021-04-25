@@ -46,7 +46,7 @@ public class UserContainer extends Container<User> {
 	
 	@Override 
 	public String toString(){
-		return "<?xml version = \"1.0\"?>\n<users>\n"+super.toString()+"</users>";
+		return "<users>\n"+super.toString()+"</users>";
 	}
 
 }

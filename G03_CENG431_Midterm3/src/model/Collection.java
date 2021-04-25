@@ -25,7 +25,21 @@ public class Collection {
 	
 	public String toString(){
 		return  "\t<collection name=\""+this.getName()+"\">\n\t"+
-				"<ids>"+this.getOutfits().toString()+"</ids>\n\t</collection>\n";
+				"<ids>"+this.outfitsToString()+"</ids>\n\t</collection>\n";
+	}
+	
+	private String outfitsToString(){
+		String result = "";
+		IContainer<Outfit> outfits = this.getOutfits();
+		if(outfits.isEmpty())
+			return result;
+		for(Outfit outfit : outfits){
+			result+=outfit.getId()+",";
+		}
+		if (result.endsWith(",")) { // if ends with , ignore it
+			result = result.substring(0, result.length() - 1);
+		}
+		return result;
 	}
 	
 }

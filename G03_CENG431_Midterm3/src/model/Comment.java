@@ -16,4 +16,8 @@ public class Comment {
 	public String getComment(){
 		return this.comment;
 	}
+	
+	public String toString(){
+		return "\""+this.getUserName()+"\":\""+this.getComment()+"\",";
+	}
 }

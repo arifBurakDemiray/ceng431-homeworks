@@ -4,7 +4,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.Writer;
 
-import org.json.JSONObject;
+import org.json.JSONException;
 
 import fileio.parser.JSONParser;
 import storage.IContainer;
@@ -25,14 +25,26 @@ public class FileWrite {
 	 */
 
 	protected <T> void writeItems(IContainer<T> items, String filePath) throws Exception {
-		String value = "{";
-		value += items.toString();
-		value += "}";
-		JSONParser jsp = new JSONParser();// try to parse to json
-		JSONObject jso = jsp.parse(value);
 		FileWriter fw = new FileWriter(filePath);// open file
 		Writer writer = new BufferedWriter(fw);
-		writer.write(jso.toString(4));// write in json format
+		writer.write(convertToFormat(items));// write in json format
 		writer.close();
+	}
+	
+	private <T> String convertToFormat(IContainer<T> items) throws JSONException{
+		String typeName = items.getClass().getAnnotatedSuperclass().toString();
+		String result = "";
+		if(typeName.contains("Outfit")){
+			String itemsString = items.toString();
+			String jsonString = (new JSONParser()).parse(itemsString).toString(4);
+			result = jsonString;
+		}
+		else if(typeName.contains("User")){
+			String xmlString = "<?xml version = \"1.0\"?>\n";
+			xmlString += items.toString();
+			result = xmlString;
+		}
+		//TODO more formats to come
+		return result;
 	}
 }

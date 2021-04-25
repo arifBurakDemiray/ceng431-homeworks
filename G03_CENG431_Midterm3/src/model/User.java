@@ -1,8 +1,9 @@
 package model;
 
+import observation.Observable;
 import storage.IContainer;
 
-public class User {
+public class User extends Observable {
 
 	private String userName;
 	private String password;

@@ -1,0 +1,26 @@
+{
+    "38": {
+        "noflikes": "22",
+        "comments": {},
+        "gender": "male",
+        "size": "43,42,41,40",
+        "color": "black",
+        "nofdislikes": "10",
+        "brand_name": "Kardesler Kundura",
+        "type": "Shoes"
+    },
+    "65": {
+        "noflikes": "15",
+        "comments": {
+            "veli": "Ananın amıke o ney ke",
+            "user": "Ow yeah ne dedin laaa",
+            "furkna": "siktim seni dırırı dırırı"
+        },
+        "gender": "male",
+        "size": "XL,L,M,ML",
+        "color": "red",
+        "nofdislikes": "35",
+        "brand_name": "Avon",
+        "type": "Jacket"
+    }
+}

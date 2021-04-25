@@ -23,7 +23,8 @@
 		<password>123456</password>
 		<followers>furkan,burak</followers>
 		<followings>furkan</followings>
-		<collections></collections>
+		<collections>
+		</collections>
 	</user>
 	<user userName="burak">
 		<password>111111</password>
@@ -36,15 +37,3 @@
 		</collections>
 	</user>
 </users>
-
-
-
-
-
-
-
-
-
-
-
-

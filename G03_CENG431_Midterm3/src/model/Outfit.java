@@ -4,7 +4,6 @@ import observation.Observable;
 import storage.CommentContainer;
 import storage.IContainer;
 
-
 public class Outfit extends Observable {
 
 	private String id;
@@ -81,34 +80,39 @@ public class Outfit extends Observable {
 
 	public void increaseLike() {
 		this.numberOfLikes++;
-		setChanged();
-		notifyObservers();
+		setAndNotify();
 	}
 
 	public void increaseDislike() {
 		this.numberOfDislikes++;
-		setChanged();
-		notifyObservers();
+		setAndNotify();
 	}
 
 	public void decreaseLike() {
 		this.numberOfLikes--;
-		setChanged();
-		notifyObservers();
+		setAndNotify();
 	}
 
 	public void decreaseDislike() {
 		this.numberOfDislikes--;
-		setChanged();
-		notifyObservers();
+		setAndNotify();
 	}
 
 	public boolean equals(String id) {
 		return this.getId().equals(id);
 	}
-	
-	public String toString(){
-		return this.getId();
+
+	public String toString() {
+		return "\"" + this.getId() + "\":{\"brand_name\":\"" + this.getBrandName() + "\",\"gender\":\""
+				+ this.getGender() + "\",\"noflikes\":\"" + this.getNumberOfLikes() + "\",\"nofdislikes\":\""
+				+ this.getNumberOfDislikes() + "\",\"type\":\"" + this.getType() + "\",\"size\":\""
+				+ String.join(",", this.getSize()) + "\",\"color\":\"" + this.getColor() + "\",\"comments\""
+				+ this.getComments().toString() + "}";
+	}
+
+	public void setAndNotify() {
+		setChanged();
+		notifyObservers();
 	}
 
 }

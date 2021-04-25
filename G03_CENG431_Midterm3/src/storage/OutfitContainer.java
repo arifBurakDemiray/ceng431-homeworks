@@ -4,7 +4,7 @@ import exception.ItemNotFoundException;
 import exception.NotSupportedException;
 import model.Outfit;
 
-public class OutfitContainer extends Container<Outfit>{
+public class OutfitContainer extends Container<Outfit> {
 
 	@Override
 	public Outfit getById(String id) throws ItemNotFoundException, NotSupportedException {
@@ -25,6 +25,18 @@ public class OutfitContainer extends Container<Outfit>{
 	@Override
 	public Outfit getByName(String name) throws NotSupportedException {
 		throw new NotSupportedException("Outfit container does not supports getById() function");
+	}
+
+	public String toString() {
+		String string = "{";
+		for (Outfit item : this.getContainer()) {
+			if (item != null)
+				string += item.toString() + ",";
+		}
+		if (string.endsWith(",")) { // if ends with , ignore it
+			string = string.substring(0, string.length() - 1);
+		}
+		return string+"}";
 	}
 
 }
