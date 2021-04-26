@@ -47,6 +47,7 @@ public class LoginView extends JFrame implements Observer {
 		message.setBounds(275, 250, 200, 30);
 		message.setForeground(Color.RED);
 
+		
 		contentPane.add(message);
 		message.setVisible(false);
 		contentPane.add(loginButton);

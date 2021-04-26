@@ -5,6 +5,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import model.Login;
+import model.User;
 import observation.*;
 
 import javax.swing.JLabel;
@@ -26,12 +28,13 @@ public class HomeView extends JFrame implements Observer {
 	private JButton followingsButton;
 	private JButton collectionsButton;
 	private JScrollPane posts;
-	private Observable model;
+	private Login model;
 
 	/**
 	 * Create the frame.
 	 */
 	public HomeView(Observable model) {
+		this.model = (Login) model;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 720, 450);
 		contentPane = new JPanel();
@@ -39,7 +42,7 @@ public class HomeView extends JFrame implements Observer {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		userName = new JLabel("UserName");
+		userName = new JLabel("userName");
 		userName.setBounds(26, 15, 65, 14);
 		contentPane.add(userName);
 		
@@ -74,8 +77,9 @@ public class HomeView extends JFrame implements Observer {
 	public void update(Observable observable, Object args) {
 		if(args==null)
 			this.setVisible(false);
-		else
-			this.setVisible(true);
+		else {
+			this.userName.setText(((User) args).getUserName());
+			this.setVisible(true);}
 		
 	}
 
@@ -90,7 +94,7 @@ public class HomeView extends JFrame implements Observer {
 	 * @param model the model to set
 	 */
 	public void setModel(Observable model) {
-		this.model = model;
+		this.model = (Login) model;
 	}
 	
 	@Override
