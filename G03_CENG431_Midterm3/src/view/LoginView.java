@@ -10,7 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import model.User;
+import model.Login;
 import observation.Observable;
 import observation.Observer;
 
@@ -24,20 +24,19 @@ public class LoginView extends JFrame implements Observer {
 	private JPasswordField password;
 	private JTextField userName;
 	private JLabel message;
-	private Observable model = null;
+	private Login model = null;
 
 	public LoginView(Observable model) {
-		this.model = (User) model;
-		setSize(1080, 720);
-		setBounds(0, 0, 1080, 720);
+		this.model =  (Login) model;
+		setBounds(100, 100, 720, 450);
 		loginButton = new JButton("Sign in");
-		loginButton.setBounds(400, 400, 100, 30);
+		loginButton.setBounds(300, 200, 100, 30);
 		password = new JPasswordField("Password");
-		password.setBounds(400, 350, 100, 30);
+		password.setBounds(300, 150, 100, 30);
 		userName = new JTextField("Username");
-		userName.setBounds(400, 300, 100, 30);
+		userName.setBounds(300, 100, 100, 30);
 		message = new JLabel("Incorrect login, please try again");
-		message.setBounds(375, 450, 200, 30);
+		message.setBounds(275, 250, 200, 30);
 		message.setForeground(Color.RED);
 
 		add(message);
@@ -56,8 +55,8 @@ public class LoginView extends JFrame implements Observer {
 		return model;
 	}
 
-	public void setModel(User model) {
-		this.model = model;
+	public void setModel(Observable observable) {
+		this.model = (Login) observable;
 	}
 
 	public void addLoginListener(ActionListener loginListener) {
@@ -95,7 +94,8 @@ public class LoginView extends JFrame implements Observer {
 
 	@Override
 	public void update(Observable observable, Object args) {
-
+		if(args==null)
+			this.setVisible(true);
 	}
 
 }

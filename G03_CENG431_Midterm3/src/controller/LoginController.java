@@ -10,22 +10,24 @@ import javax.swing.JTextField;
 
 import exception.ItemNotFoundException;
 import exception.NotSupportedException;
-import model.Outfit;
+import model.Login;
 import model.User;
+import observation.Observable;
 import observation.Observer;
 import storage.IContainer;
-import storage.UserContainer;
 import view.LoginView;
-import view.OutfitView;
 
 public class LoginController {
 
 	private LoginView view;
 	private IContainer<User> users;
+	private Login model;
 
-	public LoginController(Observer view, IContainer<User> users) {
+	public LoginController(Observable model,Observer view, IContainer<User> users) {
 		this.users = users;
 		this.view = (LoginView) view;
+		this.model = (Login) model;
+		this.model.addObserver(this.view);
 		this.view.addLoginListener(new LoginListener());
 		this.view.addTextListener(new TextClickListener());
 		
@@ -41,7 +43,7 @@ public class LoginController {
 				view.printMessage(false);
 			} else {
 				view.printMessage(true);
-				view.setModel(user);
+				model.setUser(user);
 			}
 		}
 	}
@@ -55,19 +57,17 @@ public class LoginController {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			Object field = e.getSource();
-			System.out.println("Geldim");
 			if(field instanceof JTextField) {
 				JTextField temp = (JTextField)field;
 				if(temp.getText().equals("Username")) {
 					temp.setText("");
 				}
 			}
-			else if(field instanceof JPasswordField) {
-				JPasswordField temp = (JPasswordField)field;
-				if(temp.getPassword().toString().equals("Password")) {
-					temp.setText("");
-				}
-			}
+//			else if(field instanceof JPasswordField) {
+//				JPasswordField temp = (JPasswordField)field;
+//					temp.setText("");
+//				
+//			}
 			
 		}
 
