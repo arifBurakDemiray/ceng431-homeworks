@@ -3,8 +3,6 @@ package view;
 import java.awt.Color;
 import java.awt.TextField;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -76,13 +74,6 @@ public class UserView extends JFrame implements Observer {
 		unfollowButton.addActionListener(unfollowListener);       
     }
 
-	public static class CloseListener extends WindowAdapter { // close all related windows
-		public void windowClosing(WindowEvent e) {
-			e.getWindow().setVisible(false);
-			System.exit(0);
-		}
-	}
-	
 
 	@Override
 	public void update(Observable observable, Object args) {

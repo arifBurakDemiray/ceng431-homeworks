@@ -4,11 +4,14 @@ import observation.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import model.Login;
 import model.User;
 import view.HomeView;
-import view.UserView;
+import view.TopRateView;
+import view.user.CollectionView;
+import view.user.DiscoverUsersView;
+import view.user.FollowerView;
+import view.user.FollowingView;
 public class HomeController {
 
 	private Observer view;
@@ -17,16 +20,32 @@ public class HomeController {
 	public HomeController(Observable model, Observer view) {
 		this.view=view;
 		this.model=(Login) model;
-		model.addObserver(view);
+		this.model.addObserver(view);
 		((HomeView)view).addLogoutButtonListener(new LogoutButtonListener());
+		((HomeView)view).addFollowingButtonListener(new FollowingButtonListener());
 		((HomeView)view).addFollowerButtonListener(new FollowerButtonListener());
+		((HomeView)view).addDiscoverUsersButtonListener(new DiscoverUsersButtonListener());
+		((HomeView)view).addTopRateButtonListener(new TopRateButtonListener());
+		((HomeView)view).addCollectionButtonListener(new CollectionButtonListener());
 	}
 	
 	class LogoutButtonListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			model.setUser(null);
+			model.setUser(null);	
+		}
+		
+	}
+	
+	class FollowingButtonListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			((HomeView)view).setVisible(false);
+			FollowingView followingView = new FollowingView((User)model.getUser());
+			FollowingController viewController = new FollowingController(model.getUser(),followingView);
+			
 			
 		}
 		
@@ -36,8 +55,47 @@ public class HomeController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			UserView uv = new UserView("Deneme",(User)model.getUser());
-			UserController uc = new UserController(model.getUser(),uv);
+			((HomeView)view).setVisible(false);
+			FollowerView followerView = new FollowerView((User)model.getUser());
+			FollowerController viewController = new FollowerController(model.getUser(),followerView);
+			
+			
+		}
+		
+	}
+	
+	class DiscoverUsersButtonListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			((HomeView)view).setVisible(false);
+			DiscoverUsersView discoverUsersView = new DiscoverUsersView((User)model.getUser());
+			DiscoverUsersController viewController = new DiscoverUsersController(model.getUser(),discoverUsersView);
+			
+			
+		}
+		
+	}
+	
+	class TopRateButtonListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			((HomeView)view).setVisible(false);
+			TopRateView topView = new TopRateView((User)model.getUser());
+			TopRateController topController = new TopRateController(model.getUser(),topView);
+			
+		}
+		
+	}
+	
+	class CollectionButtonListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			((HomeView)view).setVisible(false);
+			CollectionView collectionView = new CollectionView((User)model.getUser());
+			CollectionController collectionController = new CollectionController(model.getUser(),collectionView);
 			
 		}
 		

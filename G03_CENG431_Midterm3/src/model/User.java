@@ -46,6 +46,35 @@ public class User extends Observable {
 		return followings;
 	}
 	
+	/*public void addFollower(String id){
+		
+	}
+	
+	public void removeFollower(String id){
+				try {
+			this.followers.remove(id);
+		} catch (ItemNotFoundException e) {
+		}
+		setChanged();
+		notifyObservers("rmv");
+	}
+	public void addFollowing(String id){}
+	public void removeFollowing(String id){
+		try {
+			this.followings.remove(id);
+		} catch (ItemNotFoundException e) {
+		}
+		setChanged();
+		notifyObservers("unf");
+	}*/
+	
+	public void setAndNotify(String arg)
+	{
+		setChanged();
+		notifyObservers(arg);
+	}
+	
+	
 	@Override
 	public String toString(){
 		return "    <user userName=\""+this.getUserName()+"\">\n\t"+
@@ -57,6 +86,11 @@ public class User extends Observable {
 
 	public boolean equals(String name){
 		return this.getUserName().equals(name);
+		
+	}
+	
+	public boolean equals(User user){
+		return this.getUserName().equals(user.getUserName());
 		
 	}
 

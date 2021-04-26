@@ -14,8 +14,8 @@ import exception.NotSupportedException;
  */
 public class FileController {
 
-	private IContainer<User> users;
-	private IContainer<Outfit> outfits;
+	private static IContainer<User> users;
+	private static IContainer<Outfit> outfits;
 	private IFileIO fileIO;
 
 	public FileController(ICreatorService creator) {
@@ -29,8 +29,8 @@ public class FileController {
 	 */
 	public void readAll() throws FileFormatException {
 		try {
-			outfits = fileIO.readOutfits("data\\products.json");
-			users = fileIO.readUsers(outfits,"data\\users.json");
+			outfits = fileIO.readOutfits("data\\outfits.json");
+			users = fileIO.readUsers(outfits,"data\\users.xml");
 		} catch (Exception e) {
 			throw new FileFormatException(e.getMessage());
 		}
@@ -62,17 +62,17 @@ public class FileController {
 	}
 
 	// get by user name
-	public User getByUserName(String userName) throws ItemNotFoundException, NotSupportedException {
-		return this.users.getByName(userName);
+	public static User getByUserName(String userName) throws ItemNotFoundException, NotSupportedException {
+		return users.getByName(userName);
 	}
 
 	// get by product id
-	public Outfit getByOutfitId(String outfitId) throws ItemNotFoundException, NotSupportedException {
-		return this.outfits.getById(outfitId);
+	public static Outfit getByOutfitId(String outfitId) throws ItemNotFoundException, NotSupportedException {
+		return outfits.getById(outfitId);
 	}
 
-	public IContainer<User> users() {
-		return this.users;
+	public static IContainer<User> users() {
+		return users;
 	}
 
 	public IContainer<Outfit> products() {

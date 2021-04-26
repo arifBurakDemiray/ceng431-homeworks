@@ -4,8 +4,6 @@ import java.awt.Button;
 import java.awt.Color;
 import java.awt.TextField;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import model.Outfit;
@@ -72,13 +70,6 @@ public class OutfitView implements Observer {
 	public void addDislikeListener(ActionListener dislikeListener) {
         dislikeButton.addActionListener(dislikeListener);       
     }
-
-	public static class CloseListener extends WindowAdapter { // close all related windows
-		public void windowClosing(WindowEvent e) {
-			e.getWindow().setVisible(false);
-			System.exit(0);
-		}
-	}
 	
 	public void updateButtonColors(boolean isLiked)
 	{

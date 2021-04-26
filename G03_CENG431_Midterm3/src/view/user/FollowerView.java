@@ -1,92 +1,81 @@
-package view;
+package view.user;
 
-import java.awt.Color;
 import java.awt.TextField;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import javax.swing.Box;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 import model.User;
 import observation.Observable;
 import observation.Observer;
+import storage.IContainer;
 
-public class FollowerVi extends JFrame implements Observer {
+public class FollowerView extends JFrame implements Observer {
+
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 7677309279033720304L;
-	protected User model;
+	private static final long serialVersionUID = -9191185559293341072L;
+	protected Observable model;
 	protected TextField display;
-	protected JButton followButton;
-	protected JButton unfollowButton;
-	protected Box followingsList;
+	private JButton back;
+	protected JList<String> listOfNames;
+	private JPanel contentPane;
+	private IContainer<String> followersList;
 
-	
-	public FollowerView(String label, User model) {
-		this.model = model;
-		model.addObserver(this);
-		
-		Box followingsList = Box.createVerticalBox();	
-		followingsList.setOpaque(true);
-		followingsList.setBackground(Color.BLUE);
-		
-		int i=0;
-		for (String user :  model.getFollowings().getContainer()) {			
-			
-			Box userBox = Box.createHorizontalBox();
-			userBox.setOpaque(true);
-			userBox.setBackground(Color.RED);
-			
-			unfollowButton = new JButton("Unfollow");
-			unfollowButton.setBounds(60, 50, 50, 50);
-			userBox.add(unfollowButton, 0);
-			
-			JLabel userText = new JLabel (user);
-			userText.setBounds(0,50,50,50);
-			userBox.add(userText, 0);
-		
-			followingsList.add(userBox);		
-			i++;
-		}
-		
-		
-		followingsList.setBounds(0,0, 120,i*50);			
-		add(followingsList);
-		
-		
-		setSize(1000,1000);  
-		setLayout(null);//using no layout manager  
-		setVisible(false);  
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
-		
+	public FollowerView(Observable model) {
+		this.model = (User) model;
+
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 720, 450);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+
+		back = new JButton("back");
+		back.setBounds(100, 100, 20, 10);
+		contentPane.add(back);
+
+		followersList = ((User) model).getFollowers();
+		DefaultListModel<String> listModel = setList();
+
+		listOfNames = new JList<String>(listModel);
+
+		listOfNames.setBounds(150, 150, 200, 200);
+		listOfNames.setVisible(true);
+		contentPane.add(listOfNames);
+		setVisible(true);
+
 	}
 
-	protected User model() {
+	protected Observable model() {
 		return model;
 	}
-	
-	public void addFollowListener(ActionListener followListener) {		
-        followButton.addActionListener(followListener);     
-    }
-	
-	public void addUnfollowListener(ActionListener unfollowListener) {
-		unfollowButton.addActionListener(unfollowListener);       
-    }
 
-	public static class CloseListener extends WindowAdapter { // close all related windows
-		public void windowClosing(WindowEvent e) {
-			e.getWindow().setVisible(false);
-			System.exit(0);
-		}
+	public void addBackButtonListener(ActionListener listener) {
+		back.addActionListener(listener);
 	}
-	
+
+	private DefaultListModel<String> setList() {
+		DefaultListModel<String> listModel = new DefaultListModel<>();
+		for (String user : followersList.getContainer()) {
+			listModel.addElement(user);
+		}
+		return listModel;
+	}
+
 
 	@Override
 	public void update(Observable observable, Object args) {
-	
+
+		if (args.equals("back")) {
+			setVisible(false);
+		}
+
 	}
 
 }

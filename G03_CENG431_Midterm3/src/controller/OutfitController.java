@@ -22,12 +22,11 @@ public class OutfitController {
 	}
 
 	class LikeButtonListener implements ActionListener {
-
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (!liked)
 				model.increaseLike();
-			
+
 			liked = true;
 			if (disliked) {
 				model.decreaseDislike();
@@ -37,7 +36,6 @@ public class OutfitController {
 	}
 
 	class DislikeButtonListener implements ActionListener {
-		
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (!disliked)

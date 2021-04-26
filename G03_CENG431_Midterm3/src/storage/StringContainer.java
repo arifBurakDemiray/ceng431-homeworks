@@ -28,5 +28,15 @@ public class StringContainer extends Container<String> {
 		}
 		return string;
 	}
+	
+	public String[] toArray(){
+		String[] array = new String[this.getLength()];
+		int i = 0;
+		for(String value: this.getContainer()){
+			array[i]=value;
+			i++;
+		}
+		return array;
+	}
 
 }

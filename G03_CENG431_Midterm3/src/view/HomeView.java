@@ -26,7 +26,9 @@ public class HomeView extends JFrame implements Observer {
 	private JButton logoutButton;
 	private JButton followersButton;
 	private JButton followingsButton;
+	private JButton discoverUsersButton;
 	private JButton collectionsButton;
+	private JButton topRateButton;
 	private JScrollPane posts;
 	private Login model;
 
@@ -62,6 +64,14 @@ public class HomeView extends JFrame implements Observer {
 		collectionsButton.setBounds(10, 107, 100, 23);
 		contentPane.add(collectionsButton);
 		
+		discoverUsersButton = new JButton("Discover Users");
+		discoverUsersButton.setBounds(10, 141, 100, 23);
+		contentPane.add(discoverUsersButton);
+		
+		topRateButton = new JButton("Top Rates");
+		topRateButton.setBounds(10, 174, 100, 23);
+		contentPane.add(topRateButton);
+		
 		posts = new JScrollPane();
 		posts.setBounds(179, 40, 352, 297);
 		contentPane.add(posts);
@@ -73,15 +83,36 @@ public class HomeView extends JFrame implements Observer {
 		logoutButton.addActionListener(listener);
 	}
 
+	public void addFollowingButtonListener(ActionListener listener) {
+		followingsButton.addActionListener(listener);
+	}
+	
 	public void addFollowerButtonListener(ActionListener listener) {
 		followersButton.addActionListener(listener);
+	}
+	
+	public void addDiscoverUsersButtonListener(ActionListener listener) {
+		discoverUsersButton.addActionListener(listener);
+	}
+	
+	public void addTopRateButtonListener(ActionListener listener) {
+		topRateButton.addActionListener(listener);
+	}
+	
+	public void addCollectionButtonListener(ActionListener listener){
+		collectionsButton.addActionListener(listener);
 	}
 	
 	@Override
 	public void update(Observable observable, Object args) {
 		if(args==null)
 			this.setVisible(false);
-		else {
+		
+		else if(args.equals("back")){
+			setVisible(true);
+		}
+		else if(args instanceof User) {
+			((User) args).addObserver(this);
 			this.userName.setText(((User) args).getUserName());
 			this.setVisible(true);}
 		
