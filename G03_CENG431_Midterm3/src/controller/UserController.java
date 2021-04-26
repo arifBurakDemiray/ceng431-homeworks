@@ -17,6 +17,7 @@ public class UserController {
 	{
 		this.model = (User) model;
 		this.view = (UserView) view;
+		model.addObserver(view);
 	}
 	
 	public void followUser(String id)

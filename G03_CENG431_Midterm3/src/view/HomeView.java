@@ -73,6 +73,10 @@ public class HomeView extends JFrame implements Observer {
 		logoutButton.addActionListener(listener);
 	}
 
+	public void addFollowerButtonListener(ActionListener listener) {
+		followersButton.addActionListener(listener);
+	}
+	
 	@Override
 	public void update(Observable observable, Object args) {
 		if(args==null)

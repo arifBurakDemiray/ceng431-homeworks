@@ -13,7 +13,7 @@ import model.User;
 import observation.Observable;
 import observation.Observer;
 
-public class UserView extends JFrame implements Observer {
+public class FollowerVi extends JFrame implements Observer {
 	/**
 	 * 
 	 */
@@ -25,7 +25,7 @@ public class UserView extends JFrame implements Observer {
 	protected Box followingsList;
 
 	
-	public UserView(String label, User model) {
+	public FollowerView(String label, User model) {
 		this.model = model;
 		model.addObserver(this);
 		
