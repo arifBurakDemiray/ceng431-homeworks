@@ -7,8 +7,10 @@ import java.awt.event.MouseListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
 import model.Login;
 import observation.Observable;
@@ -25,9 +27,15 @@ public class LoginView extends JFrame implements Observer {
 	private JTextField userName;
 	private JLabel message;
 	private Login model = null;
-
+	private JPanel contentPane;
+	
 	public LoginView(Observable model) {
 		this.model =  (Login) model;
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
 		setBounds(100, 100, 720, 450);
 		loginButton = new JButton("Sign in");
 		loginButton.setBounds(300, 200, 100, 30);
@@ -39,15 +47,12 @@ public class LoginView extends JFrame implements Observer {
 		message.setBounds(275, 250, 200, 30);
 		message.setForeground(Color.RED);
 
-		add(message);
+		contentPane.add(message);
 		message.setVisible(false);
-		add(loginButton);
-		add(password);
-		add(userName);
-
-		setLayout(null);// using no layout manager
+		contentPane.add(loginButton);
+		contentPane.add(password);
+		contentPane.add(userName);
 		setVisible(true);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 	}
 
