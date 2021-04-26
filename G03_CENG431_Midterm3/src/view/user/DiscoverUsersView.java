@@ -48,7 +48,7 @@ public class DiscoverUsersView extends JFrame implements Observer {
 		contentPane.add(listOfNames);
 
 		back = new JButton("Back");
-		back.setBounds(100, 100, 20, 20);
+		back.setBounds(23, 11, 89, 23);
 		contentPane.add(back);
 
 		message = new JLabel("Error");
@@ -56,7 +56,7 @@ public class DiscoverUsersView extends JFrame implements Observer {
 		message.setForeground(Color.RED);
 
 		unfollowButton = new JButton("Follow");
-		unfollowButton.setBounds(300, 300, 100, 50);
+		unfollowButton.setBounds(261, 350, 89, 23);
 		contentPane.add(unfollowButton);
 
 		contentPane.add(message);

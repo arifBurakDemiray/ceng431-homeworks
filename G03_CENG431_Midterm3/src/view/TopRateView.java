@@ -5,6 +5,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import model.Rates;
 import observation.Observable;
 import observation.Observer;
 
@@ -35,7 +36,9 @@ public class TopRateView extends JFrame implements Observer{
 	 * Create the frame.
 	 */
 	public TopRateView(Observable model) {
+		
 		this.model = model;
+		Rates temp = (Rates)model;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 720, 450);
 		contentPane = new JPanel();
@@ -65,17 +68,17 @@ public class TopRateView extends JFrame implements Observer{
 		back.setBounds(23, 11, 89, 23);
 		contentPane.add(back);
 		
-		topLikeValue = new JLabel("New label");
+		topLikeValue = new JLabel(temp.topLikedOutfitType);
 		topLikeValue.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		topLikeValue.setBounds(380, 85, 130, 23);
 		contentPane.add(topLikeValue);
 		
-		topDislikeValue = new JLabel("New label");
+		topDislikeValue = new JLabel(temp.topDislikedOutfitType);
 		topDislikeValue.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		topDislikeValue.setBounds(380, 181, 88, 23);
 		contentPane.add(topDislikeValue);
 		
-		topUserValue = new JLabel("New label");
+		topUserValue = new JLabel(temp.topFollewedUserName);
 		topUserValue.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		topUserValue.setBounds(380, 272, 89, 23);
 		contentPane.add(topUserValue);

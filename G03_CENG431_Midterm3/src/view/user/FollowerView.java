@@ -36,8 +36,8 @@ public class FollowerView extends JFrame implements Observer {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		back = new JButton("back");
-		back.setBounds(100, 100, 20, 10);
+		back = new JButton("Back");
+		back.setBounds(23, 11, 89, 23);
 		contentPane.add(back);
 
 		followersList = ((User) model).getFollowers();

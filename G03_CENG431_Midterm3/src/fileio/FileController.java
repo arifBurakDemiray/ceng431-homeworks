@@ -75,8 +75,8 @@ public class FileController {
 		return users;
 	}
 
-	public IContainer<Outfit> products() {
-		return this.outfits;
+	public static IContainer<Outfit> outfits() {
+		return outfits;
 	}
 
 	

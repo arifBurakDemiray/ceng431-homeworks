@@ -39,8 +39,8 @@ public class FollowingView extends JFrame implements Observer {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		back = new JButton("back");
-		back.setBounds(100, 100, 20, 10);
+		back = new JButton("Back");
+		back.setBounds(23, 11, 89, 23);
 		contentPane.add(back);
 		
 		followingList = ((User) model).getFollowings();
@@ -57,7 +57,7 @@ public class FollowingView extends JFrame implements Observer {
 		message.setForeground(Color.RED);
 		
 		unfollowButton = new JButton("Unfollow");
-		unfollowButton.setBounds(300, 300, 100, 50);
+		unfollowButton.setBounds(261, 350, 89, 23);
 		contentPane.add(unfollowButton);
 
 		contentPane.add(message);

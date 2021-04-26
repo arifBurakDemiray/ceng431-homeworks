@@ -53,23 +53,23 @@ public class HomeView extends JFrame implements Observer {
 		contentPane.add(logoutButton);
 		
 		followersButton = new JButton("Followers");
-		followersButton.setBounds(10, 40, 100, 23);
+		followersButton.setBounds(10, 40, 125, 23);
 		contentPane.add(followersButton);
 		
 		followingsButton = new JButton("Followings");
-		followingsButton.setBounds(10, 73, 100, 23);
+		followingsButton.setBounds(10, 73, 125, 23);
 		contentPane.add(followingsButton);
 		
 		collectionsButton = new JButton("Collections");
-		collectionsButton.setBounds(10, 107, 100, 23);
+		collectionsButton.setBounds(10, 107, 125, 23);
 		contentPane.add(collectionsButton);
 		
 		discoverUsersButton = new JButton("Discover Users");
-		discoverUsersButton.setBounds(10, 141, 100, 23);
+		discoverUsersButton.setBounds(10, 141, 125, 23);
 		contentPane.add(discoverUsersButton);
 		
 		topRateButton = new JButton("Top Rates");
-		topRateButton.setBounds(10, 174, 100, 23);
+		topRateButton.setBounds(10, 174, 125, 23);
 		contentPane.add(topRateButton);
 		
 		posts = new JScrollPane();

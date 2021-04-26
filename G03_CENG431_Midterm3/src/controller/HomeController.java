@@ -82,8 +82,10 @@ public class HomeController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			((HomeView)view).setVisible(false);
-			TopRateView topView = new TopRateView((User)model.getUser());
-			TopRateController topController = new TopRateController(model.getUser(),topView);
+			Observable rates = TopRateController.initializeRateModel();
+			rates.addObserver(view);
+			TopRateView topView = new TopRateView(rates);
+			TopRateController topController = new TopRateController(rates,topView);
 			
 		}
 		

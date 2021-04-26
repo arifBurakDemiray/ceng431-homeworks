@@ -51,8 +51,8 @@ public class CollectionView extends JFrame implements Observer {
 		popup.setBounds(200, 200, 200, 200);
 		popup.setBackground(Color.BLACK);
 		popup.setVisible(false);
-		back = new JButton("back");
-		back.setBounds(100, 100, 20, 10);
+		back = new JButton("Back");
+		back.setBounds(23, 11, 89, 23);;
 		contentPane.add(back);
 
 		collectionsList = ((User) model).getCollections();
