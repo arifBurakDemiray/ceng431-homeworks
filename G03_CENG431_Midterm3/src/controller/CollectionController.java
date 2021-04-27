@@ -50,6 +50,7 @@ public class CollectionController {
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
+			if(e.getClickCount()>1) {
 			String selectedCollectionName = ((CollectionView) view).getSelectedCollection();
 			Collection collection = null;
 			try {
@@ -59,7 +60,7 @@ public class CollectionController {
 			} catch (ItemNotFoundException | NotSupportedException e1) {
 			}
 			
-			// model.setAndNotify("select");
+			}// model.setAndNotify("select");
 		}
 
 		@Override

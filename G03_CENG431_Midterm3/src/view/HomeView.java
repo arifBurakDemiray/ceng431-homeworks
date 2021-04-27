@@ -122,23 +122,28 @@ public class HomeView extends JFrame implements Observer {
 			this.setVisible(false);
 		
 		else if(args.equals("back")){
+			updateScroll((User) model.getUser());
 			setVisible(true);
 		}
 		else if(args instanceof User) {
 			((User) args).addObserver(this);
 			this.userName.setText(((User) args).getUserName());
 			this.setVisible(true);
-			IContainer<String> bla = (new CollectionPrintService((User)args)).getScroolString();
-			DefaultListModel<String> temp = new DefaultListModel<String>();
-			for(String cl: bla) {
-				temp.addElement(cl);
-			}
-			list.setModel(temp);
+			updateScroll((User) args);
 			list.setVisible(true);
 			posts.setVisible(true);}
 		
 	}
 
+	private void updateScroll(User user) {
+		IContainer<String> bla = (new CollectionPrintService(user)).getScroolString();
+		DefaultListModel<String> temp = new DefaultListModel<String>();
+		for(String cl: bla) {
+			temp.addElement(cl);
+		}
+		list.setModel(temp);
+	}
+	
 	/**
 	 * @return the model
 	 */

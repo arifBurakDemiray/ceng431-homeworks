@@ -2,6 +2,8 @@ package service;
 
 import fileio.DatabaseResult;
 import fileio.UserRepository;
+import model.Collection;
+import model.Outfit;
 import model.User;
 import storage.IContainer;
 import storage.StringContainer;
@@ -24,8 +26,13 @@ public class CollectionPrintService {
 			DatabaseResult dr = up.getUserByName(name);
 			if(dr!=null) {
 				final User temp = (User)dr.getObject();
-				result.add("---"+temp.getUserName()+"---");
-				result.add(temp.getCollections().toString());
+				result.add("@"+temp.getUserName());
+				for(Collection p: temp.getCollections()) {
+					result.add("_"+p.getName());
+					for(Outfit o: p.getOutfits()) {
+						result.add("  |"+o.getType());
+					}
+				}
 			}
 		}
 		

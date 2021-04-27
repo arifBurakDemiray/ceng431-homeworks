@@ -48,6 +48,12 @@
 	<followers>furkan,burak</followers>
 	<followings>furkan</followings>
 	<collections>
+	<collection name="Deneme">
+	<ids>65,38</ids>
+	</collection>
+	<collection name="FurkanOlduFşb">
+	<ids>65</ids>
+	</collection>
 	</collections>
     </user>
     <user userName="burak">
