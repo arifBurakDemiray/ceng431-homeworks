@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import model.Collection;
+import model.CollectionList;
 import model.User;
 import observation.Observable;
 import observation.Observer;
@@ -56,16 +57,16 @@ public class CollectionView extends JFrame implements Observer {
 		contentPane.add(back);
 		
 		createCollection = new JButton("Create Collection");
-		createCollection.setBounds(300, 250, 100, 25);
+		createCollection.setBounds(260, 280, 100, 25);
 		contentPane.add(createCollection);
 		
 		okey = new JButton("Create");
-		okey.setBounds(300, 400, 100, 25);
+		okey.setBounds(260, 350, 100, 25);
 		contentPane.add(okey);
 		okey.setVisible(false);
 		
 		collectionName = new TextField();
-		collectionName.setBounds(EXIT_ON_CLOSE, ABORT, WIDTH, HEIGHT);
+		collectionName.setBounds(260, 310, 100, 30);
 		contentPane.add(collectionName);
 		collectionName.setVisible(false);
 		
@@ -138,9 +139,11 @@ public class CollectionView extends JFrame implements Observer {
 			popup.setTitle(getSelectedCollection());
 			popup.setVisible(true);
 		}else if(args.equals("Okey")) {
+			if(observable instanceof CollectionList)
+				listOfCollectionsNames.setModel(((CollectionList) observable).getList());
 			okey.setVisible(false);
 			collectionName.setVisible(false);
-			
+			collectionName.setText("");
 		} else if (args.equals("Create")) {
 			okey.setVisible(true);
 			collectionName.setVisible(true);

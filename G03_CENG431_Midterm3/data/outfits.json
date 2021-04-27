@@ -1,27 +1,26 @@
 {
-	"65":{
-		"brand_name":"Avon",
-		"gender":"male",
-		"noflikes":"15",
-		"nofdislikes":"35",
-		"type":"Jacket",
-		"size":"XL,L,M,ML",
-		"color":"red",
-		"comments":{
-			"user":"Ow yeah ne dedin laaa",
-			"veli":"Ananın amıke o ney ke",
-			"furkna":"siktim seni dırırı dırırı",
-		}
-		
-	},
-	"38":{
-		"brand_name":"Kardesler Kundura",
-		"gender":"male",
-		"type":"Shoes",
-		"size":"43,42,41,40",
-		"color":"black",
-		"noflikes":"22",
-		"nofdislikes":"10",
-	}
+    "38": {
+        "noflikes": "22",
+        "comments": {},
+        "gender": "male",
+        "size": "43,42,41,40",
+        "color": "black",
+        "nofdislikes": "10",
+        "brand_name": "Kardesler Kundura",
+        "type": "Shoes"
+    },
+    "65": {
+        "noflikes": "15",
+        "comments": {
+            "veli": "Ananın amıke o ney ke",
+            "user": "Ow yeah ne dedin laaa",
+            "furkna": "siktim seni dırırı dırırı"
+        },
+        "gender": "male",
+        "size": "XL,L,M,ML",
+        "color": "red",
+        "nofdislikes": "35",
+        "brand_name": "Avon",
+        "type": "Jacket"
+    }
 }
-

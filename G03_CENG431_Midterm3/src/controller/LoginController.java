@@ -9,6 +9,7 @@ import model.Login;
 import model.User;
 import observation.Observable;
 import observation.Observer;
+import service.AuthService;
 import view.LoginView;
 
 public class LoginController {

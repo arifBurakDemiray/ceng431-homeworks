@@ -41,8 +41,8 @@ public class FileController {
 	 */
 	protected void writeAll() throws FileFormatException {
 		try {
-			fileIO.writeUsers(users, "data\\users.json");
-			fileIO.writeOutfits(outfits, "data\\products.json");
+			fileIO.writeUsers(users, "data\\users.xml");
+			fileIO.writeOutfits(outfits, "data\\outfits.json");
 		} catch (Exception e) {
 			throw new FileFormatException(e.getMessage());
 		}

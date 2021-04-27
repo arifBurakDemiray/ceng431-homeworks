@@ -1,6 +1,7 @@
 package controller;
 
 import observation.*;
+import service.TopRateService;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,11 +17,13 @@ public class HomeController {
 
 	private Observer view;
 	private Login model;
+	private TopRateService topRateService;
 	
 	public HomeController(Observable model, Observer view) {
 		this.view=view;
 		this.model=(Login) model;
 		this.model.addObserver(view);
+		topRateService = new TopRateService();
 		((HomeView)view).addLogoutButtonListener(new LogoutButtonListener());
 		((HomeView)view).addFollowingButtonListener(new FollowingButtonListener());
 		((HomeView)view).addFollowerButtonListener(new FollowerButtonListener());
@@ -82,7 +85,7 @@ public class HomeController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			((HomeView)view).setVisible(false);
-			final Observable rates = RateHelper.initializeRateModel();
+			final Observable rates = topRateService.initializeRateModel();
 			rates.addObserver(view);
 			TopRateView topView = new TopRateView(rates);
 			TopRateController topController = new TopRateController(rates,topView);

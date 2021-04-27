@@ -7,12 +7,19 @@ import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import javax.swing.DefaultListModel;
+
 import exception.ItemNotFoundException;
 import exception.NotSupportedException;
+import fileio.OutfitRepository;
+import fileio.UserRepository;
 import model.Collection;
+import model.CollectionList;
+import model.Outfit;
 import model.User;
 import observation.Observable;
 import observation.Observer;
+import storage.IContainer;
 import view.user.CollectionView;
 import view.user.PopupView;
 
@@ -28,6 +35,7 @@ public class CollectionController {
 		((CollectionView) this.view).addBackButtonListener(new BackButtonListener());
 		((CollectionView) this.view).addSelectCollectionListener(new SelectCollectionListener());
 		((CollectionView) this.view).addCreateCollectionButtonListener(new CreateCollectionButtonListener());
+		((CollectionView) this.view).addOkeyButtonListener(new OkeyButtonListener());
 	}
 
 	class BackButtonListener implements ActionListener {
@@ -96,7 +104,10 @@ public class CollectionController {
 			String collectionName = ((CollectionView)view).getCollectionName();
 			Collection collection = new Collection(collectionName);
 			((User)model).getCollections().add(collection);
-			model.setAndNotify("Okey");
+			(new UserRepository()).saveChanges();
+			CollectionList newList = new CollectionList(setCollectionList());
+			newList.addObserver(view);
+			newList.setAndNotify("Okey");
 		}
 		
 	}
@@ -118,6 +129,16 @@ public class CollectionController {
 			modelAdapter.removeObserver(viewAdapter);
 		}
 
+	}
+	
+	private DefaultListModel<String> setCollectionList() {
+		final IContainer<Collection> collections = ((User) model).getCollections();
+		DefaultListModel<String> listModel = new DefaultListModel<>();
+		for (Collection collection : collections) {
+			listModel.addElement(collection.getName());
+
+		}
+		return listModel;
 	}
 
 }

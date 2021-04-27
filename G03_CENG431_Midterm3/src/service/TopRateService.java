@@ -1,4 +1,4 @@
-package controller;
+package service;
 
 import fileio.OutfitRepository;
 import fileio.UserRepository;
@@ -7,10 +7,14 @@ import model.Rates;
 import model.User;
 import storage.IContainer;
 
-public class RateHelper {
+public class TopRateService {
 	
 
-	protected static Rates initializeRateModel() {
+	public TopRateService() {
+		
+	}
+	
+	public Rates initializeRateModel() {
 		final String userName = findTopFollowedUser();
 		final String topLiked = findTopLikedOutfit();
 		final String topDisliked = findTopDislikedOutfit();
