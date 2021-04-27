@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import model.User;
 import observation.Observable;
@@ -15,16 +16,14 @@ import storage.IContainer;
 
 public class FollowerView extends JFrame implements Observer {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -9191185559293341072L;
 	protected Observable model;
 	protected TextField display;
 	private JButton back;
-	protected JList<String> listOfNames;
+	private JScrollPane scrollPaneOfListOfFollowersNames;
+	protected JList<String> listOfFollowersNames;
 	private JPanel contentPane;
-	private IContainer<String> followersList;
+	
 
 	public FollowerView(Observable model) {
 		this.model = (User) model;
@@ -37,17 +36,17 @@ public class FollowerView extends JFrame implements Observer {
 		contentPane.setLayout(null);
 
 		back = new JButton("Back");
-		back.setBounds(23, 11, 89, 23);
+		back.setBounds(20, 20, 90, 25);
 		contentPane.add(back);
 
-		followersList = ((User) model).getFollowers();
 		DefaultListModel<String> listModel = setList();
+		listOfFollowersNames = new JList<String>(listModel);
+		listOfFollowersNames.setVisible(true);
 
-		listOfNames = new JList<String>(listModel);
+		scrollPaneOfListOfFollowersNames = new JScrollPane(listOfFollowersNames);
+		scrollPaneOfListOfFollowersNames.setBounds(150, 50, 200, 200);
+		contentPane.add(scrollPaneOfListOfFollowersNames);
 
-		listOfNames.setBounds(150, 150, 200, 200);
-		listOfNames.setVisible(true);
-		contentPane.add(listOfNames);
 		setVisible(true);
 
 	}
@@ -61,13 +60,13 @@ public class FollowerView extends JFrame implements Observer {
 	}
 
 	private DefaultListModel<String> setList() {
+		IContainer<String> followersList = ((User) model).getFollowers();
 		DefaultListModel<String> listModel = new DefaultListModel<>();
 		for (String user : followersList.getContainer()) {
 			listModel.addElement(user);
 		}
 		return listModel;
 	}
-
 
 	@Override
 	public void update(Observable observable, Object args) {

@@ -82,11 +82,10 @@ public class HomeController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			((HomeView)view).setVisible(false);
-			Observable rates = TopRateController.initializeRateModel();
+			final Observable rates = RateHelper.initializeRateModel();
 			rates.addObserver(view);
 			TopRateView topView = new TopRateView(rates);
 			TopRateController topController = new TopRateController(rates,topView);
-			
 		}
 		
 	}

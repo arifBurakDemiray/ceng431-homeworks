@@ -27,6 +27,7 @@ public class CollectionController {
 		model.addObserver(view);
 		((CollectionView) this.view).addBackButtonListener(new BackButtonListener());
 		((CollectionView) this.view).addSelectCollectionListener(new SelectCollectionListener());
+		((CollectionView) this.view).addCreateCollectionButtonListener(new CreateCollectionButtonListener());
 	}
 
 	class BackButtonListener implements ActionListener {
@@ -77,6 +78,17 @@ public class CollectionController {
 
 		}
 	}
+
+	class CreateCollectionButtonListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+	}
+
 
 	class WindowListener extends WindowAdapter {
 		Observer viewAdapter;

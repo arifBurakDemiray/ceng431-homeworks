@@ -1,6 +1,9 @@
 eclipse.preferences.version=1
 encoding//data/outfits.json=UTF-8
 encoding//src/app/app.java=UTF-8
+encoding//src/controller/DiscoverUsersController.java=UTF-8
+encoding//src/controller/FollowingController.java=UTF-8
+encoding//src/controller/PopupController.java=UTF-8
 encoding//src/controller/UserController.java=UTF-8
 encoding//src/model/Collection.java=UTF-8
 encoding//src/model/User.java=UTF-8

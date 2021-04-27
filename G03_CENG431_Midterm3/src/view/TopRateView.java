@@ -17,9 +17,6 @@ import javax.swing.JButton;
 
 public class TopRateView extends JFrame implements Observer{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 6980364354683833411L;
 	private JPanel contentPane;
 	private JLabel topLike;

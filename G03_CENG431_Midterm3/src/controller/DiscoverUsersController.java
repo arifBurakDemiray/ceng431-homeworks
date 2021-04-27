@@ -2,9 +2,8 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import exception.ItemNotFoundException;
-import exception.NotSupportedException;
-import fileio.FileController;
+import fileio.DatabaseResult;
+import fileio.UserRepository;
 import model.User;
 import observation.Observable;
 import observation.Observer;
@@ -14,11 +13,12 @@ public class DiscoverUsersController {
 
 	private User model;
 	private Observer view;
-
+	private UserRepository userRepository;
 	public DiscoverUsersController(Observable model, Observer view) {
 		this.model = (User) model;
 		this.view = view;
 		model.addObserver(view);
+		userRepository = new UserRepository();
 		((DiscoverUsersView) this.view).addFollowButtonListener(new FollowButtonListener());
 		((DiscoverUsersView) this.view).addBackButtonListener(new BackButtonListener());
 	}
@@ -30,11 +30,18 @@ public class DiscoverUsersController {
 		public void actionPerformed(ActionEvent e) {
 			name = ((DiscoverUsersView) view).getSelectedUser();
 			followUser(name);
-			try {
-				User otherUser = FileController.getByUserName(name);
+			DatabaseResult databaseResult = userRepository.getUserByName(name);
+			User otherUser = (User) databaseResult.getObject();
+			if(otherUser!=null)
+			{
 				addFollower(otherUser);
-			} catch (ItemNotFoundException | NotSupportedException e1) {
+				userRepository.saveChanges();
 			}
+			else
+			{
+				//message basılacak
+			}
+			
 		}
 	}
 
@@ -43,17 +50,19 @@ public class DiscoverUsersController {
 		public void actionPerformed(ActionEvent e) {
 			model.setAndNotify("back");
 			model.removeObserver(view);
+			userRepository.saveChanges();
 		}
 	}
 
 	public void addFollower(User otherUser) {
-		otherUser.getFollowers().add(model.getUserName());
-		model.setAndNotify("addUser");
+		otherUser.getFollowers().add(model.getUserName());;
+		userRepository.saveChanges();
 	}
 
 	public void followUser(String name) {
 		model.getFollowings().add(name);
 		model.setAndNotify("followUser");
+		userRepository.saveChanges();
 	}
 
 }

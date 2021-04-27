@@ -15,7 +15,7 @@ import view.user.FollowingView;
 
 public class UserController {
 
-	private User model;
+	/*private User model;
 	private Observer view;
 
 	public UserController(Observable model, Observer view) {
@@ -36,7 +36,7 @@ public class UserController {
 			name = ((FollowingView) view).getSelectedUser();
 			unfollowUser(name);
 			try {
-				User otherUser = FileController.getByUserName(name);
+				User otherUser = FileController.users().getByName(name);
 				removeFollower(otherUser, model.getUserName());
 			} catch (ItemNotFoundException | NotSupportedException e1) {
 			}
@@ -51,7 +51,7 @@ public class UserController {
 		public void actionPerformed(ActionEvent e) {
 			name = ((DiscoverUsersView) view).getSelectedUser();
 			try {
-				User otherUser = FileController.getByUserName(name);
+				User otherUser = FileController.users().getByName(name);
 				followUser(otherUser);
 			} catch (ItemNotFoundException | NotSupportedException e1) {
 			}
@@ -112,6 +112,6 @@ public class UserController {
 		} catch (ItemNotFoundException e) {
 		}
 		model.setAndNotify("unfollowUser");
-	}
+	}*/
 
 }

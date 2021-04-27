@@ -1,13 +1,16 @@
 package view.user;
 
 import java.awt.Color;
+import java.awt.TextField;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import model.Collection;
 import model.User;
@@ -23,10 +26,15 @@ public class CollectionView extends JFrame implements Observer {
 	private static final long serialVersionUID = -2106315297457499256L;
 	protected Observable model;
 	private JButton back;
-	protected JList<String> listOfNames;
+	private JButton createCollection;
+	private JButton okey;
+	private TextField collectionName;
+	private JScrollPane scrollPaneOfListOfCollectionsNames;
+	protected JList<String> listOfCollectionsNames;
 	private JPanel contentPane;
 	public JFrame popup;
-	
+	private JLabel myCollections;
+	private JLabel infoMessage;
 
 	public CollectionView(Observable model) {
 		this.model = model;
@@ -37,19 +45,41 @@ public class CollectionView extends JFrame implements Observer {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
 		popup = new JFrame("Popup");
 		popup.setBounds(200, 200, 200, 200);
 		popup.setBackground(Color.BLACK);
 		popup.setVisible(false);
+		
 		back = new JButton("Back");
 		back.setBounds(23, 11, 89, 23);
 		contentPane.add(back);
 		
+		createCollection = new JButton("Create Collection");
+		createCollection.setBounds(300, 250, 100, 25);
+		contentPane.add(createCollection);
+		
+		okey = new JButton("Create");
+		okey.setBounds(300, 400, 100, 25);
+		contentPane.add(okey);
+		
+		myCollections = new JLabel("My Collections");
+		myCollections.setBounds(200, 25, 150, 25);
+		contentPane.add(myCollections);
+		
+		infoMessage = new JLabel("Select a collection clicking to add/remove outfits");
+		infoMessage.setBounds(210, 250, 400, 30);
+		contentPane.add(infoMessage);
+		
 		DefaultListModel<String> listModel = setList();
-		listOfNames = new JList<String>(listModel);
-		listOfNames.setBounds(150, 150, 200, 200);
-		listOfNames.setVisible(true);
-		contentPane.add(listOfNames);
+		listOfCollectionsNames = new JList<String>(listModel);
+		listOfCollectionsNames.setVisible(true);
+		
+		scrollPaneOfListOfCollectionsNames = new JScrollPane(listOfCollectionsNames);
+		scrollPaneOfListOfCollectionsNames.setBounds(200, 50, 200,200);
+		contentPane.add(scrollPaneOfListOfCollectionsNames);
+		
+
 		setVisible(true);
 
 	}
@@ -63,13 +93,19 @@ public class CollectionView extends JFrame implements Observer {
 	}
 
 	public void addSelectCollectionListener(MouseListener listener) {
-		listOfNames.addMouseListener(listener);
+		listOfCollectionsNames.addMouseListener(listener);
+	}
+	
+	public void addCreateCollectionButtonListener(ActionListener listener) {
+		createCollection.addActionListener(listener);
+	}
+	
+	public void addOkeyButtonListener(ActionListener listener) {
+		okey.addActionListener(listener);
 	}
 
 	public String getSelectedCollection() {
-
-		String name = listOfNames.getSelectedValue();
-
+		String name = listOfCollectionsNames.getSelectedValue();
 		return name;
 	}
 

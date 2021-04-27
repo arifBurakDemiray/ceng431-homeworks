@@ -3,8 +3,8 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import exception.ItemNotFoundException;
-import exception.NotSupportedException;
-import fileio.FileController;
+import fileio.DatabaseResult;
+import fileio.UserRepository;
 import model.User;
 import observation.Observable;
 import observation.Observer;
@@ -14,11 +14,14 @@ public class FollowingController {
 
 	private User model;
 	private Observer view;
+	private UserRepository userRepository;
 
 	public FollowingController(Observable model, Observer view) {
 		this.model = (User) model;
 		this.view = view;
 		model.addObserver(view);
+		
+		userRepository = new UserRepository();
 		((FollowingView) this.view).addUnfollowButtonListener(new UnfollowButtonListener());
 		((FollowingView) this.view).addBackButtonListener(new BackButtonListener());
 	}
@@ -30,10 +33,16 @@ public class FollowingController {
 		public void actionPerformed(ActionEvent e) {
 			name = ((FollowingView) view).getSelectedUser();
 			unfollowUser(name);
-			try {
-				User otherUser = FileController.getByUserName(name);
+			DatabaseResult databaseResult = userRepository.getUserByName(name);
+			User otherUser = (User)databaseResult.getObject();
+			if(otherUser!=null)
+			{
 				removeFollower(otherUser, model.getUserName());
-			} catch (ItemNotFoundException | NotSupportedException e1) {
+				userRepository.saveChanges();
+			}
+			else
+			{
+				//message basılacak
 			}
 		}
 	}
@@ -43,6 +52,7 @@ public class FollowingController {
 		public void actionPerformed(ActionEvent e) {
 			model.setAndNotify("back");
 			model.removeObserver(view);
+			userRepository.saveChanges();
 		}
 	}
 
@@ -52,6 +62,7 @@ public class FollowingController {
 		} catch (ItemNotFoundException e) {
 		}
 		model.setAndNotify("removeUser");
+		userRepository.saveChanges();
 	}
 
 
@@ -61,6 +72,7 @@ public class FollowingController {
 		} catch (ItemNotFoundException e) {
 		}
 		model.setAndNotify("unfollowUser");
+		userRepository.saveChanges();
 	}
 
 }
