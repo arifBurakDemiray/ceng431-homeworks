@@ -1,21 +1,13 @@
 package view.user;
 
 import java.awt.Color;
-import java.awt.TextField;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.Popup;
-import javax.swing.PopupFactory;
 import javax.swing.border.EmptyBorder;
 import model.Collection;
 import model.User;
@@ -25,7 +17,6 @@ import storage.IContainer;
 
 public class CollectionView extends JFrame implements Observer {
 
-	
 	/**
 	 * 
 	 */
@@ -35,11 +26,10 @@ public class CollectionView extends JFrame implements Observer {
 	protected JList<String> listOfNames;
 	private JPanel contentPane;
 	public JFrame popup;
-	private IContainer<Collection> collectionsList;
 	
 
 	public CollectionView(Observable model) {
-		this.model = (User) model;
+		this.model = model;
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 720, 450);
@@ -52,12 +42,10 @@ public class CollectionView extends JFrame implements Observer {
 		popup.setBackground(Color.BLACK);
 		popup.setVisible(false);
 		back = new JButton("Back");
-		back.setBounds(23, 11, 89, 23);;
+		back.setBounds(23, 11, 89, 23);
 		contentPane.add(back);
-
-		collectionsList = ((User) model).getCollections();
+		
 		DefaultListModel<String> listModel = setList();
-
 		listOfNames = new JList<String>(listModel);
 		listOfNames.setBounds(150, 150, 200, 200);
 		listOfNames.setVisible(true);
@@ -73,17 +61,20 @@ public class CollectionView extends JFrame implements Observer {
 	public void addBackButtonListener(ActionListener listener) {
 		back.addActionListener(listener);
 	}
-	
+
 	public void addSelectCollectionListener(MouseListener listener) {
 		listOfNames.addMouseListener(listener);
 	}
-	public String getSelectedCollection()
-	{
-		  String name = listOfNames.getSelectedValue();
-          return name;
+
+	public String getSelectedCollection() {
+
+		String name = listOfNames.getSelectedValue();
+
+		return name;
 	}
 
 	private DefaultListModel<String> setList() {
+		IContainer<Collection> collectionsList = ((User) model).getCollections();
 		DefaultListModel<String> listModel = new DefaultListModel<>();
 		for (Collection collection : collectionsList.getContainer()) {
 			listModel.addElement(collection.getName());
@@ -96,10 +87,8 @@ public class CollectionView extends JFrame implements Observer {
 
 		if (args.equals("back")) {
 			setVisible(false);
-			
-		}
-		else if(args.equals("select"))
-		{	
+
+		} else if (args.equals("select")) {
 			popup.setTitle(getSelectedCollection());
 			popup.setVisible(true);
 		}

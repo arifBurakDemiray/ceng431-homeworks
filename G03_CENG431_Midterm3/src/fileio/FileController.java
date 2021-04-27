@@ -53,12 +53,12 @@ public class FileController {
 	
 	// Add user to system
 	public boolean addUser(User user) {
-		return this.users.add(user);
+		return users.add(user);
 	}
 
 	// add product to system
 	public boolean addOutfit(Outfit outfit) {
-		return this.outfits.add(outfit);
+		return outfits.add(outfit);
 	}
 
 	// get by user name

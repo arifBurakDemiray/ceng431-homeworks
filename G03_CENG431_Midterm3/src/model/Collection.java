@@ -2,8 +2,9 @@ package model;
 
 import storage.IContainer;
 import storage.OutfitContainer;
+import observation.Observable;
 
-public class Collection {
+public class Collection extends Observable{
 
 
 	private String name;
@@ -22,6 +23,7 @@ public class Collection {
 	public IContainer<Outfit> getOutfits() {
 		return outfits;
 	}
+		
 	
 	public String toString(){
 		return  "\t<collection name=\""+this.getName()+"\">\n\t"+
@@ -41,5 +43,8 @@ public class Collection {
 		}
 		return result;
 	}
-	
+
+	public boolean equals(String collectionName){
+		return this.getName().equals(collectionName);
+	}	
 }

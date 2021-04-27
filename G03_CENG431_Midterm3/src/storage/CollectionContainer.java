@@ -11,7 +11,7 @@ public class CollectionContainer extends Container<Collection> {
 		throw new NotSupportedException("Collection container does not supports getById() function");
 	}
 
-	@SuppressWarnings("unlikely-arg-type")
+
 	@Override
 	public Collection getByName(String name) throws ItemNotFoundException {
 		Collection found = null;

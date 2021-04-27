@@ -68,13 +68,6 @@ public class User extends Observable {
 		notifyObservers("unf");
 	}*/
 	
-	public void setAndNotify(String arg)
-	{
-		setChanged();
-		notifyObservers(arg);
-	}
-	
-	
 	@Override
 	public String toString(){
 		return "    <user userName=\""+this.getUserName()+"\">\n\t"+

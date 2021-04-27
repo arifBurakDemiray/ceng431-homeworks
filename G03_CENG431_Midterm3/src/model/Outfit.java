@@ -110,9 +110,5 @@ public class Outfit extends Observable {
 				+ this.getComments().toString() + "}";
 	}
 
-	public void setAndNotify() {
-		setChanged();
-		notifyObservers();
-	}
 
 }

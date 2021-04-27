@@ -1,6 +1,5 @@
 package observation;
 
-import java.awt.event.MouseEvent;
 
 public interface Observer {
 	

@@ -49,4 +49,17 @@ public class Observable {
 	public void setChanged(){
 		this.changed = true;
 	}
+	
+	public void setAndNotify(String arg)
+	{
+		setChanged();
+		notifyObservers(arg);
+	}
+	
+	public void setAndNotify()
+	{
+		setChanged();
+		notifyObservers(null);
+	}
+	
 }
