@@ -102,12 +102,13 @@ public class CollectionController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			String collectionName = ((CollectionView)view).getCollectionName();
-			Collection collection = new Collection(collectionName);
-			((User)model).getCollections().add(collection);
-			(new UserRepository()).saveChanges();
-			CollectionList newList = new CollectionList(setCollectionList());
-			newList.addObserver(view);
-			newList.setAndNotify("Okey");
+			if( !collectionName.equals("") && collectionName!=null) {
+				Collection collection = new Collection(collectionName);
+				((User)model).getCollections().add(collection);
+				(new UserRepository()).saveChanges();
+				CollectionList newList = new CollectionList(setCollectionList());
+				newList.addObserver(view);
+				newList.setAndNotify("Okey");}
 		}
 		
 	}

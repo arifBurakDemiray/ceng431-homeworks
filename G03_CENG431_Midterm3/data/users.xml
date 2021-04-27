@@ -3,7 +3,7 @@
     <user userName="furkan">
 	<password>123456</password>
 	<followers>burak</followers>
-	<followings>arif</followings>
+	<followings>arif,burak</followings>
 	<collections>
 	<collection name="Sport">
 	<ids></ids>
@@ -21,6 +21,24 @@
 	<ids></ids>
 	</collection>
 	<collection name="abo">
+	<ids></ids>
+	</collection>
+	<collection name="">
+	<ids></ids>
+	</collection>
+	<collection name="">
+	<ids></ids>
+	</collection>
+	<collection name="">
+	<ids></ids>
+	</collection>
+	<collection name="de">
+	<ids></ids>
+	</collection>
+	<collection name="">
+	<ids></ids>
+	</collection>
+	<collection name="">
 	<ids></ids>
 	</collection>
 	</collections>

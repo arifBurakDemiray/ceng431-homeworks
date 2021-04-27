@@ -5,16 +5,22 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import model.Collection;
+import model.CollectionPrint;
 import model.Login;
 import model.User;
 import observation.*;
+import service.CollectionPrintService;
+import storage.IContainer;
 
 import javax.swing.JLabel;
 
 import java.awt.event.ActionListener;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
+import javax.swing.JList;
 public class HomeView extends JFrame implements Observer {
 
 	/**
@@ -29,6 +35,7 @@ public class HomeView extends JFrame implements Observer {
 	private JButton discoverUsersButton;
 	private JButton collectionsButton;
 	private JButton topRateButton;
+	private JList<String> list;
 	private JScrollPane posts;
 	private Login model;
 
@@ -71,10 +78,16 @@ public class HomeView extends JFrame implements Observer {
 		topRateButton = new JButton("Top Rates");
 		topRateButton.setBounds(10, 174, 125, 23);
 		contentPane.add(topRateButton);
-		
+				
 		posts = new JScrollPane();
 		posts.setBounds(179, 40, 352, 297);
 		contentPane.add(posts);
+		
+		list = new JList<String>();
+		posts.setViewportView(list);
+		contentPane.add(posts);
+		
+		
 		
 		//setVisible(false);
 	}
@@ -114,7 +127,15 @@ public class HomeView extends JFrame implements Observer {
 		else if(args instanceof User) {
 			((User) args).addObserver(this);
 			this.userName.setText(((User) args).getUserName());
-			this.setVisible(true);}
+			this.setVisible(true);
+			IContainer<String> bla = (new CollectionPrintService((User)args)).getScroolString();
+			DefaultListModel<String> temp = new DefaultListModel<String>();
+			for(String cl: bla) {
+				temp.addElement(cl);
+			}
+			list.setModel(temp);
+			list.setVisible(true);
+			posts.setVisible(true);}
 		
 	}
 
@@ -137,5 +158,4 @@ public class HomeView extends JFrame implements Observer {
 		this.contentPane.setVisible(isVisible);
 		super.setVisible(isVisible);
 	}
-	
 }

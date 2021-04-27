@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import fileio.UserRepository;
 import model.User;
@@ -19,7 +20,7 @@ public class DiscoverUsersView extends JFrame implements Observer {
 
 	private static final long serialVersionUID = -8544036243765267644L;
 	protected Observable model;
-	protected TextField display;
+	protected JTextField display;
 	protected JButton followButton;
 	private JScrollPane scrollPaneOfListOfUsersNames;
 	private JButton back;

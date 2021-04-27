@@ -39,9 +39,9 @@ public class LoginView extends JFrame implements Observer {
 		setBounds(100, 100, 720, 450);
 		loginButton = new JButton("Sign in");
 		loginButton.setBounds(300, 200, 100, 30);
-		password = new JPasswordField("Password");
+		password = new JPasswordField("123456");
 		password.setBounds(300, 150, 100, 30);
-		userName = new JTextField("Username");
+		userName = new JTextField("furkan");
 		userName.setBounds(300, 100, 100, 30);
 		message = new JLabel("Incorrect login, please try again");
 		message.setBounds(275, 250, 200, 30);

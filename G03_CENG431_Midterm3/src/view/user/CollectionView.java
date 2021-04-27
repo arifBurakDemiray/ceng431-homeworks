@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import model.Collection;
 import model.CollectionList;
@@ -29,7 +30,7 @@ public class CollectionView extends JFrame implements Observer {
 	private JButton back;
 	private JButton createCollection;
 	private JButton okey;
-	private TextField collectionName;
+	private JTextField collectionName;
 	private JScrollPane scrollPaneOfListOfCollectionsNames;
 	protected JList<String> listOfCollectionsNames;
 	private JPanel contentPane;
@@ -65,7 +66,7 @@ public class CollectionView extends JFrame implements Observer {
 		contentPane.add(okey);
 		okey.setVisible(false);
 		
-		collectionName = new TextField();
+		collectionName = new JTextField();
 		collectionName.setBounds(260, 310, 100, 30);
 		contentPane.add(collectionName);
 		collectionName.setVisible(false);
