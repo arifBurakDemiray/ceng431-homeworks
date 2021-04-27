@@ -62,6 +62,12 @@ public class CollectionView extends JFrame implements Observer {
 		okey = new JButton("Create");
 		okey.setBounds(300, 400, 100, 25);
 		contentPane.add(okey);
+		okey.setVisible(false);
+		
+		collectionName = new TextField();
+		collectionName.setBounds(EXIT_ON_CLOSE, ABORT, WIDTH, HEIGHT);
+		contentPane.add(collectionName);
+		collectionName.setVisible(false);
 		
 		myCollections = new JLabel("My Collections");
 		myCollections.setBounds(200, 25, 150, 25);
@@ -108,6 +114,10 @@ public class CollectionView extends JFrame implements Observer {
 		String name = listOfCollectionsNames.getSelectedValue();
 		return name;
 	}
+	
+	public String getCollectionName(){
+		return collectionName.getText();
+	}
 
 	private DefaultListModel<String> setList() {
 		IContainer<Collection> collectionsList = ((User) model).getCollections();
@@ -127,6 +137,13 @@ public class CollectionView extends JFrame implements Observer {
 		} else if (args.equals("select")) {
 			popup.setTitle(getSelectedCollection());
 			popup.setVisible(true);
+		}else if(args.equals("Okey")) {
+			okey.setVisible(false);
+			collectionName.setVisible(false);
+			
+		} else if (args.equals("Create")) {
+			okey.setVisible(true);
+			collectionName.setVisible(true);
 		}
 
 	}

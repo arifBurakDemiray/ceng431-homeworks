@@ -83,8 +83,20 @@ public class CollectionController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
+			model.setAndNotify("Create");
 			
+		}
+		
+	}
+	
+	class OkeyButtonListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			String collectionName = ((CollectionView)view).getCollectionName();
+			Collection collection = new Collection(collectionName);
+			((User)model).getCollections().add(collection);
+			model.setAndNotify("Okey");
 		}
 		
 	}
@@ -103,7 +115,6 @@ public class CollectionController {
 		
 		@Override
 		public void windowClosed(WindowEvent arg0) {
-			// observer is deleted
 			modelAdapter.removeObserver(viewAdapter);
 		}
 
