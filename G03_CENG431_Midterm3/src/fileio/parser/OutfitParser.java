@@ -5,6 +5,7 @@ import storage.OutfitContainer;
 
 import java.util.Iterator;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -83,18 +84,28 @@ public class OutfitParser {
 	private void extractComments(Object comments, Outfit outfit) {
 		if (comments != null) {
 			String valType = comments.getClass().getTypeName();
-			if (valType.equals("org.json.JSONObject")) {
-				JSONObject commnetsO = (JSONObject) comments;
-				Iterator<?> keys = commnetsO.keys();// get keys of json object
-				while (keys.hasNext()) {
-					Object keyTemp = keys.next();// get key
-					if (keyTemp instanceof String){
-						try {
-							outfit.addComment(new Comment((String)keyTemp, commnetsO.get((String)keyTemp).toString()));
-						} catch (JSONException e) {
+			if (valType.equals("org.json.JSONArray")) {
+				JSONArray commnetsArr = (JSONArray) comments;
+				int length = commnetsArr.length();
+				// Iterator<?> keys = commnetsO.keys();// get keys of json object
+				for (int i = 0; i < length; i++) {
+					// Object keyTemp =() keys.next();// get key
+					JSONObject obj;
+					try {
+						obj = commnetsArr.getJSONObject(i);
+						String userName = (String) obj.keys().next();
+						if (userName instanceof String) {
+							try {
+								outfit.getComments()
+										.add(new Comment((String) userName, obj.get((String) userName).toString()));
+							} catch (JSONException e) {
 
+							}
 						}
+					} catch (JSONException e1) {
+
 					}
+
 				}
 			}
 		}

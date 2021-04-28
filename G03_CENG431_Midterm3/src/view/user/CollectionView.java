@@ -1,7 +1,6 @@
 package view.user;
 
 import java.awt.Color;
-import java.awt.TextField;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import javax.swing.DefaultListModel;

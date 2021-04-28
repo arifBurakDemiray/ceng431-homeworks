@@ -1,69 +1,51 @@
 <?xml version = "1.0"?>
 <users>
-    <user userName="furkan">
-	<password>123456</password>
-	<followers>burak</followers>
-	<followings>arif,burak</followings>
-	<collections>
-	<collection name="Sport">
-	<ids></ids>
-	</collection>
-	<collection name="Sleep">
-	<ids>65</ids>
-	</collection>
-	<collection name="Akanzi">
-	<ids></ids>
-	</collection>
-	<collection name="Furkan la Hottub">
-	<ids></ids>
-	</collection>
-	<collection name="denmee">
-	<ids></ids>
-	</collection>
-	<collection name="abo">
-	<ids></ids>
-	</collection>
-	<collection name="">
-	<ids></ids>
-	</collection>
-	<collection name="">
-	<ids></ids>
-	</collection>
-	<collection name="">
-	<ids></ids>
-	</collection>
-	<collection name="de">
-	<ids></ids>
-	</collection>
-	<collection name="">
-	<ids></ids>
-	</collection>
-	<collection name="">
-	<ids></ids>
-	</collection>
-	</collections>
-    </user>
-    <user userName="arif">
-	<password>123456</password>
-	<followers>furkan,burak</followers>
-	<followings>furkan</followings>
-	<collections>
-	<collection name="Deneme">
-	<ids>65,38</ids>
-	</collection>
-	<collection name="FurkanOlduFşb">
-	<ids>65</ids>
-	</collection>
-	</collections>
-    </user>
-    <user userName="burak">
-	<password>111111</password>
-	<followers>arif,furkan</followers>
-	<followings>arif</followings>
-	<collections>
-	<collection name="Wedding">
-	<ids>38</ids>
-	</collection>
-	</collections>
-    </user>
+	<user userName="furkan">
+		<password>123456</password>
+		<followers>burak</followers>
+		<followings>burak,arif</followings>
+		<collections>
+			<collection name="Sport">
+				<ids>65,38</ids>
+			</collection>
+			<collection name="Sleep">
+				<ids>38,65</ids>
+			</collection>
+			<collection name="Akanzi">
+				<ids></ids>
+			</collection>
+			<collection name="Furkan la Hottub">
+				<ids></ids>
+			</collection>
+			<collection name="denmee">
+				<ids>65,38</ids>
+			</collection>
+			<collection name="Asd">
+				<ids></ids>
+			</collection>
+		</collections>
+	</user>
+	<user userName="arif">
+		<password>123456</password>
+		<followers>burak,furkan</followers>
+		<followings>furkan</followings>
+		<collections>
+			<collection name="Deneme">
+				<ids>65,38</ids>
+			</collection>
+			<collection name="FurkanOlduFşb">
+				<ids>65</ids>
+			</collection>
+		</collections>
+	</user>
+	<user userName="burak">
+		<password>111111</password>
+		<followers>arif,furkan</followers>
+		<followings>arif</followings>
+		<collections>
+			<collection name="Wedding">
+				<ids>38</ids>
+			</collection>
+		</collections>
+	</user>
 </users>

@@ -17,11 +17,11 @@ public class CommentContainer extends Container<Comment> {
 
 	@Override
 	public String toString() {
-		String result =  ":{"+super.toString();
+		String result =  ":["+super.toString();
 		if (result.endsWith(",")) { // if ends with , ignore it
 			result = result.substring(0, result.length() - 1);
 		}
-		return result+"}";
+		return result+"]";
 	}
 
 }

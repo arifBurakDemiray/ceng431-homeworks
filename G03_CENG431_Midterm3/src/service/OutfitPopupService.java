@@ -1,11 +1,11 @@
 package service;
 
 import java.awt.Color;
-
 import fileio.OutfitRepository;
 import model.ColorResult;
+import model.Comment;
 import model.LikeResult;
-import model.Outfit;
+import model.OutfitReview;
 import observation.Observable;
 
 public class OutfitPopupService {
@@ -15,30 +15,42 @@ public class OutfitPopupService {
 		or = new OutfitRepository();
 	}
 	public void increaseLike(Observable model) {
-		if(model instanceof Outfit) {
-			((Outfit)model).increaseLike();
+		if(model instanceof OutfitReview) {
+			((OutfitReview)model).increaseLike();
+			or.saveChanges();
 		}
 		
 	}
 	public void decreaseDislike(Observable model) {
-		if(model instanceof Outfit) {
-			((Outfit)model).decreaseDislike();
+		if(model instanceof OutfitReview) {
+			((OutfitReview)model).decreaseDislike();
+			or.saveChanges();
 		}
 			
 	}
 	
 	public void decreaseLike(Observable model) {
-		if(model instanceof Outfit) {
-			((Outfit)model).decreaseLike();
+		if(model instanceof OutfitReview) {
+			((OutfitReview)model).decreaseLike();
+			or.saveChanges();
 		}
 			
 	}
 	
 	public void increaseDislike(Observable model) {
-		if(model instanceof Outfit) {
-			((Outfit)model).increaseDislike();
+		if(model instanceof OutfitReview) {
+			((OutfitReview)model).increaseDislike();
+			or.saveChanges();
 		}
 			
+	}
+	
+	public void addComment(String commentText,Observable model)
+	{
+		String userName = ((OutfitReview)model).getUser().getUserName();
+		Comment comment = new Comment(userName,commentText);
+		((OutfitReview)model).addComment(comment);
+		or.saveChanges();	
 	}
 	
 	public void notifyOutfitPopupView(Observable model,LikeResult result) {
@@ -52,7 +64,7 @@ public class OutfitPopupService {
 		else
 		{
 			dislikeButton = Color.RED;
-			likeButton = Color.GREEN;
+			likeButton = Color.WHITE;
 		}
 		model.setAndNotify(new ColorResult(likeButton,dislikeButton));
 	}

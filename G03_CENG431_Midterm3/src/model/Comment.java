@@ -18,6 +18,6 @@ public class Comment {
 	}
 	
 	public String toString(){
-		return "\""+this.getUserName()+"\":\""+this.getComment()+"\",";
+		return "{\""+this.getUserName()+"\":\""+this.getComment()+"\"},";
 	}
 }

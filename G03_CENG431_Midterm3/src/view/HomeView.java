@@ -4,18 +4,13 @@ package view;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import model.Collection;
-import model.CollectionPrint;
 import model.Login;
 import model.User;
 import observation.*;
 import service.CollectionPrintService;
-import storage.IContainer;
-
 import javax.swing.JLabel;
-
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -116,6 +111,10 @@ public class HomeView extends JFrame implements Observer {
 		collectionsButton.addActionListener(listener);
 	}
 	
+	public void addSelectCollectionListener(MouseListener listener) {
+		list.addMouseListener(listener);
+	}
+	
 	@Override
 	public void update(Observable observable, Object args) {
 		if(args==null)
@@ -135,13 +134,13 @@ public class HomeView extends JFrame implements Observer {
 		
 	}
 
+	public String getListSelected()
+	{
+		return list.getSelectedValue();
+	}
 	private void updateScroll(User user) {
-		IContainer<String> bla = (new CollectionPrintService(user)).getScroolString();
-		DefaultListModel<String> temp = new DefaultListModel<String>();
-		for(String cl: bla) {
-			temp.addElement(cl);
-		}
-		list.setModel(temp);
+		DefaultListModel<String> listModel = (new CollectionPrintService(user)).getScroolString();
+		list.setModel(listModel);
 	}
 	
 	/**

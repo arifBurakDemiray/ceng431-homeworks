@@ -66,13 +66,14 @@ public class PopupController {
 			}
 			else
 			{
-				//message basılacak
+				//TODO message basılacak
 			}	
 		}
 	}
 	
 	public void addOutfit(Outfit outfit) {
 		((Collection)model).getOutfits().add(outfit);
+	
 		model.setAndNotify("updateList");
 		outfitRepository.saveChanges();
 	}
@@ -94,13 +95,15 @@ public class PopupController {
 
 		@Override
 		public void windowClosing(WindowEvent e) {
-			model.setAndNotify("Close");
+			String result = "Close";
+			model.setAndNotify(result);
 			
 		}
 
 		@Override
 		public void windowClosed(WindowEvent e) {
-			model.setAndNotify("Close");
+			String result = "Close";
+			model.setAndNotify(result);
 			
 		}
 
@@ -124,7 +127,8 @@ public class PopupController {
 
 		@Override
 		public void windowDeactivated(WindowEvent e) {
-			model.setAndNotify("Close");
+			String result = "Close";
+			model.setAndNotify(result);
 			
 		}
 		

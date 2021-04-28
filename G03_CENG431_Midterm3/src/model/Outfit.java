@@ -25,6 +25,8 @@ public class Outfit extends Observable {
 		this(id, brandName, type, gender, size, color, numberOfLikes, numberOfDislikes, new CommentContainer());
 	}
 
+	
+
 	public Outfit(String id, String brandName, String type, String gender, String[] size, String color,
 			int numberOfLikes, int numberOfDislikes, IContainer<Comment> comments) {
 		this.id = id;
@@ -73,30 +75,15 @@ public class Outfit extends Observable {
 	public IContainer<Comment> getComments() {
 		return comments;
 	}
-
-	public boolean addComment(Comment comment) {
-		return this.comments.add(comment);
+	
+	public void setNumberOfLikes(int numberOfLikes) {
+		this.numberOfLikes = numberOfLikes;
 	}
 
-	public void increaseLike() {
-		this.numberOfLikes++;
-		//setAndNotify();
+	public void setNumberOfDislikes(int numberOfDislikes) {
+		this.numberOfDislikes = numberOfDislikes;
 	}
 
-	public void increaseDislike() {
-		this.numberOfDislikes++;
-		//setAndNotify();
-	}
-
-	public void decreaseLike() {
-		this.numberOfLikes--;
-		//setAndNotify();
-	}
-
-	public void decreaseDislike() {
-		this.numberOfDislikes--;
-		//setAndNotify();
-	}
 
 	public boolean equals(String id) {
 		return this.getId().equals(id);

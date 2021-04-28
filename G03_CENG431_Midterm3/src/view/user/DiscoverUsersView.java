@@ -1,7 +1,5 @@
 package view.user;
 
-
-import java.awt.TextField;
 import java.awt.event.ActionListener;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;

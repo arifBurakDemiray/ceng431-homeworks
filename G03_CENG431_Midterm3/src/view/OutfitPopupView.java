@@ -1,37 +1,34 @@
 package view;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.event.ActionListener;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import model.CommentModel;
+import model.ColorResult;
+import model.Comment;
+import model.OutfitReview;
 import observation.Observable;
 import observation.Observer;
-
+import storage.IContainer;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JEditorPane;
 import javax.swing.JList;
 
 public class OutfitPopupView extends JFrame implements Observer{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 8463308497742322444L;
 
 	private JPanel contentPane;
-	private JList<CommentModel> list;
+	private JList<String> listOfComments;
 	private Observable model;
 	private JScrollPane scrollPane;
 	private JButton like;
 	private JButton dislike;
 	private JEditorPane commentArea;
+	private JLabel outfitInfo;
 	private JButton comment;
 	/**
 	 * Create the frame.
@@ -45,31 +42,34 @@ public class OutfitPopupView extends JFrame implements Observer{
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setBounds(28, 34, 73, 93);
-		contentPane.add(lblNewLabel);
+		outfitInfo = new JLabel(model.toString());
+		outfitInfo.setBounds(120, 20, 200, 100);
+		contentPane.add(outfitInfo);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(111, 34, 232, 231);
+		scrollPane.setBounds(120, 130, 200, 170);
 		contentPane.add(scrollPane);
 		
-		list = new JList<CommentModel>();
-		scrollPane.setViewportView(list);
 		
-		like = new JButton("Like");
-		like.setBounds(28, 172, 51, 23);
+		DefaultListModel<String> listModel = setCommentList();
+		listOfComments = new JList<String>(listModel);
+		listOfComments.setVisible(true);
+		scrollPane.setViewportView(listOfComments);
+		
+		like = new JButton("Like "+String.valueOf(((OutfitReview)model).getOutfit().getNumberOfLikes()));
+		like.setBounds(10, 170, 90, 25);
 		contentPane.add(like);
 		
-		dislike = new JButton("Dislike");
-		dislike.setBounds(28, 206, 61, 23);
+		dislike = new JButton("Dislike "+String.valueOf(((OutfitReview)model).getOutfit().getNumberOfDislikes()));
+		dislike.setBounds(10, 215, 90, 25);
 		contentPane.add(dislike);
 		
 		comment = new JButton("Comment");
-		comment.setBounds(181, 365, 89, 23);
+		comment.setBounds(200, 360, 90, 25);
 		contentPane.add(comment);
 		
 		commentArea = new JEditorPane();
-		commentArea.setBounds(121, 276, 211, 61);
+		commentArea.setBounds(120, 305, 200, 50);
 		contentPane.add(commentArea);
 		
 		setVisible(true);
@@ -88,9 +88,34 @@ public class OutfitPopupView extends JFrame implements Observer{
 		comment.addActionListener(listener);
 	}
 	
+	public String getComment()
+	{
+		return commentArea.getText();
+	}
+	
+	private DefaultListModel<String> setCommentList() {
+		IContainer<Comment> commentList = ((OutfitReview) model).getOutfit().getComments();
+		DefaultListModel<String> listModel = new DefaultListModel<>();
+		for (Comment comment : commentList.getContainer()) {
+			
+			String text = "<html>" + comment.getUserName() + " : " + comment.getComment() + "</html>";
+			listModel.addElement(text);
+		}
+		return listModel;
+	}
+	
 	@Override
 	public void update(Observable observable, Object args) {
-		// TODO Auto-generated method stub
+		if(args instanceof ColorResult){
+			like.setBackground(((ColorResult)args).getLikeButtonColor());
+			dislike.setBackground(((ColorResult)args).getDislikeButtonColor());
+			like.setText("Like "+String.valueOf(((OutfitReview)model).getOutfit().getNumberOfLikes()));
+			dislike.setText("Dislike "+String.valueOf(((OutfitReview)model).getOutfit().getNumberOfDislikes()));
+		}
+		if(args.equals("updateList")){
+			listOfComments.setModel(setCommentList());
+		}
+		
 		
 	}
 }
