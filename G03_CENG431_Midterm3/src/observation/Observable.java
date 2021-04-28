@@ -50,7 +50,7 @@ public class Observable {
 		this.changed = true;
 	}
 	
-	public void setAndNotify(String arg)
+	public void setAndNotify(Object arg)
 	{
 		setChanged();
 		notifyObservers(arg);

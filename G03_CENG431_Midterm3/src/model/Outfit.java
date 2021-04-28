@@ -80,22 +80,22 @@ public class Outfit extends Observable {
 
 	public void increaseLike() {
 		this.numberOfLikes++;
-		setAndNotify();
+		//setAndNotify();
 	}
 
 	public void increaseDislike() {
 		this.numberOfDislikes++;
-		setAndNotify();
+		//setAndNotify();
 	}
 
 	public void decreaseLike() {
 		this.numberOfLikes--;
-		setAndNotify();
+		//setAndNotify();
 	}
 
 	public void decreaseDislike() {
 		this.numberOfDislikes--;
-		setAndNotify();
+		//setAndNotify();
 	}
 
 	public boolean equals(String id) {
