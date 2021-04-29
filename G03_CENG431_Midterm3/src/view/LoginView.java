@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
@@ -16,7 +15,7 @@ import model.Login;
 import observation.Observable;
 import observation.Observer;
 
-public class LoginView extends JFrame implements Observer {
+public class LoginView extends JPanel implements Observer {
 
 	/**
 	 * 
@@ -27,16 +26,12 @@ public class LoginView extends JFrame implements Observer {
 	private JTextField userName;
 	private JLabel message;
 	private Login model = null;
-	private JPanel contentPane;
-	
+	// private JPanel contentPane;
+
 	public LoginView(Observable model) {
-		this.model =  (Login) model;
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		setBounds(100, 100, 720, 450);
+		this.model = (Login) model;
+		setBorder(new EmptyBorder(5, 5, 5, 5));
+		setLayout(null);
 		loginButton = new JButton("Sign in");
 		loginButton.setBounds(300, 200, 100, 30);
 		password = new JPasswordField("123456");
@@ -47,12 +42,11 @@ public class LoginView extends JFrame implements Observer {
 		message.setBounds(275, 250, 200, 30);
 		message.setForeground(Color.RED);
 
-		
-		contentPane.add(message);
+		add(message);
 		message.setVisible(false);
-		contentPane.add(loginButton);
-		contentPane.add(password);
-		contentPane.add(userName);
+		add(loginButton);
+		add(password);
+		add(userName);
 		setVisible(true);
 
 	}
@@ -72,7 +66,7 @@ public class LoginView extends JFrame implements Observer {
 	public JPasswordField getPassword() {
 		return password;
 	}
-	
+
 	public void addTextListener(MouseListener textListener) {
 		userName.addMouseListener(textListener);
 		password.addMouseListener(textListener);
@@ -100,7 +94,7 @@ public class LoginView extends JFrame implements Observer {
 
 	@Override
 	public void update(Observable observable, Object args) {
-		if(args==null)
+		if (args == null)
 			this.setVisible(true);
 	}
 

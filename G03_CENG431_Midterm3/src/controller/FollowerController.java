@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 import model.User;
 import observation.Observable;
 import observation.Observer;
-import view.user.FollowerView;
+import view.FollowerView;
 
 public class FollowerController {
 

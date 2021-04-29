@@ -1,21 +1,33 @@
 {
     "38": {
-        "noflikes": "22",
-        "comments": [],
+        "noflikes": "26",
+        "comments": [
+            {"furkan": "Aaa ne kadar güzel ayakkabı"},
+            {"furkan": "çok güzel"},
+            {"furkan": "deneme deim"},
+            {"furkan": "şimdi nası"},
+            {"furkan": "süper bence"}
+        ],
         "gender": "male",
         "size": "43,42,41,40",
         "color": "black",
-        "nofdislikes": "10",
+        "nofdislikes": "13",
         "brand_name": "Kardesler Kundura",
         "type": "Shoes"
     },
     "65": {
         "noflikes": "16",
-        "comments": [],
+        "comments": [
+            {"furkan": ""},
+            {"furkan": ""},
+            {"furkan": ""},
+            {"furkan": "ne"},
+            {"furkan": "yaaa"}
+        ],
         "gender": "male",
         "size": "XL,L,M,ML",
         "color": "red",
-        "nofdislikes": "36",
+        "nofdislikes": "37",
         "brand_name": "Avon",
         "type": "Jacket"
     }

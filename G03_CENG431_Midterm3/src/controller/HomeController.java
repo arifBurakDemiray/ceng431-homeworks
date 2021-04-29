@@ -8,23 +8,20 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import exception.ItemNotFoundException;
-import exception.NotSupportedException;
+
 import fileio.DatabaseResult;
 import fileio.OutfitRepository;
-import model.Collection;
 import model.Login;
 import model.Outfit;
 import model.OutfitReview;
 import model.User;
+import view.CollectionView;
+import view.DiscoverUsersView;
+import view.FollowerView;
+import view.FollowingView;
 import view.HomeView;
 import view.OutfitPopupView;
 import view.TopRateView;
-import view.user.CollectionView;
-import view.user.DiscoverUsersView;
-import view.user.FollowerView;
-import view.user.FollowingView;
-import view.user.PopupView;
 
 public class HomeController {
 

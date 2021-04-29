@@ -16,7 +16,7 @@ public class OutfitPopupController {
 	private Observer view;
 	private Observable model;
 
-	public OutfitPopupController( Observable Model,Observer View) {
+	public OutfitPopupController(Observable Model, Observer View) {
 		this.view = View;
 		this.model = Model;
 		model.addObserver(View);
@@ -27,12 +27,14 @@ public class OutfitPopupController {
 	}
 
 	class CommentButtonListener implements ActionListener {
-		
+
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			String comment = ((OutfitPopupView)view).getComment();
-			service.addComment(comment,model);
-			model.setAndNotify("updateList");
+			String comment = ((OutfitPopupView) view).getComment();
+			if (comment != null && !comment.equals("")) {
+				service.addComment(comment, model);
+				model.setAndNotify("updateList");
+			}
 		}
 	}
 
@@ -48,7 +50,7 @@ public class OutfitPopupController {
 				service.decreaseDislike(model);
 				disliked = false;
 			}
-			service.notifyOutfitPopupView(model,new LikeResult(liked));
+			service.notifyOutfitPopupView(model, new LikeResult(liked));
 		}
 
 	}
@@ -64,7 +66,7 @@ public class OutfitPopupController {
 				service.decreaseLike(model);
 				liked = false;
 			}
-			service.notifyOutfitPopupView(model,new LikeResult(liked));
+			service.notifyOutfitPopupView(model, new LikeResult(liked));
 		}
 	}
 }

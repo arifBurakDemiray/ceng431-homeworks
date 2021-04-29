@@ -10,8 +10,8 @@ import model.Outfit;
 import model.User;
 import observation.Observable;
 import observation.Observer;
-import view.user.DiscoverUsersView;
-import view.user.FollowingView;
+import view.DiscoverUsersView;
+import view.FollowingView;
 
 public class UserController {
 

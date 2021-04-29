@@ -1,10 +1,9 @@
-package view.user;
+package view;
 
 import java.awt.TextField;
 import java.awt.event.ActionListener;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -14,7 +13,7 @@ import observation.Observable;
 import observation.Observer;
 import storage.IContainer;
 
-public class FollowerView extends JFrame implements Observer {
+public class FollowerView extends JPanel implements Observer {
 
 	private static final long serialVersionUID = -9191185559293341072L;
 	protected Observable model;
@@ -22,22 +21,16 @@ public class FollowerView extends JFrame implements Observer {
 	private JButton back;
 	private JScrollPane scrollPaneOfListOfFollowersNames;
 	protected JList<String> listOfFollowersNames;
-	private JPanel contentPane;
-	
 
 	public FollowerView(Observable model) {
 		this.model = (User) model;
-
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 720, 450);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		setBorder(new EmptyBorder(5, 5, 5, 5));
+		AppWindow.VIEW.getContentPane().add(this);
+		setLayout(null);
 
 		back = new JButton("Back");
 		back.setBounds(20, 20, 90, 25);
-		contentPane.add(back);
+		add(back);
 
 		DefaultListModel<String> listModel = setList();
 		listOfFollowersNames = new JList<String>(listModel);
@@ -45,7 +38,7 @@ public class FollowerView extends JFrame implements Observer {
 
 		scrollPaneOfListOfFollowersNames = new JScrollPane(listOfFollowersNames);
 		scrollPaneOfListOfFollowersNames.setBounds(150, 50, 200, 200);
-		contentPane.add(scrollPaneOfListOfFollowersNames);
+		add(scrollPaneOfListOfFollowersNames);
 
 		setVisible(true);
 

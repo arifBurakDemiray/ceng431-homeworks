@@ -113,6 +113,7 @@ public class OutfitPopupView extends JFrame implements Observer{
 			dislike.setText("Dislike "+String.valueOf(((OutfitReview)model).getOutfit().getNumberOfDislikes()));
 		}
 		if(args.equals("updateList")){
+			commentArea.setText("");
 			listOfComments.setModel(setCommentList());
 		}
 		

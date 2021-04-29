@@ -8,7 +8,7 @@ import fileio.UserRepository;
 import model.User;
 import observation.Observable;
 import observation.Observer;
-import view.user.FollowingView;
+import view.FollowingView;
 
 public class FollowingController {
 

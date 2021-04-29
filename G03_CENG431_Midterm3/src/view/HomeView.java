@@ -1,7 +1,5 @@
 package view;
 
-
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import model.Login;
@@ -16,13 +14,13 @@ import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JList;
-public class HomeView extends JFrame implements Observer {
+
+public class HomeView extends JPanel implements Observer {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 7713286782412153047L;
-	private JPanel contentPane;
 	private JLabel userName;
 	private JButton logoutButton;
 	private JButton followersButton;
@@ -39,54 +37,47 @@ public class HomeView extends JFrame implements Observer {
 	 */
 	public HomeView(Observable model) {
 		this.model = (Login) model;
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 720, 450);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		
+		setBorder(new EmptyBorder(5, 5, 5, 5));
+		setLayout(null);
+
 		userName = new JLabel("userName");
 		userName.setBounds(26, 15, 65, 14);
-		contentPane.add(userName);
-		
+		add(userName);
+
 		logoutButton = new JButton("Logout");
 		logoutButton.setBounds(624, 11, 75, 23);
-		contentPane.add(logoutButton);
-		
+		add(logoutButton);
+
 		followersButton = new JButton("Followers");
 		followersButton.setBounds(10, 40, 125, 23);
-		contentPane.add(followersButton);
-		
+		add(followersButton);
+
 		followingsButton = new JButton("Followings");
 		followingsButton.setBounds(10, 73, 125, 23);
-		contentPane.add(followingsButton);
-		
+		add(followingsButton);
+
 		collectionsButton = new JButton("Collections");
 		collectionsButton.setBounds(10, 107, 125, 23);
-		contentPane.add(collectionsButton);
-		
+		add(collectionsButton);
+
 		discoverUsersButton = new JButton("Discover Users");
 		discoverUsersButton.setBounds(10, 141, 125, 23);
-		contentPane.add(discoverUsersButton);
-		
+		add(discoverUsersButton);
+
 		topRateButton = new JButton("Top Rates");
 		topRateButton.setBounds(10, 174, 125, 23);
-		contentPane.add(topRateButton);
-				
+		add(topRateButton);
+
 		posts = new JScrollPane();
 		posts.setBounds(179, 40, 352, 297);
-		contentPane.add(posts);
-		
+		add(posts);
+
 		list = new JList<String>();
 		posts.setViewportView(list);
-		contentPane.add(posts);
-		
-		
-		
-		//setVisible(false);
+		add(posts);
+
 	}
-	
+
 	public void addLogoutButtonListener(ActionListener listener) {
 		logoutButton.addActionListener(listener);
 	}
@@ -94,55 +85,55 @@ public class HomeView extends JFrame implements Observer {
 	public void addFollowingButtonListener(ActionListener listener) {
 		followingsButton.addActionListener(listener);
 	}
-	
+
 	public void addFollowerButtonListener(ActionListener listener) {
 		followersButton.addActionListener(listener);
 	}
-	
+
 	public void addDiscoverUsersButtonListener(ActionListener listener) {
 		discoverUsersButton.addActionListener(listener);
 	}
-	
+
 	public void addTopRateButtonListener(ActionListener listener) {
 		topRateButton.addActionListener(listener);
 	}
-	
-	public void addCollectionButtonListener(ActionListener listener){
+
+	public void addCollectionButtonListener(ActionListener listener) {
 		collectionsButton.addActionListener(listener);
 	}
-	
+
 	public void addSelectCollectionListener(MouseListener listener) {
 		list.addMouseListener(listener);
 	}
-	
+
 	@Override
 	public void update(Observable observable, Object args) {
-		if(args==null)
+		if (args == null)
 			this.setVisible(false);
-		
-		else if(args.equals("back")){
+
+		else if (args.equals("back")) {
 			updateScroll((User) model.getUser());
 			setVisible(true);
-		}
-		else if(args instanceof User) {
+		} else if (args instanceof User) {
 			((User) args).addObserver(this);
 			this.userName.setText(((User) args).getUserName());
 			this.setVisible(true);
 			updateScroll((User) args);
 			list.setVisible(true);
-			posts.setVisible(true);}
-		
+			posts.setVisible(true);
+		}
+
 	}
 
-	public String getListSelected()
-	{
+	public String getListSelected() {
 		return list.getSelectedValue();
 	}
+
 	private void updateScroll(User user) {
 		DefaultListModel<String> listModel = (new CollectionPrintService(user)).getScroolString();
 		list.setModel(listModel);
 	}
-	
+
 	/**
 	 * @return the model
 	 */
@@ -156,10 +147,5 @@ public class HomeView extends JFrame implements Observer {
 	public void setModel(Observable model) {
 		this.model = (Login) model;
 	}
-	
-	@Override
-	public void setVisible(boolean isVisible) {
-		this.contentPane.setVisible(isVisible);
-		super.setVisible(isVisible);
-	}
+
 }

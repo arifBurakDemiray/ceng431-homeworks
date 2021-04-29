@@ -7,7 +7,7 @@ import fileio.UserRepository;
 import model.User;
 import observation.Observable;
 import observation.Observer;
-import view.user.DiscoverUsersView;
+import view.DiscoverUsersView;
 
 public class DiscoverUsersController {
 

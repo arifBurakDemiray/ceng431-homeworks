@@ -12,7 +12,7 @@ import model.Collection;
 import model.Outfit;
 import observation.Observable;
 import observation.Observer;
-import view.user.PopupView;
+import view.PopupView;
 
 public class PopupController {
 

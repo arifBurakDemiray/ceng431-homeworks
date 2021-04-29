@@ -20,8 +20,8 @@ import model.User;
 import observation.Observable;
 import observation.Observer;
 import storage.IContainer;
-import view.user.CollectionView;
-import view.user.PopupView;
+import view.CollectionView;
+import view.PopupView;
 
 public class CollectionController {
 
@@ -50,17 +50,17 @@ public class CollectionController {
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			if(e.getClickCount()>1) {
-			String selectedCollectionName = ((CollectionView) view).getSelectedCollection();
-			Collection collection = null;
-			try {
-				collection = model.getCollections().getByName(selectedCollectionName);				
-				PopupView pv = new PopupView(collection);
-				PopupController pc = new PopupController(collection,pv);
-			} catch (ItemNotFoundException | NotSupportedException e1) {
+			if (e.getClickCount() > 1) {
+				String selectedCollectionName = ((CollectionView) view).getSelectedCollection();
+				Collection collection = null;
+				try {
+					collection = model.getCollections().getByName(selectedCollectionName);
+					PopupView pv = new PopupView(collection);
+					PopupController pc = new PopupController(collection, pv);
+				} catch (ItemNotFoundException | NotSupportedException e1) {
+				}
+
 			}
-			
-			}// model.setAndNotify("select");
 		}
 
 		@Override
@@ -88,51 +88,51 @@ public class CollectionController {
 		}
 	}
 
-	class CreateCollectionButtonListener implements ActionListener{
+	class CreateCollectionButtonListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			model.setAndNotify("Create");
-			
+
 		}
-		
+
 	}
-	
-	class OkeyButtonListener implements ActionListener{
+
+	class OkeyButtonListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			String collectionName = ((CollectionView)view).getCollectionName();
-			if( !collectionName.equals("") && collectionName!=null) {
+			String collectionName = ((CollectionView) view).getCollectionName();
+			if (!collectionName.equals("") && collectionName != null) {
 				Collection collection = new Collection(collectionName);
-				((User)model).getCollections().add(collection);
+				((User) model).getCollections().add(collection);
 				(new UserRepository()).saveChanges();
 				CollectionList newList = new CollectionList(setCollectionList());
 				newList.addObserver(view);
-				newList.setAndNotify("Okey");}
+				newList.setAndNotify("Okey");
+			}
 		}
-		
-	}
 
+	}
 
 	class WindowListener extends WindowAdapter {
 		Observer viewAdapter;
 		Observable modelAdapter;
-		
+
 		public WindowListener(Observable collection, Observer pv) {
 			super();
 			this.viewAdapter = pv;
 			this.modelAdapter = collection;
-		
+
 		}
-		
+
 		@Override
 		public void windowClosed(WindowEvent arg0) {
 			modelAdapter.removeObserver(viewAdapter);
 		}
 
 	}
-	
+
 	private DefaultListModel<String> setCollectionList() {
 		final IContainer<Collection> collections = ((User) model).getCollections();
 		DefaultListModel<String> listModel = new DefaultListModel<>();
