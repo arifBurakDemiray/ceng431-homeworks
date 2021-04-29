@@ -26,7 +26,6 @@ public class LoginView extends JPanel implements Observer {
 	private JTextField userName;
 	private JLabel message;
 	private Login model = null;
-	// private JPanel contentPane;
 
 	public LoginView(Observable model) {
 		this.model = (Login) model;
