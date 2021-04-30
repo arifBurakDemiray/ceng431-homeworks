@@ -2,6 +2,8 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import enums.ButtonState;
 import exception.ItemNotFoundException;
 import fileio.DatabaseResult;
 import fileio.UserRepository;
@@ -50,18 +52,19 @@ public class FollowingController {
 	class BackButtonListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			model.setAndNotify("back");
+			model.setAndNotify(ButtonState.BACK_BUTTON);
 			model.removeObserver(view);
 			userRepository.saveChanges();
 		}
 	}
 
+	// TODO are we gonna need this? maybe it can 
 	public void removeFollower(User otherUser, String name) {
 		try {
 			otherUser.getFollowers().remove(name);
 		} catch (ItemNotFoundException e) {
 		}
-		model.setAndNotify("removeUser");
+		model.setAndNotify(ButtonState.REMOVE_BUTTON);
 		userRepository.saveChanges();
 	}
 
@@ -71,7 +74,7 @@ public class FollowingController {
 			model.getFollowings().remove(name);
 		} catch (ItemNotFoundException e) {
 		}
-		model.setAndNotify("unfollowUser");
+		model.setAndNotify(ButtonState.UNFOLLOW_BUTTON);
 		userRepository.saveChanges();
 	}
 

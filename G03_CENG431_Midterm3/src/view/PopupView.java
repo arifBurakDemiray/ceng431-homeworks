@@ -1,7 +1,6 @@
 package view;
 
 import java.awt.event.ActionListener;
-import java.awt.event.WindowListener;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -10,6 +9,8 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
+
+import enums.ButtonState;
 import exception.ItemNotFoundException;
 import exception.NotSupportedException;
 import fileio.OutfitRepository;
@@ -91,10 +92,6 @@ public class PopupView extends JFrame implements Observer {
 		addButton.addActionListener(addSelectedOutfitListener);
 	}
 
-	public void addWindowExitListener(WindowListener windowListener) {
-		addWindowListener(windowListener);
-	}
-
 	public String getSelectedOutfitToRemove() {
 		String name = listOfOwnedOutfitsNames.getSelectedValue();
 		return name;
@@ -132,14 +129,11 @@ public class PopupView extends JFrame implements Observer {
 	@Override
 	public void update(Observable observable, Object args) {
 
-		if (args.equals("back")) {
+		if (args instanceof ButtonState && args==ButtonState.BACK_BUTTON) {
 			setVisible(false);
 
-		} else if (args.equals("select")) {
-
-		}
-
-		else if (args.equals("updateList")) {
+		} 
+		else if (args instanceof ButtonState && args==ButtonState.UPDATE_BUTTON) {
 			listOfOwnedOutfitsNames.setModel(setOwnedOutfitsList());
 			listOfOtherOutfitsNames.setModel(setOtherOutfitsList());
 		}

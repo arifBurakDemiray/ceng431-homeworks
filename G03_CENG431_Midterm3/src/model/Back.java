@@ -1,5 +1,6 @@
 package model;
 
+import enums.ButtonState;
 import observation.Observable;
 
 public class Back extends Observable {
@@ -7,7 +8,7 @@ public class Back extends Observable {
 	@Override
 	public void notifyObservers()
 	{
-		notifyObservers("back");
+		notifyObservers(ButtonState.BACK_BUTTON);
 	}
 
 }

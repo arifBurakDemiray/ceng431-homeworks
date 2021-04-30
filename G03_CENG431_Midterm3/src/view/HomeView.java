@@ -2,6 +2,8 @@ package view;
 
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import enums.ButtonState;
 import model.Login;
 import model.User;
 import observation.*;
@@ -112,7 +114,7 @@ public class HomeView extends JPanel implements Observer {
 		if (args == null)
 			this.setVisible(false);
 
-		else if (args.equals("back")) {
+		else if (args instanceof ButtonState && args==ButtonState.BACK_BUTTON) {
 			updateScroll((User) model.getUser());
 			setVisible(true);
 		} else if (args instanceof User) {

@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+
+import enums.ButtonState;
 import exception.ItemNotFoundException;
 import exception.NotSupportedException;
 import fileio.DatabaseResult;
@@ -27,13 +29,12 @@ public class PopupController {
 		outfitRepository = new OutfitRepository();
 		((PopupView) this.view).addRemoveButtonListener(new RemoveButtonListener());
 		((PopupView) this.view).addAddButtonListener(new AddButtonListener());
-		((PopupView) this.view).addWindowExitListener(new WindowExitListener());
 	}
 
 	class BackButtonListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			model.setAndNotify("back");
+			model.setAndNotify(ButtonState.BACK_BUTTON);
 			model.removeObserver(view);
 		}
 	}
@@ -74,69 +75,14 @@ public class PopupController {
 	public void addOutfit(Outfit outfit) {
 		((Collection)model).getOutfits().add(outfit);
 	
-		model.setAndNotify("updateList");
+		model.setAndNotify(ButtonState.UPDATE_BUTTON);
 		outfitRepository.saveChanges();
 	}
 
 	public void removeOutfit(Outfit outfit) throws ItemNotFoundException {
 		((Collection)model).getOutfits().remove(outfit);
-		model.setAndNotify("updateList");
+		model.setAndNotify(ButtonState.UPDATE_BUTTON);
 		outfitRepository.saveChanges();
-	}
-
-
-	class WindowExitListener implements WindowListener{
-
-		@Override
-		public void windowOpened(WindowEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void windowClosing(WindowEvent e) {
-			String result = "Close";
-			model.setAndNotify(result);
-			
-		}
-
-		@Override
-		public void windowClosed(WindowEvent e) {
-			String result = "Close";
-			model.setAndNotify(result);
-			
-		}
-
-		@Override
-		public void windowIconified(WindowEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void windowDeiconified(WindowEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void windowActivated(WindowEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void windowDeactivated(WindowEvent e) {
-			String result = "Close";
-			model.setAndNotify(result);
-			
-		}
-		
-	}
-				
-
-
-
-	
+	}	
 
 }

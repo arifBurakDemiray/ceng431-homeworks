@@ -2,6 +2,8 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import enums.ButtonState;
 import model.LikeResult;
 import observation.Observable;
 import observation.Observer;
@@ -33,7 +35,7 @@ public class OutfitPopupController {
 			String comment = ((OutfitPopupView) view).getComment();
 			if (comment != null && !comment.equals("")) {
 				service.addComment(comment, model);
-				model.setAndNotify("updateList");
+				model.setAndNotify(ButtonState.UPDATE_BUTTON);
 			}
 		}
 	}

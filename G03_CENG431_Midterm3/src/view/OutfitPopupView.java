@@ -4,6 +4,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import enums.ButtonState;
 import model.ColorResult;
 import model.Comment;
 import model.OutfitReview;
@@ -112,7 +114,7 @@ public class OutfitPopupView extends JFrame implements Observer{
 			like.setText("Like "+String.valueOf(((OutfitReview)model).getOutfit().getNumberOfLikes()));
 			dislike.setText("Dislike "+String.valueOf(((OutfitReview)model).getOutfit().getNumberOfDislikes()));
 		}
-		if(args.equals("updateList")){
+		if(args instanceof ButtonState && args==ButtonState.UPDATE_BUTTON){
 			commentArea.setText("");
 			listOfComments.setModel(setCommentList());
 		}

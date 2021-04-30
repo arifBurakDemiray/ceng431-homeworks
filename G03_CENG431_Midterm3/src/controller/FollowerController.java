@@ -2,6 +2,8 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import enums.ButtonState;
 import model.User;
 import observation.Observable;
 import observation.Observer;
@@ -23,7 +25,7 @@ public class FollowerController {
 	class BackButtonListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			model.setAndNotify("back");
+			model.setAndNotify(ButtonState.BACK_BUTTON);
 			model.removeObserver(view);
 		}		
 	}

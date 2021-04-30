@@ -10,6 +10,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
+import enums.ButtonState;
 import model.Collection;
 import model.CollectionList;
 import model.User;
@@ -118,16 +120,16 @@ public class CollectionView extends JPanel implements Observer {
 	@Override
 	public void update(Observable observable, Object args) {
 
-		if (args.equals("back")) {
+		if (args instanceof ButtonState && args==ButtonState.BACK_BUTTON) {
 			setVisible(false);
 
-		}  else if (args.equals("Okey")) {
+		}  else if (args instanceof ButtonState && args==ButtonState.OKEY_BUTTON){
 			if (observable instanceof CollectionList)
 				listOfCollectionsNames.setModel(((CollectionList) observable).getList());
 			okey.setVisible(false);
 			collectionName.setVisible(false);
 			collectionName.setText("");
-		} else if (args.equals("Create")) {
+		} else if (args instanceof ButtonState && args==ButtonState.CREATE_BUTTON){
 			okey.setVisible(true);
 			collectionName.setVisible(true);
 		}

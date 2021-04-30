@@ -8,6 +8,8 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
+
+import enums.ButtonState;
 import model.User;
 import observation.Observable;
 import observation.Observer;
@@ -77,9 +79,9 @@ public class FollowingView extends JPanel implements Observer {
 
 	@Override
 	public void update(Observable observable, Object args) {
-		if (args.equals("unfollowUser")) {
+		if (args instanceof ButtonState && args==ButtonState.UNFOLLOW_BUTTON) {
 			listOfFollowingsNames.setModel(setList());
-		} else if (args.equals("back")) {
+		} else if (args instanceof ButtonState && args==ButtonState.BACK_BUTTON){
 			setVisible(false);
 		}
 	}

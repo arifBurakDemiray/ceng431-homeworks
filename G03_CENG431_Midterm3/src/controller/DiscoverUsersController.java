@@ -2,6 +2,8 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import enums.ButtonState;
 import fileio.DatabaseResult;
 import fileio.UserRepository;
 import model.User;
@@ -48,7 +50,7 @@ public class DiscoverUsersController {
 	class BackButtonListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			model.setAndNotify("back");
+			model.setAndNotify(ButtonState.BACK_BUTTON);
 			model.removeObserver(view);
 			userRepository.saveChanges();
 		}
@@ -61,7 +63,7 @@ public class DiscoverUsersController {
 
 	public void followUser(String name) {
 		model.getFollowings().add(name);
-		model.setAndNotify("followUser");
+		model.setAndNotify(ButtonState.FOLLOW_BUTTON);
 		userRepository.saveChanges();
 	}
 

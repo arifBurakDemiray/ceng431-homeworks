@@ -2,6 +2,8 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import enums.ButtonState;
 import fileio.OutfitRepository;
 import fileio.UserRepository;
 import observation.Observable;
@@ -24,7 +26,7 @@ public class TopRateController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			model.setChanged();
-			model.notifyObservers("back");
+			model.notifyObservers(ButtonState.BACK_BUTTON);
 			model.removeObserver(view);
 		}
 	}

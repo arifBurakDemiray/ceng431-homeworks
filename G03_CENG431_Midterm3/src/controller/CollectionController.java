@@ -9,13 +9,12 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.DefaultListModel;
 
+import enums.ButtonState;
 import exception.ItemNotFoundException;
 import exception.NotSupportedException;
-import fileio.OutfitRepository;
 import fileio.UserRepository;
 import model.Collection;
 import model.CollectionList;
-import model.Outfit;
 import model.User;
 import observation.Observable;
 import observation.Observer;
@@ -41,7 +40,7 @@ public class CollectionController {
 	class BackButtonListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			model.setAndNotify("back");
+			model.setAndNotify(ButtonState.BACK_BUTTON);
 			model.removeObserver(view);
 		}
 	}
@@ -92,7 +91,7 @@ public class CollectionController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			model.setAndNotify("Create");
+			model.setAndNotify(ButtonState.CREATE_BUTTON);
 
 		}
 
@@ -109,7 +108,7 @@ public class CollectionController {
 				(new UserRepository()).saveChanges();
 				CollectionList newList = new CollectionList(setCollectionList());
 				newList.addObserver(view);
-				newList.setAndNotify("Okey");
+				newList.setAndNotify(ButtonState.OKEY_BUTTON);
 			}
 		}
 

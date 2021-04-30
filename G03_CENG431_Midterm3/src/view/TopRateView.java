@@ -3,6 +3,7 @@ package view;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import enums.ButtonState;
 import model.Rates;
 import observation.Observable;
 import observation.Observer;
@@ -80,7 +81,7 @@ public class TopRateView extends JPanel implements Observer {
 
 	@Override
 	public void update(Observable observable, Object args) {
-		if (args.equals("back"))
+		if (args instanceof ButtonState && args==ButtonState.BACK_BUTTON)
 			setVisible(false);
 	}
 

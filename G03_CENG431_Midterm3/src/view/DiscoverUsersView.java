@@ -8,6 +8,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
+import enums.ButtonState;
 import fileio.UserRepository;
 import model.User;
 import observation.Observable;
@@ -82,11 +84,11 @@ public class DiscoverUsersView extends JPanel implements Observer {
 
 	@Override
 	public void update(Observable observable, Object args) {
-		if (args.equals("followUser")) {
+		if (args instanceof ButtonState && args==ButtonState.FOLLOW_BUTTON) {
 			listOfUsersNames.setModel(setList());
 		}
 
-		else if (args.equals("back")) {
+		else if (args instanceof ButtonState && args==ButtonState.BACK_BUTTON) {
 			setVisible(false);
 		}
 	}
