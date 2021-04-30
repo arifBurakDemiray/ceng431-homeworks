@@ -35,7 +35,7 @@ public class CollectionView extends JPanel implements Observer {
 
 	public CollectionView(Observable model) {
 		this.model = model;
-		AppWindow.VIEW.getContentPane().add(this);
+		AppWindow.FRAME.getContentPane().add(this);
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLayout(null);
 

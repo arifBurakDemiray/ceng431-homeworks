@@ -61,9 +61,13 @@ public class OutfitPopupService {
 			likeButton = Color.GREEN;
 			dislikeButton = Color.WHITE;
 		}
-		else
+		else if(result.isDisliked())
 		{
 			dislikeButton = Color.RED;
+			likeButton = Color.WHITE;
+		}
+		else {
+			dislikeButton = Color.WHITE;
 			likeButton = Color.WHITE;
 		}
 		model.setAndNotify(new ColorResult(likeButton,dislikeButton));

@@ -70,11 +70,12 @@ public class HomeView extends JPanel implements Observer {
 
 		posts = new JScrollPane();
 		posts.setBounds(179, 40, 352, 297);
-		add(posts);
 
 		list = new JList<String>();
 		posts.setViewportView(list);
 		add(posts);
+		
+		AppWindow.FRAME.getContentPane().add(this);
 
 	}
 

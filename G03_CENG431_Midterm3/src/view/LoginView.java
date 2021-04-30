@@ -46,7 +46,9 @@ public class LoginView extends JPanel implements Observer {
 		add(loginButton);
 		add(password);
 		add(userName);
-		setVisible(true);
+		
+		AppWindow.FRAME.getContentPane().add(this);
+		AppWindow.FRAME.setVisible(true);
 
 	}
 

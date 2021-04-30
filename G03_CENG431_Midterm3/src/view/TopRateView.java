@@ -28,13 +28,13 @@ public class TopRateView extends JPanel implements Observer {
 	/**
 	 * Create the frame.
 	 */
-	public TopRateView(Observable model) {
+	public TopRateView(Observable Model) {
 
-		this.model = model;
+		this.model = Model;
 		Rates temp = (Rates) model;
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLayout(null);
-		AppWindow.VIEW.getContentPane().add(this);
+		AppWindow.FRAME.getContentPane().add(this);
 		topLike = new JLabel("Top Liked Outfit");
 		topLike.setForeground(Color.BLUE);
 		topLike.setFont(new Font("Tahoma", Font.PLAIN, 20));

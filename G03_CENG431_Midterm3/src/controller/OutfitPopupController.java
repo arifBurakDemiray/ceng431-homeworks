@@ -42,15 +42,19 @@ public class OutfitPopupController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if (!liked)
+			if (!liked) {
 				service.increaseLike(model);
 
-			liked = true;
-			if (disliked) {
-				service.decreaseDislike(model);
-				disliked = false;
+				liked = true;
+				if (disliked) {
+					service.decreaseDislike(model);
+					disliked = false;
+				}
+			} else {
+				liked = false;
+				service.decreaseLike(model);
 			}
-			service.notifyOutfitPopupView(model, new LikeResult(liked));
+			service.notifyOutfitPopupView(model, new LikeResult(liked, disliked));
 		}
 
 	}
@@ -59,14 +63,18 @@ public class OutfitPopupController {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if (!disliked)
+			if (!disliked) {
 				service.increaseDislike(model);
-			disliked = true;
-			if (liked) {
-				service.decreaseLike(model);
-				liked = false;
+				disliked = true;
+				if (liked) {
+					service.decreaseLike(model);
+					liked = false;
+				}
+			} else {
+				disliked = false;
+				service.decreaseDislike(model);
 			}
-			service.notifyOutfitPopupView(model, new LikeResult(liked));
+			service.notifyOutfitPopupView(model, new LikeResult(liked, disliked));
 		}
 	}
 }

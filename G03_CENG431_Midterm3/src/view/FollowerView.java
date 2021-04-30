@@ -25,7 +25,7 @@ public class FollowerView extends JPanel implements Observer {
 	public FollowerView(Observable model) {
 		this.model = (User) model;
 		setBorder(new EmptyBorder(5, 5, 5, 5));
-		AppWindow.VIEW.getContentPane().add(this);
+		AppWindow.FRAME.getContentPane().add(this);
 		setLayout(null);
 
 		back = new JButton("Back");

@@ -25,7 +25,7 @@ public class DiscoverUsersView extends JPanel implements Observer {
 
 	public DiscoverUsersView(Observable model) {
 		this.model = (User) model;
-		AppWindow.VIEW.getContentPane().add(this);
+		AppWindow.FRAME.getContentPane().add(this);
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLayout(null);
 

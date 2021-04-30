@@ -25,7 +25,7 @@ public class CollectionPrintService {
 		DefaultListModel<String> listModel = new DefaultListModel<String>();
 		for(String name: followings) {
 			DatabaseResult dr = up.getUserByName(name);
-			if(dr!=null) {
+			if(dr.getObject()!=null) {
 				final User temp = (User)dr.getObject();
 				listModel.addElement("@"+temp.getUserName());
 				for(Collection p: temp.getCollections()) {

@@ -57,7 +57,7 @@ public class HomeController {
 					{
 						Observable outfitReview = new OutfitReview(outfit,(User) model.getUser());
 						Observer outfitPopupView = new OutfitPopupView(outfitReview);
-						OutfitPopupController pc = new OutfitPopupController(outfitReview, outfitPopupView);
+						final var pc = new OutfitPopupController(outfitReview, outfitPopupView);
 					}				
 				}
 			}
@@ -103,7 +103,7 @@ public class HomeController {
 		public void actionPerformed(ActionEvent e) {
 			((HomeView) view).setVisible(false);
 			FollowingView followingView = new FollowingView((User) model.getUser());
-			FollowingController viewController = new FollowingController(model.getUser(), followingView);
+			final var viewController = new FollowingController(model.getUser(), followingView);
 
 		}
 
@@ -115,7 +115,7 @@ public class HomeController {
 		public void actionPerformed(ActionEvent e) {
 			((HomeView) view).setVisible(false);
 			FollowerView followerView = new FollowerView((User) model.getUser());
-			FollowerController viewController = new FollowerController(model.getUser(), followerView);
+			final var viewController = new FollowerController(model.getUser(), followerView);
 
 		}
 
@@ -127,7 +127,7 @@ public class HomeController {
 		public void actionPerformed(ActionEvent e) {
 			((HomeView) view).setVisible(false);
 			DiscoverUsersView discoverUsersView = new DiscoverUsersView((User) model.getUser());
-			DiscoverUsersController viewController = new DiscoverUsersController(model.getUser(), discoverUsersView);
+			final var viewController = new DiscoverUsersController(model.getUser(), discoverUsersView);
 
 		}
 
@@ -141,7 +141,7 @@ public class HomeController {
 			final Observable rates = topRateService.initializeRateModel();
 			rates.addObserver(view);
 			TopRateView topView = new TopRateView(rates);
-			TopRateController topController = new TopRateController(rates, topView);
+			final var topController = new TopRateController(rates, topView);
 		}
 
 	}
@@ -152,7 +152,7 @@ public class HomeController {
 		public void actionPerformed(ActionEvent e) {
 			((HomeView) view).setVisible(false);
 			CollectionView collectionView = new CollectionView((User) model.getUser());
-			CollectionController collectionController = new CollectionController(model.getUser(), collectionView);
+			final var collectionController = new CollectionController(model.getUser(), collectionView);
 
 		}
 

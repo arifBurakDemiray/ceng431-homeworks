@@ -1,2 +1,9 @@
-/controller/
+/fileio/
+/model/
+/observation/
+/service/
+/storage/
 /view/
+/controller/
+/configuration/
+/app/

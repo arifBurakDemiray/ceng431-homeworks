@@ -1,12 +1,13 @@
 {
     "38": {
-        "noflikes": "26",
+        "noflikes": "28",
         "comments": [
             {"furkan": "Aaa ne kadar güzel ayakkabı"},
             {"furkan": "çok güzel"},
             {"furkan": "deneme deim"},
             {"furkan": "şimdi nası"},
-            {"furkan": "süper bence"}
+            {"furkan": "süper bence"},
+            {"furkan": "asd"}
         ],
         "gender": "male",
         "size": "43,42,41,40",
@@ -16,18 +17,28 @@
         "type": "Shoes"
     },
     "65": {
-        "noflikes": "16",
+        "noflikes": "21",
         "comments": [
             {"furkan": ""},
             {"furkan": ""},
             {"furkan": ""},
             {"furkan": "ne"},
-            {"furkan": "yaaa"}
+            {"furkan": "yaaa"},
+            {"furkan": "za"},
+            {"furkan": "asdasd"},
+            {"furkan": "sdasd"},
+            {"furkan": "dasda"},
+            {"furkan": "dasdassda"},
+            {"furkan": "asdasdas"},
+            {"furkan": "asdasd"},
+            {"furkan": "sdasd"},
+            {"furkan": "asdasdas"},
+            {"furkan": "qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq"}
         ],
         "gender": "male",
         "size": "XL,L,M,ML",
         "color": "red",
-        "nofdislikes": "37",
+        "nofdislikes": "39",
         "brand_name": "Avon",
         "type": "Jacket"
     }
