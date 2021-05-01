@@ -2,18 +2,16 @@ package view;
 
 import java.awt.TextField;
 import java.awt.event.ActionListener;
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
-
 import enums.ButtonState;
+import model.UpdatedList;
 import model.User;
 import observation.Observable;
 import observation.Observer;
-import storage.IContainer;
 
 public class FollowerView extends JPanel implements Observer {
 
@@ -34,8 +32,7 @@ public class FollowerView extends JPanel implements Observer {
 		back.setBounds(20, 20, 90, 25);
 		add(back);
 
-		DefaultListModel<String> listModel = setList();
-		listOfFollowersNames = new JList<String>(listModel);
+		listOfFollowersNames = new JList<String>();
 		listOfFollowersNames.setVisible(true);
 
 		scrollPaneOfListOfFollowersNames = new JScrollPane(listOfFollowersNames);
@@ -54,20 +51,17 @@ public class FollowerView extends JPanel implements Observer {
 		back.addActionListener(listener);
 	}
 
-	private DefaultListModel<String> setList() {
-		IContainer<String> followersList = ((User) model).getFollowers();
-		DefaultListModel<String> listModel = new DefaultListModel<>();
-		for (String user : followersList.getContainer()) {
-			listModel.addElement(user);
-		}
-		return listModel;
-	}
+
 
 	@Override
 	public void update(Observable observable, Object args) {
 
 		if (args instanceof ButtonState && args==ButtonState.BACK_BUTTON) {
 			AppWindow.FRAME.getContentPane().remove(this);
+		}
+		else if(args instanceof UpdatedList)
+		{
+			listOfFollowersNames.setModel( ((UpdatedList)args).getListModel());
 		}
 
 	}

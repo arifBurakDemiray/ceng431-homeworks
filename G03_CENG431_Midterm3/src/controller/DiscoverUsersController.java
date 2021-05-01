@@ -6,9 +6,11 @@ import java.awt.event.ActionListener;
 import enums.ButtonState;
 import fileio.DatabaseResult;
 import fileio.UserRepository;
+import model.UpdatedList;
 import model.User;
 import observation.Observable;
 import observation.Observer;
+import service.DiscoverUserService;
 import view.DiscoverUsersView;
 
 public class DiscoverUsersController {
@@ -16,13 +18,16 @@ public class DiscoverUsersController {
 	private User model;
 	private Observer view;
 	private UserRepository userRepository;
+	private DiscoverUserService service;
 	public DiscoverUsersController(Observable model, Observer view) {
 		this.model = (User) model;
 		this.view = view;
 		model.addObserver(view);
 		userRepository = new UserRepository();
+		service = new DiscoverUserService();
 		((DiscoverUsersView) this.view).addFollowButtonListener(new FollowButtonListener());
 		((DiscoverUsersView) this.view).addBackButtonListener(new BackButtonListener());
+		updateList();
 	}
 
 	class FollowButtonListener implements ActionListener {
@@ -62,8 +67,14 @@ public class DiscoverUsersController {
 
 	public void followUser(String name) {
 		model.getFollowings().add(name);
-		model.setAndNotify(ButtonState.FOLLOW_BUTTON);
+		updateList();
 		userRepository.saveChanges();
+	}
+	
+	private void updateList()
+	{	
+		UpdatedList updatedList = new UpdatedList(service.setUsersList(model));
+		model.setAndNotify(updatedList);
 	}
 
 }

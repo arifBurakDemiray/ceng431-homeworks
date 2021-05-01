@@ -4,17 +4,13 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import enums.ButtonState;
 import model.ColorResult;
-import model.Comment;
 import model.OutfitReview;
+import model.UpdatedList;
 import observation.Observable;
 import observation.Observer;
-import storage.IContainer;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JEditorPane;
 import javax.swing.JList;
@@ -52,9 +48,7 @@ public class OutfitPopupView extends JFrame implements Observer{
 		scrollPane.setBounds(120, 130, 200, 170);
 		contentPane.add(scrollPane);
 		
-		
-		DefaultListModel<String> listModel = setCommentList();
-		listOfComments = new JList<String>(listModel);
+		listOfComments = new JList<String>();
 		listOfComments.setVisible(true);
 		scrollPane.setViewportView(listOfComments);
 		
@@ -94,18 +88,7 @@ public class OutfitPopupView extends JFrame implements Observer{
 	{
 		return commentArea.getText();
 	}
-	
-	private DefaultListModel<String> setCommentList() {
-		IContainer<Comment> commentList = ((OutfitReview) model).getOutfit().getComments();
-		DefaultListModel<String> listModel = new DefaultListModel<>();
-		for (Comment comment : commentList.getContainer()) {
-			
-			String text = "<html>" + comment.getUserName() + " : " + comment.getComment() + "</html>";
-			listModel.addElement(text);
-		}
-		return listModel;
-	}
-	
+		
 	@Override
 	public void update(Observable observable, Object args) {
 		if(args instanceof ColorResult){
@@ -114,11 +97,17 @@ public class OutfitPopupView extends JFrame implements Observer{
 			like.setText("Like "+String.valueOf(((OutfitReview)model).getOutfit().getNumberOfLikes()));
 			dislike.setText("Dislike "+String.valueOf(((OutfitReview)model).getOutfit().getNumberOfDislikes()));
 		}
-		if(args instanceof ButtonState && args==ButtonState.UPDATE_BUTTON){
+		
+		if(args instanceof UpdatedList){
 			commentArea.setText("");
-			listOfComments.setModel(setCommentList());
+			setCommentList(args);
 		}
 		
 		
+	}
+	
+	private void setCommentList(Object obj){
+		UpdatedList commentList = (UpdatedList)obj;
+		listOfComments.setModel(commentList.getListModel());
 	}
 }

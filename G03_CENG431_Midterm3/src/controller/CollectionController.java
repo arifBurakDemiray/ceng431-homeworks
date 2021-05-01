@@ -6,19 +6,16 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-
-import javax.swing.DefaultListModel;
-
 import enums.ButtonState;
 import exception.ItemNotFoundException;
 import exception.NotSupportedException;
 import fileio.UserRepository;
 import model.Collection;
-import model.CollectionList;
+import model.UpdatedList;
 import model.User;
 import observation.Observable;
 import observation.Observer;
-import storage.IContainer;
+import service.CollectionService;
 import view.CollectionView;
 import view.PopupView;
 
@@ -26,15 +23,17 @@ public class CollectionController {
 
 	private User model;
 	private Observer view;
-
+	private CollectionService service;
 	public CollectionController(Observable model, Observer view) {
 		this.model = (User) model;
 		this.view = view;
 		model.addObserver(view);
+		service = new CollectionService();
 		((CollectionView) this.view).addBackButtonListener(new BackButtonListener());
 		((CollectionView) this.view).addSelectCollectionListener(new SelectCollectionListener());
 		((CollectionView) this.view).addCreateCollectionButtonListener(new CreateCollectionButtonListener());
 		((CollectionView) this.view).addOkeyButtonListener(new OkeyButtonListener());
+		updateList();
 	}
 
 	class BackButtonListener implements ActionListener {
@@ -106,9 +105,7 @@ public class CollectionController {
 				Collection collection = new Collection(collectionName);
 				((User) model).getCollections().add(collection);
 				(new UserRepository()).saveChanges();
-				CollectionList newList = new CollectionList(setCollectionList());
-				newList.addObserver(view);
-				newList.setAndNotify(ButtonState.OKEY_BUTTON);
+				updateList();
 			}
 		}
 
@@ -132,14 +129,12 @@ public class CollectionController {
 
 	}
 
-	private DefaultListModel<String> setCollectionList() {
-		final IContainer<Collection> collections = ((User) model).getCollections();
-		DefaultListModel<String> listModel = new DefaultListModel<>();
-		for (Collection collection : collections) {
-			listModel.addElement(collection.getName());
+	
 
-		}
-		return listModel;
+	private void updateList()
+	{	
+		UpdatedList updatedList = new UpdatedList(service.setCollectionList(model));
+		model.setAndNotify(updatedList);
 	}
 
 }

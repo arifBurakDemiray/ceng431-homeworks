@@ -2,7 +2,6 @@ package view;
 
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -10,20 +9,13 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-
 import enums.ButtonState;
-import model.Collection;
-import model.CollectionList;
-import model.User;
+import model.UpdatedList;
 import observation.Observable;
 import observation.Observer;
-import storage.IContainer;
 
 public class CollectionView extends JPanel implements Observer {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -2106315297457499256L;
 	protected Observable model;
 	private JButton back;
@@ -67,8 +59,7 @@ public class CollectionView extends JPanel implements Observer {
 		infoMessage.setBounds(210, 250, 400, 30);
 		add(infoMessage);
 
-		DefaultListModel<String> listModel = setList();
-		listOfCollectionsNames = new JList<String>(listModel);
+		listOfCollectionsNames = new JList<String>();
 		listOfCollectionsNames.setVisible(true);
 
 		scrollPaneOfListOfCollectionsNames = new JScrollPane(listOfCollectionsNames);
@@ -108,14 +99,7 @@ public class CollectionView extends JPanel implements Observer {
 		return collectionName.getText();
 	}
 
-	private DefaultListModel<String> setList() {
-		IContainer<Collection> collectionsList = ((User) model).getCollections();
-		DefaultListModel<String> listModel = new DefaultListModel<>();
-		for (Collection collection : collectionsList.getContainer()) {
-			listModel.addElement(collection.getName());
-		}
-		return listModel;
-	}
+	
 
 	@Override
 	public void update(Observable observable, Object args) {
@@ -123,13 +107,22 @@ public class CollectionView extends JPanel implements Observer {
 		if (args instanceof ButtonState && args==ButtonState.BACK_BUTTON) {
 			AppWindow.FRAME.getContentPane().remove(this);
 
-		}  else if (args instanceof ButtonState && args==ButtonState.OKEY_BUTTON){
+		} /* else if (args instanceof ButtonState && args==ButtonState.OKEY_BUTTON){
 			if (observable instanceof CollectionList)
 				listOfCollectionsNames.setModel(((CollectionList) observable).getList());
 			okey.setVisible(false);
 			collectionName.setVisible(false);
 			collectionName.setText("");
-		} else if (args instanceof ButtonState && args==ButtonState.CREATE_BUTTON){
+		}*/
+		
+		else if (args instanceof UpdatedList){
+			listOfCollectionsNames.setModel(((UpdatedList) args).getListModel());
+			okey.setVisible(false);
+			collectionName.setVisible(false);
+			collectionName.setText("");
+		}
+		
+		else if (args instanceof ButtonState && args==ButtonState.CREATE_BUTTON){
 			okey.setVisible(true);
 			collectionName.setVisible(true);
 		}

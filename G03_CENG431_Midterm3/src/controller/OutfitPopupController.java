@@ -2,9 +2,8 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import enums.ButtonState;
 import model.LikeResult;
+import model.UpdatedList;
 import observation.Observable;
 import observation.Observer;
 import service.OutfitPopupService;
@@ -23,10 +22,11 @@ public class OutfitPopupController {
 		this.model = Model;
 		service = new OutfitPopupService();
 		model.addObserver(View);
-		initializeReviewButtonColors();
+		initializeReviewButtonColors();		
 		((OutfitPopupView) view).AddLikeListener(new LikeButtonListener());
 		((OutfitPopupView) view).AddDislikeListener(new DislikeButtonListener());
 		((OutfitPopupView) view).AddCommentListener(new CommentButtonListener());
+		updateCommentList();
 	}
 
 	private void initializeReviewButtonColors(){
@@ -43,7 +43,8 @@ public class OutfitPopupController {
 			String comment = ((OutfitPopupView) view).getComment();
 			if (comment != null && !comment.equals("")) {
 				service.addComment(comment, model);
-				model.setAndNotify(ButtonState.UPDATE_BUTTON);
+				updateCommentList();
+				
 			}
 		}
 	}
@@ -86,5 +87,9 @@ public class OutfitPopupController {
 			}
 			service.notifyOutfitPopupView(model, new LikeResult(liked, disliked));
 		}
+	}
+	
+	private void updateCommentList(){
+		model.setAndNotify(new UpdatedList(service.setCommentList(model)));
 	}
 }

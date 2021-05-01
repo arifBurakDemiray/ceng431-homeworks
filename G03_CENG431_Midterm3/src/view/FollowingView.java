@@ -2,18 +2,16 @@ package view;
 
 import java.awt.TextField;
 import java.awt.event.ActionListener;
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
-
 import enums.ButtonState;
+import model.UpdatedList;
 import model.User;
 import observation.Observable;
 import observation.Observer;
-import storage.IContainer;
 
 public class FollowingView extends JPanel implements Observer {
 
@@ -34,9 +32,7 @@ public class FollowingView extends JPanel implements Observer {
 		back.setBounds(20, 20, 90, 25);
 		add(back);
 
-		DefaultListModel<String> listModel = setList();
-
-		listOfFollowingsNames = new JList<String>(listModel);
+		listOfFollowingsNames = new JList<String>();
 		listOfFollowingsNames.setVisible(true);
 
 		scrollPaneOfListOfFollowingsNames = new JScrollPane(listOfFollowingsNames);
@@ -63,14 +59,7 @@ public class FollowingView extends JPanel implements Observer {
 		back.addActionListener(listener);
 	}
 
-	private DefaultListModel<String> setList() {
-		IContainer<String> followingList = ((User) model).getFollowings();
-		DefaultListModel<String> listModel = new DefaultListModel<>();
-		for (String user : followingList.getContainer()) {
-			listModel.addElement(user);
-		}
-		return listModel;
-	}
+	
 
 	public String getSelectedUser() {
 		String name = listOfFollowingsNames.getSelectedValue();
@@ -79,8 +68,8 @@ public class FollowingView extends JPanel implements Observer {
 
 	@Override
 	public void update(Observable observable, Object args) {
-		if (args instanceof ButtonState && args==ButtonState.UNFOLLOW_BUTTON) {
-			listOfFollowingsNames.setModel(setList());
+		if (args instanceof UpdatedList) {
+			listOfFollowingsNames.setModel(((UpdatedList)args).getListModel());
 		} else if (args instanceof ButtonState && args==ButtonState.BACK_BUTTON){
 			AppWindow.FRAME.getContentPane().remove(this);
 		}

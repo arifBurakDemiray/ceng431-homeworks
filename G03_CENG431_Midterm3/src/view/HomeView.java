@@ -2,7 +2,6 @@ package view;
 
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import enums.ButtonState;
 import model.Login;
 import model.User;
@@ -11,8 +10,6 @@ import service.CollectionPrintService;
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
-
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JList;
@@ -134,7 +131,7 @@ public class HomeView extends JPanel implements Observer {
 	}
 
 	private void updateScroll(User user) {
-		DefaultListModel<String> listModel = (new CollectionPrintService(user)).getScroolString();
+		final var listModel = (new CollectionPrintService(user)).getScroolString();
 		list.setModel(listModel);
 	}
 

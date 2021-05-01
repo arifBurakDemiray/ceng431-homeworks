@@ -1,16 +1,14 @@
 package view;
 
 import java.awt.event.ActionListener;
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-
 import enums.ButtonState;
-import fileio.UserRepository;
+import model.UpdatedList;
 import model.User;
 import observation.Observable;
 import observation.Observer;
@@ -31,9 +29,8 @@ public class DiscoverUsersView extends JPanel implements Observer {
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLayout(null);
 
-		DefaultListModel<String> listModel = setList();
 
-		listOfUsersNames = new JList<String>(listModel);
+		listOfUsersNames = new JList<String>();
 		listOfUsersNames.setVisible(true);
 
 		scrollPaneOfListOfUsersNames = new JScrollPane(listOfUsersNames);
@@ -64,18 +61,7 @@ public class DiscoverUsersView extends JPanel implements Observer {
 		back.addActionListener(backListener);
 	}
 
-	private DefaultListModel<String> setList() {
-		DefaultListModel<String> listModel = new DefaultListModel<>();
-		UserRepository userRepository = new UserRepository();
-		for (User user : userRepository.getUsers().getContainer()) {
-			String temp = ((User) model).getFollowings().getItem(user.getUserName());
-			if ((temp == null) && !user.equals(model)) {
-				listModel.addElement(user.getUserName());
-			}
-
-		}
-		return listModel;
-	}
+	
 
 	public String getSelectedUser() {
 		String name = listOfUsersNames.getSelectedValue();
@@ -84,8 +70,8 @@ public class DiscoverUsersView extends JPanel implements Observer {
 
 	@Override
 	public void update(Observable observable, Object args) {
-		if (args instanceof ButtonState && args==ButtonState.FOLLOW_BUTTON) {
-			listOfUsersNames.setModel(setList());
+		if (args instanceof UpdatedList) {
+			listOfUsersNames.setModel( ((UpdatedList)args).getListModel());
 		}
 
 		else if (args instanceof ButtonState && args==ButtonState.BACK_BUTTON) {

@@ -1,7 +1,6 @@
 package view;
 
 import java.awt.event.ActionListener;
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -9,16 +8,10 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
-
 import enums.ButtonState;
-import exception.ItemNotFoundException;
-import exception.NotSupportedException;
-import fileio.OutfitRepository;
-import model.Collection;
-import model.Outfit;
+import model.UpdatedList;
 import observation.Observable;
 import observation.Observer;
-import storage.IContainer;
 
 public class PopupView extends JFrame implements Observer {
 
@@ -60,12 +53,11 @@ public class PopupView extends JFrame implements Observer {
 		otherOutfits.setBounds(250, 25, 150, 25);
 		contentPane.add(otherOutfits);
 
-		DefaultListModel<String> ownedOutfitsListModel = setOwnedOutfitsList();
-		listOfOwnedOutfitsNames = new JList<String>(ownedOutfitsListModel);
+
+		listOfOwnedOutfitsNames = new JList<String>();
 		listOfOwnedOutfitsNames.setVisible(true);
 
-		DefaultListModel<String> otherOutfitsListModel = setOtherOutfitsList();
-		listOfOtherOutfitsNames = new JList<String>(otherOutfitsListModel);
+		listOfOtherOutfitsNames = new JList<String>();
 		listOfOtherOutfitsNames.setVisible(true);
 
 		scrollPaneOfListOfOwnedOutfitsNames = new JScrollPane(listOfOwnedOutfitsNames);
@@ -96,34 +88,10 @@ public class PopupView extends JFrame implements Observer {
 		String name = listOfOwnedOutfitsNames.getSelectedValue();
 		return name;
 	}
-
+	
 	public String getSelectedOutfitToAdd() {
 		String name = listOfOtherOutfitsNames.getSelectedValue();
 		return name;
-	}
-
-	private DefaultListModel<String> setOwnedOutfitsList() {
-		IContainer<Outfit> outfits = ((Collection) model).getOutfits();
-		DefaultListModel<String> listModel = new DefaultListModel<>();
-		for (Outfit outfit : outfits.getContainer()) {
-			listModel.addElement(outfit.getId());
-		}
-		return listModel;
-	}
-
-	private DefaultListModel<String> setOtherOutfitsList() {
-		OutfitRepository outfitRepository = new OutfitRepository();
-		IContainer<Outfit> outfits = outfitRepository.getOutfits();
-		DefaultListModel<String> listModel = new DefaultListModel<>();
-		for (Outfit outfit : outfits.getContainer()) {
-			try {
-				((Collection) model).getOutfits().getById(outfit.getId());
-			} catch (ItemNotFoundException | NotSupportedException e) {
-				listModel.addElement(outfit.getId());
-			}
-
-		}
-		return listModel;
 	}
 
 	@Override
@@ -133,10 +101,13 @@ public class PopupView extends JFrame implements Observer {
 			setVisible(false);
 
 		} 
-		else if (args instanceof ButtonState && args==ButtonState.UPDATE_BUTTON) {
-			listOfOwnedOutfitsNames.setModel(setOwnedOutfitsList());
-			listOfOtherOutfitsNames.setModel(setOtherOutfitsList());
-		}
+		
+		if (args instanceof UpdatedList[]) {
+			UpdatedList[] temp = (UpdatedList[])args;
+			listOfOwnedOutfitsNames.setModel(((UpdatedList)temp[0]).getListModel());
+			listOfOtherOutfitsNames.setModel(((UpdatedList)temp[1]).getListModel());
+
+		} 
 
 	}
 

@@ -95,8 +95,9 @@ public class LoginView extends JPanel implements Observer {
 
 	@Override
 	public void update(Observable observable, Object args) {
-		if (args == null)
-			this.setVisible(true);
+		if (args == null){
+			message.setVisible(false);
+			this.setVisible(true);}
 	}
 
 }

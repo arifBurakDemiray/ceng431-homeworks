@@ -2,17 +2,17 @@
 <users>
     <user userName="furkan">
 	<password>123456</password>
-	<followers>burak</followers>
-	<followings></followings>
+	<followers>arif</followers>
+	<followings>,arif,burak</followings>
 	<collections>
 	<collection name="Sport">
 	<ids>65,38</ids>
 	</collection>
 	<collection name="Sleep">
-	<ids>38</ids>
+	<ids>65</ids>
 	</collection>
 	<collection name="Akanzi">
-	<ids>65,38</ids>
+	<ids>65</ids>
 	</collection>
 	<collection name="Furkan la Hottub">
 	<ids></ids>
@@ -27,7 +27,7 @@
 	<ids></ids>
 	</collection>
 	<collection name="Denemeeee">
-	<ids></ids>
+	<ids>38</ids>
 	</collection>
 	<collection name="Pijama">
 	<ids>38,65</ids>
@@ -38,28 +38,37 @@
 	<collection name="jjıjıooıj">
 	<ids></ids>
 	</collection>
+	<collection name="asasassadadsdas">
+	<ids></ids>
+	</collection>
 	</collections>
     </user>
     <user userName="arif">
 	<password>123456</password>
-	<followers>burak</followers>
-	<followings>burak</followings>
+	<followers>furkan,burak</followers>
+	<followings>burak,furkan</followings>
 	<collections>
 	<collection name="Deneme">
-	<ids>65,38</ids>
+	<ids>65</ids>
 	</collection>
 	<collection name="FurkanOlduFşb">
-	<ids></ids>
+	<ids>38</ids>
+	</collection>
+	<collection name="aaaayyyyy">
+	<ids>65,38</ids>
 	</collection>
 	</collections>
     </user>
     <user userName="burak">
 	<password>111111</password>
-	<followers>arif</followers>
+	<followers>arif,furkan</followers>
 	<followings>arif</followings>
 	<collections>
 	<collection name="Wedding">
 	<ids>38</ids>
+	</collection>
+	<collection name="qwwqe">
+	<ids>65,38</ids>
 	</collection>
 	</collections>
     </user>

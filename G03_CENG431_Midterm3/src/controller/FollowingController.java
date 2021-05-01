@@ -7,9 +7,11 @@ import enums.ButtonState;
 import exception.ItemNotFoundException;
 import fileio.DatabaseResult;
 import fileio.UserRepository;
+import model.UpdatedList;
 import model.User;
 import observation.Observable;
 import observation.Observer;
+import service.FollowService;
 import view.FollowingView;
 
 public class FollowingController {
@@ -17,15 +19,18 @@ public class FollowingController {
 	private User model;
 	private Observer view;
 	private UserRepository userRepository;
+	private FollowService service;
 
 	public FollowingController(Observable model, Observer view) {
 		this.model = (User) model;
 		this.view = view;
 		model.addObserver(view);
-		
+		service = new FollowService();
+		updateList();
 		userRepository = new UserRepository();
 		((FollowingView) this.view).addUnfollowButtonListener(new UnfollowButtonListener());
 		((FollowingView) this.view).addBackButtonListener(new BackButtonListener());
+		
 	}
 
 	class UnfollowButtonListener implements ActionListener {
@@ -74,8 +79,14 @@ public class FollowingController {
 			model.getFollowings().remove(name);
 		} catch (ItemNotFoundException e) {
 		}
-		model.setAndNotify(ButtonState.UNFOLLOW_BUTTON);
+		updateList();
 		userRepository.saveChanges();
+	}
+	
+	private void updateList()
+	{	
+		UpdatedList updatedList = new UpdatedList(service.setFollowList(model.getFollowings()));
+		model.setAndNotify(updatedList);
 	}
 
 }

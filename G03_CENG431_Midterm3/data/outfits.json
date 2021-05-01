@@ -1,7 +1,10 @@
 {
     "38": {
         "noflikes": "2",
-        "comments": [],
+        "comments": [
+            {"furkan": "asdsdaadsdassd"},
+            {"furkan": "asdasdwqerwqrewqrewq"}
+        ],
         "gender": "male",
         "size": "43,42,41,40",
         "color": "black",
@@ -10,12 +13,12 @@
         "type": "Shoes"
     },
     "65": {
-        "noflikes": "2",
-        "comments": [],
+        "noflikes": "1",
+        "comments": [{"furkan": "dfgdfg"}],
         "gender": "male",
         "size": "XL,L,M,ML",
         "color": "red",
-        "nofdislikes": "0",
+        "nofdislikes": "2",
         "brand_name": "Avon",
         "type": "Jacket"
     }
