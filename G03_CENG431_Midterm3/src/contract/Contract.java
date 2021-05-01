@@ -35,5 +35,7 @@ public abstract class Contract {
 	}
 
 	public abstract String toString();
+	
+	public abstract boolean equals(Object obj);
 
 }

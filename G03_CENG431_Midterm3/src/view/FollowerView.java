@@ -67,7 +67,7 @@ public class FollowerView extends JPanel implements Observer {
 	public void update(Observable observable, Object args) {
 
 		if (args instanceof ButtonState && args==ButtonState.BACK_BUTTON) {
-			setVisible(false);
+			AppWindow.FRAME.getContentPane().remove(this);
 		}
 
 	}

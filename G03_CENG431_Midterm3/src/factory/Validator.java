@@ -2,6 +2,11 @@ package factory;
 
 import java.util.Collection;
 import java.util.HashSet;
+import exception.ItemNotFoundException;
+import exception.NotSupportedException;
+import model.Outfit;
+import model.User;
+import storage.IContainer;
 
 public class Validator implements IValidatorService {
 
@@ -76,6 +81,37 @@ public class Validator implements IValidatorService {
 	private ValidationResult validatePassword(String password) {
 		boolean result = password.length() >= 6;
 		return new ValidationResult(result, "Password's length must be above 5. ");
+	}
+	
+
+	public ValidationResult validateContractUserOutfitsLikes(String outfitId,IContainer<Outfit> outfits) {
+
+		String message = "There is no outfit with id "+outfitId;
+		boolean isValid = false;
+		try {
+			outfits.getById(outfitId);
+			isValid = true;
+		} catch (ItemNotFoundException e) {
+		} catch (NotSupportedException e) {
+		}
+		
+		return new ValidationResult(isValid,message);
+
+	}
+	
+	public ValidationResult validateUsername(String username,IContainer<User> users) {
+
+		String message = "There is no user named "+username;
+		boolean isValid = false;
+		try {
+			users.getByName(username);
+			isValid = true;
+		} catch (ItemNotFoundException e) {
+		} catch (NotSupportedException e) {
+		}
+		
+		return new ValidationResult(isValid,message);
+		
 	}
 
 }

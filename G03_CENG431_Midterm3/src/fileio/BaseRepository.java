@@ -1,5 +1,6 @@
 package fileio;
 
+import contract.Contract;
 import exception.FileFormatException;
 import factory.Creator;
 import model.Outfit;
@@ -25,6 +26,14 @@ public class BaseRepository {
 	protected static final IContainer<Outfit> outfits(){
 		return fileController.outfits();
 	}
+	
+	protected static final IContainer<Contract> likes(){
+		return fileController.getUserLikeContracts();
+	}
+	protected static final IContainer<Contract> dislikes(){
+		return fileController.getUserDislikeContracts();
+	}
+	
 	
 	protected static void saveChanges() throws FileFormatException{
 		fileController.writeAll();

@@ -34,7 +34,7 @@ public class FileWrite {
 	private <T> String convertToFormat(IContainer<T> items) throws JSONException{
 		String typeName = items.getClass().getAnnotatedSuperclass().toString();
 		String result = "";
-		if(typeName.contains("Outfit")){
+		if(typeName.contains("Outfit") || typeName.contains("Contract")){
 			String itemsString = items.toString();
 			String jsonString = (new JSONParser()).parse(itemsString).toString(4);
 			result = jsonString;

@@ -38,6 +38,7 @@ public class HomeView extends JPanel implements Observer {
 	 * Create the frame.
 	 */
 	public HomeView(Observable model) {
+		
 		this.model = (Login) model;
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLayout(null);
@@ -112,7 +113,7 @@ public class HomeView extends JPanel implements Observer {
 	@Override
 	public void update(Observable observable, Object args) {
 		if (args == null)
-			this.setVisible(false);
+			AppWindow.FRAME.getContentPane().remove(this);
 
 		else if (args instanceof ButtonState && args==ButtonState.BACK_BUTTON) {
 			updateScroll((User) model.getUser());

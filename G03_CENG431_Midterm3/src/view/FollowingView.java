@@ -82,7 +82,7 @@ public class FollowingView extends JPanel implements Observer {
 		if (args instanceof ButtonState && args==ButtonState.UNFOLLOW_BUTTON) {
 			listOfFollowingsNames.setModel(setList());
 		} else if (args instanceof ButtonState && args==ButtonState.BACK_BUTTON){
-			setVisible(false);
+			AppWindow.FRAME.getContentPane().remove(this);
 		}
 	}
 

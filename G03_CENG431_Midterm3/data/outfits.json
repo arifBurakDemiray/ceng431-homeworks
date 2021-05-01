@@ -1,45 +1,21 @@
 {
     "38": {
-        "noflikes": "28",
-        "comments": [
-            {"furkan": "Aaa ne kadar güzel ayakkabı"},
-            {"furkan": "çok güzel"},
-            {"furkan": "deneme deim"},
-            {"furkan": "şimdi nası"},
-            {"furkan": "süper bence"},
-            {"furkan": "asd"}
-        ],
+        "noflikes": "2",
+        "comments": [],
         "gender": "male",
         "size": "43,42,41,40",
         "color": "black",
-        "nofdislikes": "13",
+        "nofdislikes": "1",
         "brand_name": "Kardesler Kundura",
         "type": "Shoes"
     },
     "65": {
-        "noflikes": "23",
-        "comments": [
-            {"furkan": ""},
-            {"furkan": ""},
-            {"furkan": ""},
-            {"furkan": "ne"},
-            {"furkan": "yaaa"},
-            {"furkan": "za"},
-            {"furkan": "asdasd"},
-            {"furkan": "sdasd"},
-            {"furkan": "dasda"},
-            {"furkan": "dasdassda"},
-            {"furkan": "asdasdas"},
-            {"furkan": "asdasd"},
-            {"furkan": "sdasd"},
-            {"furkan": "asdasdas"},
-            {"furkan": "qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq"},
-            {"furkan": "jhhkjk"}
-        ],
+        "noflikes": "2",
+        "comments": [],
         "gender": "male",
         "size": "XL,L,M,ML",
         "color": "red",
-        "nofdislikes": "39",
+        "nofdislikes": "0",
         "brand_name": "Avon",
         "type": "Jacket"
     }

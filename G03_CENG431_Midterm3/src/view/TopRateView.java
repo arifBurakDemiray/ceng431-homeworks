@@ -81,8 +81,8 @@ public class TopRateView extends JPanel implements Observer {
 
 	@Override
 	public void update(Observable observable, Object args) {
-		if (args instanceof ButtonState && args==ButtonState.BACK_BUTTON)
-			setVisible(false);
+		if (args instanceof ButtonState && args==ButtonState.BACK_BUTTON)		
+			AppWindow.FRAME.getContentPane().remove(this);
 	}
 
 }

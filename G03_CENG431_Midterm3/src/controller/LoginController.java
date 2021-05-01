@@ -10,6 +10,7 @@ import model.User;
 import observation.Observable;
 import observation.Observer;
 import service.AuthService;
+import view.HomeView;
 import view.LoginView;
 
 public class LoginController {
@@ -37,6 +38,9 @@ public class LoginController {
 				view.printMessage(false);
 			} else {
 				view.printMessage(true);
+				
+				HomeView userView = new HomeView(model);
+				final var hc = new HomeController(model,userView);	
 				model.setUser(user);
 			}
 		}

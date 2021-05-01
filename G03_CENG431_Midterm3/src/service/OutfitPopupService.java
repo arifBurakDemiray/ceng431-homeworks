@@ -1,6 +1,9 @@
 package service;
 
 import java.awt.Color;
+
+import fileio.DislikeContractRepository;
+import fileio.LikeContractRepository;
 import fileio.OutfitRepository;
 import model.ColorResult;
 import model.Comment;
@@ -11,19 +14,27 @@ import observation.Observable;
 public class OutfitPopupService {
 
 	private final OutfitRepository or;
+	private final DislikeContractRepository dcr;
+	private final LikeContractRepository lcr;
 	public OutfitPopupService() {
 		or = new OutfitRepository();
+		lcr = new LikeContractRepository();
+		dcr = new DislikeContractRepository();
 	}
 	public void increaseLike(Observable model) {
 		if(model instanceof OutfitReview) {
-			((OutfitReview)model).increaseLike();
+			OutfitReview review = ((OutfitReview)model);
+			review.increaseLike();
+			lcr.addLikedOutfit(review.getUser().getUserName(),review.getOutfit().getId());
 			or.saveChanges();
 		}
 		
 	}
 	public void decreaseDislike(Observable model) {
 		if(model instanceof OutfitReview) {
-			((OutfitReview)model).decreaseDislike();
+			OutfitReview review = ((OutfitReview)model);
+			review.decreaseDislike();
+			dcr.removeDislikedOutfit(review.getUser().getUserName(),review.getOutfit().getId());
 			or.saveChanges();
 		}
 			
@@ -31,7 +42,9 @@ public class OutfitPopupService {
 	
 	public void decreaseLike(Observable model) {
 		if(model instanceof OutfitReview) {
-			((OutfitReview)model).decreaseLike();
+			OutfitReview review = ((OutfitReview)model);
+			review.decreaseLike();
+			lcr.removeLikedOutfit(review.getUser().getUserName(),review.getOutfit().getId());
 			or.saveChanges();
 		}
 			
@@ -39,7 +52,9 @@ public class OutfitPopupService {
 	
 	public void increaseDislike(Observable model) {
 		if(model instanceof OutfitReview) {
-			((OutfitReview)model).increaseDislike();
+			OutfitReview review = ((OutfitReview)model);
+			review.increaseDislike();
+			dcr.addDislikedOutfit(review.getUser().getUserName(),review.getOutfit().getId());
 			or.saveChanges();
 		}
 			
@@ -71,6 +86,13 @@ public class OutfitPopupService {
 			likeButton = Color.WHITE;
 		}
 		model.setAndNotify(new ColorResult(likeButton,dislikeButton));
+	}
+	
+	public LikeResult setInitialButtonColor(Observable model){
+		OutfitReview review = ((OutfitReview)model);
+		boolean isLiked = lcr.userHasLiked(review.getUser().getUserName(),review.getOutfit().getId());
+		boolean isDisliked = dcr.userHasDisliked(review.getUser().getUserName(),review.getOutfit().getId());
+		return new LikeResult(isLiked,isDisliked);
 	}
 	
 }

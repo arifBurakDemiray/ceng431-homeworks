@@ -2,6 +2,7 @@ package factory;
 
 import org.w3c.dom.Element;
 
+import fileio.parser.ContractParam;
 import model.Outfit;
 import storage.IContainer;
 
@@ -32,4 +33,7 @@ public interface ICreatorService {
 	public CreationResult createUser(String name, String password, Element userNodeElement, String idsOfFollowers,
 			String idsOfFollowings, IContainer<Outfit> outfits);
 
+
+	public CreationResult createContractUserOutfitsLikes(String userName, String outfitId, ContractParam contractParam);
+	
 }

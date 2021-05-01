@@ -52,7 +52,6 @@ public class DiscoverUsersController {
 		public void actionPerformed(ActionEvent e) {
 			model.setAndNotify(ButtonState.BACK_BUTTON);
 			model.removeObserver(view);
-			userRepository.saveChanges();
 		}
 	}
 

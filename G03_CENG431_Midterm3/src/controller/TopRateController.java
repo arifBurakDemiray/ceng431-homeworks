@@ -2,10 +2,7 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import enums.ButtonState;
-import fileio.OutfitRepository;
-import fileio.UserRepository;
 import observation.Observable;
 import observation.Observer;
 import view.TopRateView;

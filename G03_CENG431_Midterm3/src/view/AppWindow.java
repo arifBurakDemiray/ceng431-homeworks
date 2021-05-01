@@ -17,11 +17,11 @@ public class AppWindow extends JWindow{
 	
 	public AppWindow() throws Exception {
 		FRAME = new Frame("Outfigram");
-		Login lg = new Login(null);
+		Login lg = new Login(null);		
 		LoginView loginView = new LoginView(lg);
 		final var loginController = new LoginController(lg,loginView);
-		HomeView userView = new HomeView(lg);
-		final var hc = new HomeController(lg,userView);
+		
+		
 		
 	}
 }

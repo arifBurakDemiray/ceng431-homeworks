@@ -1,10 +1,8 @@
+/contract/
 /fileio/
-/model/
-/observation/
-/service/
+/factory/
 /storage/
-/view/
 /controller/
-/configuration/
+/service/
+/view/
 /app/
-/enums/

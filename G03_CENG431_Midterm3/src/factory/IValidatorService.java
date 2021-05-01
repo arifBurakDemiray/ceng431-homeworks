@@ -1,5 +1,8 @@
 package factory;
 
+import model.Outfit;
+import model.User;
+import storage.IContainer;
 
 /**
  * This class validates given attributes for creator
@@ -33,6 +36,8 @@ public interface IValidatorService {
 	 */
 	public ValidationResult validateUser(String name, String password);
 
+	public ValidationResult validateContractUserOutfitsLikes(String outfitId,IContainer<Outfit> outfits);
 	
+	public ValidationResult validateUsername(String username,IContainer<User> users);
 
 }

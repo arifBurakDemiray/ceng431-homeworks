@@ -121,7 +121,7 @@ public class CollectionView extends JPanel implements Observer {
 	public void update(Observable observable, Object args) {
 
 		if (args instanceof ButtonState && args==ButtonState.BACK_BUTTON) {
-			setVisible(false);
+			AppWindow.FRAME.getContentPane().remove(this);
 
 		}  else if (args instanceof ButtonState && args==ButtonState.OKEY_BUTTON){
 			if (observable instanceof CollectionList)

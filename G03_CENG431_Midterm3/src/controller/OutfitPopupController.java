@@ -21,11 +21,19 @@ public class OutfitPopupController {
 	public OutfitPopupController(Observable Model, Observer View) {
 		this.view = View;
 		this.model = Model;
-		model.addObserver(View);
 		service = new OutfitPopupService();
+		model.addObserver(View);
+		initializeReviewButtonColors();
 		((OutfitPopupView) view).AddLikeListener(new LikeButtonListener());
 		((OutfitPopupView) view).AddDislikeListener(new DislikeButtonListener());
 		((OutfitPopupView) view).AddCommentListener(new CommentButtonListener());
+	}
+
+	private void initializeReviewButtonColors(){
+		LikeResult lr = service.setInitialButtonColor(model);
+		liked = lr.isLiked();
+		disliked = lr.isDisliked();
+		service.notifyOutfitPopupView(model, lr);
 	}
 
 	class CommentButtonListener implements ActionListener {

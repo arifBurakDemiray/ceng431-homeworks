@@ -89,7 +89,7 @@ public class DiscoverUsersView extends JPanel implements Observer {
 		}
 
 		else if (args instanceof ButtonState && args==ButtonState.BACK_BUTTON) {
-			setVisible(false);
+			AppWindow.FRAME.getContentPane().remove(this);
 		}
 	}
 

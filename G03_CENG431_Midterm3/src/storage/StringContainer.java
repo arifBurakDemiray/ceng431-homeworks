@@ -1,20 +1,17 @@
 package storage;
 
-import exception.ItemNotFoundException;
 import exception.NotSupportedException;
 
 public class StringContainer extends Container<String> {
 
 	@Override
-	public String getById(String id) throws ItemNotFoundException, NotSupportedException {
-		// TODO Auto-generated method stub
-		return null;
+	public String getById(String id) throws NotSupportedException {
+		throw new NotSupportedException("src.storage.StringContainer.getById() function is not supported for StringContainer.");
 	}
 
 	@Override
-	public String getByName(String name) throws ItemNotFoundException, NotSupportedException {
-		// TODO Auto-generated method stub
-		return null;
+	public String getByName(String name) throws NotSupportedException {
+		throw new NotSupportedException("src.storage.StringContainer.getByName() function is not supported for StringContainer.");
 	}
 	
 	public String toString() {

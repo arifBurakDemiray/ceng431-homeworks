@@ -3,6 +3,9 @@ package factory;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import contract.Contract;
+import contract.ContractUserOutfitsLikes;
+import fileio.parser.ContractParam;
 import model.Collection;
 import model.Outfit;
 import model.User;
@@ -113,5 +116,31 @@ public class Creator implements ICreatorService {
 
 		return collections;
 	}
+	
+	// create user-product contract
+		public CreationResult createContractUserOutfitsLikes(String userName, String outfitsId, ContractParam contractParam) {
+			
+			
+			Contract contract = null;
+			ValidationResult resultUser = validator.validateUsername(userName,contractParam.getUsers());
+			if(!resultUser.isValid())
+			{				
+				return new CreationResult(contract,resultUser.message);
+			}
+			
+			String[] ids = outfitsId.split(",");
+			IContainer<String> contractOutfits = new StringContainer();
+			for (String id : ids) {
+				// validate inputs
+				ValidationResult resultId = validator.validateContractUserOutfitsLikes(id,contractParam.getOutfits());
+				if (resultId.isValid()) {// if is valid
+					contractOutfits.add(id);
+				} // return result
+			}
+			
+			contract = new ContractUserOutfitsLikes(userName, contractOutfits);
+			return new CreationResult(contract, resultUser.message);
+		}
+
 
 }
