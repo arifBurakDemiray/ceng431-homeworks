@@ -9,7 +9,10 @@ import observation.Observer;
 import service.OutfitPopupService;
 import view.OutfitPopupView;
 
-public class OutfitPopupController {
+/**
+ * This class controls outfit reviews
+ */
+public class OutfitPopupController extends Consumable {
 
 	private OutfitPopupService service;
 	private boolean liked = false;
@@ -22,54 +25,58 @@ public class OutfitPopupController {
 		this.model = Model;
 		service = new OutfitPopupService();
 		model.addObserver(View);
-		initializeReviewButtonColors();		
+		initializeReviewButtonColors();
 		((OutfitPopupView) view).AddLikeListener(new LikeButtonListener());
 		((OutfitPopupView) view).AddDislikeListener(new DislikeButtonListener());
 		((OutfitPopupView) view).AddCommentListener(new CommentButtonListener());
-		updateCommentList();
+		updateCommentList(); // Initialise comments
 	}
 
-	private void initializeReviewButtonColors(){
-		LikeResult lr = service.setInitialButtonColor(model);
+	private void initializeReviewButtonColors() {
+		LikeResult lr = service.setInitialButtonColor(model); // find initial button colors
 		liked = lr.isLiked();
 		disliked = lr.isDisliked();
-		service.notifyOutfitPopupView(model, lr);
+		service.notifyOutfitPopupView(model, lr); // end send colors to service to notify observers
 	}
 
+	// if user clicks comment button
 	class CommentButtonListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			String comment = ((OutfitPopupView) view).getComment();
-			if (comment != null && !comment.equals("")) {
-				service.addComment(comment, model);
-				updateCommentList();
-				
+			if (comment != null && !comment.equals("")) {// and comment is not empty
+				service.addComment(comment, model); // add comment
+				updateCommentList();// and update list
+
 			}
 		}
 	}
 
+	// if user clicks like button
 	class LikeButtonListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if (!liked) {
+			if (!liked) { // if user not liked before, increase like
 				service.increaseLike(model);
 
-				liked = true;
-				if (disliked) {
-					service.decreaseDislike(model);
-					disliked = false;
+				liked = true; // and make liked true
+				if (disliked) { // if user disliked before
+					service.decreaseDislike(model); // decrease like
+					disliked = false; // make disliked false
 				}
-			} else {
-				liked = false;
+			} else { // if user liked before
+				liked = false; // make liked false and decrease like
 				service.decreaseLike(model);
 			}
+			// and send service a like result to render button colors
 			service.notifyOutfitPopupView(model, new LikeResult(liked, disliked));
 		}
 
 	}
 
+	// This class is the opposite of above class
 	class DislikeButtonListener implements ActionListener {
 
 		@Override
@@ -88,8 +95,9 @@ public class OutfitPopupController {
 			service.notifyOutfitPopupView(model, new LikeResult(liked, disliked));
 		}
 	}
-	
-	private void updateCommentList(){
+
+	// this function sends observers rendered comment list
+	private void updateCommentList() {
 		model.setAndNotify(new UpdatedList(service.setCommentList(model)));
 	}
 }

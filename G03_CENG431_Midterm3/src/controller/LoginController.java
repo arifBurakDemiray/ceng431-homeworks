@@ -13,7 +13,10 @@ import service.AuthService;
 import view.HomeView;
 import view.LoginView;
 
-public class LoginController {
+/**
+ * This class handles login screen actions
+ */
+public class LoginController extends Consumable {
 
 	private LoginView view;
 	private Login model;
@@ -23,67 +26,57 @@ public class LoginController {
 		this.authService = new AuthService();
 		this.view = (LoginView) view;
 		this.model = (Login) model;
-		this.model.addObserver(this.view);
-		this.view.addLoginListener(new LoginListener());
+		this.model.addObserver(this.view); // add observer
+		this.view.addLoginListener(new LoginListener()); // add listeners
 		this.view.addTextListener(new TextClickListener());
-
 	}
 
+	// This class listens login button, if pressed user is going to be checked for
+	// login
 	class LoginListener implements ActionListener {
-		@SuppressWarnings("deprecation")
+
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			User user = authService.login(view.getUserName().getText(), view.getPassword().getText());
+			User user = authService.login(view.getUserName().getText(), view.getPassword());
 			if (user == null) {
-				view.printMessage(false);
-			} else {
+				view.printMessage(false); // this function is for printing credentials wrong message
+			} else { // if true means not print the message
 				view.printMessage(true);
-				
 				HomeView userView = new HomeView(model);
-				final var hc = new HomeController(model,userView);	
+				final Consumable homeController = new HomeController(model, userView);
 				model.setUser(user);
+				homeController.supressNotUsed();
 			}
 		}
 	}
 
+	// This class listens text areas, if user clicks text, removes the text
 	class TextClickListener implements MouseListener {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			Object field = e.getSource();
 			if (field instanceof JTextField) {
 				JTextField temp = (JTextField) field;
-				if (temp.getText().equals("Username")) {
+				if (temp.getText().equals("Username")) { // if text is initial, remove it
 					temp.setText("");
 				}
 			}
-//			else if(field instanceof JPasswordField) {
-//				JPasswordField temp = (JPasswordField)field;
-//					temp.setText("");//				
-//			}
 		}
 
 		@Override
 		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
-
 		}
 
 		@Override
 		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
-
 		}
 
 		@Override
 		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
-
 		}
 
 		@Override
 		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
-
 		}
 
 	}

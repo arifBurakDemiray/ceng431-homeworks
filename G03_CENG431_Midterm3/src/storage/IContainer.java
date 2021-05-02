@@ -13,7 +13,7 @@ public interface IContainer<T> extends Iterable<T> {
 	 * before.
 	 *
 	 * @param item given item to add to the container.
-	 * @return true/false
+	 * @return true if added, otherwise false
 	 */
 	public boolean add(T item);
 
@@ -24,7 +24,7 @@ public interface IContainer<T> extends Iterable<T> {
 	 * @param id id of given item.
 	 * @return T object
 	 * @throws ItemNotFoundException
-	 * @throws NotSupportedException   if item does not have a getId function
+	 * @throws NotSupportedException if item does not have a getId function
 	 *
 	 */
 	public T getById(String id) throws ItemNotFoundException, NotSupportedException;
@@ -92,7 +92,12 @@ public interface IContainer<T> extends Iterable<T> {
 	 * @return string value of a container.
 	 */
 	public String toString();
-	
+
+	/**
+	 * This function converts a IContainer object to its array value
+	 * 
+	 * @return array value of IContainer
+	 */
 	public T[] toArray();
-	
+
 }

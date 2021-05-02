@@ -7,7 +7,10 @@ import observation.Observable;
 import observation.Observer;
 import view.TopRateView;
 
-public class TopRateController {
+/**
+* This class is responsible for control the top rate view
+*/
+public class TopRateController extends Consumable {
 
 	private Observer view;
 	private Observable model;
@@ -16,9 +19,10 @@ public class TopRateController {
 		this.view = view;
 		this.model = model;
 		model.addObserver(view);
-		((TopRateView)view).addBackButtonListener(new BackButtonListener());
+		((TopRateView) view).addBackButtonListener(new BackButtonListener()); //add back button
 	}
 
+	//if back button pressed, remove observer and go back
 	class BackButtonListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -27,6 +31,5 @@ public class TopRateController {
 			model.removeObserver(view);
 		}
 	}
-
 
 }

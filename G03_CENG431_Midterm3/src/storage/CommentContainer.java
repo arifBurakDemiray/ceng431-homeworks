@@ -16,6 +16,7 @@ public class CommentContainer extends Container<Comment> {
 	}
 
 	@Override
+	//modified to write in a json file
 	public String toString() {
 		String result =  ":["+super.toString();
 		if (result.endsWith(",")) { // if ends with , ignore it

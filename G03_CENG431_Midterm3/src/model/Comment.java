@@ -2,22 +2,42 @@ package model;
 
 public class Comment {
 
-	private String userName;
-	private String comment;
-	public Comment(String userName, String comment){
+	private String userName; // name of comment owner
+	private String comment; // comment text
+
+	/**
+	 * The model for the Comment
+	 *
+	 */
+	public Comment(String userName, String comment) {
 		this.userName = userName;
-		this.comment=comment;
+		this.comment = comment;
 	}
-	
-	public String getUserName(){
+
+	/**
+	 * Returns the name of comment owner
+	 * 
+	 * @return user name
+	 */
+	public String getUserName() {
 		return this.userName;
 	}
-	
-	public String getComment(){
+
+	/**
+	 * Returns the text of comment
+	 * 
+	 * @return comment text
+	 */
+	public String getComment() {
 		return this.comment;
 	}
-	
-	public String toString(){
-		return "{\""+this.getUserName()+"\":\""+this.getComment()+"\"},";
+
+	/**
+	 * The function returns a string in json format for outfits.json
+	 * 
+	 * @return string of comment in json type
+	 */
+	public String toString() {
+		return "{\"" + this.getUserName() + "\":\"" + this.getComment() + "\"},";
 	}
 }

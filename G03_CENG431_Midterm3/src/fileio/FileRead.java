@@ -11,9 +11,9 @@ public class FileRead {
 	}
 
 	/**
-	 * This function reads a file
+	 * This function reads a file of given path
 	 * 
-	 * @param filename of the file
+	 * @param fielpath of the file
 	 * @returns read file in string format
 	 * @throws IOException
 	 */

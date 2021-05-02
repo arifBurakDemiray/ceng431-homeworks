@@ -33,7 +33,17 @@ public interface ICreatorService {
 	public CreationResult createUser(String name, String password, Element userNodeElement, String idsOfFollowers,
 			String idsOfFollowings, IContainer<Outfit> outfits);
 
-
+	/**
+	 * The function creates a contract between user and his/her liked, disliked
+	 * outfits. The contract help us to detect which user liked/disliked which
+	 * outfit to prevent like/dislike spam in the program.
+	 * 
+	 * @param userName      = user's name
+	 * @param outfitId      = outfit's id
+	 * @param contractParam = ContractParam object which includes Creator, Outfit
+	 *                      Container of program and User Container of program
+	 * @return CreationResult
+	 */
 	public CreationResult createContractUserOutfitsLikes(String userName, String outfitId, ContractParam contractParam);
-	
+
 }

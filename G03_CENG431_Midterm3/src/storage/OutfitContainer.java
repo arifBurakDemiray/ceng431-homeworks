@@ -7,7 +7,7 @@ import model.Outfit;
 public class OutfitContainer extends Container<Outfit> {
 
 	@Override
-	public Outfit getById(String id) throws ItemNotFoundException, NotSupportedException {
+	public Outfit getById(String id) throws ItemNotFoundException {
 		Outfit found = null;
 		for (Outfit outfit : this.getContainer()) {
 			if (outfit.equals(id)) {
@@ -27,6 +27,8 @@ public class OutfitContainer extends Container<Outfit> {
 		throw new NotSupportedException("Outfit container does not supports getById() function");
 	}
 
+	@Override
+	//modified to write in a json file
 	public String toString() {
 		String string = "{";
 		for (Outfit item : this.getContainer()) {

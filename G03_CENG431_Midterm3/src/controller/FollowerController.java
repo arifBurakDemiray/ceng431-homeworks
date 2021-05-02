@@ -11,7 +11,10 @@ import observation.Observer;
 import service.FollowService;
 import view.FollowerView;
 
-public class FollowerController {
+/**
+ * This class is responsible for showing followers of the model
+ */
+public class FollowerController extends Consumable {
 
 	private User model;
 	private Observer view;
@@ -20,23 +23,23 @@ public class FollowerController {
 	public FollowerController(Observable model, Observer view) {
 		this.model = (User) model;
 		this.view = view;
-		model.addObserver(view);		
+		model.addObserver(view);
 		service = new FollowService();
-		updateList();
+		updateList(); // update followers for initial show
+		// add back button listener
 		((FollowerView) this.view).addBackButtonListener(new BackButtonListener());
 	}
 
-
-	class BackButtonListener implements ActionListener{
+	class BackButtonListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			model.setAndNotify(ButtonState.BACK_BUTTON);
+			model.setAndNotify(ButtonState.BACK_BUTTON); // if back button pressed
 			model.removeObserver(view);
-		}		
+		}
 	}
-	
-	private void updateList()
-	{	
+
+	// update list for follower view
+	private void updateList() {
 		UpdatedList updatedList = new UpdatedList(service.setFollowList(model.getFollowers()));
 		model.setAndNotify(updatedList);
 	}

@@ -8,14 +8,12 @@ public class ObserverContainer extends Container<Observer> {
 
 	@Override
 	public Observer getById(String id) throws ItemNotFoundException, NotSupportedException {
-		// TODO Auto-generated method stub
-		return null;
+		throw new NotSupportedException("Observer container does not supports getById() function");
 	}
 
 	@Override
 	public Observer getByName(String name) throws ItemNotFoundException, NotSupportedException {
-		// TODO Auto-generated method stub
-		return null;
+		throw new NotSupportedException("Observer container does not supports getById() function");
 	}
 
 }

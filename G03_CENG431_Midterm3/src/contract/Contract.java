@@ -10,7 +10,7 @@ public abstract class Contract {
 	private Object contracter;// contract signer
 
 	/**
-	 * Constracts a contract between owner and signer
+	 * Contracts between owner and signer
 	 * 
 	 * @param contractee
 	 * @param contracter

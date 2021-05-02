@@ -4,39 +4,61 @@ import storage.IContainer;
 import storage.OutfitContainer;
 import observation.Observable;
 
-public class Collection extends Observable{
+public class Collection extends Observable {
 
+	private String name; // collection name
+	private IContainer<Outfit> outfits; // outfit container which holds outfits of collection
 
-	private String name;
-	private IContainer<Outfit> outfits;
-	
-	public Collection(String name)
-	{
+	/**
+	 * The model for the Collection
+	 *
+	 */
+	public Collection(String name) {
 		this.name = name;
 		outfits = new OutfitContainer();
 	}
 
+	/**
+	 * The function returns collection name
+	 * 
+	 * @return collection name
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * The function returns outfit container
+	 * 
+	 * @return outfit container
+	 */
 	public IContainer<Outfit> getOutfits() {
 		return outfits;
 	}
-		
-	
-	public String toString(){
-		return  "\t<collection name=\""+this.getName()+"\">\n\t"+
-				"<ids>"+this.outfitsToString()+"</ids>\n\t</collection>\n";
+
+	/**
+	 * The function is returns a string of collection with xml type for users.xml
+	 * 
+	 * @return string of collection
+	 */
+	public String toString() {
+		return "\t<collection name=\"" + this.getName() + "\">\n\t" + "<ids>" + this.outfitsToString()
+				+ "</ids>\n\t</collection>\n";
 	}
-	
-	private String outfitsToString(){
+
+	/**
+	 * The function is a helper function for toString() which returns a string of
+	 * outfits as "65,38,22"
+	 * 
+	 * @return string of outfits
+	 */
+	private String outfitsToString() {
 		String result = "";
 		IContainer<Outfit> outfits = this.getOutfits();
-		if(outfits.isEmpty())
+		if (outfits.isEmpty())
 			return result;
-		for(Outfit outfit : outfits){
-			result+=outfit.getId()+",";
+		for (Outfit outfit : outfits) {
+			result += outfit.getId() + ",";
 		}
 		if (result.endsWith(",")) { // if ends with , ignore it
 			result = result.substring(0, result.length() - 1);
@@ -44,7 +66,14 @@ public class Collection extends Observable{
 		return result;
 	}
 
-	public boolean equals(String collectionName){
+	/**
+	 * The function controls that gotten collection name is equal to the that
+	 * collection's name
+	 * 
+	 * @param collectionName = gotten collection name
+	 * @return boolean
+	 */
+	public boolean equals(String collectionName) {
 		return this.getName().equals(collectionName);
-	}	
+	}
 }

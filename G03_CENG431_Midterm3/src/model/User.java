@@ -5,13 +5,16 @@ import storage.IContainer;
 
 public class User extends Observable {
 
-	private String userName;
-	private String password;
-	private IContainer<Collection> collections;
-	private IContainer<String> followers;
-	private IContainer<String> followings;
+	private String userName; // user name 
+	private String password; // user password
+	private IContainer<Collection> collections; // collection container of user
+	private IContainer<String> followers; // follower users container of user
+	private IContainer<String> followings; // following users container of user
 	
-	
+	/**
+	 * The model for the User
+	 *
+	 */
 	public User(String userName, String password) {
 		this.userName = userName;
 		this.password = password;
@@ -30,45 +33,49 @@ public class User extends Observable {
 		followings = this.followings;
 	}
 	
+	/**
+	 * Returns the user name
+	 * @return user name
+	 */
 	public String getUserName() {
 		return userName;
 	}
+	
+	/**
+	 * Returns the user password
+	 * @return user password
+	 */
 	public String getPassword() {
 		return password;
 	}
+	
+	/**
+	 * Returns the collection container of user
+	 * @return Collection Container
+	 */
 	public IContainer<Collection> getCollections() {
 		return collections;
 	}
+	
+	/**
+	 * Returns the follower container of user
+	 * @return String Container
+	 */
 	public IContainer<String> getFollowers() {
 		return followers;
 	}
+	
+	/**
+	 * Returns the following users container of user
+	 * @return String Container
+	 */
 	public IContainer<String> getFollowings() {
 		return followings;
 	}
 	
-	/*public void addFollower(String id){
-		
-	}
-	
-	public void removeFollower(String id){
-				try {
-			this.followers.remove(id);
-		} catch (ItemNotFoundException e) {
-		}
-		setChanged();
-		notifyObservers("rmv");
-	}
-	public void addFollowing(String id){}
-	public void removeFollowing(String id){
-		try {
-			this.followings.remove(id);
-		} catch (ItemNotFoundException e) {
-		}
-		setChanged();
-		notifyObservers("unf");
-	}*/
-	
+
 	@Override
+	//modified to write in a xml file
 	public String toString(){
 		return "    <user userName=\""+this.getUserName()+"\">\n\t"+
 		"<password>"+this.getPassword()+"</password>\n\t"+
@@ -77,11 +84,13 @@ public class User extends Observable {
 		this.getCollections().toString()+"\n    </user>\n";
 	}
 
+	//This function looks given user is equal that user or not by given user name
 	public boolean equals(String name){
 		return this.getUserName().equals(name);
 		
 	}
 	
+	// This function looks given user is equal that user or not
 	public boolean equals(User user){
 		return this.getUserName().equals(user.getUserName());
 		

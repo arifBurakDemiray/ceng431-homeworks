@@ -1,75 +1,51 @@
 <?xml version = "1.0"?>
 <users>
-    <user userName="furkan">
-	<password>123456</password>
-	<followers>arif</followers>
-	<followings>,arif,burak</followings>
+    <user userName="Tugkan Tuglular">
+	<password>tugkan123</password>
+	<followers>Furkan Sahin</followers>
+	<followings>			Furkan Sahin		</followings>
 	<collections>
-	<collection name="Sport">
-	<ids>65,38</ids>
-	</collection>
-	<collection name="Sleep">
-	<ids>65</ids>
-	</collection>
-	<collection name="Akanzi">
-	<ids>65</ids>
-	</collection>
-	<collection name="Furkan la Hottub">
-	<ids></ids>
-	</collection>
-	<collection name="denmee">
-	<ids>65</ids>
-	</collection>
-	<collection name="Asd">
-	<ids></ids>
-	</collection>
-	<collection name="deneme">
-	<ids></ids>
-	</collection>
-	<collection name="Denemeeee">
-	<ids>38</ids>
-	</collection>
-	<collection name="Pijama">
-	<ids>38,65</ids>
-	</collection>
-	<collection name="asdsaddsads">
-	<ids>38</ids>
-	</collection>
-	<collection name="jjıjıooıj">
-	<ids></ids>
-	</collection>
-	<collection name="asasassadadsdas">
-	<ids></ids>
+	<collection name="Glasses">
+	<ids>97</ids>
 	</collection>
 	</collections>
     </user>
-    <user userName="arif">
-	<password>123456</password>
-	<followers>furkan,burak</followers>
-	<followings>burak,furkan</followings>
+    <user userName="Dilek Ozturk">
+	<password>dilek000</password>
+	<followers></followers>
+	<followings></followings>
 	<collections>
-	<collection name="Deneme">
-	<ids>65</ids>
-	</collection>
-	<collection name="FurkanOlduFşb">
-	<ids>38</ids>
-	</collection>
-	<collection name="aaaayyyyy">
-	<ids>65,38</ids>
+	</collections>
+    </user>
+    <user userName="Serhat Caner">
+	<password>serhat111</password>
+	<followers></followers>
+	<followings></followings>
+	<collections>
+	</collections>
+    </user>
+    <user userName="Furkan Sahin">
+	<password>furkan123</password>
+	<followers>Tugkan Tuglular</followers>
+	<followings>Tugkan Tuglular</followings>
+	<collections>
+	<collection name="Sportif">
+	<ids>508,8</ids>
 	</collection>
 	</collections>
     </user>
-    <user userName="burak">
-	<password>111111</password>
-	<followers>arif,furkan</followers>
-	<followings>arif</followings>
+    <user userName="Arif Burak Demiray">
+	<password>arif007</password>
+	<followers></followers>
+	<followings></followings>
 	<collections>
-	<collection name="Wedding">
-	<ids>38</ids>
-	</collection>
-	<collection name="qwwqe">
-	<ids>65,38</ids>
-	</collection>
+	</collections>
+    </user>
+    <user userName="Ali Veli">
+	<password>12345678</password>
+	<followers></followers>
+	<followings></followings>
+	<collections>
 	</collections>
     </user>
 </users>

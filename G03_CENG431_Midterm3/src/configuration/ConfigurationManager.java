@@ -21,7 +21,7 @@ public class ConfigurationManager {
 	public ConfigurationManager(){}
 
 	/**
-	 * this function initializes data of the program for function to use {@link #configureServices()}
+	 * this function initialises data of the program for function to use {@link #configureServices()}
 	 * @throws FileFormatException if there is  a problem with file , gives error
 	 */
 	private void addRepositories() throws FileFormatException{
@@ -30,15 +30,12 @@ public class ConfigurationManager {
 	}
 
 	/**
-	 * This funtiýn initializes app window for ui for function to use {@link #configureServices()}
+	 * This function initialises app window for ui for function to use {@link #configureServices()}
+	 * @throws Exception for not expected actions
 	 */
-	private void createAppWindow() {
-		try {
-			new AppWindow();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
+	private void createAppWindow() throws Exception{
+		new AppWindow();
+
 	}
 	
 	/**
@@ -47,10 +44,10 @@ public class ConfigurationManager {
 	public void configureServices(){
 		try {
 			addRepositories();
-		} catch (FileFormatException e) {
-			System.err.println(e.getMessage());
+			createAppWindow();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		}
-		createAppWindow();
 	}
 
 }

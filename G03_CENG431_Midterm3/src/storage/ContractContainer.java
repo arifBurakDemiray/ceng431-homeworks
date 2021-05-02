@@ -1,7 +1,6 @@
 package storage;
 
 import contract.Contract;
-import contract.ContractUserOutfitsLikes;
 import exception.ItemNotFoundException;
 import exception.NotSupportedException;
 
@@ -37,6 +36,7 @@ public class ContractContainer extends Container<Contract> {
 		}
 	}
 	
+	//modified to write in a json file
 	public String toString(){
 		String string = "{"+super.toString();
 		if (string.endsWith(",")) { // if ends with , ignore it

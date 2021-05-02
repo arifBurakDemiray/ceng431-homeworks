@@ -11,7 +11,6 @@ public class CollectionContainer extends Container<Collection> {
 		throw new NotSupportedException("Collection container does not supports getById() function");
 	}
 
-
 	@Override
 	public Collection getByName(String name) throws ItemNotFoundException {
 		Collection found = null;
@@ -27,10 +26,11 @@ public class CollectionContainer extends Container<Collection> {
 			return found;
 		}
 	}
-	
+
 	@Override
-	public String toString(){
-		return "<collections>\n"+super.toString()+"\t</collections>";
+	// modified to write in a xml file
+	public String toString() {
+		return "<collections>\n" + super.toString() + "\t</collections>";
 	}
 
 }

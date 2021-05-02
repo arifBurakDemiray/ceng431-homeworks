@@ -122,9 +122,10 @@ public abstract class Container<T> implements IContainer<T> {
 		return string;
 	}
 
+	
 	@SuppressWarnings("unchecked")
 	public T[] toArray(){
-		return (T[]) this.container.toArray();
+		return  (T[]) this.container.toArray();
 	}
 
 }

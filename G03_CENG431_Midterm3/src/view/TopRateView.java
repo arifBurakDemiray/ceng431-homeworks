@@ -14,28 +14,34 @@ import java.awt.event.ActionListener;
 import java.awt.Color;
 import javax.swing.JButton;
 
+/**
+ * The top rate view is a view which shows the most liked and disliked outfit,
+ * most followed user
+ *
+ */
 public class TopRateView extends JPanel implements Observer {
 
 	private static final long serialVersionUID = 6980364354683833411L;
-	private JLabel topLike;
-	private JLabel topDislike;
-	private JLabel topUser;
-	private JLabel topLikeValue;
-	private JLabel topDislikeValue;
-	private JLabel topUserValue;
-	private JButton back;
+	private JLabel topLike; // text of "Top Liked Outfit"
+	private JLabel topDislike; // text of "Top Disliked Outfit"
+	private JLabel topUser; // text of "Top Followed User"
+	private JLabel topLikeValue; // text of name of most liked outfit
+	private JLabel topDislikeValue; // text of name of most disliked outfit
+	private JLabel topUserValue; // text of name of most followed user
+	private JButton back; // back button
 	private Observable model;
 
 	/**
 	 * Create the frame.
 	 */
 	public TopRateView(Observable Model) {
-
+		// set the observable and view elements in the view.
 		this.model = Model;
 		Rates temp = (Rates) model;
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLayout(null);
 		AppWindow.FRAME.getContentPane().add(this);
+
 		topLike = new JLabel("Top Liked Outfit");
 		topLike.setForeground(Color.BLUE);
 		topLike.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -75,13 +81,19 @@ public class TopRateView extends JPanel implements Observer {
 		setVisible(true);
 	}
 
+	/**
+	 * The function helps for detecting of clicking back button using listener
+	 * 
+	 * @param listener
+	 */
 	public void addBackButtonListener(ActionListener listener) {
 		back.addActionListener(listener);
 	}
 
 	@Override
 	public void update(Observable observable, Object args) {
-		if (args instanceof ButtonState && args==ButtonState.BACK_BUTTON)		
+		// If back button is clicked, remove the view from FRAME
+		if (args instanceof ButtonState && args == ButtonState.BACK_BUTTON)
 			AppWindow.FRAME.getContentPane().remove(this);
 	}
 

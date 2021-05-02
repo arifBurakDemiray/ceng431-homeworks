@@ -10,10 +10,10 @@ import storage.IContainer;
  */
 public interface IFileIO {
 	/**
-	 * This function reads products
+	 * This function reads outfits
 	 * 
-	 * @param filePath of the products file
-	 * @returns read products
+	 * @param filePath of the outfits file
+	 * @returns read outfits
 	 * @throws Exception for fileio exceptions
 	 */
 	public IContainer<Outfit> readOutfits(String filePath) throws Exception;
@@ -25,14 +25,14 @@ public interface IFileIO {
 	 * @returns read users
 	 * @throws Exception for fileio exceptions
 	 */
-	public IContainer<User> readUsers(IContainer<Outfit> oufits,String filePath) throws Exception;
-	
+	public IContainer<User> readUsers(IContainer<Outfit> oufits, String filePath) throws Exception;
+
 	/**
 	 * This function reads contracts
 	 * 
 	 * @param filePath of the contracts file
 	 * @param users    of the system
-	 * @param products of the system
+	 * @param outfits  of the system
 	 * @returns read contracts
 	 * @throws Exception for fileio exceptions
 	 */
@@ -49,14 +49,14 @@ public interface IFileIO {
 	public void writeUsers(IContainer<User> users, String filePath) throws Exception;
 
 	/**
-	 * This function writes products
+	 * This function writes outfits
 	 * 
-	 * @param products of the system
+	 * @param outfits  of the system
 	 * @param filePath of the file
 	 * @throws Exceptions for write operations
 	 */
-	public void writeOutfits(IContainer<Outfit> products, String filePath) throws Exception;
-	
+	public void writeOutfits(IContainer<Outfit> outfits, String filePath) throws Exception;
+
 	/**
 	 * This function writes contracts
 	 * 

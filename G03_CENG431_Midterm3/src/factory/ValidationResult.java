@@ -1,13 +1,12 @@
 package factory;
 
 /**
- * This  class is the result of validation
- *
+ * This class is the result of validation process
  */
 public class ValidationResult {
 
-	private boolean isValid; //validity
-	protected String message; //messages
+	private boolean isValid; // validity boolean
+	protected String message; // messages
 
 	protected ValidationResult(boolean validity, String msg) {
 		this.message = msg;
