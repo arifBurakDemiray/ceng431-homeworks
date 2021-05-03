@@ -63,7 +63,7 @@ public class CollectionView extends JPanel implements Observer {
 		myCollections.setBounds(200, 10, 150, 25);
 		add(myCollections);
 
-		infoMessage = new JLabel("<html>Select a collection clicking to add/remove outfits."
+		infoMessage = new JLabel("<html>Select a collection clicking on name twice to add/remove outfits."
 				+ "To create a new collection, click the 'Create Collection' button and type a collection name.</html>");
 		infoMessage.setBounds(450, 70, 200, 200);
 		add(infoMessage);
