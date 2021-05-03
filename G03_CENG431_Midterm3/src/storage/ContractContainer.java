@@ -20,6 +20,7 @@ public class ContractContainer extends Container<Contract> {
 	 * getByName() is invoked.
 	 * @throws ItemNotFoundException 
 	 */
+	@SuppressWarnings("unlikely-arg-type")
 	@Override
 	public Contract getByName(String name) throws ItemNotFoundException {
 		Contract found = null;

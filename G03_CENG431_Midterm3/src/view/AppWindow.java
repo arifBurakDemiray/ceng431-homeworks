@@ -13,10 +13,8 @@ public class AppWindow extends JWindow {
 
 	/**
 	 * The constructor is the starter for the views. It initialise the login screen.
-	 * 
-	 * @throws Exception
 	 */
-	public AppWindow() throws Exception {
+	public AppWindow() {
 		FRAME = new Frame("Outfigram");
 		Login lg = new Login(null);
 		LoginView loginView = new LoginView(lg);

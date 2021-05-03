@@ -30,7 +30,7 @@ public class CollectionContainer extends Container<Collection> {
 	@Override
 	// modified to write in a xml file
 	public String toString() {
-		return "<collections>\n" + super.toString() + "\t</collections>";
+		return "<collections>\n" + super.toString() + "\t\t</collections>";
 	}
 
 }

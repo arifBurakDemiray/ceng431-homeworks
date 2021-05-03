@@ -78,9 +78,9 @@ public class User extends Observable {
 	//modified to write in a xml file
 	public String toString(){
 		return "    <user userName=\""+this.getUserName()+"\">\n\t"+
-		"<password>"+this.getPassword()+"</password>\n\t"+
-		"<followers>"+this.getFollowers().toString()+"</followers>\n\t"+
-		"<followings>"+this.getFollowings().toString()+"</followings>\n\t"+
+		"\t<password>"+this.getPassword()+"</password>\n\t"+
+		"\t<followers>"+this.getFollowers().toString()+"</followers>\n\t"+
+		"\t<followings>"+this.getFollowings().toString()+"</followings>\n\t\t"+
 		this.getCollections().toString()+"\n    </user>\n";
 	}
 

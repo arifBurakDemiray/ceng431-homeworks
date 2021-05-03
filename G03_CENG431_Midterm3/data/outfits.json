@@ -1,145 +1,100 @@
 {
-    "44": {
-        "noflikes": "0",
-        "comments": [],
-        "gender": "female",
-        "size": "S,M,L,XL",
-        "color": "blue",
-        "nofdislikes": "0",
-        "brand_name": "Terzi Furkan",
-        "type": "Blue Jeans"
-    },
-    "78": {
-        "noflikes": "0",
-        "comments": [],
-        "gender": "female",
-        "size": "36-38-40-42-44",
-        "color": "brown",
-        "nofdislikes": "0",
-        "brand_name": "Belter Jessie",
-        "type": "Belt"
-    },
-    "35": {
-        "noflikes": "0",
-        "comments": [],
-        "gender": "male",
-        "size": "46,45,44,43,42",
-        "color": "white and black",
-        "nofdislikes": "0",
-        "brand_name": "KundurArif",
-        "type": "Sport Shoes"
-    },
-    "58": {
-        "noflikes": "0",
-        "comments": [],
-        "gender": "male",
-        "size": "40 cm,50 cm,60 cm",
-        "color": "white and yellow",
-        "nofdislikes": "0",
-        "brand_name": "Redkit Store",
-        "type": "Cowboy Hat"
-    },
-    "26": {
-        "noflikes": "0",
-        "comments": [],
-        "gender": "male",
-        "size": "S,M,L,XL",
-        "color": "blue",
-        "nofdislikes": "0",
-        "brand_name": "Terzi Furkan",
-        "type": "Blue Jeans"
-    },
     "38": {
-        "noflikes": "0",
-        "comments": [],
         "gender": "female",
         "size": "43,42,41,40",
         "color": "white",
-        "nofdislikes": "0",
         "brand_name": "Kardesler Kundura",
         "type": "Wedding Shoes"
     },
-    "16": {
-        "noflikes": "0",
-        "comments": [],
-        "gender": "female",
-        "size": "S,M,L",
-        "color": "orange and purple",
-        "nofdislikes": "0",
-        "brand_name": "ModaSahin",
-        "type": "Disco Dress"
-    },
-    "128": {
-        "noflikes": "0",
-        "comments": [],
-        "gender": "male",
-        "size": "35 mm,45 mm,50 mm",
-        "color": "black and brown",
-        "nofdislikes": "0",
-        "brand_name": "Saatci Furkan",
-        "type": "Sport Watch"
-    },
-    "8": {
-        "noflikes": "0",
-        "comments": [],
-        "gender": "male",
-        "size": "L,XL,XXL",
-        "color": "black",
-        "nofdislikes": "1",
-        "brand_name": "Demiragli",
-        "type": "Wedding Suit"
-    },
-    "60": {
-        "noflikes": "0",
-        "comments": [],
-        "gender": "female",
-        "size": "Small,Medium,Large",
-        "color": "black and blue",
-        "nofdislikes": "0",
-        "brand_name": "Eye Optic",
-        "type": "Sunglasses"
-    },
-    "72": {
-        "noflikes": "0",
-        "comments": [],
-        "gender": "female",
-        "size": "20 mm,30 mm,40 mm",
-        "color": "orange and red",
-        "nofdislikes": "0",
-        "brand_name": "Saatci Furkan",
-        "type": "Sport Watch"
-    },
-    "508": {
-        "noflikes": "1",
-        "comments": [{"Tugkan Tuglular": "deneme"}],
-        "gender": "female",
-        "size": "40 cm,50 cm,60 cm",
-        "color": "red and white",
-        "nofdislikes": "0",
-        "brand_name": "Redkit Store",
-        "type": "Nurse Hat"
-    },
-    "97": {
-        "noflikes": "1",
-        "comments": [
-            {"Furkan Sahin": "good color"},
-            {"Furkan Sahin": "uyyy ha"}
-        ],
-        "gender": "male",
-        "size": "Small,Medium,Large",
-        "color": "grey and black",
-        "nofdislikes": "0",
-        "brand_name": "Eye Optic",
-        "type": "Sunglasses"
-    },
     "65": {
-        "noflikes": "0",
-        "comments": [],
         "gender": "male",
         "size": "XL,L,M,ML",
         "color": "red",
-        "nofdislikes": "0",
         "brand_name": "Rustem Usta Dericilik",
         "type": "Jacket"
+    },
+	"72": {
+        "gender": "female",
+        "size": "20 mm,30 mm,40 mm",
+        "color": "orange and red",
+        "brand_name": "Saatci Furkan",
+        "type": "Sport Watch"
+    },
+	"128": {
+	        "gender": "male",
+			"size": "35 mm,45 mm,50 mm",
+	        "color": "black and brown",
+	        "brand_name": "Saatci Furkan",
+	        "type": "Sport Watch"
+	    },
+	"16": {
+        "gender": "female",
+        "size": "S,M,L",
+        "color": "orange and purple",
+        "brand_name": "ModaSahin",
+        "type": "Disco Dress"
+    },
+	"8": {
+        "gender": "male",
+        "size": "L,XL,XXL",
+        "color": "black",
+        "brand_name": "Demiragli",
+        "type": "Wedding Suit"
+    },
+	"35": {
+        "gender": "male",
+        "size": "46,45,44,43,42",
+        "color": "white and black",
+        "brand_name": "KundurArif",
+        "type": "Sport Shoes"
+    },
+	"26": {
+        "gender": "male",
+        "size": "S,M,L,XL",
+        "color": "blue",
+        "brand_name": "Terzi Furkan",
+        "type": "Blue Jeans"
+    },
+	"44": {
+        "gender": "female",
+        "size":"S,M,L,XL",
+        "color": "blue",
+        "brand_name": "Terzi Furkan",
+        "type": "Blue Jeans"
+    },
+	"58": {
+        "gender": "male",
+        "size": "40 cm,50 cm,60 cm",
+        "color": "white and yellow",
+        "brand_name": "Redkit Store",
+        "type": "Cowboy Hat"
+    },
+	"97": {
+        "gender": "male",
+        "size": "Small,Medium,Large",
+        "color": "grey and black",
+        "brand_name": "Eye Optic",
+        "type": "Sunglasses"
+    },
+	"60": {
+        "gender": "female",
+        "size": "Small,Medium,Large",
+        "color": "black and blue",
+        "brand_name": "Eye Optic",
+        "type": "Sunglasses"
+    },
+	"78": {
+        "gender": "female",
+        "size": "36-38-40-42-44",
+        "color": "brown",
+        "brand_name": "Belter Jessie",
+        "type": "Belt"
+    },
+	"508": {
+        "gender": "female",
+        "size": "40 cm,50 cm,60 cm",
+        "color": "red and white",
+        "brand_name": "Redkit Store",
+        "type": "Nurse Hat"
     }
 }

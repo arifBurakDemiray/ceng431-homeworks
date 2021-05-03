@@ -31,9 +31,8 @@ public class ConfigurationManager {
 
 	/**
 	 * This function initialises app window for ui for function to use {@link #configureServices()}
-	 * @throws Exception for not expected actions
 	 */
-	private void createAppWindow() throws Exception{
+	private void createAppWindow(){
 		new AppWindow();
 
 	}
@@ -45,7 +44,7 @@ public class ConfigurationManager {
 		try {
 			addRepositories();
 			createAppWindow();
-		} catch (Exception e) {
+		} catch (FileFormatException | RuntimeException e) {
 			System.out.println(e.getMessage());
 		}
 	}

@@ -39,7 +39,7 @@ public class LoginView extends JPanel implements Observer {
 		loginButton.setBounds(300, 200, 100, 30);
 		add(loginButton);
 		
-		password = new JPasswordField("123");
+		password = new JPasswordField("Password");
 		password.setBounds(300, 150, 100, 30);
 		add(password);
 		
@@ -126,6 +126,8 @@ public class LoginView extends JPanel implements Observer {
 	@Override
 	public void update(Observable observable, Object args) {
 		if (args == null){
+			password.setText("");
+			userName.setText("");
 			message.setVisible(false);
 			this.setVisible(true);}
 	}

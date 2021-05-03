@@ -46,16 +46,16 @@ public class CollectionView extends JPanel implements Observer {
 		add(back);
 
 		createCollection = new JButton("Create Collection");
-		createCollection.setBounds(200, 250, 150, 25);
+		createCollection.setBounds(225, 250, 150, 25);
 		add(createCollection);
 		
 		okey = new JButton("Create");
-		okey.setBounds(200, 320, 150, 25);
+		okey.setBounds(225, 320, 150, 25);
 		add(okey);
 		okey.setVisible(false);
 
 		collectionName = new JTextField();
-		collectionName.setBounds(200, 280, 100, 30);
+		collectionName.setBounds(225, 280, 150, 30);
 		add(collectionName);
 		collectionName.setVisible(false);
 

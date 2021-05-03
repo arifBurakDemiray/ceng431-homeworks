@@ -42,8 +42,8 @@ public class Collection extends Observable {
 	 * @return string of collection
 	 */
 	public String toString() {
-		return "\t<collection name=\"" + this.getName() + "\">\n\t" + "<ids>" + this.outfitsToString()
-				+ "</ids>\n\t</collection>\n";
+		return "\t\t\t<collection name=\"" + this.getName() + "\">\n\t" + "\t\t\t<ids>" + this.outfitsToString()
+				+ "</ids>\n\t\t\t</collection>\n";
 	}
 
 	/**

@@ -66,17 +66,17 @@ public class TopRateView extends JPanel implements Observer {
 
 		topLikeValue = new JLabel(temp.topLikedOutfitType);
 		topLikeValue.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		topLikeValue.setBounds(380, 85, 130, 23);
+		topLikeValue.setBounds(380, 85, 200, 23);
 		add(topLikeValue);
 
 		topDislikeValue = new JLabel(temp.topDislikedOutfitType);
 		topDislikeValue.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		topDislikeValue.setBounds(380, 181, 88, 23);
+		topDislikeValue.setBounds(380, 181, 200, 23);
 		add(topDislikeValue);
 
 		topUserValue = new JLabel(temp.topFollewedUserName);
 		topUserValue.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		topUserValue.setBounds(380, 272, 89, 23);
+		topUserValue.setBounds(380, 272, 200, 23);
 		add(topUserValue);
 		setVisible(true);
 	}

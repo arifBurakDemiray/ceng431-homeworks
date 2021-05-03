@@ -20,7 +20,7 @@ public class HomeService {
 	 */
 	public Outfit getSelectedOutfit(String selectedItemName) {
 		Outfit result = null;
-		if (selectedItemName.contains("Outfit")) {// this shows up this is an outfit item
+		if (selectedItemName!=null && selectedItemName.contains("Outfit")) {// this shows up this is an outfit item
 			DatabaseResult dbResult = outfits.getOutfitById(selectedItemName.split("-")[1]);// take id of it
 			Object dbObject = dbResult.getObject();
 			if (dbObject != null) { // if result not null
