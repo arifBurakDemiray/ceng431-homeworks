@@ -1,6 +1,6 @@
 # Building Software Systems Course Homeworks
 
-This repository holds the codes that I we wrote for mentioned course. 
+This repository holds the codes that we wrote for mentioned course. 
 
 Contributors of this repository
 - [Arif Burak Demiray](https://github.com/arifBurakDemiray)
