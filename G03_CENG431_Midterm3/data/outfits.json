@@ -96,5 +96,12 @@
         "color": "red and white",
         "brand_name": "Redkit Store",
         "type": "Nurse Hat"
+    },
+	"102": {
+        "gender": "male",
+        "size": "S,M,L",
+        "color": "black",
+        "brand_name": "Bag Center",
+        "type": "Handbag"
     }
 }
