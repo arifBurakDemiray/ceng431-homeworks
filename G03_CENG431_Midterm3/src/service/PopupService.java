@@ -67,11 +67,15 @@ public class PopupService {
 	 */
 	public void removeOutfitFromCollection(String outfitDetail, CollectionReview model) {
 		Outfit outfit = null;
-		String outfitId = outfitDetail.split(":")[0];
-		try {
-			outfit = model.getOutfits().getById(outfitId);
-		} catch (ItemNotFoundException | NotSupportedException e) {
+		if(outfitDetail!=null && !outfitDetail.equals(""))
+		{
+			String outfitId = outfitDetail.split(":")[0];
+			try {
+				outfit = model.getOutfits().getById(outfitId);
+			} catch (ItemNotFoundException | NotSupportedException e) {
+			}
 		}
+		
 		if (outfit != null) // if collection has outfit
 			removeOutfit(outfit, model);
 	}
@@ -83,12 +87,17 @@ public class PopupService {
 	 * @param model        collection that is going to has outfit
 	 */
 	public void addOutfitToCollection(String outfitDetail, CollectionReview model) {
-		String outfitId = outfitDetail.split(":")[0];
-		DatabaseResult databaseResult = outfitRepository.getOutfitById(outfitId);
-		Outfit selectedOutfit = (Outfit) databaseResult.getObject();
-		if (selectedOutfit != null) { // if outfit successfully found
-			addOutfit(selectedOutfit, model);
+		
+		if(outfitDetail != null && !outfitDetail.equals(""))
+		{
+			String outfitId = outfitDetail.split(":")[0];
+			DatabaseResult databaseResult = outfitRepository.getOutfitById(outfitId);
+			Outfit selectedOutfit = (Outfit) databaseResult.getObject();
+			if (selectedOutfit != null) { // if outfit successfully found
+				addOutfit(selectedOutfit, model);
+			}
 		}
+		
 	}
 
 	// this function simply adds outfit to collection

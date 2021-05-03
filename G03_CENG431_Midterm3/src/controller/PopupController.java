@@ -46,9 +46,14 @@ public class PopupController extends Consumable {
 				Component component = e.getComponent();
 				Outfit outfit = null;
 				@SuppressWarnings("unchecked")
+			
 				String selectedItemName = ((JList<String>) component).getSelectedValue();
-				String outfitId = selectedItemName.split(":")[0];
-				outfit = service.getOutfitById(outfitId);
+				if(selectedItemName != null && !selectedItemName.equals(""))
+				{
+					String outfitId = selectedItemName.split(":")[0];
+					outfit = service.getOutfitById(outfitId);
+				}
+			
 				if (outfit != null) // if outfit is found
 				{ // create outfit review model
 					Observable outfitReview = new OutfitReview(outfit, ((CollectionReview) model).getUser());
